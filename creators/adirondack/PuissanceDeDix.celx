@@ -1,0 +1,286 @@
+
+------------------------------------------------------------------------------
+-- The Powers of TEN, V1.1E, 2005
+-- Das Vielfache von ZEHN, V1.0, 2004
+-- PowersOfTen.celx
+-- Vielfachesvon10.cel
+--
+-- Runs with Celestia 1.3.2
+-- Duration: ca. 5 Minuten
+--
+-- Original script: Author unknown
+-- 18 August 2004:  Original German Version by Ulrich "Adirondack" Dickmann.
+-- 29 January 2005: English Version (and conversion to celx) by Zarius.
+------------------------------------------------------------------------------
+--
+
+--***************************************************************************
+--                                                                          *
+--          Example Celx Cleanup script for Celestia (version 1)            *
+--                      by Don Goyette - March 17, 2004                     *
+--                                                                          *
+--      Demonstrates how to use the celestia_cleanup_callback function.     *
+--                                                                          *
+--***************************************************************************
+
+
+--***************************************************************************
+--                    Get the users current settings
+--***************************************************************************
+-- Items from the celestia object...
+  orig_ambient           = celestia:getambient()
+  orig_faintestvisible   = celestia:getfaintestvisible()
+  orig_labelflags        = celestia:getlabelflags()
+  orig_orbitflags        = celestia:getorbitflags()
+  orig_renderflags       = celestia:getrenderflags()
+  orig_selection         = celestia:getselection()
+  orig_stardistancelimit = celestia:getstardistancelimit()
+  orig_starstyle         = celestia:getstarstyle()
+  orig_time              = celestia:gettime()
+  orig_timescale         = celestia:gettimescale()
+  orig_renderflags       = celestia:getrenderflags()
+  orig_labelflags        = celestia:getlabelflags()
+
+--  orig_skycolor			 = celestia:getskycolor()
+
+-- Items from the observer object...  
+  orig_fov               = celestia:getobserver():getfov()
+  orig_frame             = celestia:getobserver():getframe()
+  orig_locationflags     = celestia:getobserver():getlocationflags()
+  orig_orientation       = celestia:getobserver():getorientation()
+  orig_position          = celestia:getobserver():getposition()
+  orig_speed             = celestia:getobserver():getspeed()
+  orig_surface           = celestia:getobserver():getsurface()
+
+
+--***************************************************************************
+--                                                                          *
+-- This function is called automaticalAL when the script ends, be it        *
+-- because it reached it's end, or the user pressed ESC.                    *
+--                                                                          *
+-- Returns user settings to the way they were before the script ran.        *
+--                                                                          *
+--***************************************************************************
+  function celestia_cleanup_callback()
+
+-- Items from the celestia object...
+    celestia:setambient(orig_ambient)
+    celestia:setfaintestvisible(orig_faintestvisible)
+    celestia:setlabelflags(orig_labelflags)
+    celestia:setorbitflags(orig_orbitflags)
+    celestia:setrenderflags(orig_renderflags)
+    celestia:select(orig_selection)
+    celestia:setstardistancelimit(orig_stardistancelimit)
+    celestia:setstarstyle(orig_starstyle)
+    celestia:settimescale(orig_timescale)
+
+    celestia:settime(orig_time)
+
+    celestia:setrenderflags(orig_renderflags)
+    celestia:setlabelflags(orig_labelflags)
+--	celestia:setskycolor(orig_skycolor)
+--  OR: Original Time PLUS the time it took the script to run...
+--    celestia:settime(orig_time + (celestia:getscripttime() / 24 / 3600) )
+
+-- UNcomment the following line if you used MultiView in your script...
+--    celestia:getobserver():singleview()
+
+-- Items from the observer object...  
+    celestia:getobserver():setfov(orig_fov)
+    celestia:getobserver():setframe(orig_frame)
+    celestia:getobserver():setlocationflags(orig_locationflags)
+    celestia:getobserver():setorientation(orig_orientation)
+    celestia:getobserver():setposition(orig_position)
+    celestia:getobserver():setspeed(orig_speed)
+    celestia:getobserver():setsurface(orig_surface)
+  end
+
+
+--***************************************************************************
+--                     Your script code goes below
+--***************************************************************************
+
+-- Change any settings you want to. When your script is terminated, the
+-- celestia_cleanup_callback() function defined above is AUTOMATICALAL
+-- executed by Celestia -- resetting the users initial settings. DO NOT
+-- call this function inside of your script.
+
+
+-- Workaround for a windows bug I've seen elsewhere? (Zarius)
+wait(0.1)
+celestia:flash("")
+wait(0.1)
+
+--  moon_and_sol_time = celestia:tojulianday(2005, 2, 7, 03, 54, 0)
+-- celestia:settime(moon_and_sol_time)
+celestia:settime(2453150.3000)
+celestia:settimescale(1)
+
+local obs = celestia:getobserver()
+local earthRadius = 6378.1
+earth = celestia:find("Sol/Earth")
+celestia:select(earth)
+celestia:setrenderflags{planets = true, stars = true, atmospheres = true}
+celestia:setrenderflags{orbits = false, constellations = false, galaxies = false, clouds = false}
+-- goto(time 2 distance 8)
+celestia:setlabelflags{galaxies = false, planets = false, moons = false, locations = false}
+-- wait(3.0)
+-- set ( name "FOV" value 45.0 )
+
+obs:gotolonglat(earth, math.rad(-80.55610), math.rad(28.48618), 7+earthRadius, 5)
+obs:center(earth, 2)
+wait(3.0)
+
+celestia:print("LA PUISSANCE DE 10 - 10^1 = 10.", 3.0, -1, -1, 1, 5)
+wait(3.0)
+
+celestia:print("          LA PUISSANCE DE 10 - 10^2 = 100.", 3.0, -1, -1, 1, 4)
+wait(3.0)
+
+celestia:print("                    LA PUISSANCE DE 10 - 10^3 = 1000.", 3.0, -1, -1, 1, 3)
+wait(3.0)
+
+celestia:print("PUISSANCE DE 10\n\nVersion allemande de Ulrich ' Adirondack ' Dickmann, 18 Aout 2004\n\nAuteur du script original : inconnu.\n\nTraduction anglaise de Zarius & Babelfish.\n\nTraduction francaise : Didier Brisson", 10, -1, 1, 1, -11)
+wait(12)
+
+obs:gotodistance(earth, 1E+4, 5)
+-- goto(time 5 distance 5)
+wait(6.0)
+
+obs:gotolonglat(earth, math.rad(-80.55610), math.rad(28.48618), 10+earthRadius, 8)
+celestia:settimescale(0)
+celestia:print("Cap Canaveral, 10 km = 10^1 kilometres (=~ 6 miles)", 10.0, -1, -1, 1, 2)
+wait(10.0) 
+
+obs:gotolonglat(earth, math.rad(-80.55610), math.rad(28.48618), (1E+2)+earthRadius, 7)
+wait(6.0)
+celestia:print("Cap Canaveral, 100km 10^2", 5.0, -1, -1, 1, 2)
+wait(5.0) 
+
+obs:gotolonglat(earth, math.rad(-80.55610), math.rad(28.48618), (1E+3)+earthRadius, 5)
+wait(5.0)
+celestia:print("La Floride, 1000km = 10^3", 5.0, -1, -1, 1, 2)
+wait(5.0)
+
+celestia:setrenderflags{clouds = true}
+obs:gotolonglat(earth, math.rad(-80.55610), math.rad(28.48618), (1E+4)+earthRadius, 5)
+wait(4.0)
+celestia:print("La Terre, 10,000km = 10^4", 5.0, -1, -1, 1, 2)
+wait(5.0) 
+
+obs:gotolonglat(earth, math.rad(-80.55610), math.rad(90.0), (1E+5)+earthRadius, 2)
+wait(2.0)
+celestia:print("La Terre, 100,000km = 10^5", 5.0, -1, -1, 1, 2)
+wait(5.0) 
+
+celestia:setrenderflags{orbits = true}
+celestia:setlabelflags{planets = true, moons = true}
+obs:gotolonglat(earth, math.rad(-80.55610), math.rad(90.0), (1E+6)+earthRadius, 5)
+wait(5.0)
+celestia:print("Terre/Lune, 1 million km = 10^6", 7.0, -1, -1, 1, 2)
+wait(7.0)
+
+celestia:print("Nous volons vers Polaris...", 7.0, -1, -1, 1, 2)
+wait(7.0)
+
+obs:gotodistance(earth, 1E+7, 4.6)
+celestia:print("Terre/Lune, 10^7 km", 5.0, -1, -1, 1, 2)
+wait(5.0) 
+
+celestia:setrenderflags{clouds = false}
+celestia:print("C'est environ la valeur d'une orbite de la Terre", 5.0, -1, -1, 1, 4)
+wait(5.0) 
+
+obs:gotodistance(earth, 1E+8, 4.6)
+-- changedistance (duration 4.6 rate 0.5 )
+wait(4.0) 
+celestia:print("Systeme Solaire Interieur, 10^8 km - Orbite de Venus", 5.0, -1, -1, 1, 2)
+wait(5.0) 
+
+object = celestia:find("Sol")
+celestia:select(object)
+celestia:setrenderflags{constellations = true}
+obs:gotodistance(earth, 1E+9, 4.59)
+wait(4.0) 
+celestia:print("Systeme Solaire Interieur, 10^9 km", 5.0, -1, -1, 1, 2)
+wait(5.0) 
+
+celestia:print("Meme a cette distance\nles etoiles ne semblent pas bouger.", 5.0, -1, -1, 1, 4)
+wait(5.0) 
+
+obs:gotodistance(earth, 1E+10, 4.55)
+wait(4.0) 
+celestia:print("Systeme Solaire, 10^10 km =~ 63 AU (unite astronomique)", 5.0, -1, -1, 1, 2)
+wait(5.0) 
+
+obs:gotodistance(earth, 1E+11, 4.58)
+wait(4.0) 
+celestia:print("Le Soleil, 10^11 km", 5.0, -1, -1, 1, 2)
+wait(5.0) 
+
+obs:gotodistance(earth, 1E+12, 4.61)
+wait(4.0) 
+celestia:print("Etoiles locales, 10^12 km =~ 0.1 AL (annee-lumiere)", 5.0, -1, -1, 1, 2)
+wait(5.0) 
+
+obs:gotodistance(earth, 1E+13, 4.6)
+wait(4.0) 
+celestia:print ("10^13 km =~ 1.03 AL", 5, -1, -1, 1, 2)
+wait(5.0) 
+
+obs:gotodistance(earth, 1E+14, 4.6)
+wait(4.0) 
+celestia:print("10^14 km =~ 10.3 AL", 5.0, -1, -1, 1, 2)
+wait(5.0) 
+
+obs:gotodistance(earth, 1E+15, 4.6)
+wait(4.0) 
+celestia:print("10^15 km =~ 100 AL", 5.0, -1, -1, 1, 2)
+wait(5.0) 
+
+celestia:setrenderflags{galaxies = true}
+celestia:setlabelflags{galaxies = true}
+obs:gotodistance(earth, 1E+16, 4.6)
+wait(4.0) 
+celestia:print("10^16 km =~ 1 000 AL", 5.0, -1, -1, 1, 2)
+wait(5.0) 
+
+obs:gotodistance(earth, 1E+17, 4.6)
+wait(4.0) 
+celestia:print("10^17 km =~ 10 000 AL", 5.0, -1, -1, 1, 2)
+wait(5.0) 
+
+obs:gotodistance(earth, 1E+18, 4.6)
+wait(4.0) 
+celestia:print("La Voie Lactee, 10^18 km =~ 100 000 AL", 5.0, -1, -1, 1, 2)
+wait(5.0) 
+
+obs:gotodistance(earth, 1E+19, 4.6)
+wait(4.0) 
+celestia:print("La Voie Lactee, 10^19 km =~ 1 million AL", 6.0, -1, -1, 1, 2)
+wait(6.0) 
+
+obs:gotodistance(earth, 1E+20, 4.6)
+wait(4.0) 
+celestia:print("La Voie Lactee, 10^20 km =~ 10 millions AL", 6.0, -1, -1, 1, 2)
+wait(6.0) 
+
+celestia:unmarkall()
+celestia:setrenderflags{markers = true}
+m33 = celestia:find("M33")
+m33:mark("#dddddd", "x", 10)
+-- m33:setlabel()
+sol = celestia:find("Sol")
+sol:mark("#dddddd", "x", 10)
+celestia:print("La galaxie M33 est a 3 millions AL du Soleil.", 8.0, -1, -1, 1, 4)
+wait(8.0) 
+
+celestia:unmarkall()
+celestia:print("L'univers observable s'etend sur 10 a 20 BILLION (un million de million) AL!", 8.0, -1, -1, 1, 4)
+wait(8.0) 
+
+celestia:print("Ce qui correspond environ a. 10^23 kilometres.", 10, -1, -1, 1, 4)
+wait(10.0)
+
+celestia:print("-- FIN du script ---\n\nUne production deUlrich Dickmann/Aout 2004\n\nTraduction anglaise : Zarius & Babelfish                                          Traduction francaise : Didier Brisson", 10, -1, -1, 2, 6)
+wait(10)

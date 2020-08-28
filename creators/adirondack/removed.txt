@@ -1,0 +1,7 @@
+The following files were removed as they are too big to upload to GitHub:
+- th_titan.zip
+- th_titan_extras.zip
+- wotw_dds.zip
+- wotw_dds_V1_1.zip
+- wotw_jpg.zip
+- wotw_jpg_V1_1.zip
