@@ -1,0 +1,75 @@
+--***************************************************************************
+--                 Don G's Celx/Lua Pause-a-Script function                 *
+--                              (version 1.0)                               *
+--                                                                          *
+-- This function pauses the script and waits for the user to press the      *
+-- spacebar.                                                                *
+--                                                                          *
+--***************************************************************************
+
+
+--***************************************************************************
+--                         Keyboard Input Callback                          *
+--                                                                          *
+-- This function is called automatically by Celestia when celestia:         *
+-- requestkeyboard() is set to true.                                        *
+--                                                                          *
+--***************************************************************************
+  function celestia_keyboard_callback(keypress)
+    rtnKeypress = keypress
+    return true  -- Tell Celestia we will handle this keypress
+  end
+    
+
+--***************************************************************************
+--       Pause the script and wait for user to press the spacebar
+--***************************************************************************
+  function pause()
+    origTimeScale = celestia:gettimescale()  -- Get the current time-scale
+    celestia:settimescale(0)                 -- Pause time
+    rtnKeypress = ""
+    celestia:requestkeyboard(true)           -- Enable keyboard input
+    
+    while rtnKeypress ~= " " do  --Loop until we get the spacebar
+      -- (Yes, the print duration time is longer than the wait duration time.
+      -- this is to stop the prompt from "flickering".)
+      celestia:print("Press the spacebar to continue ..." , 1, -1, -1, 1, 4)
+      wait(0.5)
+    end
+
+    celestia:requestkeyboard(false)       -- Disable keyboard input
+    celestia:settimescale(origTimeScale)  -- Reset the time scale
+  end
+  
+
+--***************************************************************************
+--                               Example
+--***************************************************************************
+  obs = celestia:getobserver()
+
+  celestia:print("Going to Earth ..." , 5, -1, -1, 1, 4)
+  myObject = celestia:find("Sol/Earth")
+  celestia:select(myObject)
+  obs:center(myObject)
+  obs:follow(myObject)
+  obs:gotodistance(myObject, (25000 + myObject:radius()), 5)
+  wait(5)
+  
+  pause()  -- Pause the script here
+
+  celestia:print("Going to Mars ..." , 5, -1, -1, 1, 4)
+  myObject = celestia:find("Sol/Mars")
+  celestia:select(myObject)
+  obs:center(myObject)
+  obs:follow(myObject)
+  obs:gotodistance(myObject, (25000 + myObject:radius()), 5)
+  wait(5)
+  
+
+--***************************************************************************
+--                           End of script
+--***************************************************************************
+  celestia:print("This script is now finished.", 2, -1, -1, 1, 10)
+  wait(2)
+  
+  

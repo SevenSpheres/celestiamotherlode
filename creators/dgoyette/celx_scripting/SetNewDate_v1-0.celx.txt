@@ -1,0 +1,236 @@
+--***************************************************************************
+--                   Don G's Celx/Lua setNewDate Function                   *
+--                             (version 1.0)                                *
+--                                                                          *
+--  This function allows the user to enter a new date.                      *
+--                                                                          *
+--***************************************************************************
+
+
+--***************************************************************************
+--                            Global Variables                              *
+--***************************************************************************
+  userKeypress = ""  -- Used with keyboard entry
+
+
+--***************************************************************************
+--                         Keyboard Input Callback                          *
+--                                                                          *
+-- This function is called automatically by Celestia when celestia:         *
+-- requestkeyboard() is set to true.                                        *
+--                                                                          *
+--***************************************************************************
+  function celestia_keyboard_callback(char)
+    userKeypress = char
+    return true  -- Tell Celestia we will handle this keypress
+  end
+
+
+--***************************************************************************
+--                   getUserInput from the keyboard                         *
+--                                                                          *
+--  This function allows the user to enter a single line of text in reply   *
+--  to your prompt for information ('prompt' is a string value).            *
+--***************************************************************************
+  function getUserInput(prompt)
+    local inputLine = ""
+
+    if prompt == nil then
+       celestia:print("getUserInput Error: Please include prompt text.",
+                       5, -1, -1, 1, 5)
+       wait(5)
+       return ""
+    end
+
+    -- Count line feed characters (\n) in the prompt text...
+    local x         = 0
+    local nlcount   = 0
+    local charpos   = 1
+    local promptRow = 3
+
+    charcount = string.len(prompt)
+    for charpos = 1, charcount do
+      x = string.find(prompt, "\n", charpos, plain)
+      if x ~= nil then
+         nlcount = nlcount + 1
+         charpos = x + 1
+      end
+    end
+
+    -- Compute what row to begin displaying prompt on...
+    if nlcount > 0 then
+       promptRow = promptRow + nlcount
+    end
+
+    origTimeScale = celestia:gettimescale()  -- Get the current time-scale
+    celestia:settimescale(0)                 -- Pause time
+    userKeypress = ""                        -- Clear the userKeypress var
+    celestia:requestkeyboard(true)           -- Enable keyboard input
+
+    while true do                            -- Loop until we get Enter key
+      -- Display the prompt...
+      celestia:print(prompt .. inputLine, 100, -1, -1, 1, promptRow)
+      wait(0.01)
+
+      -- What key did the user press...
+      if userKeypress == "\013" then      -- Enter key, we're done
+         break
+
+      elseif userKeypress == "\008" then  -- Backspace key, remove last char
+         local strlen = string.len(inputLine)
+         if strlen <= 1 then
+            inputLine = ""
+         else
+            inputLine = string.sub(inputLine, 1, strlen - 1)
+         end
+
+      else  -- Add the character to inputLine...
+         inputLine = inputLine .. userKeypress
+
+      end
+      userKeypress = ""
+
+    end
+
+    celestia:requestkeyboard(false)       -- Disable keyboard input
+    celestia:settimescale(origTimeScale)  -- Reset the time scale
+    return inputLine
+  end
+
+
+--***************************************************************************
+--                               setNewDate                                 *
+--                                                                          *
+--  This function allows the user to enter a new date.                      *
+--***************************************************************************
+  function setNewDate()
+    local error = ""
+    local prompt = ""
+
+    while true do
+      prompt = error .. "\n"
+        .. "Enter 0 (zero) to exit.\n"
+        .. "Include leading zeros, time is UTC 24-hour clock\n"
+        .. "Format: YYYY-MM-DD-HH-MM-SS.SSS\n"
+        .. "Enter new date: "
+
+      local userInput = getUserInput(prompt)
+
+      if userInput == "0" or userInput == "" then
+         return "0"  -- User terminated the function
+      end
+
+      -- Validate the user entered date, and set it if it's okay...
+      error = checkDate(userInput)
+      
+      if error == "0" then
+         return userInput  -- Date was successfully set
+      end
+      
+    end  -- (while)
+  end    -- (function)
+
+
+-- Validate user entry...
+  function checkDate(userInput)
+    if string.len(userInput) ~= 23 then
+       return "Error: Please enter all digits, hyphens, leading zeros and decimal places."
+    end
+
+    -- Pick out the individual fields we need...
+    
+    -- YYYY-MM-DD-HH-MM-SS.SSS
+    --          11111111112222
+    -- 12345678901234567890123
+    local year   = string.sub(userInput,  1,  4)
+    local month  = string.sub(userInput,  6,  7)
+    local day    = string.sub(userInput,  9, 10)
+    local hour   = string.sub(userInput, 12, 13)
+    local minute = string.sub(userInput, 15, 16)
+    local second = string.sub(userInput, 18, 23)
+
+    local num = tonumber(year)
+    if num == nil then
+       num = 0
+    end
+         
+    if num < 1 then
+       return "ERROR: The year cannot be zero."
+    end
+
+    num = tonumber(month)
+    if num == nil then
+       num = 99
+    end
+         
+    if num < 1 or num > 12 then
+       return "ERROR: Invalid Month. Must be between 01 and 12"
+    end
+
+    num = tonumber(day)
+    if num == nil then
+       num = 99
+    end
+         
+    if num < 1 or num > 31 then
+       return "ERROR: Invalid Day. Must be between 01 and 31"
+    end
+
+    num = tonumber(hour)
+    if num == nil then
+       num = 99
+    end
+         
+    if num > 23 then
+       return "ERROR: Invalid Hour. Must be between 00 and 23"
+    end
+
+    num = tonumber(minute)
+    if num == nil then
+       num = 99
+    end
+         
+    if num > 60 then
+       return "ERROR: Invalid Minute. Must be between 00 and 59"
+    end
+
+    num = tonumber(second)
+    if num == nil then
+       num = 99
+    end
+         
+    if num > 60 then
+       return "ERROR: Invalid Seconds. Must be between 00.000 and 59.999"
+    end
+       
+    -- Finally, set the new date...
+    celestia:settime( 
+      celestia:tojulianday(
+        tonumber(year),
+        tonumber(month),
+        tonumber(day),
+        tonumber(hour),
+        tonumber(minute),
+        tonumber(second) ) )
+           
+    return "0"
+  end
+
+
+--***************************************************************************
+--                   EXAMPLE of how to use this function                    *
+--***************************************************************************
+
+   newDate = setNewDate()
+
+   if newDate == "0" then
+      celestia:flash("User terminated the function. Date was not changed.", 5)
+      wait (5)
+   else
+      celestia:flash("Date set to: " .. newDate, 5)
+      wait (5)
+   end
+
+   celestia:flash("End of script.", 3)
+   wait (3)
+

@@ -1,0 +1,100 @@
+--***************************************************************************
+--                  Don G's Celx/Lua getUserInput Function                  *
+--                              (version 1.0)                               *
+--                                                                          *
+--  This function allows the user to enter a single line of text in reply   *
+--  to your prompt for information.                                         *
+--                                                                          *
+--***************************************************************************
+
+
+--***************************************************************************
+--                            Global Variables                              *
+--***************************************************************************
+  userKeypress = ""  -- Used with keyboard entry
+
+
+--***************************************************************************
+--                         Keyboard Input Callback                          *
+--                                                                          *
+-- This function is called automatically by Celestia when celestia:         *
+-- requestkeyboard() is set to true.                                        *
+--                                                                          *
+--***************************************************************************
+  function celestia_keyboard_callback(char)
+    userKeypress = char
+    return true  -- Tell Celestia we will handle this keypress
+  end
+
+
+--***************************************************************************
+--                   getUserInput from the keyboard                         *
+--                                                                          *
+--  This function allows the user to enter a single line of text in reply   *
+--  to your prompt for information ('prompt' is a string value).            *
+--***************************************************************************
+  function getUserInput(prompt)
+    local inputLine = ""
+    
+    if prompt == nil then
+       celestia:print("getUserInput Error: Please include prompt text.",
+                       5, -1, -1, 1, 5)
+       wait(5)
+       return ""
+    end
+    
+    origTimeScale = celestia:gettimescale()  -- Get the current time-scale
+    celestia:settimescale(0)                 -- Pause time
+    userKeypress = ""                        -- Clear the userKeypress var
+    celestia:requestkeyboard(true)           -- Enable keyboard input
+
+    while true do                            -- Loop until we get Enter key
+      -- Display the prompt...
+      celestia:print(prompt .. inputLine, 100, -1, -1, 1, 5)
+      wait(0.01)
+
+      -- What key did the user press...
+      if userKeypress == "\013" then      -- Enter key, we're done
+         break
+
+      elseif userKeypress == "\008" then  -- Backspace key, remove last char
+         local strlen = string.len(inputLine)
+         if strlen <= 1 then
+            inputLine = ""
+         else
+            inputLine = string.sub(inputLine, 1, strlen - 1)
+         end
+
+      else  -- Add the character to inputLine...
+         inputLine = inputLine .. userKeypress
+
+      end
+      userKeypress = ""
+
+    end
+
+    celestia:requestkeyboard(false)       -- Disable keyboard input
+    celestia:settimescale(origTimeScale)  -- Reset the time scale
+    return inputLine
+  end
+
+
+--***************************************************************************
+--                   EXAMPLE of how to use this function                    *
+--***************************************************************************
+
+-- Call the function. The text is used as the user prompt...
+   userInput = getUserInput("Enter text (then press ENTER): ")
+
+-- The user pressed the ENTER key, so let's see what we got...
+   if userInput ~= "" then
+      celestia:flash("Text entered: " .. userInput, 5)
+      wait (5)
+   else
+      celestia:flash("No text was entered.", 5)
+      wait (5)
+   end
+
+   celestia:flash("End of script.", 3)
+   wait (3)
+   

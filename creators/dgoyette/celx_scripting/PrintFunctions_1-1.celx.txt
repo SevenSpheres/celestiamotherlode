@@ -1,0 +1,350 @@
+--***************************************************************************
+--                                                                          *
+--              Don G's Celx PRINT functions for Celestia                   *
+--                             Version 1.1                                  *
+--                                                                          *
+--  This Celx script provides print functions that you can use in your own  *
+--  Celx scripts. Provided with NO STRINGS ATTACHED by Don Goyette.         *
+--                                                                          *
+--  Note: I don't use block-comments because my editor's syntax coloring    *
+--        feature does not support them, sorry.                             *
+--                                                                          *
+----------------------------------------------------------------------------*
+--                                                                          *
+--  displayTime: Determine # of seconds to display text, based on           *
+--               SEC_PER_CHAR.                                              *
+--                                                                          *
+--  textWrap:    Determine where line feeds need to be inserted, based on   *
+--               CHARS_PER_LINE, and insert them.                           *
+--                                                                          *
+--  printLL:     Print the specified text in the lower left (LL) corner.    *
+--                                                                          *
+--***************************************************************************
+
+
+
+--***************************************************************************
+--                                                                          *
+--  To use this code:                                                       *
+--                                                                          *
+--    1. Copy the "Global Variables" code section and paste it into your    *
+--       Celx script, somewhere near the top where end-users can see and    *
+--       modify the values.                                                 *
+--                                                                          *
+--    2. Copy ALL of the function definition code and paste it into your    *
+--       Celx script ABOVE your main script code. The functions include:    *
+--         * displayTime                                                    *
+--         * textWrap                                                       *
+--         * printLL                                                        *
+--                                                                          *
+--    3. Start using the functions!                                         *
+--                                                                          *
+--  If you come across any bugs, please let me know about them on the       *
+--  Celestia Scripting forum:                                               *
+--   (http://www.shatters.net/forum/viewforum.php?f=9)                      *
+--  so I can fix them for everyone else too.  Thank you, and enjoy!         *
+--                                                                          *
+--***************************************************************************
+
+
+
+--                  Start of Global Variables section...
+
+--***************************************************************************
+--                            Global Variables                              *
+--                                                                          *
+--  In your script, these three variables MUST be placed ABOVE the code for *
+--  the included functions. Change them as desired for your purposes.       *
+--                                                                          *
+--***************************************************************************
+--
+--  SEC_PER_CHAR: Used in displayTime. Number of seconds to display each
+--  character. Increase to display text for a longer period, decrease for a
+--  shorter period. SMALL changes make a BIG difference!
+--
+--  CHARS_PER_LINE: Used in textWrap. Column number to insert line feed at.
+--  Set this to the number of characters to be displayed on a line of text.
+--  Larger values for higher resolution displays, lower values for lower
+--  screen resolutions. 75-78 is a good range for an 800 x 600 display in
+--  windowed mode.
+--
+--  HORIZONTAL_OFFSET: Used in printLL. The horizontal position from the left
+--  edge of the screen, to start displaying text at. If you prefer your text
+--  to be flush with the left edge of the display, set this to 0.
+--
+    SEC_PER_CHAR      = 0.08
+    CHARS_PER_LINE    = 78
+    HORIZONTAL_OFFSET = 1
+--
+--                     End of Global Variables section
+
+
+
+--                   Start of Function Definition section...
+
+--***************************************************************************
+--                               displayTime                                *
+--                                                                          *
+--  This function determines the number of seconds the text should be       *
+--  displayed based on the number of characters times SEC_PER_CHAR, and     *
+--  returns the value.                                                      *
+--                                                                          *
+--***************************************************************************
+  function displayTime(text)
+
+-- How many characters are in the text string...
+    local charcount = string.len(text)
+
+-- If there is no text, don't do anything...
+    if charcount == 0 then
+       return 0
+    end
+
+-- Count line feed characters (\n)...
+    local x       = 0
+    local nlcount = 0
+    local charpos = 1
+
+    for charpos = 1, charcount do
+      x = string.find(text, "\n", charpos, plain)
+      if x ~= nil then
+         nlcount = nlcount + 1
+         charpos = x + 1
+      end
+    end
+
+-- If line feeds were found, subtract their count from charcount...
+    if nlcount > 0 then
+       charcount = charcount - nlcount
+    end
+
+-- Return the number of seconds to display the text. If it's a short
+-- string, double the time...
+    if charcount > 40 then
+       return charcount * SEC_PER_CHAR
+    else
+       return charcount * (SEC_PER_CHAR * 2)
+    end
+
+  end
+
+
+--***************************************************************************
+--                                 textWrap                                 *
+--                                                                          *
+--  This function determines where line feeds need to be inserted, based on *
+--  CHARS_PER_LINE, and inserts them.                                       *
+--                                                                          *
+--***************************************************************************
+  function textWrap(text)
+
+-- How many characters are in the text string...
+    local charcount = string.len(text)
+
+-- If the text string is less than the number of characters per line, don't
+-- do anything...
+    if charcount <= CHARS_PER_LINE then
+       return text
+    end
+
+-- Check for existing, user-specified new-line characters...
+    local x        = 0
+    local charpos  = 1
+
+    for charpos = 1, charcount do
+      x = string.find(text, "\n", charpos, plain)
+      if x ~= nil then
+         return "textWrap Error: The string contains hard-coded newline \ncharacters and thus cannot be auto-wrapped."
+      end
+    end
+
+-- Insert line feed characters (\n)...
+    local endpos   = CHARS_PER_LINE
+    local text_new = ""
+    local test     = ""
+    local loop     = true
+          charpos  = 1
+
+    while loop do
+      -- Check for punctuation or space to break on...
+      test = string.sub(text, endpos, endpos)
+
+
+      while  (test ~= " "
+       and test ~= "."
+       and test ~= ","
+       and test ~= "!"
+       and test ~= "-"
+       and test ~= ";"
+       and test ~= ":") do
+         -- Decrement the end position until we find punctuation or space...
+         endpos = endpos - 1
+
+         if endpos <= 1 then
+            -- The string contained no punctuation or spaces!
+            return "textWrap Error: The string contained no punctuation or spaces to break on!"
+         end
+
+         test = string.sub(text, endpos, endpos)
+      end  -- (second while)
+
+
+   -- Add a line to the NEW text string...
+      text_new = text_new .. string.sub(text, charpos, endpos) .. "\n"
+
+   -- Remove the used characters from the text string...
+      text = string.sub(text, endpos + 1, charcount)
+
+      if string.sub(text, 1, 1) == " " then
+         text = string.sub(text, 2, charcount)
+      end
+
+   -- Reset the variables...
+      charpos   = 1
+      endpos    = CHARS_PER_LINE
+      charcount = string.len(text)
+
+   -- If there are fewer than CHARS_PER_LINE characters remaining in the text
+   -- string, simply add it to the text_new string...
+      if charcount <= CHARS_PER_LINE then
+         text_new = text_new .. text
+         loop = false
+      end
+
+    end  -- (first while)
+
+-- Return the NEW text string...
+    return text_new
+
+  end
+
+
+--***************************************************************************
+--                                 printLL                                  *
+--                                                                          *
+--  This print function does several things:                                *
+--    * If seconds is not provided, determines how long the text should be  *
+--      displayed (in seconds).                                             *
+--    * Counts the number of lines of text to be displayed.                 *
+--    * Counts up from the bottom of the display to determine what line to  *
+--      start printing on.                                                  *
+--    * Prints the text in the lower left-hand corner of the display, using *
+--      the HORIZONTAL_OFFSET global variable (set above) to determine how  *
+--      many characters from the left edge of the display to begin at.      *
+--                                                                          *
+--***************************************************************************
+  function printLL(text, seconds)
+
+-- How many characters are in the text string...
+    local charcount = string.len(text)
+
+-- If seconds was not passed to this function, set it...
+    if seconds == nil then
+       seconds = displayTime(text)
+    end
+
+-- If there is no text, don't do anything...
+    if charcount == 0 then
+       return
+    end
+
+-- Count line feed characters (\n)...
+    local x       = 0
+    local lfcount = 3
+    local charpos = 1
+
+    for charpos = 1, charcount do
+      x = string.find(text, "\n", charpos, plain)
+      if x ~= nil then
+         lfcount = lfcount + 1
+         charpos = x + 1
+      end
+    end
+
+-- Display the text...
+    celestia:print ( text, seconds, -1, -1, HORIZONTAL_OFFSET, lfcount )
+    wait(seconds)
+
+  end
+--
+--                   End of Function Definition section
+
+
+
+--***************************************************************************
+--                                                                          *
+--                               Script Body                                *
+--                                                                          *
+--  Your script code goes below here...                                     *
+--                                                                          *
+--***************************************************************************
+
+
+--            <<<  EXAMPLES OF HOW TO USE THESE FUNCTIONS  >>>
+
+
+
+-- Using the displayTime function
+-- ------------------------------
+--
+-- Compute the number of seconds the text should be displayed, based on the
+-- SEC_PER_CHAR global variable set above. Then, use MY print commands...
+   text = "This is a line of text.\nThis is a second line of text.\nThis is a third line of text."
+   seconds = displayTime(text)
+   celestia:print(text, seconds, -1, -1, 0, 10)
+   wait(seconds)
+
+
+
+-- Using the printLL function
+-- --------------------------
+--
+-- Note: When you do NOT specify a number of seconds with the printLL
+--       function, it automatically calls the displayTime function to
+--       determine how many seconds to display the text.
+
+
+-- Print the specified text in the lower left hand corner position, using my
+-- new line characters...
+   printLL("This is a line of text.\nThis is a second line of text.\nThis is a third line of text.")
+
+
+-- Print a SHORT line, using the printLL function, and using MY number of
+-- seconds (5)...
+   printLL("Hello, my name is Don.", 5)
+
+
+
+-- Using the textWrap function
+-- ---------------------------
+--
+-- Use the textWrap function to define where the new line (line feed)
+-- characters should be placed, based on the CHARS_PER_LINE global variable
+-- set above. Then use MY print commands...
+   myText = textWrap("This is a lot of text #1 ... Enable or disable callback for keyboard input. If keyboard-input has been enabled, Celestia will execute the function with the name 'celestia_keyboard_callback' for each keypress. This function must exist when calling requestkeyboard.")
+   seconds = displayTime(myText)
+   celestia:print(myText, seconds, -1, -1, 0, 10)
+   wait(seconds)
+
+
+
+-- Using the textWrap function with printLL
+-- ----------------------------------------
+--
+-- Print the specified text in the lower left hand corner position, using
+-- textWrap to define where the new line (line feed) characters should be
+-- placed, based on the CHARS_PER_LINE global variable set above...
+   myText = textWrap("This is a lot of text #2 ... Enable or disable callback for keyboard input. If keyboard-input has been enabled, Celestia will execute the function with the name 'celestia_keyboard_callback' for each keypress. This function must exist when calling requestkeyboard.")
+   printLL(myText)
+
+
+-- Do the same exact thing as the example immediately above this one, but
+-- code it all on one line...
+   printLL( textWrap("This is a lot of text #3 ... Enable or disable callback for keyboard input. If keyboard-input has been enabled, Celestia will execute the function with the name 'celestia_keyboard_callback' for each keypress. This function must exist when calling requestkeyboard.") )
+
+
+
+-- End of examples and end of script...
+   celestia:flash("Script is complete.", 3)
+   wait (3)
+

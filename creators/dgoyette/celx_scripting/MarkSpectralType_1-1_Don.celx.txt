@@ -1,0 +1,51 @@
+--***************************************************************************
+--                        markSpectralType function                         *
+--                                                                          *
+--  This function allows you to define a specific star spectral type and    *
+--  then marks all stars of this type with a 10-pixel pink triangle marker. *
+--                                                                          *
+--  The original 17 lines of base code were written by Chris Laurel.        *
+--  I have changed variable names, added comments, etc. to make the script  *
+--  a little more understandable -- hopefully -- Don G.                     *
+--***************************************************************************
+
+  function markSpectralType(spectralType)
+    local numOfStars = celestia:getstarcount()
+    local counter = 0
+
+    celestia:flash("Searching " .. numOfStars .. " stars...", 3)
+    wait(3)
+
+    while counter < numOfStars do
+      star = celestia:getstar(counter)
+      first, last = string.find(star:spectraltype(), spectralType, 1, true)
+
+      if first == 1 then
+         star:mark("#ff99ff", "triangle", 10)
+      end
+
+      counter = counter + 1
+    end
+  end
+
+
+--***************************************************************************
+--                                                                          *
+--              Example of using the markSpectralType function              *
+--                                                                          *
+--***************************************************************************
+
+  -- Define the spectral type to be marked...
+  spectralType = "O"
+
+  -- Clear all existing markers...
+  celestia:unmarkall()
+
+  -- Mark the requested Spectral Types...
+  markSpectralType(spectralType)
+
+  -- Make sure Marker display is ON...
+  celestia:show("markers")
+
+  -- The End
+  celestia:flash("Done marking.", 3)

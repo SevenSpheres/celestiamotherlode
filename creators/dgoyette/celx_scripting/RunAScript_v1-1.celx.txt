@@ -1,0 +1,107 @@
+--***************************************************************************
+--                                                                          *
+--                             Run_A_Script                                 *
+--                              (ver. 1.1)                                  *
+--                                                                          *
+-- Copyright (c) 2004 Don Goyette                                           *
+-- http://www.donandcarla.com/Celestia/                                     *
+--                                                                          *
+-- You are free to use, copy, modify, or redistribute this script, for      *
+-- NON-commercial use only. Your script must also retain a credit to the    *
+-- original author of this script.                                          *
+--                                                                          *
+--***************************************************************************
+--                                                                          *
+-- This script allows you to display a menu of Celx scripts on-screen and   *
+-- then allows the user to select one of the scripts via a keypress. You    *
+-- should use only numbers (0-9) and letters (a-z) as many other keys are   *
+-- not properly captured by Lua/Celx (March 2004).                          *
+--                                                                          *
+--***************************************************************************
+
+
+--***************************************************************************
+--                         Keyboard Input Callback                          *
+--                                                                          *
+-- This function is called automatically by Celestia when celestia:         *
+-- requestkeyboard() is set to true.                                        *
+--                                                                          *
+--***************************************************************************
+  function celestia_keyboard_callback(keypress)
+    rtnKeypress = keypress
+    return true  -- Tell Celestia we will handle this keypress
+  end
+    
+
+--***************************************************************************
+--                     Get a keypress from the user
+--***************************************************************************
+  function GetKey()
+    celestia:requestkeyboard(true)  --Enable keyboard input
+    
+    while rtnKeypress == "" do  --Loop until we get a keypress
+
+      -- Display the menu (this is where you define your menu)...
+      -- (Yes, the print duration time is longer than the wait duration time.
+      -- this is to stop the menu from "flickering".)
+      celestia:print("Press a number key to run the corresponding script:\n\n"
+                   .."  1. Script #1\n"
+                   .."  2. Script #2\n"
+                   .."  9. End"
+                    , 1, -1, -1, 1, 15)
+      wait(0.5)
+    end
+
+    -- Disable keyboard input
+    celestia:requestkeyboard(false)
+  end
+  
+
+--***************************************************************************
+--                                Main Code
+--***************************************************************************
+  rtnKeypress = ""
+
+  while rtnKeypress ~= "9" do --This is your End / EXIT key definition
+    GetKey() -- Get a Keypress
+  
+    -- Check the key value (this is where you match a keypress to a script)
+    -- NOTE: These script files MUST exist in the same directory as this
+    --       script, or you will get a "File not found" error.
+    if (rtnKeypress == "1") then
+      filename = "script1.celx"
+
+    elseif rtnKeypress == "2" then
+      filename = "script2.celx"
+    
+    else -- Not a valid keypress, ignore it
+      filename = ""
+
+    end
+  
+    -- rtnVal returns nil or a compiled Lua function
+    if filename > "" then
+       rtnVal = loadfile(filename)
+
+       if rtnVal == nil then
+          celestia:flash("File not found.")
+       else
+          rtnVal() -- run the script file as a function
+          celestia:print("Script '"..filename.."' is complete.",
+                          5, -1, -1, 1, 10)
+          wait(5)
+       end
+       
+    rtnKeypress = ""  -- Clear the last keypress
+    end
+  
+  end --(while rtnKeypress ~= "9")
+  
+
+--***************************************************************************
+--                           End of script
+--***************************************************************************
+  celestia:print("This script is now finished.", 2, -1, -1, 1, 10)
+  wait(2)
+  
+  

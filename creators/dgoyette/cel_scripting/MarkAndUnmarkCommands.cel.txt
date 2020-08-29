@@ -1,0 +1,112 @@
+Hello,
+
+If you are using Celestia version 1.3.1 pre9 or above, here is an example of how to use the Mark and Unmark commands in a script.  Marking an object places a colored symbol on the object, or if it is out of sight, where the object is located.  You control the size and color of the symbol and select one of five different symbols to use.
+
+If you are using a version prior to 1.3.1 pre9, you will not be able to use the renderflags command to turn Markers ON and OFF. You will need to do this manually via the keyboard (Ctrl+k). Also, you will not be able to use the unmarkall command. Otherwise, everything else should work fine. Just place a "#" at the beginning of the two lines in question.
+
+Enjoy!
+
+-Don G.
+
+
+Copy the following code, from the beginning "{" to the ending "}", paste it into your plain text editor, save the file as markers.cel in the Celestia directory, then run it (double click the file name in a file manager or use Celestia's menu: File / Open Script).
+
+
+{ 
+# ------------------------------------------------------------------ 
+# An example script showing how to use the Mark and Unmark commands 
+# ------------------------------------------------------------------ 
+
+# Select Earth... 
+  select { object "Sol/Earth" } 
+
+# Center Earth on-screen... 
+  center {} 
+
+# Move the Earth out of sight... 
+  goto { duration 2 distance 1000 } 
+  wait { duration 2 } 
+
+# Turn ON Marker display... 
+  renderflags { set "markers" } 
+
+# Unmark Earth in case it's currently Marked. This MUST be done before 
+# adding a Mark, or the new Mark will not override the old Mark... 
+  unmark { object "Sol/Earth" } 
+
+# Here are the allowable values for "symbol": 
+#  * diamond 
+#  * plus 
+#  * square 
+#  * triangle 
+#  * x 
+
+# Here are some values for color. As you can see, the number values 
+# from left to right relate to Red, Green and Blue (RGB). Allowable 
+# values are from 0 to 1, with decimals being specified with a 
+# leading 0, such as 0.5. 
+#  [0 0 0] # Black 
+#  [1 0 0] # Red 
+#  [0 1 0] # Green 
+#  [0 0 1] # Blue 
+#  [1 1 0] # Yellow 
+#  [1 1 1] # White 
+
+# Mark Earth with a size 15 blue X... 
+  mark { object "Sol/Earth" # no default 
+         size   15.0        # default = 10.0 
+         color  [0 1 0]     # default = [1.0 0.0 0.0] Red 
+         symbol "x" }       # default = "diamond" 
+
+# Display planet labels for 2 seconds... 
+  labels { set "planets" } 
+  wait   { duration 2 } 
+  labels { clear "planets" } 
+
+# Wait so the user can see the Mark... 
+  wait { duration 3 } 
+
+
+# Mark Earth with a size 15 red diamond... 
+  unmark { object "Sol/Earth" } 
+  mark { object "Sol/Earth" 
+         size   15.0 
+         color  [1 0 0] 
+         symbol "diamond" } 
+  wait { duration 3 } 
+
+
+# Mark Earth with a size 10 yellow square... 
+  unmark { object "Sol/Earth" } 
+  mark { object "Sol/Earth" 
+         size   10.0 
+         color  [1 1 0] 
+         symbol "square" } 
+  wait { duration 3 } 
+
+
+# Mark Earth with a size 50 blue triangle... 
+  unmark { object "Sol/Earth" } 
+  mark { object "Sol/Earth" 
+         size   50.0 
+         color  [0 0 1] 
+         symbol "triangle" } 
+  wait { duration 3 } 
+  unmark { object "Sol/Earth" } 
+
+
+# Turn OFF Marker display... 
+  renderflags { clear "markers" } 
+
+# Uncomment the following line to UNMark ALL objects... 
+#  unmarkall {} 
+
+# Let the user know the script is finished... 
+  print  { text "The script is finished." 
+           row  -2 
+           column 23 
+           duration 5 } 
+
+  wait   { duration 5 } 
+
+}

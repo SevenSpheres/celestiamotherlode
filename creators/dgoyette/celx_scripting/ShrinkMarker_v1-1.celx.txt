@@ -1,0 +1,238 @@
+--***************************************************************************
+--                  Don G's Celx/Lua Shrink Marker Function                 *
+--                              (version 1.1)                               *
+--                                                                          *
+--  This function helps to draw the viewers attention to the object you     *
+--  are trying to point out by shrinking a marker of your description from  *
+--  a beginning to ending size, in x steps, repeated y times.               *
+--                                                                          *
+--***************************************************************************
+  function shrinkMarker(yourObject, markerColor, markerType, markerSizeBegin,
+                        markerSizeEnd, shrinkWait, shrinkSteps, shrinkRepeat,
+                        leaveMarkerOn)
+
+  -- Validate parameters...
+
+    -- Check yourObject...
+    local typeOfVariable = type(yourObject)
+
+    if typeOfVariable ~= "userdata" then
+       celestia:print('shrinkMarker Error: The yourObject param must be an OBJECT type.\nFor example: myObject = celestia:find ("Sol/Earth")',
+         20, -1, -1, 0, 4)
+       wait (20)
+       return
+    end
+
+    -- Check markerColor...
+    if (markerColor ~= nil and markerColor ~= "") then
+       local typeOfVariable = type(markerColor)
+
+       if typeOfVariable ~= "string" then
+          celestia:print('shrinkMarker Error: The markerColor param must be a string.\nFor example: markerColor = "#00FF00"',
+            20, -1, -1, 0, 4)
+          wait (20)
+          return
+       end
+
+       if string.len(markerColor) ~= 7 then
+          celestia:print('shrinkMarker Error: The markerColor param must consist of\nexactly 7 characters, in the format "#rrggbb" where rgb\nare Hex values (0-F).',
+            20, -1, -1, 0, 5)
+          wait (20)
+          return
+       end
+
+       if string.sub(markerColor, 1, 1) ~= "#" then
+          celestia:print('shrinkMarker Error: The first character of the markerColor\nparam must be "#". For example: markerColor = "#00FF00"',
+            20, -1, -1, 0, 4)
+          wait (20)
+          return
+       end
+    else
+       markerColor = "#FF0000"
+    end
+
+    -- Check markerType...
+    if (markerType ~= nil and markerType ~= "") then
+       if (markerType ~= "diamond"
+       and markerType ~= "triangle"
+       and markerType ~= "square"
+       and markerType ~= "plus"
+       and markerType ~= "x") then
+          celestia:print('shrinkMarker Error: markerType must be one of:\n"diamond", "triangle", "square", "plus", or "x".',
+            20, -1, -1, 0, 4)
+          wait (20)
+          return
+       end
+    else
+       markerType = "square"
+    end
+
+    -- Check markerSizeBegin and markerSizeEnd...
+    if ( (markerSizeBegin == nil) or (markerSizeBegin < 1) ) then
+          markerSizeBegin = 100
+    end
+
+    if ( (markerSizeEnd == nil) or (markerSizeEnd < 1) ) then
+          markerSizeEnd = 10
+    end
+
+    if (markerSizeEnd > markerSizeBegin) or (markerSizeEnd == markerSizeBegin) then
+          celestia:print('shrinkMarker Error: markerSizeBegin must be larger than markerSizeEnd.',
+            20, -1, -1, 0, 4)
+          wait (20)
+          return
+       end
+
+    if (markerSizeBegin - markerSizeEnd) <= 2 then
+          celestia:print('shrinkMarker Error: (markerSizeBegin - markerSizeEnd) must be 2 or larger.',
+            20, -1, -1, 0, 4)
+          wait (20)
+          return
+       end
+
+    -- Check shrinkWait... 0.02 to 0.08
+    if (shrinkWait == nil or (shrinkWait < 0.001 or shrinkWait > 1.0) ) then
+        shrinkWait = 0.05
+    end
+
+    -- Check shrinkSteps...
+    if (shrinkSteps == nil or (shrinkSteps < 2 or shrinkSteps > 100) ) then
+        shrinkSteps = 10
+    end
+
+    -- Check shrinkRepeat...
+    if (shrinkRepeat == nil or (shrinkRepeat < 2 or shrinkRepeat > 40) ) then
+        shrinkRepeat = 3
+    end
+
+    -- Check leaveMarkerOn...
+    if leaveMarkerOn == nil then
+       leaveMarkerOn = false
+    end
+
+
+  -- Begin the function code...
+    local shrinkBy = (markerSizeBegin - markerSizeEnd) / shrinkSteps
+    local x1, x2 = 0
+
+    yourObject:unmark() -- make sure the object is not currently marked
+
+    for x1 = 1, shrinkRepeat do
+      local markerSize = markerSizeBegin
+
+      for x2 = 1, shrinkSteps do
+        yourObject:mark ( markerColor, markerType, markerSize ) --ON
+        markerSize = markerSize - shrinkBy
+        wait(shrinkWait)
+        yourObject:unmark() --OFF
+      end
+    end
+
+    if (leaveMarkerOn) then
+        yourObject:mark ( markerColor, markerType, markerSizeEnd )
+    end
+  end
+
+
+
+--***************************************************************************
+--                                Change Log                                *
+--                                                                          *
+--  Version 1.1                                                             *
+--  -----------                                                             *
+--  * Added the shrinkWait parameter to allow the user to define how long   *
+--    each marker will be displayed, without having to modify the actual    *
+--    function code.                                                        *
+--                                                                          *
+--  * Moved two variables out of the loop areas (suggested by Toti).        *
+--                                                                          *
+--  * Modified the example code.                                            *
+--                                                                          *
+--***************************************************************************
+
+
+
+--***************************************************************************
+--                          Parameter Descriptions                          *
+--                          ----------------------                          *
+--                                                                          *
+--       yourObject: (Object) A variable you define as an OBJECT type.      *
+--          Default: None                                                   *
+--          Example: 'myObject = celestia:find("Sol/Earth")' creates an     *
+--                   OBJECT type variable named 'myObject'.                 *
+--                                                                          *
+--      markerColor: (String) In hex format: "#rrggbb" where r g b = Hex    *
+--                   0-F                                                    *
+--          Default: "#FF0000" (Red)                                        *
+--                   Example colors...                                      *
+--                     Red   = "#FF0000"                                    *
+--                     Green = "#00FF00"                                    *
+--                     Blue  = "#0000FF"                                    *
+--                     White = "#FFFFFF"                                    *
+--                     Black = "#000000"                                    *
+--                                                                          *
+--       markerType: (String) "diamond", "triangle", "square", "plus", or   *
+--                   "x"                                                    *
+--          Default: "square"                                               *
+--                                                                          *
+--  markerSizeBegin: (Integer) Size of beginning marker, in pixels          *
+--          Default: 100                                                    *
+--                                                                          *
+--    markerSizeEnd: (Integer) Size of ending marker, in pixels             *
+--          Default: 10                                                     *
+--                                                                          *
+--       shrinkWait: (Float) # of seconds to pause between drawing markers  *
+--          Default: 0.05   [a good range is 0.02 to 0.08]                  *
+--                                                                          *
+--      shrinkSteps: (Integer) # of steps to shrink from Begin to End size  *
+--          Default: 10                                                     *
+--                                                                          *
+--     shrinkRepeat: (Integer) # of times to repeat the process             *
+--          Default: 3                                                      *
+--                                                                          *
+--    leaveMarkerOn: (Boolean) true=on  false=off                           *
+--          Default: false                                                  *
+--                                                                          *
+----------------------------------------------------------------------------*
+--  NOTES:                                                                  *
+--    1. Remember to use the leading "#" in markerColor                     *
+--                                                                          *
+--    2. Remember to perform ... celestia:show("markers") first             *
+--                                                                          *
+--    3. As of version 1.3.2 pre7, Celx limits the size of a marker to 100  *
+--       pixels. Hopefully, a newer version will raise this limit.          *
+--***************************************************************************
+
+
+
+--***************************************************************************
+--                                 Example                                  *
+--***************************************************************************
+  obs = celestia:getobserver()
+
+  -- Select, Center, Follow and Goto an object (Earth, at 25K km)...
+  myObject = celestia:find("Sol/Earth")
+  celestia:select(myObject)
+  obs:gotodistance(myObject, (25000 + myObject:radius()), 5)
+  wait(5)
+
+  -- Make sure Marker display is ON...
+  celestia:show("markers")
+
+  -- Shrink a red, 100 pixel 'diamond' to 5 pixels, in 10 steps, pausing
+  -- for 0.05 seconds between drawing the markers, and repeat everything
+  -- three times...
+  shrinkMarker(myObject, "#FF0000", "diamond", 100, 5, 0.05, 10, 3, false)
+
+  -- Other valid call formats...
+--  shrinkMarker(myObject)  -- uses all default values
+--  shrinkMarker(myObject, "", "diamond", 0, 0, 0, 0, 0, nil)
+--  shrinkMarker(myObject, nil, nil, 50, 5, nil, nil, nil, true)
+
+
+--***************************************************************************
+--                           End of script
+--***************************************************************************
+  celestia:print("The End.", 2, -1, -1, 1, 4)
+  wait(2)
+

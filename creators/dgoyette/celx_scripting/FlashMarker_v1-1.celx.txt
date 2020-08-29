@@ -1,0 +1,187 @@
+--***************************************************************************
+--                  Don G's Celx/Lua Flash Marker Function                  *
+--                              (version 1.1)                               *
+--                                                                          *
+-- This function helps to draw the viewers attention to the object you are  *
+-- trying to point out by flashing a marker on it, that you define.         *
+--                                                                          *
+--***************************************************************************
+  function flashMarker(yourObject, markerColor, markerType, markerSize,
+                       flashTimes, leaveMarkerOn)
+
+  -- Validate parameters...
+
+    -- Check yourObject...
+    local typeOfVariable = type(yourObject)
+
+    if typeOfVariable ~= "userdata" then
+       celestia:print('flashMarker Error: The yourObject param must be an OBJECT type.\nFor example: myObject = celestia:find ("Sol/Earth")',
+         20, -1, -1, 0, 4)
+       wait (20)
+       return
+    end
+
+    -- Check markerColor...
+    if (markerColor ~= nil and markerColor ~= "") then
+       local typeOfVariable = type(markerColor)
+
+       if typeOfVariable ~= "string" then
+          celestia:print('flashMarker Error: The markerColor param must be a string.\nFor example: markerColor = "#00FF00"',
+            20, -1, -1, 0, 4)
+          wait (20)
+          return
+       end
+
+       if string.len(markerColor) ~= 7 then
+          celestia:print('flashMarker Error: The markerColor param must consist of\nexactly 7 characters, in the format "#rrggbb" where rgb\nare Hex values (0-F)',
+            20, -1, -1, 0, 5)
+          wait (20)
+          return
+       end
+
+       if string.sub(markerColor, 1, 1) ~= "#" then
+          celestia:print('flashMarker Error: The first character of the markerColor\nparam must be "#". For example: markerColor = "#00FF00"',
+            20, -1, -1, 0, 4)
+          wait (20)
+          return
+       end
+    else
+       markerColor = "#FF0000"
+    end
+
+    -- Check markerType...
+    if (markerType ~= nil and markerType ~= "") then
+       if (markerType ~= "diamond"
+       and markerType ~= "triangle"
+       and markerType ~= "square"
+       and markerType ~= "plus"
+       and markerType ~= "x") then
+          celestia:print('flashMarker Error: markerType must be one of:\n"diamond", "triangle", "square", "plus", or "x"',
+            20, -1, -1, 0, 4)
+          wait (20)
+          return
+       end
+    else
+       markerType = "x"
+    end
+
+    -- Check markerSize...
+    if (markerSize == nil or markerSize <= 1) then
+       markerSize = 15
+    end
+
+    -- Check leaveMarkerOn...
+    if leaveMarkerOn == nil then
+       leaveMarkerOn = false
+    end
+
+    -- Check flashTimes...
+    if (flashTimes == nil or (flashTimes <= 0 or flashTimes > 10) ) then
+       flashTimes = 3
+    end
+
+    if (leaveMarkerOn) then
+       flashTimes = flashTimes - 1  -- The last ON appears as a flash
+    end
+
+
+  -- Begin the function code...
+    yourObject:unmark() -- make sure the object is not currently marked
+
+    for x = 1, flashTimes do
+      yourObject:mark ( markerColor, markerType, markerSize ) --ON
+      wait(0.5)
+      yourObject:unmark() --OFF
+      wait(0.5)
+    end
+
+    if (leaveMarkerOn) then
+      yourObject:mark ( markerColor, markerType, markerSize )
+    end
+  end
+
+
+--***************************************************************************
+--                                Change Log                                *
+--                                                                          *
+--  Version 1.1                                                             *
+--  -----------                                                             *
+--  * Changed function name from FlashMarker to flashMarker in order to be  *
+--    consistent with my other functions.                                   *
+--                                                                          *
+--  * Added parameter validation and error reporting.                       *
+--                                                                          *
+--  * Added default values to all but the yourObject parameter.             *
+--                                                                          *
+--***************************************************************************
+
+
+
+--***************************************************************************
+--                          Parameter Descriptions                          *
+--                          ----------------------                          *
+--                                                                          *
+--  yourObject: (Object) A variable you define as an OBJECT type.           *
+--     Default: None                                                        *
+--     Example: 'myObject = celestia:find("Sol/Earth")' creates an OBJECT   *
+--              type variable named 'myObject'.                             *
+--                                                                          *
+--  markerColor: (String) In hex format: "#rrggbb" where r g b = Hex 0-F    *
+--      Default: Red                                                        *
+--               Example colors...                                          *
+--                 Red   = "#FF0000"                                        *
+--                 Green = "#00FF00"                                        *
+--                 Blue  = "#0000FF"                                        *
+--                 White = "#FFFFFF"                                        *
+--                 Black = "#000000"                                        *
+--                                                                          *
+--  markerType: (String) "diamond", "triangle", "square", "plus", or "x"    *
+--     Default: "x"                                                         *
+--                                                                          *
+--  markerSize: (Integer) Size of marker, in pixels                         *
+--     Default: 15                                                          *
+--                                                                          *
+--  flashTimes: (Integer) # of times to flash the marker                    *
+--     Default: 3                                                           *
+--                                                                          *
+--  leaveMarkerOn: (Boolean) true=on  false=off                             *
+--        Default: false                                                    *
+--                                                                          *
+--  NOTES:                                                                  *
+--    1. Remember to use the leading "#" in markerColor                     *
+--    2. Remember to perform ... celestia:show("markers") first             *
+--***************************************************************************
+
+
+
+--***************************************************************************
+--                                 Example                                  *
+--***************************************************************************
+  obs = celestia:getobserver()
+
+  -- Select, Center, Follow and Goto an object (Earth, at 250K km)...
+  myObject = celestia:find("Sol/Earth")
+  celestia:select(myObject)
+  obs:center(myObject)
+  obs:follow(myObject)
+  obs:gotodistance(myObject, (250000 + myObject:radius()), 5)
+  wait(5)
+
+  -- Make sure Marker display is ON...
+  celestia:show("markers")
+
+  -- Flash a medium blue, 40 pixel 'X' on the object 3 times...
+--  flashMarker(myObject, "#7174F3", "x", 40, 3, false)
+
+  -- Other valid call formats...
+  --  flashMarker(myObject)  -- uses all default values
+  --  flashMarker(myObject, "", "diamond", 0, 5, nil)
+  --  flashMarker(myObject, nil, nil, 30, nil, true)
+
+
+--***************************************************************************
+--                           End of script
+--***************************************************************************
+  celestia:print("The End.", 2, -1, -1, 1, 4)
+  wait(2)
+

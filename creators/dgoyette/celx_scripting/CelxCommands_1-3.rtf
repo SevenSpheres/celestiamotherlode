@@ -1,0 +1,1313 @@
+{\rtf1\ansi\ansicpg1252\deff0{\fonttbl{\f0\fnil\fcharset0 Courier New;}{\f1\fswiss\fprq2\fcharset0 Arial;}{\f2\fswiss\fprq2\fcharset0 Arial Black;}}
+{\*\generator Msftedit 5.41.15.1503;}\viewkind4\uc1\pard\qc\lang1033\ul\b\f0\fs20 Celx Objects and Methods (for Celestia version 1.3.2)\ulnone\b0\par
+(file version 1.3 -- April 18, 2004)\par
+\pard\par
+This "suitable for printing" RTF file was created by Don Goyette. The "guts" of this file came from Harald Schmidt's "Summary of Lua-support in Celestia" web page during March, 2004. Most of the examples are mine, so if you find errors, please let me know so I can fix them. Thank you!\par
+\par
+\par
+\ul\b\f1\fs28 What is an object?\par
+\ulnone\b0\f0\fs20 Think of an object as a "container name", such as an orange. The orange has "properties", such as shape, size, color, etc. You probably also learned "methods" to clean, peel, and eat the orange. Thus the heirarchy:\par
+\par
+  OBJECT\par
+    PROPERTIES (Descriptions)\par
+    METHODS    (Instructions to get, set, change, do things)\par
+\par
+  For an orange...\par
+\par
+    Object Name: orange\par
+      Properties: value\par
+        - Shape: spherical\par
+        - Color: orange\par
+        - Diameter: 5 (inches)\par
+      Methods:\par
+        - Wash\par
+        - Peel\par
+        - Remove_a_section\par
+        - Eat\par
+        - GetDiameter\par
+\par
+To wash the orange in Celx, you would code: "orange:wash()".\par
+To get the diameter of the orange, you would code: "dia = orange:GetDiameter()".\par
+\par
+Lua/Celx is missing "Class" in Celestia, which in this case would be "fruit". Thus, you would have ...\par
+  Fruit\par
+    Orange\par
+      Properties\par
+      Methods\par
+    Apple\par
+      Properties\par
+      Methods\par
+\par
+\par
+-----------------------------------------------------\par
+A note from Harald Schmidt...\par
+\par
+There is an important distinction which I never made really clear in my summary (I have it wrong too), and which your Celx-Command reference doesn't make either:\par
+\par
+You write "These are the *objects* available ...", but this isn't true. If using OOP-speak these would be the classes (or types), and in Lua they probably would be called something like "types of userdata" (ugh).\par
+\par
+So: celestia, observer, object, position, frame, vector, and rotation are actually classes, or types of objects. From the point of view of a script, these names don't really exist, it's just for us humans - they could as well be called A, B, C, ... In Lua you can't create an object directly anyway (it is a stretch to use class/object in the first place).\par
+\par
+Then there are objects, instance of these types. In the beginning there is only one object, which confusingly is of the type "celestia" and as well has the name "celestia". There is always only one "celestia", but it may have different names - so if you code ...\par
+  c = celestia\par
+... there are now two names for one object.\par
+\par
+If you look at observer, it's even worse. There may be a changing number of different observers (one per view), and a changing number of names to these observers. So if you code ...\par
+  obs1 = celestia:getobserver()\par
+  wait(1)\par
+  obs2 = celestia:getobserver()\par
+... you may either have two names for the same object, or two really distinct objects (if the user created or activated another view during wait() ) - and I am currently ignoring that observer can become invalid (which is just a nice way to say that the real object which the name was pointing to just vanished).\par
+-----------------------------------------------------\par
+\par
+I'm confused, but if you are an OOP programmer (I am not), you will certainly spot the mistakes in terminology right off, and I am sorry. If you are a beginner, I hope this guide doesn't confuse you too much.\par
+\par
+\par
+\ul\b\f1\fs28 Objects (Classes or Types?) in Celx/Lua for Celestia\par
+\ulnone\b0\f0\fs20 These are the \b objects\b0  available in Celestia's implementation of Lua, called Celx:\par
+  celestia ... The program/script\par
+  frame ...... Frame of reference / coordinate system\par
+  object ..... Celestial object (ie. planet, moon, spacecraft)\par
+  observer ... A "view", or the person viewing the screen\par
+  position ... An x,y,z \i point\i0  in 3-D space\par
+  Rotation ... Axis,w or w,x,y,z rotational setting\par
+  Vector ..... An x,y,z \i direction\i0  in 3-D space\par
+\par
+\par
+\ul\b\f1\fs28 Alphabetical summary of methods contained within each object\par
+\ulnone\f2\fs20 Object Name: celestia\b0\f0  (general methods)\par
+  createcelscript\par
+  find\par
+  flash .................. (see print)\par
+  fromjulianday .......... (see tojulianday)\par
+  getambient ............. setambient\par
+  getfaintestvisible ..... setfaintestvisible\par
+  getlabelflags .......... setlabelflags\par
+  getminfeaturesize ...... aetminfeaturesize\par
+  getminorbitsize ........ setminorbitsize\par
+  getobserver ............ (see observer object)\par
+  getobservers ........... (see observer object)\par
+  getorbitflags .......... setorbitflags\par
+  getrenderflags ......... setrenderflags\par
+  getscripttime\par
+  getselection ........... select\par
+  getstar\par
+  getstarcount\par
+  getstardistancelimit ... setstardistancelimit\par
+  getstarstyle ........... setstarstyle\par
+  gettime ................ settime\par
+  gettimescale ........... settimescale\par
+  hide ................... show\par
+  hidelabel .............. showlabel\par
+  mark ................... unmark / unmarkall\par
+  newframe ............... (see observer: getframe and setframe)\par
+  newvector .............. (see Vector object)\par
+  newposition ............ (see observer: getposition and setposition)\par
+  newrotation ............ (see observer: getposition and setposition)\par
+  print .................. (see flash)\par
+  requestkeyboard ........ (see keyboard callback)\par
+  select ................. getselection\par
+  show ................... hide\par
+  showlabel .............. hidelabel\par
+  takescreenshot\par
+  tojulianday ............ (see fromjulianday)\par
+\par
+\par
+\b\f2 Object Name: frame\b0\f0  (Frame of Reference / Coordinate System)\par
+  from\par
+  to\par
+  (also see celestia:newframe, observer:getframe/setframe)\par
+\par
+\par
+\b\f2 Object Name: object\b0\f0  (celestial objects)\par
+  absmag\par
+  getchildren\par
+  getinfo\par
+  getposition\par
+  mark\par
+  preloadtexture\par
+  radius\par
+  spectraltype\par
+  type\par
+  unmark\par
+\par
+\par
+\b\f2 Object Name: observer\b0\f0  (the person looking at the screen)\par
+  cancelgoto\par
+  center\par
+  chase\par
+  deleteview\par
+  follow\par
+  getfov ................. setfov\par
+  getframe ............... setframe       (see celestia:newframe)\par
+  getlocationflags ....... setlocationflags\par
+  getorientation ......... setorientation (see celestia:newrotation)\par
+  getposition ............ setposition    (see celestia:newposition)\par
+  getspeed ............... setspeed\par
+  getsurface ............. setsurface\par
+  gettime ................ (see celestia: gettime and settime)\par
+  goto\par
+  gotodistance\par
+  gotolonglat\par
+  gotolocation (actually gotoposition)\par
+  gotosurface\par
+  isvalid\par
+  lock\par
+  lookat\par
+  rotate\par
+  singleview\par
+  splitview\par
+  synchronous\par
+  track\par
+  travelling\par
+\par
+\par
+\b\f2 Object Name: position\b0\f0  (a point in 3-D space)\par
+  addvector\par
+  distanceto\par
+  getx\par
+  gety\par
+  getz\par
+  orientationto\par
+  vectorto\par
+\par
+\par
+\b\f2 Object Name: Rotation\b0\f0  (a ???)\par
+  imag\par
+  real\par
+\par
+\par
+\b\f2 Object Name: Vector\b0\f0  (a direction in 3-D space)\par
+  getx\par
+  gety\par
+  getz\par
+  length\par
+  normalize\par
+\par
+\par
+\b\f2 Callbacks\b0\f0\par
+  celestia_cleanup_callback  (Restore user settings)\par
+  celestia_keyboard_callback (Get user input)\par
+\par
+\par
+\par
+\ul\b\f1\fs28 Descriptions of methods for each object...\par
+\ulnone\b0\f0\fs20 The following is a detailed description of the methods contained within each of Celx's objects, listed alphabetically. Square brackets [] indicate optional parameters.\par
+\par
+\par
+\ul\b\f2\fs24 Object Name:\ulnone  celestia\b0\par
+\f0\fs20 The \b\i celestia\b0\i0  object represents the Celestia program itself and contains most of the general, all-purpose methods (functions or routines).\par
+\par
+    \b\fs22 createcelscript\b0\fs20  (source)\par
+      Creates a Cel script inside your Celx script.\par
+\par
+      Example:\par
+        function CEL(source)\par
+          local script = celestia:createcelscript(source)\par
+          while script:tick() do\par
+            wait(0)\par
+          end\par
+        end\par
+\par
+        CEL([[\par
+         \{\par
+          <CEL script code goes here>\par
+          <CEL script code goes here>\par
+          ...\par
+         \}\par
+        ]])\par
+\par
+\par
+    \b\fs22 find\b0\fs20  (string)\par
+      Creates a new (celestial) \b\i object\b0\i0  object. (Complain to Chris, not me.)\par
+      Example: myObject = celestia:find("Sol/Earth")\par
+               myObject is now a (celestial) \b\i object\b0\i0  object.\par
+\par
+\par
+    \b\fs22 flash\fs20  \b0 (string [, duration])\par
+      Displays a text message in the lower right-hand portion of the screen.\par
+      Example: celestia:flash("Hello", 3)\par
+\par
+\par
+    \b\fs22 fromjulianday\b0\fs20  ()\par
+      Converts a julian-day value to a calendar date. Returns a table that\par
+      contains the following date fields: t.year, t.month, t.day, t.hour,\par
+      t.minute, t.seconds\par
+\par
+      Example: t = celestia:fromjulianday(2453081.7990005)\par
+               results in...\par
+                 t.year    = 2004\par
+                 t.month   = 03\par
+                 t.day     = 17\par
+                 t.hour    = 7 (based on a 24-hour clock)\par
+                 t.minute  = 10\par
+                 t.seconds = 33.643\par
+\par
+\par
+    \b\fs22 getambient\b0\fs20  ()\par
+      Return the current value for ambient light.\par
+      Example: currAmbient = celestia:getambient()\par
+\par
+\par
+    \b\fs22 getfaintestvisible\b0\fs20  ()\par
+      Returns normal magnitude limit if AutoMag is OFF, or the magnitude\par
+      limit at 45 degrees if AutoMag is ON.\par
+      Example: origFaintestvisible = celestia:getfaintestvisible()\par
+\par
+\par
+\b     \fs22 getlabelflags\b0\fs20  ()\par
+      Returns a table of key:value pairs for label flags, defining which items\par
+      should contain text labels. (see setlabelflags)\par
+        labelflags: asteroids, comets, constellations, galaxies, locations,\par
+                    moons, planets, spacecraft, stars.\par
+      Example: origLabelflags = celestia:getlabelflags()\par
+\par
+\par
+    \b\fs22 getminfeaturesize\b0\fs20  ()\par
+      Returns the minimum size for a feature (city, etc.) to be labeled.\par
+      Example: currMinFeatureSize = celestia:getminfeaturesize()\par
+\par
+\par
+    \b\fs22 getminorbitsize\b0\fs20  ()\par
+      Returns the minimum diameter, in pixels, for an orbit to be rendered.\par
+      Example: currMinOrbitSize = celestia:getminorbitsize()\par
+\par
+\par
+    \b\fs22 getobserver\b0\fs20  ()\par
+      Creates a new \b\i observer\b0\i0  object.\par
+      Example: obs = celestia:getobserver()\par
+\par
+\par
+    \b\fs22 getobservers\b0\fs20  ()\par
+      Creates a table of new \b\i observer\b0\i0  objects.\par
+      Example: obs_table = celestia:getobservers()\par
+\par
+\par
+\b     \fs22 getorbitflags\b0\fs20  ()\par
+      Returns a table of key:value pairs. (see setorbitflags)\par
+      Example: origOrbitflags = celestia:getorbitflags()\par
+\par
+\par
+    \b\fs22 getrenderflags\b0\fs20  ()\par
+      Returns a table of key:value pairs. (see setrenderflags)\par
+      Example: origRenderflags = celestia:getrenderflags()\par
+\par
+\par
+    \b\fs22 getscripttime\b0\fs20  ()\par
+      Returns the real number of seconds (with fractions) since the script\par
+      began, useful for timing purposes.\par
+      Example: scriptTime = celestia:getscripttime()\par
+\par
+\par
+    \b\fs22 getselection\b0\fs20  ()\par
+      Creates a new (celestial) \b\i object\b0\i0  object by returning the currently\par
+      selected object.\par
+      Example: myObject = celestia:getselection()\par
+\par
+\par
+    \b\fs22 getstar\b0\fs20  (index_number)\par
+      Creates a new (celestial) \b\i object\b0\i0  object for the specified star\par
+      (identified by it's index_number in the star database).\par
+      Example: myObject = celestia:getstar(1234)\par
+\par
+\par
+    \b\fs22 getstarcount\b0\fs20  ()\par
+      Return the number of stars in the star catalogue.\par
+      Example: starCount = celestia:getstarcount()\par
+\par
+\par
+    \b\fs22 getstardistancelimit\b0\fs20  ()\par
+      Return the maximum distance of stars to be rendered, in light-years.\par
+      Example: furthestStars = celestia:getstardistancelimit()\par
+\par
+\par
+    \b\fs22 getstarstyle\b0\fs20  ()\par
+      Returns the current rendering style for stars (see setstarstyle).\par
+      Example: starStyle = celestia:getstarstyle()\par
+\par
+\par
+    \b\fs22 gettime\b0\fs20  ()\par
+      Get current simulation-time as julian days. See to/fromjulianday.\par
+      Example: currTime = celestia:gettime()\par
+\par
+\par
+    \b\fs22 gettimescale\b0\fs20  ()\par
+      Get current timescale (how many seconds of simulation time equal\par
+      one second of real time), such as 10x, 100x, etc.\par
+      Example: timeScale = celestia:gettimescale()\par
+\par
+\par
+    \b\fs22 hide\b0\fs20  ("renderflag" [, "renderflag"] ... )\par
+      Do not render the specified items on the screen.\par
+      renderflags: orbits, cloudmaps, constellations, galaxies, planets,\par
+                   stars, nightmaps, eclipseshadows, ringshadows, comettails,\par
+                   boundaries, markers, automag, atmospheres, grid,\par
+                   smoothlines, lightdelay\par
+      Example: celestia:hide("planets", "grid")\par
+\par
+\par
+\b     \fs22 hidelabel\b0\fs20  ("labelflag" [, "labelflag"] ...)\par
+      Remove text labels from the specified items. See setlabelflags.\par
+      labelflags: planets, moons, spacecraft, asteroids, comets,\par
+                  constellations, stars, galaxies, locations.\par
+      Example: celestia:hidelabel("planets", "moons")\par
+\par
+\par
+    \b\fs22 mark\b0\fs20  (myObject)\par
+      Place a mark on the specified \b\i object\b0\i0 .\par
+        myObject: (celestial) \b\i object\b0\i0  to be marked.\par
+\par
+         Example: celestia:mark(myEarth) (See find example above.)\par
+                  You can also use myEarth:mark().\par
+\par
+\par
+    \b\fs22 newframe\b0\fs20  (coordsysname [, reference [, target]] )\par
+      Create a new \b\i frame\b0\i0  (of reference / coordinate system) object.\par
+        coordsysname: String describing type of frame: "universal",\par
+                      "ecliptic",  "equatorial", "planetographic", "observer",\par
+                      "lock", "chase".\par
+           reference: Reference-\b\i object\b0\i0 . Not needed for type "universal".\par
+              target: Target-\b\i object\b0\i0 . Only needed for "lock".\par
+\par
+             Example: myFrame = celestia:newframe("ecliptic")\par
+\par
+\par
+    \b\fs22 newposition\b0\fs20  (x, y, z)\par
+      Creates a new \b\i position\b0\i0  object, from numbers or from URL-style Base64-\par
+      encoded values.\par
+        x, y, z: The components of the new position. Either as numbers (unit\par
+                 is microlightyears), or as x, y, z string-values taken from\par
+                 a cel-style URL.\par
+        Example: ???\par
+\par
+\par
+    \b\fs22 newrotation\b0\fs20  (axis, w) \b -OR-\b0  (w, x, y, z)\par
+      Creates new \b\i rotation\b0\i0  object (i.e. a quaternion).\par
+           axis: \b\i Vector\b0\i0  describing the axis of this rotation.\par
+              w: The \i angle\i0  of this rotation (for details check out\par
+                 quaternions).\par
+      Or ...\par
+        w,x,y,z: Number values for this quaternion.\par
+\par
+      Note: (From Harald) Passing the components of a vector as x,y,z-values\par
+            is not the same as passing the vector. If you pass a vector, a\par
+            quaternion will be created by the use of "setAxisAngle", which (I\par
+            hope) is more useful in practice. If you want to create a rotation\par
+            from the values used in a cel:-URL, use the seperate values.\par
+\par
+      Example: ???\par
+\par
+\par
+    \b\fs22 newvector\b0\fs20  (x, y, z)\par
+      Create a new \b\i vector\b0\i0  object.\par
+        x, y, z: Components of the new vector. Unit is microlightyears.\par
+\par
+        Example: ???\par
+\par
+\par
+    \b\fs22 print\fs20  \b0 (string\par
+            [, duration\par
+            [, horig    (-1, 0 or 1 / left, center or right)\par
+            [, vorig    (-1, 0 or 1 / bottom, center or top)\par
+            [, hoffset  (0 to ?-depends on screen res -/left +/right)\par
+            [, voffset] (0 to ?-depends on screen res -/down +/up)\par
+           ]]]] )\par
+      Display text at the specified position on-screen for duration seconds.\par
+\par
+      Example: celestia:print("Hello", 3, 0, 0, -3, 0)\par
+\par
+\par
+    \b\fs22 requestkeyboard\b0\fs20  (true or false)\par
+      Enable or disable callback for keyboard input. If keyboard-input has\par
+      been enabled, Celestia will execute the function with the name\par
+      "celestia_keyboard_callback" for each keypress. This function must exist\par
+      when calling requestkeyboard.\par
+\par
+      The pressed key is given the function as a string-argument, containing\par
+      the UTF-8 encoding of this key (which for ASCII-chars will simply be the\par
+      string containing the normal char).\par
+\par
+      The callback-function can return a boolean indicating whether the\par
+      keypress has been handled (true) or if the normal processing should\par
+      continue (false), no return value is taken as true. These callbacks can\par
+      only happen while the script is executing wait().\par
+\par
+      See the keyboard callback description in the Callback section below.\par
+\par
+\par
+    \b\fs22 select\b0\fs20  (myObject or nil)\par
+      Select the specified \b\i object\b0\i0 , or clear the currently selected \b\i object\b0\i0 .\par
+        myObject: (celestial) \b\i object\b0\i0  to be selected.\par
+             nil: Clears the current selection.\par
+         Example: celestia:select(myEarth) (See find example above.)\par
+\par
+\par
+    \b\fs22 setambient\b0\fs20  (decimal value between 0 and 1)\par
+      Set the level of ambient light.\par
+      Example: celestia:setambient(0.2)\par
+\par
+\par
+    \b\fs22 setfaintestvisible\b0\fs20  (number)\par
+      Set normal magnitude limit, if AutoMag is OFF, or the magnitude limit\par
+      at 45 degrees if AutoMag is ON.\par
+      Example: celestia:setfaintestvisible(6.5)\par
+\par
+\par
+\b     \fs22 setlabelflags\b0\fs20  (labelflags)\par
+      Define which items should contain text labels. See showlabel.\par
+        labelflags: asteroids, comets, constellations, galaxies, locations,\par
+                    moons, planets, spacecraft, stars\par
+           Example:\par
+             t = \{\} -- create table (curly braces)\par
+             t.asteroids  = true\par
+             t.spacecraft = false\par
+             celestia:setlabelflags(t)\par
+           or...\par
+             -- This form uses \i curly braces \i0 ...\par
+             celestia:setlabelflags\{asteroids = true, spacecraft = false\}\par
+\par
+\par
+    \b\fs22 setminfeaturesize\b0\fs20  (number)\par
+      Set the minimum size for a feature (city, etc.) to be labeled.\par
+      Example: celestia:setminfeaturesize(10)\par
+\par
+\par
+    \b\fs22 setminorbitsize\b0\fs20  (number)\par
+      Set the minimum diameter of orbits to be rendered, in pixels.\par
+      Example: celestia:setminorbitsize(20)\par
+\par
+\par
+\b     \fs22 setorbitflags\b0\fs20  (orbitflags)\par
+      Define what items to display orbit paths for.\par
+        orbitflags: Asteroid, Comet, Invisible, Moon, Planet, Spacecraft, \par
+                    Unknown.\par
+           Example:\par
+             t = \{\} -- create table\par
+             t.Planet = true\par
+             t.Moon   = false\par
+             celestia:setorbitflags(t)\par
+           or...\par
+             -- This form uses \i curly braces \i0 ...\par
+             celestia:setorbitflags\{Planet = true, Moon = false\}\par
+\par
+\par
+    \b\fs22 setrenderflags\b0\fs20  (renderflags)\par
+      Define what items should be displayed on-screen. See show.\par
+        renderflags: atmospheres, automag, boundaries, cloudmaps, comettails,\par
+                     constellations, eclipseshadows, galaxies, grid,\par
+                     lightdelay, markers, nightmaps, orbits, planets,\par
+                     ringshadows, smoothlines, stars.\par
+\par
+            Example:\par
+              t = \{\}  -- Create table (note the curly braces)\par
+              t.galaxies = true\par
+              t.grid     = false\par
+              celestia:setrenderflags(t)\par
+            or...\par
+              -- This form uses \i curly braces \i0 ...\par
+              celestia:setrenderflags\{galaxies = true, grid = false\}\par
+\par
+\par
+    \b\fs22 setstardistancelimit\b0\fs20  (number)\par
+      Set the maximum distance of stars to be rendered, in light-years.\par
+      Example: celestia:setstardistancelimit(60000)\par
+\par
+\par
+    \b\fs22 setstarstyle\b0\fs20  (string)\par
+      Define the rendering style for stars: "fuzzy", "point", or "disc".\par
+      Example: celestia:setstarstyle("point")\par
+\par
+\par
+    \b\fs22 settime\b0\fs20  (number)\par
+      Set date/time for this simulation in julian days.\par
+      See celestia:tojulianday().\par
+      Example: newTime = celestia:tojulianday (2004, 3, 17, 16, 35, 50.6)\par
+               celestia:settime(newTime)\par
+\par
+\par
+\b     \fs22 settimescale\b0\fs20  (number)\par
+      Set the timescale (how many seconds of simulation time equal one second\par
+      of real time), such as 10x, 100x, etc.\par
+        negative numbers = reverse time\par
+         0 = Pause time\par
+         1 = Real time\par
+        10 = 10x, etc.\par
+      Example: celestia:settimescale(-1000) -- 1000x in reverse\par
+\par
+\par
+    \b\fs22 show\b0\fs20  ("renderflag" [, "renderflag"] ... )\par
+      Define what items should be displayed on-screen. See setrenderflags.\par
+        renderflags: atmospheres, automag, boundaries, cloudmaps, comettails,\par
+                     constellations, eclipseshadows, galaxies, grid,\par
+                     lightdelay, markers, nightmaps, orbits, planets,\par
+                     ringshadows, smoothlines, stars.\par
+            Example: celestia:show("planets", "grid")\par
+\par
+\par
+\b     \fs22 showlabel\b0\fs20  ("labelflag" [, "labelflag"] ...)\par
+      Define which items should contain text labels. See setlabelflags.\par
+        labelflags: asteroids, comets, constellations, galaxies, locations,\par
+                    moons, planets, spacecraft, stars\par
+           Example: celestia:showlabel("planets", "moons")\par
+\par
+\par
+    \b\fs22 takescreenshot\b0\fs20  ( [filetype [, name]] )\par
+      Take (if allowed) a screenshot and save it to disk, returns true if\par
+      successful.\par
+        filetype: A string, either "png" or "jpg", default is "png".\par
+            name: A string which will be used in the filename for this\par
+                  screenshot.\par
+\par
+      Allowing a script to take a screenshot is controlled by the setting\par
+      "ScriptScreenshotCount" in the celestia.cfg file, which is the maximum\par
+      number of screenshots a script may take per run. Use 0 to disallow\par
+      screenshots, -1 for unlimited screenshots. The directory where screen-\par
+      shots are saved is set by "ScriptScreenshotDirectory" in celestia.cfg,\par
+      defaulting to the main celestia directory (typically something like\par
+      C:\\Program Files\\Celestia\\).\par
+\par
+      Depending on your system, celestia may not be allowed to write files\par
+      there. To avoid overwriting other files (i.e. non-screenshots), the\par
+      filename is always something like "screenshot-000001.png" or\par
+      "screenshot-name-000001.png", where the number is automatically incre-\par
+      mented, starting at 1, each time you start a script. Name can be chosen\par
+      by the script - see above. The name-part is restricted to A-z, 0-9 and\par
+      _ (underscore) with a maximum length of eight chars. Considering the\par
+      specialized application of this method these restrictions shouldn't be\par
+      a problem.\par
+\par
+      Note: Taking screenshots takes some time, but any flash, print, goto\par
+            or center command in progress will not wait.\par
+\par
+\par
+    \b\fs22 tojulianday\b0\fs20  (YYYY, MM, DD, HH, MM, SS.SSS)\par
+      Convert a calendar date to julian days (see also: settime, gettime,\par
+      and fromjulianday).\par
+         Note: Hour (HH) is based on a 24-hour clock (no AM and PM).\par
+      Example: newTime = celestia:tojulianday (2004, 3, 17, 16, 35, 50.6)\par
+               celestia:settime(newTime)\par
+\par
+\par
+    \b\fs22 unmark\b0\fs20  (myObject)\par
+      Remove an existing mark from the specified \b\i object\b0\i0 .\par
+        myObject: (celestial) \b\i object\b0\i0  to be UNmarked.\par
+         Example: celestia:unmark(myEarth) (See find example above.)\par
+                  You can also use myEarth:unmark().\par
+\par
+\par
+    \b\fs22 unmarkall\b0\fs20  ()\par
+      Unmark all (celestial) \b\i object\b0\i0  objects.\par
+      Example: celestia:unmarkall()\par
+\par
+\par
+\par
+\ul\b\f2\fs24 Object Name:\ulnone  frame\b0\par
+\f0\fs20 A \b\i frame\b0\i0  object represents the frame of reference, or coordinate system, of an observer. For example: "universal", "ecliptic", "equatorial", "planetographic", "observer", "lock",\par
+or "chase".\par
+\par
+    \b\fs22 from\b0\fs20  (\b\i position\b0\i0  or \b\i Rotation\b0\i0  [, time])\par
+      Convert \b\i position\b0\i0  or \b\i rotation\b0\i0  from this frame's coordinates to universal\par
+      coordinates. \par
+        pos, rot: The \b\i position\b0\i0  or \b\i Rotation\b0\i0  to be transformed.\par
+            time: The time to be used for the conversion (frames are relative\par
+                  to celestial bodies, which move). Default: Current\par
+                  simulation time.\par
+         Example: ???\par
+\par
+\par
+    \b\fs22 to\b0\fs20  (\b\i position\b0\i0  or \b\i Rotation\b0\i0  [, time])\par
+      Convert \b\i position\b0\i0  or \b\i Rotation\b0\i0  from universal coordinates to this frame's\par
+      coordinates.\par
+        pos, rot: The \b\i position\b0\i0  or \b\i Rotation\b0\i0  to be transformed.\par
+            time: The time to be used for the conversion (frames are relative\par
+                  to celestial bodies, which move). Default: Current\par
+                  simulation time.\par
+         Example: ???\par
+\par
+\par
+\par
+\ul\b\f2\fs24 Object Name:\ulnone  object\b0\par
+\f0\fs20 This object type refers to a \i celestial\i0  \b\i object\b0\i0 , such as a planet, moon, spaceship, etc.\par
+\par
+Note: The example code shown in this section assumes you have already created\par
+      a (celestial) \b\i object\b0\i0  object named myObject. For example:\par
+        myObject = celestia:find("Sol/Earth")\par
+      -or-\par
+        myObject = celestia:getstar(1234)\par
+      -etc.-\par
+\par
+    \b\fs22 absmag\b0\fs20  ()\par
+      If this object is a star, returns the absolute magnitude. Otherwise\par
+      returns nil.\par
+        Example: objAbsmag = myObject:absmag()\par
+\par
+\par
+    \b\fs22 getchildren\b0\fs20  ()\par
+      Return a table containing all \i children \b objects\b0\i0  of \b\i this object\b0\i0 . The\par
+      children of a star are it's planets; the children of a planet are it's\par
+      moons; etc.\par
+        Example: children_tbl = myObject:getchildren()\par
+\par
+\par
+    \b\fs22 getinfo\b0\fs20  ()\par
+      Return a table containing all available information on this object. The\par
+      exact content of the table depends on what type of object it is. For\par
+      example, a table for a star will include the keys: type, catalogNumber,\par
+      stellarClass, absoluteMagnitude, luminosity, radius, temperature,\par
+      rotationPeriod, and bolometricMagnitude.\par
+        Example: info_tbl = myObject:getinfo()\par
+\par
+\par
+    \b\fs22 getposition\b0\fs20  ( [time] )\par
+      Return a \b\i position\b0  \i0 object for this object.\par
+        time: The time to be used to determine the position of this object.\par
+              Default: Current simulation time.\par
+\par
+\par
+    \b\fs22 mark\b0\fs20  ( [color [, symbolname [, size]]] )\par
+      Mark \b\i this object\b0\i0  with the specified marker.\par
+             color: The color to be used for the marker. Use HTML-style\par
+                    "#00ff00" (green), or predefined color-names. Default:\par
+                    "#00ff00".\par
+        symbolname: String naming the symbol to be used as the marker:\par
+                    "diamond", "triangle", "square", "plus", "x". Default:\par
+                    "diamond".\par
+              size: The size of the marker, in pixels. Default: 10.\par
+  \par
+           Example: Mark myObject with a 20 pixel red triangle...\par
+                      myObject:mark("#ff0000", "triangle", 20)\par
+\par
+\par
+    \b\fs22 name\b0\fs20  ()\par
+      Return the name of the object, as a string.\par
+        Example: objName = myObject:name()\par
+\par
+\par
+    \b\fs22 preloadtexture\b0\fs20  ()\par
+      Loads a texture for \b\i this object\b0\i0  from disk. This is useful to reduce any\par
+      "jerking" motion when approaching the object. Especially useful for\par
+      large texture files.\par
+        Example: myObject:preloadtexture("earth.png")\par
+\par
+\par
+    \b\fs22 radius\b0\fs20  ()\par
+      Return radius of object in kilometers.\par
+        Example: radiusKM = myObject:radius()\par
+\par
+\par
+    \b\fs22 spectraltype\b0\fs20  ()\par
+      If object is a star, return a string containing the spectral type.\par
+      Otherwise return nil.\par
+        Example: specType = myObject:spectraltype()\par
+\par
+\par
+    \b\fs22 type\b0\fs20  ()\par
+      Return the type of object, as a string: "asteroid", "comet","deepsky",\par
+      "invisible", "location", "moon", "null", "planet", "spacecraft", "star",\par
+      or "unknown".\par
+        Example: objType = myObject:type() \par
+\par
+\par
+    \b\fs22 unmark\b0\fs20  ()\par
+      Remove the marker from \b\i this object\b0\i0 .\par
+        Example: myObject:unmark()\par
+\par
+\par
+\par
+\ul\b\f2\fs24 Object Name:\ulnone  observer\b0\par
+\f0\fs20 An \b\i observer\b0\i0  object is used to access properties specific to a view, such as the point of view, the frame of reference, tracking, or to perform goto commands in a view. To create a new observer object, see celestia:getobserver.\par
+\par
+\b Note:\b0  The goto() methods do NOT \b select\b0  the target object, or \b retain\b0  the previous frame-of-reference (follow, sync orbit, etc.) as the goto command does in Cel scripting.\par
+\par
+\b Note:\b0  As views (and thus observers) can be created and destroyed by the user, observer-objects in Lua can become invalid. Accessing an invalid observer-object will result in an error. To ease handling of observer-objects, you can compare them with other observer-objects using "==", which is not reliably possible with other userdata. See the isvalid() method for checking the validity of an observer object.\par
+\par
+Note: In the example code below, "obs" represents an \b\i observer\b0\i0  object.\par
+\par
+Note: The example code below assumes you have already created a (celestial)\par
+      \b\i object\b0\i0  object named myObject. For example:\par
+        myObject = celestia:find("Sol/Earth")\par
+      -or-\par
+        myObject = celestia:getstar(1234)\par
+      -etc.-\par
+\par
+\par
+    \b\fs22 cancelgoto\b0\fs20  ()\par
+      Cancel any goto command currently being executed.\par
+        Example: obs:cancelgoto()\par
+\par
+\par
+    \b\fs22 center\b0\fs20  (target [, duration] )\par
+      Center the \b\i object\b0\i0  on-screen, taking duration seconds (like pressing "c"\par
+      on the keyboard).\par
+          target: The \b\i object\b0\i0  to be centered.\par
+        duration: Number of seconds the centering should take. Default: 5.\par
+\par
+            Note: This command returns immediately, so you probably want to\par
+                  wait(<duration>) before continuing in your script.\par
+\par
+         Example: obs:center(myObject, 5)\par
+                  wait(5)\par
+\par
+\par
+    \b\fs22 chase\b0\fs20  (target)\par
+      Chase the specified \b\i object\b0\i0 .\par
+         target: The \b\i object\b0\i0  to chase.\par
+           Note: Chase-mode is the same as setting the frame of reference to\par
+                 \i chase\i0 , with target as ref-object.\par
+        Example: obs:chase(myObject)\par
+\par
+\par
+    \b\fs22 deleteview\b0\fs20  ()\par
+      Delete the currently active view of \b\i this observer\b0\i0  object (if there is\par
+      at least one view remaining).\par
+           Note: You must not use this \b\i observer\b0\i0  object after this command.\par
+        Example: obs:deleteview()\par
+\par
+\par
+    \b\fs22 follow\b0\fs20  (target)\par
+      Follow the specified \b\i object\b0\i0 .\par
+         target: The \b\i object\b0\i0  to be followed.\par
+           Note: Follow is the same as setting the frame of reference to\par
+                 ecliptical with target as the ref-object.\par
+        Example: obs:follow(myObject)\par
+\par
+\par
+    \b\fs22 getfov\b0\fs20  ()\par
+      Return the current field of view (FOV) for \b\i this observer\b0\i0  in radians.\par
+        Example: obs:getfov()\par
+\par
+\par
+    \b\fs22 getframe\b0\fs20  ()\par
+      Return \b\i frame\b0\i0  (of reference) object for \b\i this observer\b0\i0 . (Also see\par
+      celestia:newframe, observer:getframe/setframe.)\par
+        Example: obs:getframe()\par
+\par
+\par
+    \b\fs22 getlocationflags\b0\fs20  ()\par
+      Return a key:value pair table of all location-flag settings.\par
+        Location-flags: city, observatory, landingsite, crater, vallis, mons,\par
+                        planum, chasma, patera, mare, rupes, tessera, regio,\par
+                        chaos, terra, astrum, corona, dorsum, fossa, catena,\par
+                        mensa, rima, undae, reticulum, planitia, linea,\par
+                        fluctus, farrum, other.\par
+                  Note: Not all of these values are currently used.\par
+\par
+               Example: origLocationflags = obs:getlocationflags()\par
+\par
+\par
+    \b\fs22 getorientation\b0\fs20  ()\par
+      Return the current orientation of \b\i this observer\b0\i0 , as a \b\i rotation\b0\i0  object.\par
+        Example: orient = obs:getorientation()\par
+\par
+\par
+    \b\fs22 getposition\b0\fs20  ()\par
+      Return a \b\i position\b0\i0  object for \b\i this observer\b0\i0  in universal coordinates.\par
+        Example: pos = obs:getposition()\par
+\par
+\par
+    \b\fs22 getspeed\b0\fs20  ()\par
+      Return the current speed of \b\i this observer\b0\i0  in microlightyears. (See Notes\par
+      section below, for a description of microlightyears.)\par
+        Example: speed = obs:getspeed()\par
+\par
+\par
+    \b\fs22 getsurface\b0\fs20  ()\par
+      Return a string describing the current \b\i object\b0\i0 's surface (???). This can\par
+      be "limit of knowledge" or possibly an AlternateSurface.\par
+      TODO: Check if this works as documented.\par
+        Example: surface = obs:getsurface()\par
+\par
+\par
+    \b\fs22 gettime\b0\fs20  ()\par
+      Return \b\i this observer\b0\i0 's current time as julian days. Returns the same\par
+      value as celestia:gettime() does (1.3.2 pre7).\par
+        Example: time = obs:gettime()\par
+\par
+\par
+    \b\fs22 goto\b0\fs20  (target [, duration [, start_inter [, end_inter]]] )\par
+      Travel to target \b\i object\b0\i0  or \b\i position\b0\i0  (like pressing "g" on the keyboard).\par
+           target: The \b\i object\b0\i0  or \b\i position\b0\i0  to travel to.\par
+         duration: Number of seconds to travel. Default: 5.\par
+      start_inter: ? Number\par
+        end_inter: ? Number\par
+\par
+             Note: This command returns immediately, so you probably want to\par
+                   wait(<duration>) before continuing in your script.\par
+\par
+             Note: Going to the position returned by object:getposition() is\par
+                   not the same as going to the object, as you will go to the\par
+                   center of that object.\par
+\par
+          Example: obs:goto(myObject, 5)\par
+                   wait(5)\par
+\par
+\par
+    \b\fs22 goto\b0\fs20  (params)\par
+      Travel to a position using a table of entries.\par
+        params: a table containing the parameters used for the goto...\par
+\par
+      Using this method, many different types of gotos can be performed.\par
+      The parameters for the goto must be given in the table (watch for\par
+      typos, unrecognized keys or values with wrong type will be ignored).\par
+\par
+      params.duration .......... Travel duration, in seconds. Default: 5\par
+      params.from .............. Source-\b\i position\b0\i0  of the journey. Default:\par
+                                 Current position of this observer.\par
+      params.to ................ Target-\b\i position\b0\i0  of the journey. Default:\par
+                                 Current position of this observer (i.e. no\par
+                                 movement).\par
+      params.initialOrientation. Initial orientation (given as a \b\i rotation\b0\i0 -\par
+                                 object) for this journey. Default: Current\par
+                                 orientation of this observer.\par
+      params.finalOrientation... Target orientation (given as a \b\i rotation\b0\i0 -\par
+                                 object) for this journey. Default: Current\par
+                                 orientation of this observer.\par
+      params.startInterpolation. A number between 0 and 1 giving the point of\par
+                                 the journey where the orientation of this\par
+                                 observer starts to change. Default: 0.25\par
+      params.endInterpolation .. A number between 0 and 1 giving the point of\par
+                                 the journey where the orientation of this\par
+                                 observer reaches finalOrientation. Default:\par
+                                 0.75\par
+      params.accelTime.......... A number between 0 and 1 controlling the\par
+                                 acceleration. (Note: Exact details are\par
+                                 unknown.)\par
+\par
+      Note: The given \b\i positions\b0\i0  are expected to be relative to the universal\par
+            frame-of-reference, while the non table-based goto uses \b\i positions\b0\i0\par
+            relative to the current frame-of-reference.\par
+\par
+      Note: This command returns immediately, so you probably want to\par
+            wait(<duration>) before continuing in your script.\par
+\par
+      Example: ???\par
+\par
+\par
+    \b\fs22 gotodistance\b0\fs20  (target [, distance [, duration]] )\par
+      Travel to \i distance\i0  away from target \b\i object\b0\i0  in \i duration\i0  seconds.\par
+          target: \b\i object\b0\i0  to travel to.\par
+        distance: Distance from target to stop, in km. Default: 20000.\par
+        duration: Number of seconds the goto should take. Default: 5.\par
+\par
+            Note: This command returns immediately, so you probably want to\par
+                  wait(<duration>) before continuing in your script.\par
+\par
+         Example: ???\par
+\par
+\par
+    \b\fs22 gotolocation\b0\fs20  (target [, duration])\par
+      Travel to the specified target \b\i position\b0\i0  (not location).\par
+          target: \b\i position\b0\i0  to travel to, in the observer's current frame of\par
+                  reference.\par
+        duration: Number of seconds the goto should take. Default: 5.\par
+\par
+            Note: The name of this method is wrong (it goes to a position, not\par
+                  a location), and it expects the \b\i position\b0\i0  to be relative to\par
+                  the current frame of reference while most methods use the\par
+                  universal frame of reference.\par
+\par
+            Note: The \b\i position\b0\i0  is relative to the current frame of reference\par
+                  for this observer.\par
+\par
+            Note: This command returns immediately, so you probably want to\par
+                  wait(<duration>) before continuing in your script.\par
+\par
+         Example: ???\par
+\par
+\par
+    \b\fs22 gotolonglat\b0\fs20  (target [, longitude [, latitude [, distance [, duration]\par
+                    ]]] )\par
+      Travel to the specified longitude, latitude, and distance above target\par
+      \b\i object\b0\i0 .\par
+           target: \b\i object\b0\i0  to travel to.\par
+        longitude: Destination longitude. Default: 0\par
+         latitude: Destination latitude. Default: 0\par
+         distance: Distance from the object's center. Default: 5x object\par
+                   radius.\par
+         duration: Number of seconds to travel. Default: 5.\par
+\par
+             Note: longitude and latitude are in radians (0 to 2*pi), not\par
+                   degree (0 to 360). Use math.rad(...) to convert if necc.\par
+\par
+             Note: This command returns immediately, so you probably want to\par
+                   wait (<duration>) before continuing in your script.\par
+\par
+          Example: ???\par
+\par
+\par
+    \b\fs22 gotosurface\b0\fs20  (target [, duration] )\par
+      Travel to the surface of the target \b\i object\b0\i0 .\par
+          target: \b\i object\b0\i0  on which to land.\par
+        duration: Number of seconds the goto should take. Default: 5.\par
+\par
+            Note: This command returns immediately, so you probably want to\par
+                  wait(<duration>) before continuing in your script.\par
+\par
+         Example: ???\par
+\par
+\par
+    \b\fs22 isvalid\b0\fs20  () \par
+      Returns true if \b\i this observer\b0\i0  is still valid.\par
+\par
+            Note: This can change only if you call deleteview, singleview, or\par
+                  by user-interaction during wait().\par
+\par
+         Example: ???\par
+\par
+\par
+    \b\fs22 lock\b0\fs20  (target)\par
+      Activate lock-mode on the axis from the target \b\i object\b0\i0  to the currently\par
+      selected \b\i object\b0\i0 .\par
+         target: The \b\i object\b0\i0  to lock.\par
+\par
+           Note: Lock-mode is the same as setting the frame of reference to\par
+                 lock with target as target-object and the selection as ref.\par
+\par
+        Example: obs:lock(myObject)\par
+\par
+\par
+    \b\fs22 lookat\b0\fs20  ([from,] to, up)\par
+      Set orientation of this observer.\par
+           from: The observers \b\i position\b0\i0 . Default: current \b\i position\b0\i0 .\par
+             to: The \b\i position\b0\i0  to look at.\par
+             up: A \i vector\i0  pointing to where "up" should be in the current view.\par
+                 Must not be parallel to the axis from->to.\par
+\par
+        Example: ???\par
+\par
+\par
+    \b\fs22 rotate\b0\fs20  (rotation)\par
+      Rotate this observer object.\par
+        Example: ???\par
+\par
+\par
+    \b\fs22 setfov\b0\fs20  (fov, in radians)\par
+      Set the field of view (FOV) for this observer.\par
+           Note: Use math.rad(...) to convert from degrees.\par
+        Example: Set FOV to 30 degrees...\par
+                 obs:setfov( math.rad(30) )\par
+\par
+\par
+    \b\fs22 setframe\b0\fs20  (frame)\par
+      Set \b\i frame\b0\i0  (of reference) for this observer.\par
+        Example: ???\par
+\par
+      \par
+    \b\fs22 setlocationflags\b0\fs20  (locationflags)\par
+      Define what locations should have their names displayed as text labels.\par
+        locationflags: A table of Location-flags as keys, along with a\par
+                       corresponding true or false value this flag should be\par
+                       set to.\par
+               values: city, observatory, landingsite, crater, vallis, mons,\par
+                       planum, chasma, patera, mare, rupes, tessera, regio,\par
+                       chaos, terra, astrum, corona, dorsum, fossa, catena,\par
+                       mensa, rima, undae, reticulum, planitia, linea,\par
+                       fluctus, farrum, other.\par
+                 Note: Not all of these values are currently used.\par
+\par
+              Example:\par
+                t = \{\}  -- Create table (note the curly braces)\par
+                t.city = true\par
+                t.observatory = false\par
+                obs:setlocationflags(t)\par
+              or...\par
+                -- Note the curly braces...\par
+                obs:setlocationflags\{city = true, observatory = false\}\par
+\par
+\par
+    \b\fs22 setorientation\b0\fs20  (rotation)\par
+      Set the orientation of this observer in universal coordinates via the\par
+      \b\i rotation\b0\i0  object.\par
+\par
+           Note: The easiest way to get a rotation is probably the\par
+                 position:orientationto(position) command, which returns a\par
+                 \b\i rotation\b0\i0  object pointing from one position to another.\par
+\par
+        Example: ???\par
+\par
+\par
+    \b\fs22 setposition\b0\fs20  (position)\par
+      Set the \b\i position\b0\i0  for this observer, in universal coordinates.\par
+        Example: ???\par
+\par
+\par
+    \b\fs22 setspeed\b0\fs20  (speed)\par
+      Set the speed (motion through space) of this observer.\par
+          speed: Speed of this observer in microlightyears.\par
+        Example: obs:setspeed(1)\par
+\par
+\par
+    \b\fs22 setsurface\b0\fs20  (string)\par
+      Set the name of the surface to be used. See getsurface.\par
+        Example: ???\par
+\par
+\par
+    \b\fs22 singleview\b0\fs20  ()\par
+      Make the current view for this observer the only view (delete all other\par
+      views).\par
+        Example: obs:singleview()\par
+\par
+\par
+    \b\fs22 splitview\b0\fs20  (splitdirection [, splitpos] )\par
+      Split the view for this observer.\par
+        splitdirection: "h" for a horizontal split, "v" for a vertical split\par
+              splitpos: Where to split this view, default is 0.5 (middle).\par
+\par
+               Example: obs:splitview("h", 0.6)\par
+\par
+\par
+    \b\fs22 synchronous\b0\fs20  (target)\par
+      Orbit the object in geo-synchronous mode.\par
+         target: \b\i object\b0\i0  to be orbited.\par
+\par
+           Note: Sync-mode is the same as setting the frame of reference to\par
+                 planetographic (a.k.a. geographic) with target as ref-object.\par
+\par
+        Example: obs:synchronous(myObject)\par
+\par
+\par
+    \b\fs22 track\b0\fs20  (target or nil)\par
+      Track the specified object (ie. always keep object centered), or stop\par
+      tracking the object.\par
+         target: \b\i object\b0\i0  to track.\par
+            nil: Stops tracking the \b\i object\b0\i0 .\par
+\par
+        Example: obs:track(myObject)\par
+\par
+\par
+    \b\fs22 travelling\b0\fs20  ()\par
+      Returns true if there is a goto or center currently in progress.\par
+        Example: ???\par
+\par
+\par
+\par
+\ul\b\f2\fs24 Object Name:\ulnone  position\b0\par
+\f0\fs20 A \b\i position\b0\i0  object contains the exact coordinates of a point in space. Internally, position-objects use 128 bit per component and therefore have higher precision than available directly in Lua (which typically uses 64-bit double-precision). A position is relative to a coordinate system (ie. a frame of reference, see frame) and may need to be converted to or from universal coordinates before further use.\par
+\par
+    \b\fs22 addvector\b0\fs20  (vector)\par
+      Add \b\i vector\b0\i0  to this position and return the resulting \i vector\i0 .\par
+           Note: You can also use "position + vector".\par
+        Example: ???\par
+\par
+\par
+    \b\fs22 distanceto\b0\fs20  (target)\par
+      Returns distance to the \b\i position\b0\i0 , in kilometers.\par
+         target: The target \i position\i0  to which the distance is to be measured.\par
+        Example: ???\par
+\par
+\par
+    \b\fs22 getx\b0\fs20  ()\par
+      Return the x-coordinate of \b\i this position\b0\i0 .\par
+           Note: the precision of the returned number may be insufficient to\par
+                 express the exact position.\par
+           Note: You can also access the x-component directly by using\par
+                 position.x (this works even for position.x = 1)\par
+\par
+        Example: ???\par
+\par
+\par
+    \b\fs22 gety\b0\fs20  ()\par
+      Return the y-coordinate of \b\i this position\b0\i0 . See getx ().\par
+\par
+\par
+    \b\fs22 getz\b0\fs20  ()\par
+      Return the z-coordinate of \b\i this position\b0\i0 . See getx ().\par
+\par
+\par
+    \b\fs22 orientationto\b0\fs20  (target)\par
+      Returns a \b\i rotation\b0\i0  object which points to the target position.\par
+         target: The target \i position\i0  to which the orientation should point to.\par
+        Example: ???\par
+\par
+\par
+    \b\fs22 vectorto\b0\fs20  (target)\par
+      Return a \b\i vector\b0\i0  pointing from this position to the target \i position\i0 .\par
+         target: The \i position\i0  the vector should be pointing to.\par
+\par
+           Note: Precision of vector may be insufficient to express this\par
+                 distance exactly.\par
+           Note: Instead of "source:vectorto(target)" you can also use\par
+                 "target - source".\par
+\par
+        Example: ???\par
+\par
+\par
+\par
+\ul\b\f2\fs24 Object Name:\ulnone  Rotation\b0\par
+\b\i\f0\fs20 Rotation\b0\i0  objects are in fact quaternions and represent a rotation or the orientation in space. They can be created via celestia:newrotation() and used to control the observer via observer:rotate() or observer:setorientation(). A quaternion consists of the four values w, x, y, z and you can access these components directly using something like "rotation.x = 1".\par
+\par
+    \b\fs22 imag\b0\fs20  ()\par
+      Returns the x, y, and z values of a \b\i rotation\b0\i0 , as a \b\i vector\b0\i0 .\par
+        Example: ???\par
+\par
+\par
+    \b\fs22 real\b0\fs20  ()\par
+      Returns the w value of a \b\i rotation\b0\i0 , as a number.\par
+        Example: ???\par
+\par
+\par
+\par
+\ul\b\f2\fs24 Object Name:\ulnone  Vector\b0\par
+\f0\fs20 A \b\i Vector\b0\i0  object points from one position to another one. Coordinates are 64-bit double-precision. The unit used is microlightyears (1 microly = 9466411.842 km).\par
+\par
+    \b\fs22 getx\b0\fs20  ()\par
+      Return the x-coordinate of this vector. You can also access this\par
+      component directly using vector.x.\par
+        Example: ???\par
+\par
+\par
+    \b\fs22 gety\b0\fs20  ()\par
+      Return the y-coordinate of this vector. You can also access this\par
+      component directly using vector.y.\par
+        Example: ???\par
+\par
+\par
+    \b\fs22 getz\b0\fs20  ()\par
+      Return the z-coordinate of this vector. You can also access this\par
+      component directly using vector.z.\par
+        Example: ???\par
+\par
+\par
+    \b\fs22 length\b0\fs20  ()\par
+      Returns the length of this vector, in ? units.\par
+        Example: ???\par
+\par
+\par
+    \b\fs22 normalize\b0\fs20  ()\par
+      Returns a \b\i vector\b0\i0  pointing in the same direction but with length 1.\par
+           Note: Be careful not to use this on extremely short vectors or even\par
+                 the vector (0,0,0), because the result is undefined (a vector\par
+                 of NaNs).\par
+        Example: ???\par
+\par
+\par
+\par
+\ul\b\f2\fs24 Operators\ulnone\b0\par
+\f0\fs20 You can manipulate vectors, positions and rotations using normal operators like "+" and "-". The following operations are pre-defined (s represents a number):\par
+\par
+    vector = vector   + vector \par
+    vector = vector   - vector \par
+    vector = vector   * s \par
+    vector = vector   ^ vector \par
+    vector = s        * vector \par
+         s = vector   * vector \par
+  position = vector   + position \par
+  rotation = rotation + rotation \par
+  rotation = rotation * rotation \par
+  rotation = rotation * s \par
+  rotation = vector   * rotation \par
+  position = position + position \par
+  position = position + vector \par
+\par
+Many operations are obvious, except for "vector = vector ^ vector", which computes the cross-product of two vectors. This matches the internal use in C++ within Celestia. The operations on rotation-objects probably are obvious to those who understand quaternions (which is what a rotation is, under the hood).\par
+\par
+\par
+\par
+\ul\b\f2\fs24 Callbacks\ulnone\b0\par
+\f0\fs20 A callback is a function which is executed as a result of external events.\par
+\par
+Currently, there are two callbacks in Celx scripting, one for keyboard input and one for clean-up processing. Callbacks are limited in what you can do:\par
+  * The callback code must complete within 1 second, or it will be terminated.\par
+  * You can't use wait() in a callback.\par
+\par
+\par
+\ul Keyboard Callback:\ulnone  (celestia_keyboard_callback)\par
+The callback for keyboard input must have the name "celestia_keyboard_callback". After a script activates the handling keyboard-input by calling celestia:requestkeyboard(true), any keypress will result in a call to a method with this name.\par
+\par
+The method should accept one parameter, a string, which holds the char of the key which has been pressed. Accented characters like \'e4 or \'e9 will be passed as UTF-8 sequences (ie. as a multibyte sequence). If you only want to handle ASCII, you can safely ignore this. Keys like CTRL-A are passed as strings containing a char with ASCII-codes < 32, as are Enter (13) or Backspace (8). Some special keys like cursor-keys or ESC won't activate the callback.\par
+\par
+The callback can return either true or false, indicating that it either has handled the keypress or that celestia should continue normal processing for this key. Not returning any value is the same as returning true.\par
+\par
+If an error occurs while processing the callback, the error message will be written to the console (visible with "~") and an implicit false is returned, i.e. celestia will continue processing for this key.\par
+\par
+For two examples of how to use the keyboard callback function, visit http://www.donandcarla.com/Celestia/ and look at the PauseAScript and RunAScript scripts.\par
+\par
+\par
+\ul Cleanup Callback:\ulnone  (celestia_cleanup_callback)\par
+Whenever a Lua script terminates (because it ended, the user terminated it or an error occured), Celestia will try to execute a function in your script with the name "celestia_cleanup_callback". This function can be used to perform any cleanup actions, notably restoring settings to the values in use before the script started. Errors will only be reported to the console.\par
+\par
+For an example of using the cleanup callback function, visit http://www.donandcarla.com/Celestia/ and look at the CleanupExample script.\par
+\par
+\par
+\par
+\ul\b\f2\fs24 Notes\ulnone\b0\par
+\f0\fs20 * There is no good way to stop a goto-in progress, but this can be worked\par
+  around by starting a VERY short goto:\par
+    obs:goto(obs:getposition(), 0)\par
+  (don't know if this works entirely reliable -- from Harald)\par
+\par
+\par
+* To undo follow/lock/sync, switch to the universal frame of reference:\par
+    universal_frame = celestia:newframe("universal")\par
+    obs:setframe(universal_frame)\par
+\par
+\par
+* QUESTION: How do display the entire contents of a table, on-screen, all\par
+  at one time? For example, the table returned via getlabelflags().\par
+\par
+  ANSWER: Build a string one element after the other, by walking through the\par
+  table ("tblname") in a loop:\par
+\par
+    text = ""\par
+    for key,value in pairs(tblname) do\par
+      text = text .. tostring(key) .. ": " .. tostring(value) .. "\\n"\par
+    end\par
+    celestia:print(text, 5, -1, 1, 1, -4)\par
+\par
+\par
+* QUESTION: What is a "micro light year" (MLY)?\par
+\par
+  ANSWER: A microlightyear is defined and used in Celestia's source code. It\par
+  is also exposed for use in Celx scripting as both a distance and a speed.\par
+  One MLY is a small fraction (1/1000000th) of a light year, as shown below.\par
+\par
+  MLY used as a DISTANCE:\par
+   One MLY = 9,466,411.842 km. Define a constant of this value (ie. KM_PER_MLY\par
+   = 9466411.842) and use it in your scripts where you need to convert from/\par
+   to km/MLY.\par
+\par
+  MLY used as a SPEED:\par
+   One m/second.... = 1.0563664635456286120030821283171e-10 MLY/s\par
+   One km/second... = 1.0563664635456286120030821283171e-7  MLY/s\par
+   One c........... = 0.031669069865511136 MLY/s\par
+   One AU/second... = 15.80301736253152 MLY/s\par
+   One ly/second... = 1000000.0 MLY/s\par
+\par
+   \ul MLY Powers-of-Ten Table\ulnone\par
+             0.000000001 MLY/s =    9.466  m/second\par
+             0.00000001  MLY/s =   94.664  m/second\par
+             0.0000001   MLY/s =  946.641  m/second\par
+\par
+             0.000001    MLY/s =    9.466 km/second\par
+             0.00001     MLY/s =   94.664 km/second\par
+             0.0001      MLY/s =  946.641 km/second\par
+             0.001       MLY/s = 9466.412 km/second\par
+\par
+             0.01        MLY/s =    0.316  c\par
+             0.1         MLY/s =    3.158  c\par
+             1.0         MLY/s =   31.577  c\par
+\par
+            10.0         MLY/s =    0.633 AU/second\par
+           100.0         MLY/s =    6.328 AU/second\par
+          1000.0         MLY/s =   63.279 AU/second\par
+         10000.0         MLY/s =  632.791 AU/second\par
+\par
+        100000.0         MLY/s =    0.100 LY/second\par
+       1000000.0         MLY/s =    1.000 LY/second\par
+      10000000.0         MLY/s =   10.000 LY/second\par
+     100000000.0         MLY/s =  100.000 LY/second\par
+\par
+\par
+   \ul Some other useful distance and speed values\ulnone\par
+             c = 299792.458 km/s\par
+     KM_PER_LY = 9466411842000.000\par
+     KM_PER_AU = 149597870.7\par
+     AU_PER_LY = (KM_PER_LY / KM_PER_AU)\par
+\par
+\par
+\par
+\par
+\par
+---< The End >---\par
+\par
+}
+ 

@@ -1,0 +1,153 @@
+--*************************************************************************** 
+--*************************************************************************** 
+--              getUserInput() and markSpectralType() example 
+--   Authors of the above functions: Don G. and Chris Laurel, respectively 
+-- 
+-- Shows just one of many uses for Don G.'s getUserInput() function. 
+-- It asks the user to enter a star spectral class and then calls Chris' 
+-- markSpectralType() function to mark all matching stars in the current 
+-- Celestia database. 
+-- 
+-- Coded by Toti 
+
+--*************************************************************************** 
+--*************************************************************************** 
+
+
+--*************************************************************************** 
+--                              Constants                              
+--*************************************************************************** 
+-- if the script shows an error message, change this to true (remember that it will be SLOOOOOOOOOW): 
+   WAIT_ENABLE   = false 
+
+-- this controls the size of markers: 
+   MARKER_SIZE   = 3 
+
+-- A dictionary of spectral types, shape and color of the corresponding marker: 
+   spectralTypes   = {O={shape="square", color="#00ff00"}, 
+            B={shape="square", color="#0000ff"}, 
+            A={shape="square", color="#ff0000"}, 
+            F={shape="square", color="#ff00ff"}, 
+            G={shape="square", color="#00ffff"}, 
+            K={shape="square", color="#ffff00"}, 
+            M={shape="square", color="#d0d0ff"}} 
+
+
+
+--*************************************************************************** 
+--                         Keyboard Input Callback                          
+--*************************************************************************** 
+function celestia_keyboard_callback(char) 
+   userKeypress = char 
+   return true  -- Tell Celestia we will handle this keypress 
+end 
+
+
+
+--*************************************************************************** 
+--    markSpectralType function   (Chris Laurel, slightly 
+--                                  adapted by Toti)          
+--*************************************************************************** 
+function markSpectralType(spectralType, shape, color) 
+   local numOfStars   = celestia:getstarcount() 
+   local counter      = 0 
+   celestia:flash("Searching " .. numOfStars .. " stars...", 3) 
+   while counter < numOfStars do 
+      star = celestia:getstar(counter) 
+      first, last = string.find(star:spectraltype(), spectralType, 1, true) 
+      if first == 1 then 
+         -- mod: added support for marker color, shape and size parameters: 
+         star:mark(color, shape, MARKER_SIZE) 
+      end 
+      counter = counter + 1 
+      -- mod: my computer needs these lines and WAIT_ENABLE set to true: 
+      if WAIT_ENABLE then 
+         wait() 
+      end 
+   end 
+end 
+
+
+
+--*************************************************************************** 
+--                getUserInput from the keyboard     (Don G. slightly 
+--                                                adapted by Toti)                  
+--*************************************************************************** 
+function getUserInput(prompt, uppercase) 
+   local inputLine = "" 
+   if prompt == nil then 
+      celestia:print("getUserInput Error: Please include prompt text.",5, -1, -1, 1, 5) 
+      wait(5) 
+      return "" 
+   end 
+   origTimeScale = celestia:gettimescale()  -- Get the current time-scale 
+   celestia:settimescale(0)                 -- Pause time 
+   userKeypress = ""                        -- Clear the userKeypress var 
+   celestia:requestkeyboard(true)           -- Enable keyboard input 
+   while true do                            -- Loop until we get Enter key 
+      -- Display the prompt... 
+      celestia:print(prompt .. inputLine, 100, -1, -1, 1, 5) 
+      wait(0.01) 
+      -- What key did the user press... 
+      if userKeypress == "\013" then      -- Enter key, we're done 
+         break 
+      elseif userKeypress == "\008" then  -- Backspace key, remove last char 
+         local strlen = string.len(inputLine) 
+         if strlen <= 1 then 
+            inputLine = "" 
+         else 
+            inputLine = string.sub(inputLine, 1, strlen - 1) 
+         end 
+      else  -- Add the character to inputLine... 
+         -- mod: support for displaying user input on uppercase (mainly of aesthetical value): 
+         if uppercase == true then 
+            userKeypress = string.upper(userKeypress) 
+         end 
+         inputLine = inputLine .. userKeypress 
+      end 
+      userKeypress = "" 
+   end 
+   celestia:requestkeyboard(false)       -- Disable keyboard input 
+   celestia:settimescale(origTimeScale)  -- Reset the time scale 
+   return inputLine 
+end 
+
+
+
+--*************************************************************************** 
+--                       isInDict    
+--            searches for an object 'obj' in the dictionary 'dict' 
+--           If found, returns the object data. If not, returns nil 
+--*************************************************************************** 
+function isInDict(obj, dict) 
+   -- try to read 'dict' data using key 'obj' 
+   local block   = rawget (dict,obj) 
+      if block then 
+      return block 
+   else 
+      return nil 
+   end 
+end 
+
+
+
+--*************************************************************************** 
+--                  This is the main routine 
+--*************************************************************************** 
+
+-- Make sure Marker display is ON... 
+celestia:show("markers") 
+
+-- Clear all existing markers... 
+celestia:unmarkall() 
+
+repeat 
+   input = getUserInput("(O B A F G K M)\n Enter spectral class and press ENTER: ", true) 
+
+   -- do not waste CPU searching for non existing spectral classes: 
+   sclass = isInDict(input, spectralTypes) 
+   if sclass ~= nil then 
+      markSpectralType(input, sclass.shape, sclass.color) 
+   end 
+   wait() 
+until 1 == 2    --you must press ESC to stop this... ;) 

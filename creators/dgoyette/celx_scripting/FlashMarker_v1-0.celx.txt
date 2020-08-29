@@ -1,0 +1,67 @@
+--***************************************************************************
+--                  Don G's Celx/Lua Flash Marker Function                  *
+--                              (version 1.0)                               *
+--                                                                          *
+-- This function helps to draw the viewers attention to the object you are  *
+-- trying to point out.                                                     *
+--                                                                          *
+--***************************************************************************
+  function FlashMarker(yourObject, markerColor, markerType, markerSize,
+                       flashTimes, leaveMarkerOn)
+    yourObject:unmark() -- make sure the object is not currently marked
+    
+    for x = 1, flashTimes do
+      yourObject:mark ( markerColor, markerType, markerSize ) --ON
+      wait(0.5)
+      yourObject:unmark() --OFF
+      wait(0.5)
+    end
+
+    if (leaveMarkerOn) then
+      yourObject:mark ( markerColor, markerType, markerSize )
+    end
+  end
+  
+
+--***************************************************************************
+--                                 Example
+--***************************************************************************
+  obs = celestia:getobserver()
+
+
+  -- Select, Center, Follow and Goto an object (Earth, at 250K km)...
+  myObject = celestia:find("Sol/Earth")
+  celestia:select(myObject)
+  obs:center(myObject)
+  obs:follow(myObject)
+  obs:gotodistance(myObject, (250000 + myObject:radius()), 5)
+  wait(5)
+
+  
+  -- Make sure Marker display is ON...
+  celestia:show("markers")
+
+  
+  -- Flash the specified marker on the object...
+  FlashMarker(myObject, "#7174F3", "x", 40, 3, false)
+
+    -- FlashMarker() parameters:
+    --  yourObject object
+    --  markerColor string (in hex format: "#rrggbb" where r,g,b = 0 to f)
+    --  markerType string ("diamond", "triangle", "square", "plus", or "x")
+    --  markerSize integer (in pixels)
+    --  flashTimes integer (# of times to flash the marker)
+    --  leaveMarkerOn boolean (true [on] or false [off])
+
+    -- NOTES:
+    --  1. Remember to use the leading "#" in markerColor
+    --  2. Remember to perform ... celestia:show("markers") first
+  
+
+--***************************************************************************
+--                           End of script
+--***************************************************************************
+  celestia:print("This script is now finished.", 2, -1, -1, 1, 10)
+  wait(2)
+  
+  

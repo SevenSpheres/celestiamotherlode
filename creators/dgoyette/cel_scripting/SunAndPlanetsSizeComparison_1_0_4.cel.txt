@@ -1,0 +1,612 @@
+{
+
+#------------------------------------------------------------------------+
+#                                                                        |
+# FileName: SunAndPlanetsSizeComparison_1_0_4.cel                        |
+# FileType: Celestia .CEL Script (See http://www.shatters.net/celestia/) |
+#                                                                        |
+# PostDate: October 31, 2003 (original posting date)                     |
+#  Version: 1.0.4                                                        |
+# Last Mod: Nov 22, 2003                                                 |
+#                                                                        |
+#  Purpose: Display our solar system planets to compare their size to    |
+#           the sun, at a distance of two million km.                    |
+#                                                                        |
+#   Author: Christoria (User=christoria on the Celestia Forums):         |
+#           See http://shatters.net/forum/viewforum.php?f=9              |
+#                                                                        |
+#  License: Free for personal use. For any other use, contact Author.    |
+#                                                                        |
+#------------------------------------------------------------------------+
+# Modified by Don Goyette (User=don on the Celestia Forums) on November  |
+# 13, 2003 to move some code from inside of "goto...wait" and "print...  |
+# wait" statements, to outside of those statements. Along with a few     |
+# other changes and additions.                                           |
+#                                                                        |
+# Modified by Bob Hegwood on Nov 16, 2003 to obtain more accurate two    |
+# million km planet distances, and made a couple of spelling changes.    |
+#                                                                        |
+# Modified by Don Goyette on November 17, 2003. More text changes and    |
+# additions, and put back a couple of things that Bob changed, since     |
+# this version is for the basic Celestia distribution package and his    |
+# version is for the planet add-ons he has installed on his system.      |
+#                                                                        |
+# Modified by Bob Hegwood on Nov 22, 2003 for distance modifications     |
+# made necessary by changes in planetary radii. Made minor text changes. |
+#------------------------------------------------------------------------+
+
+
+#------------------------------------------------------------------------+
+#                                  Setup                                 |
+#------------------------------------------------------------------------+
+# Do not render the following objects...
+  renderflags { clear "orbits|constellations|comettails|boundaries|markers" }
+  renderflags { clear "eclipseshadows|pointstars|nightmaps|galaxies" }
+  renderflags { clear "planets|stars" }
+
+# Render the following objects...
+    renderflags { set "cloudmaps|ringshadows" }
+
+# Do not label the following objects...
+  labels { clear "planets|moons|spacecraft|asteroids|constellations|stars|galaxies" }
+
+# Set Ambient Light Level (0.0 to 1.0 is a good Lo-Hi range)...
+  set { name "AmbientLightLevel" value 0.40 }
+
+# Set Field of View (Celestia 1.3.1 dflt = 25)...
+  set { name "FOV" value 27.5 }
+
+# Set visible star Magnitude (Celestia UI: 0.8 to 15.2, dflt=6.0)...
+  setvisibilitylimit { magnitude 8.0 }
+
+# Set the time multiplier...
+  timerate { rate 1 }
+
+# Set Date and Time...
+  time { jd 2452950.34359 }
+
+
+#------------------------------------------------------------------------+
+#                             Script Body                                |
+#------------------------------------------------------------------------+
+#
+# At this point, stars and planets are NOT displayed, so we can put a nice
+# text description of the script on the screen.
+#
+# The length of sentences are defined for an 800x600 display, which is about
+# 50 to 60 characters.
+#
+  wait { duration 3 }
+
+  print { origin "topleft"  row 11  column 1  duration 18
+text "Welcome to the Sun vs. Planets size comparison script.\n\nThis script first displays our Sun at a distance of 2\nmillion km. Then, it displays each of the planets in\nour solar system, at approximately the same 2 million\nkm distance, for size comparison.\n\n(To end this script at any time, press the ESC key.)" }
+
+  wait { duration 18 }
+
+  print { origin "topleft"  row 11  column 1  duration 15
+text "Before we get started, lets remove a little distraction ...\n\nPress the 'v' key on your keyboard until there is NO text\ndisplayed in any of the window corners ..." }
+
+  wait { duration 13 }
+
+  print { origin "topleft"  row 11  column 1  duration 15
+text "Also, if you happen to see small green text (Locations)\ndisplayed on the screen when we visit a planet, press\nthe '&' key to turn this off." }
+
+  wait { duration 13 }
+
+
+#------------------------------------------------------------------------+
+#                          Start at Sol, our Sun                         |
+#------------------------------------------------------------------------+
+  select { object "Sol" }
+
+  print { row -4  column 1  duration 5  text "First stop, our Sun ..." }
+  wait { duration 5 }
+
+# Define the starting Coordinate System, Camera Position and Orientation...
+  setframe { ref "Sol"  coordsys "universal" }
+
+  setposition {
+    base   [ 0.003261867430402947 -3.555640827885698e-007 6.174173227554632e-007 ]
+    offset [ 1.25510712933874e-013 5.421010862427522e-019 3.236343484869231e-017 ] }
+
+  setorientation {
+    angle 1.99055
+    axis  [ -0.0333064 -0.340652 0.939599 ] }
+
+  goto { time 2  distance 10.05999 }
+  wait { duration 2 }
+
+# Rotate the Sun so it shows a smiley face...
+  rotate { duration 0.11
+           rate 1000
+           axis [0 0 1] }
+  wait { duration 0.11 }
+
+  renderflags { set "stars|planets" }  # Turn on stars
+
+# Speed up time so we can see the Sun rotating...
+  timerate { rate 15000.0 }
+
+  print { text "There's our huge Sun, smiling down on us.\nCurrent distance: 7 million km."  row -5  column 2  duration 9 }
+  wait { duration 9 }
+
+  print { text "Let's zoom in to 2 million km -- our comparison distance.\nThen, we'll observe each of the planets from about the\nsame distance."
+          row -5  column 2  duration 9}
+  wait { duration 9 }
+
+  changedistance { duration 3.15 rate -0.5 }
+  wait { duration 3.15 }
+  wait { duration 2 }
+
+# Since we sped up time, reset it...
+  timerate { rate 1.0 }
+  time { jd 2452950.34359 }
+
+# Turn off star display so we can display some text...
+  renderflags { clear "stars" }
+
+  print { text "Now THAT is HUGE!!!\nEven at a distance of 2 MILLION km! WOW!"
+          row -4  column 1  duration 7 }
+  wait  { duration 7 }
+
+# Rotate the Sun back to it's normal position...
+  rotate { duration 0.11
+           rate -1000
+           axis [0 0 1] }
+  wait { duration 0.11 }
+
+
+#------------------------------------------------------------------------+
+#                                   Mercury                              |
+#------------------------------------------------------------------------+
+# NOTE: Since white text does not show up on a white sun, we have to
+#       move the sun out of the way before displaying any text...
+
+  select { object "Mercury" }
+  center { time 1 }
+
+  print { text "Next stop: Mercury, planet #1 ..."
+          row -4  column 2  duration 3 }
+  wait { duration 4 }
+
+  follow { }
+
+  goto { time 3 distance 8 }
+  renderflags { set "stars" }  # (We turned this off above)
+  wait { duration 3 }
+
+# Speed up time so we can see the planet rotating...
+  timerate { rate 70000.0 }
+
+  print { text "There's Mercury, at a pretty close distance of only\n17 thousand km."
+          row -4  column 2  duration 8 }
+  wait { duration 8 }
+
+  print { text "Did you know that Mercury's surface temperatures range\nfrom 90 degrees K to 700 degrees K. Now that's HOT!"
+          row -4  column 2  duration 8 }
+  wait { duration 8 }
+
+  print { text "Let's go to 2 million km away, like we did at the sun ..." 
+          row -4  column 2  duration 6 }
+  wait { duration 6 } 
+
+  goto { time 5  distance 820.688 } 
+  wait { duration 5 } 
+
+# Since we sped up time, reset it...
+  timerate { rate 1.0 }
+  time { jd 2452950.34359 }
+
+  print { text "Wow! This is the same 2 million km distance we just viewed\nthe sun at, and Mercury is just a tiny little dot!"  row -4  column 2  duration 8 }
+  wait { duration 8 }
+
+  print { text "Now let's check out Venus, planet #2.\nWatch Mercury go bye bye ..."
+          row -4  column 2  duration 7 }	
+  labels { set "planets" }  # (To see where Mercury is)
+  wait { duration 7 }
+
+
+#------------------------------------------------------------------------+
+#                                  Venus                                 |
+#------------------------------------------------------------------------+
+  select { object "Venus" }
+  center { time 2 }
+  follow { }
+
+  goto { time 5 distance 8 }
+  wait { duration 5 }
+  labels { clear "planets" }
+
+# Speed up time so we can see the planet rotating...
+  timerate { rate 6000.0 }
+
+  print { text "Here's Venus, at a distance of 42 thousand km. Notice\nhow it rotates in the -opposite- direction as the other\nplanets. This is called a 'retrograde' rotation."
+          row -5  column 2  duration 15 }
+  wait { duration 15 }
+
+  print { text "Let's go out to 2 million km ..." 
+          row -4  column 2  duration 5 }
+  wait { duration 5 }
+
+  goto { time 6 distance 331.5}
+  wait { duration 6 }
+
+# Since we sped up time, reset it...
+  timerate { rate 1.0 }
+  time { jd 2452950.34359 }
+
+  print { text "It's almost gone, but you can still see it! Quite small\ncompared to the Sun at 2 million km, wouldn't you say?"
+          row -4  column 2  duration 7 }
+  wait { duration 7 }
+
+  print { text "Next, let's go to our home planet, Earth:\nthird rock from the Sun, planet #3 ..."
+          row -4  column 2  duration 7 }
+  wait { duration 7 }
+
+
+#------------------------------------------------------------------------+
+#                                    Earth                               |
+#------------------------------------------------------------------------+
+  select { object "Earth" }
+  center { time 1 }
+  follow { }
+
+  goto { time 5 distance 8 }
+  wait { duration 5 }
+
+# Speed up time so we can see the planet rotating...
+  timerate { rate 1000 }
+
+  print { text "Our Big Blue Marble sure is beautiful.\nWe're at a distance of 45 thousand km right now."
+          row -4  column 2  duration 8 }
+  wait { duration 8 }
+
+  print { text "How many Earths do you think can fit inside the Sun?"
+          row -4  column 2  duration 7 }
+  wait { duration 7 }
+
+  print { text "With a radius of 6,378 km, over one million Earths\ncan fit inside the Sun!!!  WOW!"
+          row -4  column 2  duration 7 }
+  wait { duration 7 }
+
+  print { text "Time for the 2 million km comparison ..."
+          row -4  column 2  duration 4 }
+  wait { duration 4 }
+
+  goto { time 6 distance 314.65 }
+  wait { duration 6 }
+
+# Since we sped up time, reset it...
+  timerate { rate 1.0 }
+  time { jd 2452950.34359 }
+
+  print { text "Now at a distance of 2 million km -- Pretty small.\nHere's a little more Earth trivia for you ..."
+          row -4  column 2  duration 7 }
+  wait { duration 7 }
+
+  print { text "Earth's mass is 6,000,000,000,000,000,000,000,000 kgs!\nThat's 6x10E24 kgs, which is how scientists and engineers\nwrite that huge number."
+          row -5  column 2  duration 10 }
+  wait { duration 10 }
+
+  print { text "Let's set off for Mars, the 'Red planet', #4 ..."
+          row -4  column 2  duration 5 }
+  wait { duration 5 }
+
+
+#------------------------------------------------------------------------+
+#                                   Mars                                 |
+#------------------------------------------------------------------------+
+  select { object "Mars" }
+  center { time 1 }
+  follow { }
+
+  goto { time 5 distance 8 }
+  wait { duration 5 }
+
+# Speed up time so we can see the planet rotating...
+  timerate { rate 1500 }
+
+  print { text "There's Mars, and now you know why it's called\nthe 'Red planet'. We're at a distance of 24 thousand km."
+          row -4  column 2  duration 10 }
+  wait { duration 10 }
+
+  print { text "Mars is where the Sojourner Rover landed, on the 4th of July,\n1997. It was a small, 6-wheeled, remotely controlled vehicle."
+          row -4  column 2  duration 10 }
+  wait { duration 10 }
+
+  print { text "Out to 2 million km, shall we?"
+          row -4  column 2  duration 5 }
+  wait { duration 5 }
+
+  goto { time 6 distance 590.4 }
+  wait { duration 5 }
+
+# Since we sped up time, reset it...
+  timerate { rate 1.0 }
+  time { jd 2452950.34359 }
+
+  print { text "We're still not able to see much of this planet either."
+          row -4  column 2  duration 5 }
+  wait { duration 5 }
+
+
+#------------------------------------------------------------------------+
+#                                   Jupiter                              |
+#------------------------------------------------------------------------+
+  print { text "Now, on to some bigger planets -- much bigger --\nthe Gas Giants. First stop is Jupiter, planet #5 ..."
+          row -4  column 2  duration 10 }
+  wait { duration 10 }
+
+  select { object "Jupiter" }
+  center { time 1 }
+  follow { }
+
+  goto { time 8 distance 8 }
+  wait { duration 8 }
+
+# Speed up time so we can see the planet rotating...
+  timerate { rate 2000 }
+
+  print { text "We are 500 thousand km away! Remember when we\nlooked at Mercury? It was a mere 17 thousand km away."
+          row -4  column 2  duration 10 }
+  wait { duration 10 }
+  timerate { rate 800 }
+
+  print { text "The Great Red Spot on Jupiter is actually a huge (23,000\nkm by 12,400 km) hurricane-like storm that has lasted\nfor over 300 years."
+          row -5  column 2  duration 9 }
+  wait { duration 9 }
+
+  print { text "Will Jupiter look as big as the Sun at 2 million km away?\nLet's see ..."
+          row -4  column 2  duration 7 }
+  wait { duration 7 }
+
+  goto { time 3 distance 29.02 }
+  wait { duration 3 }
+  timerate { rate 1000 }
+
+  print { text "Hey, we can still see it! Jupiter is the largest\nplanet in our Solar System."
+          row -4  column 2  duration 9 }
+  wait { duration 9 }
+
+
+#------------------------------------------------------------------------+
+#                                  Saturn                                |
+#------------------------------------------------------------------------+
+  select { object "Saturn" }
+
+  print { text "And now, to the planet with the best rings:\nSaturn, planet #6 ..."
+          row -4  column 2  duration 7 }
+  wait { duration 7 }
+
+# Since we sped up time, reset it...
+  timerate { rate 1.0 }
+  time { jd 2452950.34359 }
+
+  center { time 1 }
+  follow { }
+
+  goto { time 8  distance 8  up [ 0 1 0 ]  upframe "equatorial" }
+  wait { duration 8 }
+
+  print { text "Saturn, at 422 thousand km away.\nWhat a cool planet!"
+          row -4  column 2  duration 5 }
+  wait { duration 5 }
+  orbit { axis [ 0 1 0 ] rate 30 duration 12 }
+
+  print { text "We could watch this one for a while, but\n2 million km coming up ..."
+          row -4  column 2  duration 7 }
+  wait { duration 7 }
+
+  goto { time 6 distance 34.16 }
+  wait { duration 6 }
+
+# Speed up time so we can see the planet rotating...
+  timerate { rate 1500 }
+
+  print { text "Still looks cool.\nLike Jupiter, Saturn is also a Gas Giant."
+          row -4  column 2  duration 9 }
+  wait { duration 9 }
+
+  print { text "Want some more trivia?"
+          row -4  column 2  duration 5 }
+  wait { duration 5 }
+
+  print { text "Saturn is the only planet, that if put in water ...\nwould float!"
+          row -4  column 2  duration 7 }
+  wait { duration 7 }
+
+  print { text "Tell me that ain't cool.\nSaturn is definitely cool."
+          row -4  column 2  duration 7 }
+  wait { duration 7 }
+
+
+#------------------------------------------------------------------------+
+#                                    Uranus                              |
+#------------------------------------------------------------------------+
+  select { object "Uranus" }
+
+  print { text "Now let's check out Uranus, planet #7.\nThat's pronounced 'YOOR-uh-nus' ..."
+          row -4  column 2  duration 7 }
+  wait { duration 7 }
+
+# Since we sped up time, reset it...
+  timerate { rate 1.0 }
+  time { jd 2452950.34358 }
+
+  center { time 1 }
+  follow { }
+
+  goto { time 5 distance 8 }
+  wait { duration 5 }
+
+# Speed up time so we can see the planet rotating...
+  timerate { rate 1000 }
+
+  print { text "Uranus, at a distance of 179 thousand km.\nCan you see how the planet is tilted on it's side?"
+          row -4  column 2  duration 10 }
+  wait { duration 10 }
+
+  print { text "It might look pretty, but uranus has surface winds of\nup to 600 km per hour! That's a bit windy for us humans."
+          row -4  column 2  duration 8 }
+  wait { duration 8 }
+
+  print { text "Betcha it stays blue at 2 million km.\nWhat do YOU think? . . ."
+          row -4  column 2  duration 8 }
+  wait { duration 8 }
+
+  goto { time 5 distance 79.25 }
+  wait { duration 5 }
+
+# Since we sped up time, reset it...
+  timerate { rate 1.0 }
+  time { jd 2452950.34359 }
+
+  print { text "Yep, it's still blue. Told ya."
+          row -4  column 2  duration 5 } 
+  wait { duration 5 }
+
+
+#------------------------------------------------------------------------+
+#                                  Neptune                               |
+#------------------------------------------------------------------------+
+  select { object "Neptune" }
+
+  print { text "It's time to tune into Neptune, planet #8 on our charts ...\nIsn't this fun?"
+          row -4  column 2  duration 7 }
+  wait { duration 7 }
+
+  center { time 8 }
+  follow { }
+
+  goto { time 3 distance 8 }
+  wait { duration 3 }
+
+# Speed up time so we can see the planet rotating...
+  timerate { rate 800 }
+
+  print { text "What a cool blue!\nWe're at 173 thousand km, which is the closest\nwe've started with the Gas Giants."
+          row -5  column 2  duration 9 }
+  wait { duration 9 }
+
+  print { text "That dark spot on Neptune is about the size of our\nentire planet Earth."
+          row -4  column 2  duration 7 }
+  wait { duration 7 }
+
+  print { text "Neptune's diameter is about 4 times the diameter of Earth."
+          row -4  column 2  duration 7 }
+  wait { duration 7 }
+
+  print { text "Here we go ... 2 million km ..."
+          row -4  column 2  duration 5 }
+  wait { duration 5 }
+
+  goto { time 5 distance 81.78 }
+  wait { duration 5 }
+
+# Since we sped up time, reset it...
+  timerate { rate 1.0 }
+  time { jd 2452950.34359 }
+
+  print { text "We can still see it."
+          row -4  column 2  duration 5 } 
+  wait { duration 5 }
+
+
+#------------------------------------------------------------------------+
+#                                    Pluto                               |
+#------------------------------------------------------------------------+
+  select { object "Pluto" }
+
+  print { text "And finally, we'll visit Pluto, planet #9,\nthe smallest planet in our Solar System ..."
+          row -4  column 2  duration 7 }
+  wait { duration 7 }
+
+  center { time 1 }
+  follow { }
+
+  goto { time 5 distance 8 }
+  wait { duration 5 }
+
+# Speed up time so we can see the planet rotating...
+  timerate { rate 8000 }
+
+  print { text "We are only 8 thousand km away.\nAt Mercury, we started at 17 thousand km.\nWatch for Charon, Pluto's moon ..."
+          row -5  column 2  duration 15 }
+  wait { duration 15 }
+
+  print { text "The radius of Pluto is a mere 1151 km, which is SMALLER\nthan Earth's moon! Now that is one tiny planet!"
+          row -5  column 2  duration 7 }
+  wait { duration 7 }
+
+  print { text "Notice how Pluto rotates in the -opposite- direction\nas the other planets, just like Venus, and it's axis\nis tilted like Earth's."
+          row -5  column 2  duration 8 }
+  wait { duration 7 }
+
+  print { text "Say adios, ciao, goodbye ...\n2 million km coming right up ..."
+          row -4  column 2  duration 7 }
+  wait { duration 7 }
+
+  goto { time 5 distance 1739.0 }
+  wait { duration 5 }
+
+# Since we sped up time, reset it...
+  timerate { rate 1.0 }
+  time { jd 2452950.34359 }
+
+  print { text "Oh, and since Pluto is the furthest planet from the Sun,\nit takes 250 Earth years to go around the Sun once."
+          row -5  column 2  duration 9 }
+  wait { duration 9 }
+
+
+#------------------------------------------------------------------------+
+#                             Time to go Home                            |
+#------------------------------------------------------------------------+
+  print { text "There you have it:\n\nJupiter is HUGE!\nPluto is ... Hey, where'd Pluto go???"
+          row -7  column 2  duration 10 }
+  wait { duration 10 }
+
+  select { object "Earth" }
+  follow { }
+  center { time 10 }
+
+  print { text "As you just saw, the planets in our Solar System vary\ngreatly in size. From tiny little Pluto to huge Jupiter."
+          row -4  column 2  duration 10 }
+  wait { duration 10 }
+
+  goto { time 20 distance 8 }
+
+  print { text "However, when it comes to size, none of our planets\ncompares to the Sun. Remember how it filled the display\nat 2 million km? None of the planets even came close!\n\nWhat a magnificent Solar System we live in!"
+          row -7  column 2  duration 18 }
+  wait { duration 18 }
+
+  print { text "And here we are, back at our home planet, Earth.\n... So go home already."
+          row -4  column 2  duration 10 }
+  wait { duration 10 }
+
+
+#------------------------------------------------------------------------+
+#                                 The End                                |
+#------------------------------------------------------------------------+
+# Reset visible star Magnitude (Celestia UI: 0.8 to 15.2, dflt=6.0)...
+  setvisibilitylimit { magnitude 6.5 }
+
+  print { row -4  column 2  duration 5
+text "We hope you enjoyed the Sun vs. Planet size comparison script." }
+  wait { duration 5 }
+
+  print { row -6  column 2  duration 10
+text "Now that the script is finished, you can display text again.\n\nPress the 'v' key on your keyboard until the text you\nwant to see is displayed." }
+  wait { duration 10 }
+
+# Reset Field of View (Celestia 1.3.1 dflt = 25)...
+  set { name "FOV" value 25.0 }
+
+  print { text "Press the '!' key to return to your current date and time."
+          row -4  column 2  duration 7 }
+  wait { duration 7 }
+
+  print  { text "The script is now finished."
+           row -4  column 2  duration 5 }
+  wait   { duration 5 }
+
+}

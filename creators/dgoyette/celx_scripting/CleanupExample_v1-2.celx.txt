@@ -1,0 +1,89 @@
+--***************************************************************************
+--                                                                          *
+--          Example Celx Cleanup script for Celestia (version 1.2)          *
+--                      by Don Goyette - March 26, 2004                     *
+--                                                                          *
+--  Demonstrates how to use the celestia_cleanup_callback function.         *
+--  (Based on code in Harald Schmidt's Nine Planets celx script.)           *
+--                                                                          *
+--***************************************************************************
+
+
+--***************************************************************************
+--                    Get the users current settings
+--***************************************************************************
+  function getSettings()
+  -- Items from the celestia class...
+    orig_ambient           = celestia:getambient()
+    orig_faintestvisible   = celestia:getfaintestvisible()
+    orig_labelflags        = celestia:getlabelflags()
+    orig_orbitflags        = celestia:getorbitflags()
+    orig_renderflags       = celestia:getrenderflags()
+    orig_selection         = celestia:getselection()
+    orig_stardistancelimit = celestia:getstardistancelimit()
+    orig_starstyle         = celestia:getstarstyle()
+    orig_time              = celestia:gettime()
+    orig_timescale         = celestia:gettimescale()
+
+  -- Items from the observer class...  
+    orig_fov               = celestia:getobserver():getfov()
+    orig_frame             = celestia:getobserver():getframe()
+    orig_locationflags     = celestia:getobserver():getlocationflags()
+    orig_orientation       = celestia:getobserver():getorientation()
+    orig_position          = celestia:getobserver():getposition()
+    orig_speed             = celestia:getobserver():getspeed()
+    orig_surface           = celestia:getobserver():getsurface()
+  end
+
+
+--***************************************************************************
+--                                                                          *
+-- This function is called automatically when the script ends, be it        *
+-- because it reached it's end, or the user pressed ESC.                    *
+--                                                                          *
+-- Returns user settings to the way they were before the script ran.        *
+--                                                                          *
+--***************************************************************************
+  function celestia_cleanup_callback()
+
+-- Items from the celestia class...
+    celestia:setambient(orig_ambient)
+    celestia:setfaintestvisible(orig_faintestvisible)
+    celestia:setlabelflags(orig_labelflags)
+    celestia:setorbitflags(orig_orbitflags)
+    celestia:setrenderflags(orig_renderflags)
+    celestia:select(orig_selection)
+    celestia:setstardistancelimit(orig_stardistancelimit)
+    celestia:setstarstyle(orig_starstyle)
+    celestia:settimescale(orig_timescale)
+
+   -- Original Time PLUS the time it took the script to run (does not
+   -- take timescale into account)...
+    celestia:settime(orig_time + (celestia:getscripttime() / 24 / 3600) )
+
+-- UNcomment the following line if you used MultiView in your script...
+--    celestia:getobserver():singleview()
+
+-- Items from the observer class...  
+    celestia:getobserver():setfov(orig_fov)
+    celestia:getobserver():setframe(orig_frame)
+    celestia:getobserver():setlocationflags(orig_locationflags)
+    celestia:getobserver():setorientation(orig_orientation)
+    celestia:getobserver():setposition(orig_position)
+    celestia:getobserver():setspeed(orig_speed)
+    celestia:getobserver():setsurface(orig_surface)
+  end
+
+
+--***************************************************************************
+--                     Your script code goes below
+--***************************************************************************
+  -- Get the user's current settings
+  getSettings()
+
+
+-- Change any settings you want to. When your script is terminated, the
+-- celestia_cleanup_callback() function defined above is AUTOMATICALLY
+-- executed by Celestia -- resetting the users initial settings. DO NOT
+-- call this function inside of your script.
+
