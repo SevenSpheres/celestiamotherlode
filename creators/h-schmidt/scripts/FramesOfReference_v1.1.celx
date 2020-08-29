@@ -1,0 +1,253 @@
+--[[
+
+ FramesOfReference.celx
+ (c) 2004 by Harald Schmidt
+
+
+ Script to help explaining the various coordinate systems in
+ Celestia.
+ 
+ This script will set the observer to one of the axis in the currently
+ selected frame of reference. Pressing "X", "Y" or "Z" will change the
+ axis accordingly. Pressing "F" will cycle through the possible frames
+ (a body, e.g. Earth, must be selected).
+--]]
+
+-- these keys are handled by the script:
+special_keys = { X=true, Y=true, Z=true, F=true, G=true }
+-- holds pressed keys until processing:
+input_buffer = {}
+
+-- This is the axis which will be shown next:
+targetaxis = celestia:newvector(1,0,0)
+
+-- This is the axis we were showing when 
+-- "targetaxis" was selected
+sourceaxis = celestia:newvector(0,1,0)
+
+-- this is the axis we are currently showing, which may be
+-- a mix between multiple axis:
+currentaxis =celestia:newvector(0,0,1)
+
+-- This is the time when targetaxis was selected:
+change_start_time = 0
+
+-- time needed to change axis:
+change_duration = 2
+
+
+-- ZERO, needed for frame transformations
+ZEROPOS = celestia:newposition(0,0,0)
+
+-- not quite up ;)
+UP = celestia:newvector(-0.05,1,-0.05)
+
+
+-- Callback for keyboard
+function default_callback(input)
+  if special_keys[input] == true then
+    table.insert(input_buffer, input)
+    return true
+  end
+  return false
+end
+
+
+-- Callback to restore initial settings
+function celestia_cleanup_callback()
+  celestia:setrenderflags(renderflags)
+  celestia:setlabelflags(labelflags)
+end
+
+-- and a function to remember initial settings
+function init()
+  renderflags = celestia:getrenderflags()
+  labelflags = celestia:getlabelflags()
+  celestia:setrenderflags{orbits=true,grid=true}
+  celestia:setlabelflags{planets=true,moons=true}
+end
+
+init()
+
+function get_key()
+  local key = input_buffer[1]
+  if key ~= nil then
+    table.remove(input_buffer, 1)
+  end
+  return key
+end
+
+function convert2frame(vector, frame)
+  rel_zero = frame:to(ZEROPOS)
+  rel_zero_v = frame:to(ZEROPOS + vector)
+  rel_v = rel_zero_v - rel_zero
+  --return rel_v
+  return frame:from(ZEROPOS + vector)
+end
+
+
+--[[ 
+ Get the current frame, and move the observer
+ to the position indicated by targetaxis in that frame
+ ]]
+
+function setobserver()
+  local obs = celestia:getobserver()
+  frame = obs:getframe()
+  -- Update axis, i.e. change it from its current value
+  -- to its target value:
+
+  local dt = (celestia:getscripttime() - change_start_time)/change_duration
+  if dt > 1 then
+    currentaxis.x = targetaxis.x
+    currentaxis.y = targetaxis.y
+    currentaxis.z = targetaxis.z
+  else
+    currentaxis.x = dt * targetaxis.x + (1-dt) * sourceaxis.x
+    currentaxis.y = dt * targetaxis.y + (1-dt) * sourceaxis.y
+    currentaxis.z = dt * targetaxis.z + (1-dt) * sourceaxis.z
+  end
+  
+  -- get the frame of reference, name and position of the
+  -- reference object etc.:
+  local ref = frame:getrefobject()
+  local pos
+  local refname
+  local targetname = ""
+  if ref ~= nil then
+    pos = ref:getposition()
+    refname = ref:name()
+    target = frame:gettargetobject()
+    if target ~= nil then 
+      targetname = "/"..target:name()
+    end
+  else
+    pos = celestia:newposition(0,0,0)
+    refname=""
+  end
+  
+  -- now convert currentaxis (shortened so we are nearer to the refobject) 
+  -- from frame-coordinates to universal coordinates:
+  local observer_pos = convert2frame(-0.2 * currentaxis, frame)
+  obs:setposition(observer_pos)
+  
+  -- And now look at the reference-object.
+  -- UP is a vector which is nearly pointing "up" in universal frame. 
+  -- If it was perfectly pointing upwards, we would run into problems
+  -- when visiting Y-axis in Universal Frame
+  obs:lookat(pos, UP)
+  
+  -- and give the user some information about the current state:
+  celestia:print("active Frame: " .. frame:getcoordinatesystem() .. ", relative to " .. refname..targetname)
+end
+
+
+--[[
+ Select the next frame in the series of available frames.
+ Care must be taken for the "lock" frame because it needs two objects
+]]
+
+function selectnextframe(dir)
+  -- list of frame-names. Duplicate universal at the end so we can simply always choose "the next one after the active one" 
+  local frame_names = { "universal", "ecliptic", "equatorial", "planetographic", "observer", "lock", "chase", "universal" }
+  local obs = celestia:getobserver()
+  local frame = obs:getframe()
+  local current_frame = frame:getcoordinatesystem()
+  local new_frame
+  for i,v in ipairs(frame_names) do
+    -- Is this the current frame?
+    if v == current_frame and i+dir > 0 then
+      -- found the current one, so select the next/previous one:
+      new_frame = frame_names[i+dir]
+      break
+    end
+  end
+  -- special case: universal needs no args:
+  if new_frame == "universal" then
+    obs:setframe(celestia:newframe(new_frame))
+    return
+  end
+  -- test if refobject is valid
+  local refobject = celestia:getselection()
+  if refobject == nil then
+    celestia:print("must select object to activate " .. new_frame .. " frame-of-reference",5)
+    wait(2)
+    return
+  end
+  -- special case: lock needs two arguments:
+  if new_frame == "lock" then
+    local target
+    if refobject:name() ~= "Sol" then
+      target = celestia:find("Sol")
+    else
+      target = celestia:find("Earth")
+    end
+    obs:setframe(celestia:newframe(new_frame, refobject, target))
+    return
+  end
+  obs:setframe(celestia:newframe(new_frame, refobject))
+end
+
+function intro()
+  local message = [[
+  Frames of Reference
+  
+  For quick visualization of the axis for available types of
+  "Frames of Reference". 
+  
+  Press Shift-X/Y/Z to move the observer onto the according axis. The 
+  reference point (e.g. earth) will be in the center, i.e. you will
+  look in direction of the axis.
+  
+  Press Shift-F/Shift-G to select the next/previsous type of frame.  
+  
+  Press any key to continue...
+  ]]
+  celestia:print(message, 120, -1, 1, 7, -4)
+end
+
+intro_finished = false
+function end_intro()
+  celestia:print("", 0.1)
+  celestia_keyboard_callback = default_callback
+  intro_finished = true
+end
+celestia_keyboard_callback = end_intro
+
+intro()
+
+
+-- we need keyboard input:
+celestia:requestkeyboard(true)
+
+while not intro_finished do
+  wait(0.1)
+end
+
+-- main loop. Check for keys, and set targetaxis accordingly
+while true do
+  k = get_key()
+  if k == "X" then
+    targetaxis = celestia:newvector(1,0,0)
+    sourceaxis = currentaxis
+    change_start_time = celestia:getscripttime()
+  end
+  if k == "Y" then
+    targetaxis = celestia:newvector(0,1,0)
+    sourceaxis = currentaxis
+    change_start_time = celestia:getscripttime()
+  end
+  if k == "Z" then
+    targetaxis = celestia:newvector(0,0,1)
+    sourceaxis = currentaxis
+    change_start_time = celestia:getscripttime()
+  end
+  if k == "F" then
+    selectnextframe(1)
+  end
+  if k == "G" then
+    selectnextframe(-1)
+  end
+  setobserver()
+  wait(0.0)
+end

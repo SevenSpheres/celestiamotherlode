@@ -1,0 +1,83 @@
+-- Example script for Lua support in celestia
+--
+-- Random journey through our galaxy, v 1.0
+--
+-- (c) 2003 Harald Schmidt
+-- http://www.h-schmidt.net/celestia/
+--
+-- comments, bugreports to: celestia ( at ) h-schmidt.net
+-- 
+-- You are free to use, copy, modify, redistribute this script,
+-- but keep a credit to the original author
+--
+-- BUGS: It depends too much on arbitrary chosen constants. 
+
+-- temporary workaround against a bug on windows:
+-- not sure if this is necessary or actually helps, but better try:
+wait(0.1)
+celestia:flash("")
+wait(0.1)
+
+speed = 20000000
+
+velocity = celestia:newvector(1,0,0)
+vel_change = celestia:newvector(0,0,0)
+vel_change_change = celestia:newvector(0,0,0)
+up = celestia:newvector(0,1,0)
+
+center = celestia:find("Sol"):getposition()
+observer = celestia:getobserver()
+
+position = center
+
+-- return length of v
+function length(v)
+    local x = v:getx()
+    local y = v:gety()
+    local z = v:getz()
+    local d = math.sqrt(x*x + y*y + z*z)
+    return d
+end
+
+function random_vector(r)
+  return celestia:newvector(r*(math.random()-0.5), r*(math.random()-0.5),  r*(math.random()-0.5))
+end
+
+randomness = 0.00001
+A = 0.8
+B = 0.8
+C = 0.9
+
+max_dist = 1000*1e12
+
+t = celestia:getscripttime()
+
+while true do
+   local t0 = celestia:getscripttime()
+   local dt = t0 - t
+   t = t0
+   dist = position:distanceto(center)
+
+   local a2 = (1-(1-A)*dt)
+   vel_change_change = a2*vel_change_change + (1-a2)*random_vector(1):normalize()
+   local b2 = (1-(1-B)*dt)
+   vel_change = b2*vel_change + (1-b2)*vel_change_change:normalize()   
+   vel_change = vel_change:normalize()
+   
+   local c2 = (1-(1-C)*dt)
+   velocity = c2*velocity + (1-c2)*vel_change:normalize()
+   velocity = velocity:normalize()
+   
+   if dist > max_dist then
+     vec2center = position:vectorto(center)
+     vec2center = vec2center:normalize()
+     corr_factor = ((dist - max_dist)/max_dist)
+     vel_change = vel_change + 0.2 * corr_factor * vec2center
+     -- celestia:flash("corr_factor: "..corr_factor,0.2)
+   end
+   pos_new =  position + velocity * speed * dt
+   observer:lookat(position, pos_new, up)
+   observer:setposition(pos_new)
+   position = pos_new
+   wait(0.0)
+end

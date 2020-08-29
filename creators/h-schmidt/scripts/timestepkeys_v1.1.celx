@@ -1,0 +1,124 @@
+--[[
+  
+  Script to change one (sidereal) day/year per keypress.
+  by Harald Schmidt
+  
+]]
+
+
+--[[ Define useful constants and mappings 
+     ####################################
+  ]]
+
+-- List of valid keys to be handled by this script
+validkeys = { a=true, A=true, s=true, S=true, d=true, D=true }
+
+-- use fixed table until this information is available directly via getinfo
+daytable = { Mercury=1407.509405, Venus= 5832.479839, Earth= 23.9344694, 
+  Mars= 24.622962, Jupiter= 9.927953, Saturn= 10.65622, Uranus= 17.24, 
+  Neptune= 16.11, Pluto= 153.293904 }
+
+yeartable = { Mercury= 0.2408, Venus= 0.6152, Earth= 1.0000, 
+  Mars= 1.8809, Jupiter= 11.8622, Saturn= 29.4577, Uranus= 84.0139, 
+  Neptune= 164.793, Pluto= 248.54 }
+
+-- the name of the currently selected planet
+selectedplanet = ""
+
+-- table mapping from char to timestep:
+steptable = {}
+
+--[[ #################################### ]]
+
+
+function intro()
+  local message = [[
+  Timestep-Keys
+  
+  Allows quick and easy change of the current date by
+  astronomically significant amounts (relative to a given planet).
+  
+  Press "a" to increase date by one year
+  Press "s" to increase date by one sidereal day
+  Press "d" to increase date by one solar day
+  Use Shift-a/s/d to decrease by the same amount.
+  
+  It's recommended to use "sync orbit Earth" when changing by solar days, 
+  "sync orbit Earth" or "follow Earth " when changing by sidereal days 
+  and "follow Sol" when changing by years (replace Earth by whatever
+  planet you want to look at). Try to keep the Sun within view to 
+  have a reference point.
+  
+  Press any key to continue...
+  ]]
+  celestia:print(message, 120, -1, 1, 7, -4)
+end
+
+intro_finished = false
+function end_intro()
+  intro_finished = true
+  celestia:print("", 0.1)
+  celestia_keyboard_callback = default_callback
+end
+celestia_keyboard_callback = end_intro
+
+function default_callback(input)
+  local char = string.sub(input, 1, 1)
+  if validkeys[char] then
+    getselection()
+    if steptable[char] ~= nil then
+      celestia:settime(celestia:gettime() + steptable[char])
+      return true
+    else
+      celestia:flash("timestep keys don't work, because no valid planet is selected.")
+    end
+  end
+  return false
+end
+
+function getselection()
+  selection = celestia:getselection()
+  
+  -- planet selected?
+  if selection == nil or selection:type() ~= "planet" then
+    steptable = {}
+    selectedplanet = ""
+    return
+  end
+  
+  name = selection:name()
+  
+  -- did it change?
+  if name == selectedplanet then
+    return
+  end
+  
+  -- new selected planet, reset steptable/selectedplanet
+  selectedplanet = name
+  steptable = {}
+
+  if daytable[name] == nil then
+    celestia:flash("sorry, rotation period unknown for " .. name)
+    return
+  end
+  
+  -- compute solar/sidereal day, sidereal year:
+  
+  -- sidereal day:
+  steptable['s'] = daytable[name] / 24
+  steptable['S'] = -steptable['s'] 
+
+  -- sidereal year:
+  steptable['a'] = yeartable[name] * 365.25636
+  steptable['A'] = -steptable['a']
+
+  -- solar day:
+  steptable['d'] = 1 / 24 / (1/(daytable[name]) - 1/(365.25636*24*yeartable[name]) )
+  steptable['D'] = -steptable['d']
+end
+
+intro()
+celestia:requestkeyboard(true)
+while true do
+  wait(1)
+end

@@ -1,0 +1,129 @@
+-- Example script for Lua support in celestia
+--
+-- The Nine Planets
+--
+-- (c) 2003 Harald Schmidt
+-- http://www.h-schmidt.net/celestia/
+--
+-- comments, bugreports to: celestia ( at ) h-schmidt.net
+-- 
+-- You are free to use, copy, modify, redistribute this script,
+-- but keep a credit to the original author
+--
+
+
+-- This function is called automatically when the script ends, 
+-- be it because it reached it's end, or the user pressed ESC:
+function celestia_cleanup_callback()
+  celestia:setrenderflags(orig_renderflags)
+  celestia:setlabelflags(orig_labelflags)
+  celestia:getobserver():singleview()
+  celestia:settimescale(1.0)
+  celestia:settime(orig_time + (celestia:getscripttime() / 24 / 3600) )
+end
+
+planets = {}
+planets[1] = celestia:find("Mercury")
+planets[2] = celestia:find("Venus")
+planets[3] = celestia:find("Earth")
+planets[4] = celestia:find("Mars")
+planets[5] = celestia:find("Jupiter")
+planets[6] = celestia:find("Saturn")
+planets[7] = celestia:find("Uranus")
+planets[8] = celestia:find("Neptune")
+planets[9] = celestia:find("Pluto")
+
+celestia:print("  The Nine Planets\n(preloading textures...)", 5, 0, 0, -7, -1)
+wait(0.1)
+
+for k,v in pairs(planets) do
+  v:preloadtexture()
+end
+
+orig_renderflags = celestia:getrenderflags()
+orig_labelflags = celestia:getlabelflags()
+orig_fov = celestia:getobserver():getfov()
+orig_time = celestia:gettime()
+
+-- Try to improve performance by disabling orbits, galaxies and automag
+celestia:setrenderflags{orbits=false, galaxies=false, planets=true, stars=true, labels=false, automag=false,constellations=false, markers=false, grid=false,boundaries=false}
+
+-- disable ALL labelflags:
+labelflags = celestia:getlabelflags()
+for k,v in pairs(labelflags) do
+  labelflags[k]=false
+end
+celestia:setlabelflags(labelflags)
+
+o = celestia:getobserver()
+o:singleview()
+observers = celestia:getobservers()
+observers[1]:splitview("h", 0.666)
+wait(0.5)
+
+observers = celestia:getobservers()
+observers[1]:splitview("h", 0.5)
+wait(0.5)
+
+observers = celestia:getobservers()
+for i, o in ipairs(observers) do
+  o:splitview("v", 0.666)
+  wait(0.5)
+end
+
+observers = celestia:getobservers()
+for i = 1,3 do
+  observers[i]:splitview("v", 0.5)
+  wait(0.5)
+end
+
+
+observers = celestia:getobservers()
+
+-- Need to resort the observer_list, because 
+-- I want it layed out nicely top to bottom, left to right:
+observer_sort = { 3,1,2,9,7,8,6,4,5 }
+obs = {}
+for i = 1,9 do
+  obs[observer_sort[i]] = observers[i]
+end
+observers = obs
+
+-- start goto for each view, adapt distance to FOV:
+for i = 1,9 do
+  local fov = observers[i]:getfov()
+  observers[i]:follow(planets[i])
+  local vertsize = planets[i]:radius()*1.5
+  -- vertsize = sin * dist
+  local dist = 2*vertsize / math.sin(fov)
+  observers[i]:gotodistance(planets[i], dist, 10)
+end
+-- wait until goto over (too lazy to use observer:travelling)
+wait(10.1)
+
+celestia:print("Accelerating time...", 6, 0, 0, -5, -2)
+
+-- speed up time slowly
+t0 = celestia:getscripttime()
+repeat
+  td = celestia:getscripttime() - t0
+  celestia:settimescale(td*500)
+  wait(0.25)
+until td > 60
+
+
+--reset to normal timescale:
+celestia:settimescale(1)
+
+celestia:print("Enough!", 2, 0, 0, -2, -2)
+
+wait(2)
+
+
+-- destroy layout, let earth be the only one to see:
+for i = 9,1,-1 do
+  if i ~= 3 then
+    observers[i]:deleteview()
+    wait(0.5)
+  end
+end

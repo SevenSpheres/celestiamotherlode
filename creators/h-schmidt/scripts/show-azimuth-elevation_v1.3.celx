@@ -1,0 +1,434 @@
+--[[
+
+  show-azimuth-elevation.celx (v1.2)
+  
+  Celestia-script showing Azimuth and Elevation and RA/Dec.
+  by Harald Schmidt
+  http://www.h-schmidt.net/celestia/
+  
+--]]
+  
+
+--[[ TODO: Allow Entering coordinates
+  ]]
+
+-- useful constants:
+LOOK = celestia:newvector(0,0,-1)
+UP = celestia:newposition(0,1,0)
+UPV = celestia:newvector(0,1,0)
+EARTH = celestia:find("Sol/Earth")
+
+--[[
+  ## transform a vector by a rotation ##
+]]
+function rotation_transform(v, rotation)
+  -- Use native method if available (1.3.2pre8?)
+  if rotation.transform ~= nil then
+    return rotation:transform(v)
+  end
+  matrix = { }
+
+  x = rotation.x;
+  y = rotation.y;
+  z = rotation.z;
+  w = rotation.w;
+
+  wx = w * x * 2;
+  wy = w * y * 2;
+  wz = w * z * 2;
+  xx = x * x * 2;
+  xy = x * y * 2;
+  xz = x * z * 2;
+  yy = y * y * 2;
+  yz = y * z * 2;
+  zz = z * z * 2;
+
+  matrix[0] = { x= 1 - yy - zz, y= xy - wz,     z= xz + wy }
+  matrix[1] = { x= xy + wz,     y= 1 - xx - zz, z= yz - wx }
+  matrix[2] = { x= xz - wy,     y= yz + wx,     z= 1 - xx - yy }
+
+  nx = (matrix[0].x * v.x + matrix[1].x * v.y + matrix[2].x * v.z)
+  ny = (matrix[0].y * v.x + matrix[1].y * v.y + matrix[2].y * v.z)
+  nz = (matrix[0].z * v.x + matrix[1].z * v.y + matrix[2].z * v.z)
+
+  return celestia:newvector(nx, ny, nz)
+end 
+
+--[[
+ ## Return a vector in the direction where the observer is looking ##
+]]
+function lookat(obs)
+  rot = obs:getorientation()
+  return (rotation_transform(LOOK,rot)):normalize()
+end
+
+--[[
+ ## Transform coordinates from cartesian to polar(?) ##
+]]
+function transform_xyz2rtp(x,y,z)
+  r = math.sqrt(x*x + y*y + z*z)
+  theta = math.atan(math.sqrt(x*x + y*y)/z)
+  if x < 0 then
+    phi = math.atan(y/x) + math.pi
+  elseif x > 0 then
+    phi = math.atan(y/x)
+  elseif y > 0 then
+    phi = math.pi/2
+  else
+    phi = -math.pi/2
+  end
+  return r,theta,phi
+end
+
+--[[
+ ## Transform coordinates from polar to cartesian ##
+]]
+function transform_pt2xyz(p,t)
+ -- B&S, p. 177
+  local r = 1
+  local x = r*math.sin(t)*math.cos(p)
+  local y = r*math.sin(t)*math.sin(p)
+  local z = r*math.cos(t)
+  return x,y,z
+end
+
+--[[ 
+ ## Create new axis. 
+ #
+ # local_up is a vector going from planet center to surface position
+ # rot_axis is a vector along the rotation axis, pointing "north"
+ # (both must be normalized)
+ # Returns three perpendicular and normalized vectors, 
+ # a vector from south to north, one from east to west and the original local_up
+ ##
+  ]]
+function create_local_axis(local_up, rot_axis)
+  -- the axis W-E is perpendicular to both the rotation axis
+  -- and the local UP (i.e. there is no EAST-WEST when at the poles)
+  
+  W2E = (rot_axis ^ local_up):normalize()
+  
+  -- the axis N-S is perpendicular to the local up, and the W-E axis
+  S2N = (local_up ^ W2E):normalize()
+  
+  -- NOW: local_up, W2E, S2N should all be perpendicular.
+  -- Test (all values should be near zero): 
+  -- celestia:print("lw:" .. local_up*W2E .. " ws:" .. W2E*S2N .. " ls:".. local_up*S2N)
+  
+  -- return X,Y,Z:
+  return S2N, W2E*(-1), local_up
+end
+
+--[[
+ ## Transform coordinate system:
+  # From universal coordinates to the one given by x_axis, y_axis, z_axis
+ ##
+]]  
+function transform(vec, x_axis, y_axis, z_axis)
+  old_vecs = { celestia:newvector(1,0,0), celestia:newvector(0,1,0), celestia:newvector(0,0,1) }
+  new_vecs = { x_axis, y_axis, z_axis }
+  old_coords = { vec.x, vec.y, vec.z }
+  new_coords = { 0, 0, 0}
+  -- Bronstein & Semendjajew, TB der Mathematik, p. 179
+  for new = 1, 3 do
+    new_coords[new] = 0
+    for old = 1, 3 do
+      new_coords[new] = new_coords[new] + (new_vecs[new]*old_vecs[old])*old_coords[old]
+    end
+  end
+  return celestia:newvector(new_coords[1], new_coords[2], new_coords[3])  
+end
+
+--[[
+ ## Return three axis for a coordinate system relative to surface of planet.
+ ## z_axis is pointing up (away from planet center)
+ ## x_axis is pointing north (parallel to surface, in direction of rotation axis)
+ ## y_axis is pointing west
+ ]]
+function get_surfacelocal_coordinatesystem(obs, selected_planet)
+  local frame = celestia:newframe("planetographic", selected_planet)
+  local objectcenter  = selected_planet:getposition()
+  -- this is the UP-vector for this frame in universal coords:
+  -- (rotation axis for body)
+  local univ_up = frame:from(UP) - objectcenter
+
+  local curpos = obs:getposition()
+
+  -- this is UP at the position of the observer (in univ. coords):
+  local local_up = (curpos - objectcenter):normalize()
+
+  local x_axis, y_axis, z_axis = create_local_axis(local_up, univ_up)
+  return x_axis, y_axis, z_axis
+end
+
+--[[
+ ## Return current azimuth and elevation of obs for selected_planet ##
+ ]]
+function get_az_elev(obs, selected_planet)
+  x_axis, y_axis, z_axis = get_surfacelocal_coordinatesystem(obs, selected_planet)
+  -- this is the direction where we are currently looking (i.e. observer orientation)
+  look = lookat(obs):normalize()
+  v = transform(look , x_axis, y_axis, z_axis)
+  r,theta,phi = transform_xyz2rtp(v.x, v.y, v.z)
+  -- change from ccw to cw (if seen from z>0):
+  phi = math.mod(720 - math.deg(phi), 360)
+  
+  -- change to elevation above/below ground:
+  if theta > 0 then
+    theta = (90 - math.deg(theta))
+  else
+    theta = - math.deg(theta) - 90
+  end
+  return phi, theta
+end
+
+--[[
+ ## Return current RA and Dec for obs (sel_pl is ignored) ##
+ ]]
+function get_ra_dec(obs, sel_pl)
+  base_rot = celestia:newrotation(celestia:newvector(1,0,0), -math.rad(23.4392911))
+  frame = celestia:newframe("planetographic", EARTH)
+  --[[center = frame:from(celestia:newposition(0,0,0), J2000)
+  x_axis = frame:from(celestia:newposition(1,0,0), J2000) - center
+  y_axis = frame:from(celestia:newposition(0,1,0), J2000) - center
+  z_axis = frame:from(celestia:newposition(0,0,1), J2000) - center]]
+  rot = obs:getorientation() * base_rot
+  --rot = frame:to(rot, J2000)
+  look = (rotation_transform(LOOK,rot)):normalize()
+  r,theta,phi = transform_xyz2rtp(look.x, look.z, look.y)
+  phi = math.mod(720 - math.deg(phi), 360)
+  theta = math.deg(theta)
+  if theta > 0 then
+    theta = 90 - theta
+  else
+    theta = (-90 - theta)
+  end
+  return phi, theta
+end
+
+--[[
+  ## Transform (positive) degrees to hours, minutes, seconds.
+  ]]
+function deg2hms(deg)
+  deg_p_hour = 360/24
+  deg_p_minute = 360 / (24*60)
+  deg_p_second = 360 / (24*60*60)
+  hours = math.floor(deg / deg_p_hour)
+  deg = deg - deg_p_hour * hours
+  minutes = math.floor(deg / deg_p_minute )
+  deg = deg - deg_p_minute * minutes
+  seconds = deg / deg_p_second
+  return hours, minutes, math.floor(10*seconds)/10
+end
+
+--[[ 
+ ## make obs look to az/elev (relative to selected_planet)
+ ]]
+function point_to(az, elev, obs, selected_planet)
+  -- change from cw to ccw:
+  local phi = math.mod(720 - az, 360)
+  local theta
+  -- change to elevation above/below ground:
+  if elev > 0 then
+    theta = (90 - elev)
+  else
+    theta = - elev - 90
+  end
+  local x_axis, y_axis, z_axis = get_surfacelocal_coordinatesystem(obs, selected_planet)
+  local x,y,z = transform_pt2xyz(math.rad(phi), math.rad(theta))
+  local v = x*x_axis + y*y_axis + z*z_axis
+  local pos = obs:getposition()
+  obs:lookat(pos + v, z_axis)
+end
+
+--[[
+ ## Force up being really UP
+ ]]
+function force_up(obs, selected_planet)
+  local x_axis, y_axis, z_axis = get_surfacelocal_coordinatesystem(obs, selected_planet)
+  local orientation = obs:getorientation()
+  local observer_up = rotation_transform(UPV, orientation)
+  
+  if z_axis * observer_up < 0.999 then
+    look_point = rotation_transform(LOOK, orientation)
+    obs:lookat(obs:getposition() + look_point, z_axis)
+  end
+end
+
+base_planet = EARTH
+
+auto_force_up = false
+
+-- ####################### KEYBOARD HANDLING ######################################
+--[[
+ ## General kb handler, activate other keyboard handlers on demand:
+ ]]
+function general_kb_handler(str)
+  if str == "S" then
+    local obj = celestia:getselection()
+    if obj and obj:type() == "planet" then
+      base_planet = obj
+    end
+    return true
+  end
+  if str == "A" then
+    kb_azimuth = ""
+    kb_elevation = nil
+    celestia_keyboard_callback = kb_enter_azimuth
+    return true
+  end
+  if str == "F" then
+    auto_force_up = not auto_force_up
+    return true
+  end
+  return false
+end
+
+--[[
+ ## Keyboard handler for azimuth input. Activates kb-handler for elevation when finished
+ ## Result is saved in kb_azimuth (which is nil when general_kb_handler is active)
+ ]]
+kb_azimuth = nil
+function kb_enter_azimuth(str)
+  s = string.sub(str,1,1)
+  if s == "," then
+    s = "."
+  end
+  ch = string.byte(s)
+  if string.len(kb_azimuth) == 0 and s == "-" then
+    kb_azimuth = kb_azimuth .. s
+  end
+  if string.len(kb_azimuth) > 0 and s == "\008" then
+    kb_azimuth = string.sub(kb_azimuth, 1, string.len(kb_azimuth)-1)
+  end
+  if ch >= string.byte("0") and ch <= string.byte("9") then
+    kb_azimuth = kb_azimuth .. s
+  end
+  if s == "." and string.find(kb_azimuth,".", 1, true) == nil then
+    kb_azimuth = kb_azimuth .. s
+  end
+    
+  if s == "\013" then
+    kb_elevation = ""
+    celestia_keyboard_callback = kb_enter_elevation
+  end
+  return true
+end
+
+
+--[[
+ ## Keyboard handler for elevation input. Activates general kb-handler when finished
+ ## Result is saved in kb_elevation (which is nil when this kb-hanlder is not active)
+]]
+kb_elevation = ""
+function kb_enter_elevation(str)
+  s = string.sub(str,1,1)
+  if s == "," then
+    s = "."
+  end
+  ch = string.byte(s)
+  if string.len(kb_elevation) == 0 and s == "-" then
+    kb_elevation = kb_elevation .. s
+  end
+  if string.len(kb_elevation) > 0 and s == "\008" then
+    kb_elevation = string.sub(kb_elevation, 1, string.len(kb_elevation)-1)
+  end
+  if ch >= string.byte("0") and ch <= string.byte("9") then
+    kb_elevation = kb_elevation .. s
+  end
+  if s == "." and string.find(kb_elevation,".", 1, true) == nil then
+    kb_elevation = kb_elevation .. s
+  end
+    
+  if s == "\013" then
+    celestia_keyboard_callback = general_kb_handler
+    local az = tonumber(kb_azimuth)
+    local elev = tonumber(kb_elevation)
+    if az ~= nil and elev ~= nil then
+      -- make azimuth positive, and 0 <= az < 360:
+      az = math.mod(math.mod(az,360) + 360, 360)
+      elev = math.min(89.999, elev)
+      elev = math.max(-89.999, elev)
+      point_to(az, elev, celestia:getobserver(), base_planet)
+    end
+    kb_azimuth = nil
+    kb_elevation = nil
+  end
+  return true
+end
+
+function intro()
+  local message = [[
+  Show Azimuth and Elevation Script
+  
+  Displays Azimuth and Elevation of the screen's center
+  relative from the point on Earth directly below the observer
+  (most useful when on or near the ground). Also displays
+  RA and Declination.
+  
+  Press Shift-S to use the currently selected planet instead of
+    Earth as the base planet for Az/Elev.
+  Press Shift-A to enter values for Azimuth and Elevation
+    and then center on that direction.
+  Press Shift-F to force the the observer to have "up"
+    pointing away from the ground.
+  
+  Press any key to continue...
+  ]]
+  celestia:print(message, 120, -1, 1, 7, -4)
+end
+
+into_finished = false
+function end_intro()
+  celestia:print("", 0.1)
+  celestia_keyboard_callback = general_kb_handler
+  intro_finished = true
+end
+
+celestia_keyboard_callback = end_intro
+
+celestia:requestkeyboard(true)
+
+intro()
+
+while not intro_finished do
+  wait(0.1)
+end
+
+-- ################################################################################
+
+--[[
+  ## main loop: Get Az/Elev and RA/Dec and display values on screen ##
+  ]]
+while true do
+  local obs = celestia:getobserver()
+  
+  local planet_dist = obs:getposition():distanceto(base_planet:getposition())
+  local planet_radius = base_planet:radius()
+  
+  -- Check if the user currently types azimuth/elevation:
+  if kb_azimuth ~= nil then
+    if kb_elevation ~= nil then
+      celestia:print("Enter Azimuth: " .. kb_azimuth .. "\n     Elevation: " .. tostring(kb_elevation) .. "_")
+    else
+      celestia:print("Enter Azimuth: " .. kb_azimuth .. "_")
+    end
+    wait(0)
+  else
+  -- otherwise print current az/elev + ra/dec:
+    az, elev = get_az_elev(obs, base_planet)
+    local az_string = string.format("Azimuth: %3.2f° Elevation: %3.2f°" , az, elev)
+    
+    
+    ra, dec = get_ra_dec(obs, base_planet)
+    h,m,s = deg2hms(ra)
+    local radec_string = string.format("RA: %2ih %2im %2.1fs  Dec: %3.2f°", h, m, s, dec)
+    if auto_force_up then
+      force_up(obs, base_planet)
+      az_string = az_string .. " (auto-up)"
+    end
+    
+    celestia:print(az_string .. "\n" .. radec_string, 1, 0, -1, -11, 3 )
+    wait(0.0)
+  end
+end

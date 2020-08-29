@@ -1,0 +1,120 @@
+
+-- _lines contains all entered lines
+-- _lines.currentline right now is the same as _lines.lastline
+-- each line is a table containing the list of entered strings (UTF-8 single chars).
+-- and a length attribute (Backspace only decrements the length)
+_lines = {}
+_lines[1] = {}
+_lines[1].length = 0
+_lines.currentline = 1
+_lines.lastline = 1
+_lines.cursorline = 1
+
+
+-- Return the text in this line.
+function concat(line)
+  local text = ""
+  for i=1,line.length do
+      text = text .. line[i]
+  end
+  return text
+end
+
+function copyline(line)
+  local copy = {}
+  for k,v in pairs(line) do
+    copy[k] = v
+  end
+  return copy
+end
+
+-- Reduce the length of the current line
+function backspace()
+  local curline = _lines[_lines.currentline]
+  curline.length = math.max(0, curline.length - 1)
+end
+
+-- execute the current line, catching any error
+-- and displaying return values (if there are any)
+function execute()
+  local curline = _lines[_lines.currentline]
+  _lines.lastline = _lines.lastline + 1
+  _lines[_lines.lastline] = {}
+  _lines[_lines.lastline].length = 0
+  _lines.currentline = _lines.lastline
+  _lines.cursorline = _lines.currentline
+  local cmd = concat(curline)
+  local f, err = loadstring(cmd)
+  local retvalue
+  local errmsg
+  if f then
+    retvalue, result = pcall(f)
+  else
+    updatescreen("Syntax error: " .. tostring(err))
+    return
+  end
+  if retvalue then
+    updatescreen("OK: " .. tostring(result))
+  else
+    updatescreen("Error: " .. tostring(result))
+  end
+end
+
+-- Print the last couple of lines on the screen
+-- result will be appended if non-nil, used for execute()
+function updatescreen(result)
+  local alltext = ""
+  local i = math.max(1, _lines.lastline - 9)
+  while i < _lines.lastline do
+    local curline = _lines[i]
+    local text = "# "
+    text = concat(curline)
+    alltext = alltext .. text .. "\n"
+    i = i + 1
+  end
+  local curline = _lines[_lines.lastline]
+  text = "> " .. concat(curline)
+  alltext = alltext .. text
+  if result then
+        alltext = alltext .. "\n" ..result
+  end
+  celestia:print(alltext, 100, -1, -1, 0, math.min(_lines.lastline,9) + 3)
+end
+
+-- Callback for keypresses (name is hardcoded in celestia)
+function celestia_keyboard_callback(str)
+  if string.byte(str,1) < 32 and string.len(str) > 1 then
+    str = string.sub(str, 1, 1)
+  end
+  local cur_char = " "..string.byte(str, 1)..","..string.len(str).." "
+  if str == "\013" then
+    execute()
+  elseif str == "\008" then
+    backspace()
+    updatescreen("("..cur_char..")")
+  elseif str == "\016" then
+    _lines.cursorline = math.max(1,_lines.cursorline - 1)
+    _lines[_lines.currentline] = copyline(_lines[_lines.cursorline])
+    updatescreen()
+  elseif str == "\014" then
+    _lines.cursorline = math.min(_lines.lastline,_lines.cursorline + 1)
+    _lines[_lines.currentline] = copyline(_lines[_lines.cursorline])
+    updatescreen()
+  else
+    local curline = _lines[_lines.currentline] 
+    curline[curline.length+1] = str
+    curline.length = curline.length+1
+    updatescreen()
+  end
+  --celestia:flash(string.byte(str, 1))      
+  return true
+end
+
+-- enable keyboard-callback:
+celestia:requestkeyboard(true)
+celestia:flash("Enter command, end with ESC")
+
+-- and do nothing...
+while true do 
+  wait(0)
+end

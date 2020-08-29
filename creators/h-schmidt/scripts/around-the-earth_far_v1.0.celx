@@ -1,0 +1,55 @@
+-- Example script for Lua support in celestia
+--
+-- Rotation around earth (far), v 1.0
+--
+-- (c) 2003 Harald Schmidt
+-- http://www.h-schmidt.net/celestia/
+--
+-- comments, bugreports to: celestia ( at ) h-schmidt.net
+-- 
+-- You are free to use, copy, modify, redistribute this script,
+-- but keep a credit to the original author
+--
+
+-- temporary workaround against a bug on windows:
+-- not sure if this is necessary or actually helps, but better try:
+wait(0.1)
+celestia:flash("")
+wait(0.1)
+
+earth = celestia:find("Sol/Earth")
+
+obs_frame = celestia:newframe("planetographic", earth)
+
+zeropos = earth:getposition()
+upvector = celestia:newvector(0,1,0)
+uppos = obs_frame:to(zeropos) + upvector
+upvec_rel = zeropos:vectorto(obs_frame:from(uppos)) 
+
+function set_pos(body, alpha, beta, r)
+  local pos0_univ = body:getposition()
+  local x = r * math.sin(math.rad(alpha))*math.cos(math.rad(beta))
+  local y = r * math.sin(math.rad(beta)) 
+  local z = r * math.cos(math.rad(alpha))*math.cos(math.rad(beta))
+  local diff_vector = celestia:newvector(x,y,z)
+  local pos1_rel = obs_frame:to(pos0_univ) + diff_vector
+  local pos1_univ = obs_frame:from(pos1_rel)
+  celestia:getobserver():setposition(pos1_univ)
+  celestia:getobserver():lookat(body:getposition(), upvec_rel)
+  wait(0)
+end
+
+t0 = 0
+t1 = 30
+rot_speed = 360 / t1
+R0 = 1e-2
+R1 = 1e9
+while t0 < t1 do
+  local m = -t1 / ((t1-t0)+1e-10) 
+  r = R0 + R1 * math.exp(m)
+  t0 = celestia:getscripttime()
+  a = rot_speed * t0 * 4
+  b = math.min(89.9, rot_speed * 0.5*(t0-(t1/2)))
+  set_pos(earth, a, b, r)
+end  
+  

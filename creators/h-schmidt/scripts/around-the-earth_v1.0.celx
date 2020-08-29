@@ -1,0 +1,53 @@
+-- Example script for Lua support in celestia
+--
+-- Rotation around earth, v 1.0
+--
+-- (c) 2003 Harald Schmidt
+-- http://www.h-schmidt.net/celestia/
+--
+-- comments, bugreports to: celestia ( at ) h-schmidt.net
+-- 
+-- You are free to use, copy, modify, redistribute this script,
+-- but keep a credit to the original author
+--
+
+-- temporary workaround against a bug on windows:
+-- not sure if this is necessary or actually helps, but better try:
+wait(0.1)
+celestia:flash("")
+wait(0.1)
+
+earth = celestia:find("Sol/Earth")
+obs_frame = celestia:newframe("planetographic", earth)
+
+zeropos = earth:getposition()
+upvector = celestia:newvector(0,1,0)
+uppos = obs_frame:to(zeropos) + upvector
+upvec_rel = zeropos:vectorto(obs_frame:from(uppos)) 
+
+function gotolonglat(body, longitude, latitude, r)
+    local x = - r * math.cos(math.rad(longitude))*math.cos(math.rad(latitude))
+    local y = r * math.sin(math.rad(latitude)) 
+    local z = r * math.sin(math.rad(longitude))*math.cos(math.rad(latitude))
+    local offset = celestia:newvector(x,y,z)
+    local rel_pos = obs_frame:to( earth:getposition() )
+    rel_pos = rel_pos + offset
+    local univ_pos = obs_frame:from(rel_pos)
+    local obs = celestia:getobserver()
+    obs:setposition(univ_pos)
+    obs:lookat(earth:getposition(), upvec_rel)
+    wait(0.0)
+end
+
+
+t0 = 0
+t1 = 60
+rot_speed = 360 / t1
+R = 0.002
+while t0 < t1 do
+  t0 = celestia:getscripttime()
+  a = rot_speed * t0 * 5
+  -- don't set to 90, because then "up" in lookat can't work:
+  b = math.min(89.9, rot_speed * 0.5*(t0-(t1/2)))
+  gotolonglat(earth, a, b, R)
+end  

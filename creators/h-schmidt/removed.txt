@@ -1,0 +1,3 @@
+The following files were removed as they are too big to upload to GitHub:
+- earth-clouds-hs.zip
+- earth-unshaded-hs.zip

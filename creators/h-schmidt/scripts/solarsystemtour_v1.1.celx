@@ -1,0 +1,311 @@
+-- Example script for Lua support in celestia
+--
+-- Solar system tour Version II, v1.1
+--
+-- (c) 2003 Harald Schmidt
+-- http://www.h-schmidt.net/celestia/
+--
+-- comments, bugreports to: celestia ( at ) h-schmidt.net
+-- 
+-- You are free to use, copy, modify, redistribute this script,
+-- but keep a credit to the original author
+--
+-- Bugs: script needs cleanup. It has become more complex than anticipated,
+-- and some things are just a dirty hack.
+-- 2003-12-14: Test with 1.3.1rc:
+--  There are some workarounds needed for Windows - 
+--  the assumption that a simple wait(0) forces a rendering phase
+--  seems is wrong.
+--  table.getn() seems to not work on win (or works differently).
+--  Replaced by old explicit length-counting until further investigation.
+
+-- temporary workaround against a bug on windows:
+wait(0.1)
+celestia:flash("")
+wait(0.5)
+
+-- base_inertia is (very!) roughly how much of the current direction
+-- will be retained in a second.
+base_inertia = 0.3
+
+-- base_speed_timestep is the amount of time we would (at current speed)
+-- need to reach next target:
+-- Don't set this too small, or we will miss targets
+base_speed_timestep = 1
+
+-- CONSTANT, do not change
+KM_PER_MLY=9466411.842
+
+-- keep camera locked within this distance to target:
+CAMLOCKD = 0.03
+
+-- up-vector for observer 
+UP = celestia:newvector(0,1,0)
+
+INTRO = "Solarsystem Tour (v1.1) by Harald Schmidt\nplease report bugs to celestia (at) h-schmidt.net\n\n"
+-- return vector with same direction and length == 1
+function normalize(v)
+    local x = v:getx()
+    local y = v:gety()
+    local z = v:getz()
+    local d = math.sqrt(x*x + y*y + z*z)
+    if d > 0.0000001 then
+        d = 1/d
+    else
+        --celestia:flash("underflow",2)
+        d = 1
+    end
+    return celestia:newvector(d*x, d*y, d*z)
+end
+
+-- return length of v
+function length(v)
+    local x = v:getx()
+    local y = v:gety()
+    local z = v:getz()
+    local d = math.sqrt(x*x + y*y + z*z)
+    return d
+end
+
+-- INITIALIZATION
+
+pos_table = {}
+pos_table.len = 0
+
+-- fill pos_table with solar-system objects
+-- we currently avoid moons, they probably need further tweaking 
+-- (extreme changes in speed necessary, for example when
+-- moving from mars to jupiter (very fast) and then to a jupiter moon (slow))
+function filltable(obj, depth)
+    pos_table[pos_table.len] = obj
+    pos_table.len = pos_table.len + 1
+    local i, v
+    local children = obj:getchildren()
+    for i, v in ipairs(children) do
+        if v:radius() < 1 or v:name() == "Galileo" then 
+            --celestia:flash("ignoring: " .. v:name())
+            --wait(2)
+        else
+            --if depth <= 2 then
+            --    filltable(v, depth+1)
+            --end
+            pos_table[pos_table.len] = v
+            pos_table.len = pos_table.len + 1
+            preload(v)
+        end
+    end
+end
+
+-- preload textures
+function preload(obj)
+    if obj:type() == "planet" or obj:type() == "moon" then
+        if obj:radius() < 100 then
+           return
+        end
+        celestia:print(INTRO.."Preloading texture for " .. obj:name(), 10, 0, 0, -20, 0)        
+        local p = obj:getposition()
+        local r = obj:radius()
+        local v = celestia:newvector(1,0,0)
+        v = (4 * r) / KM_PER_MLY * v 
+        celestia:getobserver():setposition(p + v)
+        celestia:getobserver():lookat(p, UP)
+        wait(0.1)
+        if obj:type() == "planet" then
+           local children = obj:getchildren()
+           for i, c in ipairs(children) do
+              preload(c)
+           end
+        end
+    end
+end
+
+side_toggle_a = 1
+side_toggle_b = 1
+function getposfromobject(source, target)
+   local displacement = nil
+   if source == nil then
+      displacement = celestia:newvector(0.001, 0, 0)
+   else
+      local src2target = source:getposition():vectorto(target:getposition())
+      displacement = (src2target ^ UP):normalize()
+      displacement = side_toggle_a  * 3*target:radius()/KM_PER_MLY * displacement
+      displacement = displacement + 1.0*target:radius()/KM_PER_MLY * src2target:normalize()
+      side_toggle_a = -1 * side_toggle_a
+      side_toggle_b = side_toggle_a * side_toggle_b
+   end
+   return target:getposition() + displacement
+end
+
+function getcameratarget(sourcepos, targetpos, obspos, part)
+   src2target = sourcepos:vectorto(targetpos)
+   local lgth = length(src2target)
+   local part2 = (part - CAMLOCKD) / (1 - 2*CAMLOCKD)
+   part2 = math.min(1,math.max(0,part2))
+   local disp = lgth * 0.05 * side_toggle_b * math.pow(math.sin(math.pi*part2),2)
+   local vec = nil
+   if part2 < 0.5 then
+        vec = obspos:vectorto(sourcepos)
+   else
+        vec = obspos:vectorto(targetpos)
+   end
+   local factor1 = math.abs(part2 - 0.5)
+   local displacement =  disp * (sourcepos:vectorto(targetpos) ^ UP):normalize()
+   return obspos + factor1 * vec + displacement
+end
+
+offset = celestia:newvector(0.1,0,0)
+
+sol = celestia:find("Sol")
+filltable(sol,1)
+o = celestia:getobserver()
+t = 1
+date = celestia:gettime()
+pos = pos_table[t-1]:getposition():addvector(offset)
+o:setposition(pos)
+velocity = celestia:newvector(1e-5,0,0)
+-- count frames
+counter = 0
+-- starting speed: 2mly / step
+min_speed = 2
+-- distance to/from target where we maintain constant speed
+-- this is the starting value, to get away from sun 
+const_speed_distance = pos_table[t-1]:radius()*1
+
+time = celestia:getscripttime()
+
+last_target_pos = pos
+
+-- must show this long, because sun is to bright to read this at first:
+celestia:print(INTRO .. "", 5, 0, 0, -20, 0)
+
+celestia:select(pos_table[0])
+-- walk the position-table:
+while t < pos_table.len do    
+  next_target = pos_table[t]
+  
+  past_midpoint = false
+  
+  -- get position where we should be heading and distance to target
+  -- next_target_pos = next_target:getposition():addvector(offset)
+  next_target_pos = getposfromobject(pos_table[t-1], pos_table[t])
+  -- overall distance 
+  dist = pos:distanceto(next_target_pos)
+  
+  -- :TODO: convert this from dist (we need this in microly instead of km)
+  dist_mly = length(pos:vectorto(next_target_pos))
+  
+  -- select next target when within dist_trigger to planet
+  radius = math.max(10, next_target:radius())
+  dist_trigger = radius*5
+  
+  -- emergency trigger if first trigger fails (could happen if we blast by too fast - current parameters should avoid this)
+  dist_emergency_trigger = dist / 3
+  last_dist = dist
+  
+  -- current distance to target
+  d = dist
+  
+  -- INNER LOOP: approach to next target, exit loop when there
+  while d > dist_trigger do
+      local time2 = celestia:getscripttime()
+      local dt = math.max(0.005, math.min(0.2, time2 - time))
+      time = time2
+      
+      -- use this to correct for moving bodies while in flight
+      celestia:settime(date)
+      -- next_target_pos = next_target:getposition():addvector(offset)
+      
+      -- distance to target (in "dist"-units, i.e. should vary between ~1 and 0)
+      a = d / dist
+
+      -- now compute velocity envelope: go slow when near planet, go really fast between
+      
+      -- speed is a funcion of distance to/from target, and
+      -- distance is computed as: 
+      if a > 0.5 then
+        -- distance from previous target:
+        ref_distance_km = dist - d
+      else
+        if not past_midpoint then
+          -- this is executed once between src and target
+          celestia:select(next_target)
+          past_midpoint = true
+        end
+        -- distance to next target:
+        ref_distance_km = d
+      end
+      
+      -- reset const_speed_distance when approaching next target
+      -- leave intact while going away from last target (avoid instantaneous velocity boost)
+      if a < 0.5 then
+        const_speed_distance = dist_trigger*2
+      end
+      
+      -- compute distance to target (when approaching) or
+      -- from last target
+      ref_distance_km = math.max(const_speed_distance, ref_distance_km)
+      ref_distance_mly = ref_distance_km / KM_PER_MLY
+        
+      -- speed is computed as:
+      -- speed = distance_to_target / time_to_reach_target
+      -- distance_to_target is of couse
+      speed = ref_distance_mly / base_speed_timestep
+      
+      -- inertia controls how quick the direction of view changes.
+      --
+      -- To make the script behave mostly identical for different FPS, we
+      -- must change inertia depending on the time between two frames. 
+      -- inertia doesn't have a linear influence, but this first-order
+      -- approximation should suffice.
+      -- 
+      -- if dt == 0, inertia = 1, for dt >= 0.1, inertia = 0.1*base_inertia
+      inertia = 1 - (math.min(0.1, dt)*(1-base_inertia))
+      -- camera must change quicker when getting near target, otherwise we could miss the target,
+      -- therefore adjust proportionally to distance to target (but don't set to >= 1)
+      inertia = math.max(0.5, math.min(a,1)*inertia)
+      
+      direction = pos:vectorto(next_target_pos)      
+      -- normalized direction 
+      dir_norm = normalize(direction)
+      
+      -- normalized velocity
+      -- cant use vector:normalize because length may be to small
+      vel_norm = normalize(velocity)
+
+      -- This is the most important part:
+      -- compute the new velocity, by choosing a direction
+      -- between the former velocity and the direction we have to go.
+      
+      new_velocity_direction = (inertia * vel_norm + (1-inertia)*dir_norm) 
+      
+      velocity = speed * dt * new_velocity_direction:normalize()
+      
+      newpos = pos + velocity
+      
+      -- look in direction of movement      
+      o:setposition(pos)
+      o:lookat(getcameratarget(last_target_pos, next_target:getposition(), pos, 1-a), UP)      
+      
+      pos = newpos
+      d = pos:distanceto(next_target_pos)
+      
+      -- check emergency trigger?
+      if d < dist_emergency_trigger then
+        -- real check: are we going away again?
+        if d > last_dist then
+            -- this is an error, print message
+            celestia:flash("Ah, I just missed my target - continuing with next target!")
+            --wait(2)
+            break
+        end
+      end
+      last_dist = d
+      counter = counter + 1
+      wait(0.01)
+  end
+  
+  last_target_pos = next_target:getposition()
+  t = t + 1
+end
+o:follow(pos_table[pos_table.len-1])
+celestia:flash("This is the end, after " .. math.floor(celestia:getscripttime()) .. " seconds and " .. counter .. " steps. Thanks for watching.",10)
