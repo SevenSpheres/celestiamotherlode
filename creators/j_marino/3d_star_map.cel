@@ -1,0 +1,389 @@
+{
+
+time { utc "2004-07-01T00:01:00" }
+labels { clear "planets|minorplanets|stars|constellations" }
+renderflags { clear "constellations|orbits" }
+timerate { rate 1 }
+
+wait { duration 4 }
+
+setvisibilitylimit { magnitude 0 }
+
+print { text "3D STARSMAP TOUR" row -12 column 15 duration 5}
+wait {duration 3}
+
+print { text "This script is public domain for noncommercial use" row -12 column 7 duration 5}
+wait {duration 3}
+
+print { text "Tour didicado a mi familia" row -12 column 14 duration 5}
+wait {duration 3}
+
+print { text "Maria Antonieta y Juan Marino, mis Padres" row -12 column 10 duration 5}
+wait {duration 3}
+
+print { text "" row -12 column 14 duration 5}
+
+
+
+
+
+#-----------------------------------------------------------	
+
+set { name "StarStyle" value "scaleddiscs" }
+setvisibilitylimit { magnitude 9.5 }
+select { object "sol/earth" }
+center { time 7 }
+goto { time 5 distance 10 }
+renderflags {clear "markers"}
+wait { duration 5 }
+
+#-----------------------------------------------------------
+
+renderflags { clear "orbits" }
+
+gotolonglat {time 5  distance 20 longitude 180  latitude 0}
+wait { duration 3 }
+
+#...........................................................
+	
+wait { duration 3 }
+
+select { object "earth" }
+synchronous {}
+
+#...........................................................
+gotolonglat {time 10  distance 2.5e11  longitude 180  latitude 0}
+#...........................................................
+
+
+
+#-----------------------------------------------------------
+#                       B O C A
+#-----------------------------------------------------------
+
+wait { duration 2 }
+renderflags {set "markers"}
+mark {object "Sol" size 10 color [0 1 0] symbol "o"}
+timerate { rate 5000 }
+wait {duration 5}
+
+print { text "Podemos imaginarnos la disposicion espacial\nde las estrellas circundantes al sol" row -4 column 1 duration 5}
+wait {duration 3}
+print { text "Como un gigantesco ESCORPION (great scorpion)..." row -4 column 1 duration 5}
+wait { duration 3 }
+print { text "EN LA CABEZA (scorpion head) esta el  SOL y RIGEL KENTAURUS" row -4 column 1 duration 5}
+mark {object "Rigel kentaurus" size 10 color [1 1 0] symbol "x"}
+
+wait {duration 5}
+
+#...........................................................
+
+
+
+
+#-----------------------------------------------------------
+#                   T E N A Z A S
+#-----------------------------------------------------------
+
+#...........................................................
+
+print { text "ALTAIR (scorpion mouth) representa la BOCA DEL ESCORPION" row -4 column 1 duration 5}
+mark {object "Altair" size 10 color [1 1 0] symbol "x"}
+
+wait {duration 5}
+
+#...........................................................
+
+print { text "VEGA y FOMALHAUT (scorpion claws) las pinzas o TENAZAS" row -4 column 1 duration 5}
+mark {object "vega" size 10 color [0 1 0] symbol "x"}
+mark {object "Fomalhaut" size 10 color [0 1 0] symbol "x"}
+
+wait {duration 5}
+
+#...........................................................
+
+
+
+
+#-----------------------------------------------------------
+#                     C U E R P O
+#-----------------------------------------------------------
+
+#...........................................................
+
+print { text "SIRIO y PROCYON (scorpion body) representa al CUERPO" row -4 column 1 duration 5}
+mark {object "Sirius" size 10 color [0.4 0.4 1] symbol "o"}
+mark {object "Procyon" size 10 color [0.4 0.4 1] symbol "o"}
+
+wait {duration 5}
+
+#...........................................................
+
+
+
+
+#-----------------------------------------------------------
+#                       C O L A
+#-----------------------------------------------------------
+
+#...........................................................
+gotolonglat {time 10  distance 4e11  longitude 180  latitude 0}
+#...........................................................
+wait { duration 7 }
+
+mark {object "Pollux" size 10 color [1 1 1] symbol "o"}
+print { text "POLLUX (scorpion tail) representa la primera mitad de LA COLA" row -4 column 1 duration 5}
+
+wait {duration 5}
+
+#...........................................................
+
+
+mark {object "Castor" size 10 color [1 1 1] symbol "o"}
+print { text "CASTOR (scorpion tail) representa la acodadura de la COLA" row -4 column 1 duration 5}
+
+wait {duration 5} 
+
+#...........................................................
+
+mark {object "capella" size 10 color [1 1 1] symbol "o"}
+print { text "CAPELLA (scorpion stinger) representa EL AGUIJON" row -4 column 1 duration 5}
+
+wait { duration 5 }
+
+
+
+#-----------------------------------------------------------
+#                       H I A D A S
+#-----------------------------------------------------------
+#...........................................................
+gotolonglat {time 10  distance 1e12  longitude 180  latitude 0}
+#...........................................................
+
+
+mark {object "77 tau" size 10 color [1 1 0] symbol "o"}
+wait {duration 15}
+
+
+select { object "77 tau" }
+wait { duration 3 }
+goto { time 10 distance 1e8 }
+wait { duration 3 }
+timerate { rate 70000 }
+synchronous {}
+
+#...........................................................
+
+print { text "LAS HIADAS" row -12 column 20 duration 5}
+wait { duration 5 }
+
+#...........................................................
+
+print { text "Las HIADAS son un cumulo abierto de estrellas" row -4 column 1 duration 6}
+wait { duration 6 }
+
+#...........................................................
+
+print { text "Tienen un diametro global de unos\n30-35 a. luz en forma de 'V'" row -4 column 1 duration 6}
+wait { duration 6 }
+
+#...........................................................
+
+print { text "Las estrellas de este cumulo\ntienen unos 870 millones de edad" row -4 column 1 duration 6}
+wait { duration 6 }
+
+#...........................................................
+
+print { text "Todo el conjunto estelar se\nencuentra a 130 a. luz de la Tierra" row -4 column 1 duration 6}
+wait { duration 6 }
+
+#...........................................................
+
+timerate { rate 70000 }
+wait { duration 1}
+timerate { rate 35000 }
+wait { duration 1}
+timerate { rate 12000 }
+wait { duration 1}
+timerate { rate 5000 }
+
+#...........................................................
+select { object "sol/earth" }
+center { time 4 }
+wait { duration 4 }
+#...........................................................
+gotolonglat {time 10  distance 1e12  longitude 180  latitude 0}
+#...........................................................
+synchronous {}
+wait { duration 10}
+
+wait {duration 7}
+
+
+#-----------------------------------------------------------
+#                      P L E Y A D E S
+#-----------------------------------------------------------
+#...........................................................
+gotolonglat {time 10  distance 2.5e12  longitude 180  latitude 0}
+#...........................................................
+
+
+
+mark {object "Alcyone" size 10 color [1 1 0] symbol "x"}
+wait {duration 10}
+
+
+select { object "alcyone" }
+wait { duration 3 }
+goto { time 10 distance 2.5e8 }
+wait { duration 3 }
+timerate { rate 8000 }
+synchronous {}
+
+#...........................................................
+
+print { text "LAS PLEYADES" row -12 column 20 duration 5}
+wait { duration 5 }
+
+#...........................................................
+
+print { text "Las PLEYADES son en total 200 estrellas" row -4 column 1 duration 6}
+wait { duration 6 }
+
+#...........................................................
+
+print { text "Figura en el catalogo Messier como M 45" row -4 column 1 duration 6}
+wait { duration 6 }
+
+#...........................................................
+
+print { text "Este es su nucleo, formado por las siete estrellas mas brillantes" row -4 column 1 duration 6}
+wait { duration 6 }
+
+#...........................................................
+
+print { text "Tiene un diametro aproximado de unos 7 a. luz," row -4 column 1 duration 6}
+wait { duration 6 }
+
+#...........................................................
+
+print { text "Son estrellas muy jovenes, de solo unos 80 millones de a." row -4 column 1 duration 6}
+wait { duration 6 }
+
+#...........................................................
+
+
+timerate { rate 8000}
+wait { duration 1}
+timerate { rate 6500 }
+wait { duration 1}
+timerate { rate 5000 }
+
+#...........................................................
+select { object "sol/earth" }
+center { time 4 }
+wait { duration 4 }
+#...........................................................
+gotolonglat {time 10  distance 2.5e12  longitude 180  latitude 0}
+#...........................................................
+synchronous {}
+wait { duration 10}
+
+wait {duration 7}
+
+
+labels { set "stars" }
+
+
+
+
+#...........................................................
+gotolonglat {time 10  distance 4e12  longitude 180  latitude 0}
+#...........................................................
+
+wait { duration 10 }
+renderflags {clear "markers"}
+
+#...........................................................
+gotolonglat {time 10  distance 8e12  longitude 180  latitude 0}
+#...........................................................
+
+
+#...........................................................
+gotolonglat {time 10  distance 1e13  longitude 180  latitude 0}
+setvisibilitylimit { magnitude 10 }
+#...........................................................
+
+wait { duration 10 }
+
+
+#...........................................................
+gotolonglat {time 10  distance 4e13  longitude 180  latitude 0}
+setvisibilitylimit { magnitude 11 }
+#...........................................................
+
+wait { duration 10 }
+
+
+#-----------------------------------------------------------
+gotolonglat {time 5  distance 5e13  longitude 180  latitude 0}
+setvisibilitylimit { magnitude 11.3 }
+wait { duration 5 }
+#-----------------------------------------------------------
+gotolonglat {time 5  distance 1e14  longitude 180  latitude 0}
+setvisibilitylimit { magnitude 11.7 }
+wait { duration 5 }
+#-----------------------------------------------------------
+gotolonglat {time 5  distance 2e14  longitude 180  latitude 0}
+setvisibilitylimit { magnitude 11.7 }
+wait { duration 5 }
+#-----------------------------------------------------------
+
+
+
+
+#-----------------------------------------------------------
+#                     DESACELERACION
+#-----------------------------------------------------------
+timerate { rate 5000 }
+wait { duration 1 }
+timerate { rate 2500 }
+wait { duration 1 }
+timerate { rate 1200 }
+wait { duration 1 }
+timerate { rate 600 }
+wait { duration 1 }
+timerate { rate 300 }
+wait { duration 1 }
+timerate { rate 150 }
+wait { duration 1 }
+timerate { rate 75 }
+wait { duration 1 }
+timerate { rate 1 }
+wait { duration 3 }
+
+
+#-----------------------------------------------------------
+#                    R E G R E S O
+#-----------------------------------------------------------
+follow {}
+setvisibilitylimit { magnitude 7.0 }
+goto { time 10 distance 10 }
+
+
+#-----------------------------------------------------------
+#                        F I N
+#-----------------------------------------------------------
+wait { duration 9}
+
+print {text "Esperando que este Tour fue de su agrado..." row -4 column 1 duration 4.0}
+wait {duration 5.0}
+
+
+print {text "Este 'script' ahora a finalizado.\nPresione '!' para retornar al actual tiempo..." row -4 column 1 duration 4.0}
+wait {duration 5.0}
+
+
+}
+
+	

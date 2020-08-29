@@ -1,0 +1,366 @@
+{
+
+time { utc "2004-07-01T00:01:00" }
+labels { clear "planets|minorplanets|stars|constellations" }
+renderflags { clear "constellations|orbits" }
+timerate { rate 1 }
+
+wait { duration 4 }
+
+setvisibilitylimit { magnitude 0 }
+
+print { text "Extrasolar Planets Marks" row -12 column 15 duration 5}
+wait {duration 3}
+
+print { text "This script is public domain for noncommercial use" row -12 column 7 duration 5}
+wait {duration 3}
+
+
+print { text "Class 1 Ammonia clouds White clouds, brown hydrocarbon stains\nClass 2 Water clouds White clouds, sulphur stains\nClass 3 Cloudless Blue, sparse clouds near the polar regions\nClass 4 Sodium haze Dark, sparse silicate clouds at equator\nClass 5 Silicate clouds Bright silicate clouds above dark sodium haze" row -18 column 1 duration 10}
+
+wait {duration 10}
+
+print { text "Pink Marks -> Ammonia Jovians\nWhite Marks -> Water Jovians\nYellow Marks -> Warm Water Jovians\nBlue Marks -> Clarified Jovians\nDwelled Marks -> Sodium Haze Jovians\nGreen Marks -> Silicate Clouds Jovians\nRed Marks -> Brown Dwarf" row -18 column 10 duration 15}
+
+wait {duration 15}
+
+
+print { text "" row -12 column 14 duration 5}
+
+
+
+
+
+#-----------------------------------------------------------	
+
+set { name "StarStyle" value "scaleddiscs" }
+setvisibilitylimit { magnitude 9.5 }
+select { object "sol/earth" }
+center { time 7 }
+goto { time 5 distance 10 }
+renderflags {clear "markers"}
+wait { duration 5 }
+
+#-----------------------------------------------------------
+
+renderflags { clear "orbits" }
+
+gotolonglat {time 5  distance 20 longitude 180  latitude 0}
+wait { duration 3 }
+
+#...........................................................
+	
+wait { duration 3 }
+
+select { object "earth" }
+synchronous {}
+
+#...........................................................
+gotolonglat {time 10  distance 2.5e11  longitude 180  latitude 0}
+#...........................................................
+
+
+
+#-----------------------------------------------------------
+#                       01 Step
+#-----------------------------------------------------------
+
+wait { duration 2 }
+renderflags {set "markers"}
+timerate { rate 5000 }
+
+
+#-----------------------------------------------------------
+#                       Central Mark
+#-----------------------------------------------------------
+
+mark { object "sol/earth" size 16 color [ 1 1 1 ] symbol "x" } 
+
+#-----------------------------------------------------------
+#                       Ammonia
+#-----------------------------------------------------------
+
+mark { object "HD 114386/b" size 18 color [ 1 0.6 0.6 ] symbol "diamond" } 
+mark { object "HD 95128/c" size 18 color [ 1 0.6 0.6 ] symbol "diamond" } 
+mark { object "HD 145675/b" size 18 color [ 1 0.6 0.6 ] symbol "diamond" } 
+mark { object "HD 142022/b" size 18 color [ 1 0.6 0.6 ] symbol "diamond" } 
+mark { object "HD 39091/b" size 18 color [ 1 0.6 0.6 ] symbol "diamond" } 
+mark { object "HD 70642/b" size 18 color [ 1 0.6 0.6 ] symbol "diamond" } 
+mark { object "HD 33636/b" size 18 color [ 1 0.6 0.6 ] symbol "diamond" } 
+mark { object "HD 22049/c" size 18 color [ 1 0.6 0.6 ] symbol "diamond" } 
+mark { object "HD 117207/b" size 18 color [ 1 0.6 0.6 ] symbol "diamond" }
+mark { object "HD 30177/b" size 18 color [ 1 0.6 0.6 ] symbol "diamond" }
+mark { object "HD 89307/b" size 18 color [ 1 0.6 0.6 ] symbol "diamond" }
+mark { object "HD 72659/b" size 18 color [ 1 0.6 0.6 ] symbol "diamond" }
+mark { object "HD 75732/d" size 18 color [ 1 0.6 0.6 ] symbol "diamond" }
+mark { object "HD 217107/c" size 18 color [ 1 0.6 0.6 ] symbol "diamond" }
+mark { object "HD 160691/b" size 18 color [ 1 0.6 0.6 ] symbol "diamond" }
+mark { object "HD 160691/c" size 18 color [ 1 0.6 0.6 ] symbol "diamond" }
+mark { object "HD 190360/b" size 18 color [ 1 0.6 0.6 ] symbol "diamond" }
+mark { object "HD 37124/d" size 18 color [ 1 0.6 0.6 ] symbol "diamond" }
+mark { object "HD 128311/c" size 18 color [ 1 0.6 0.6 ] symbol "diamond" }
+
+#-----------------------------------------------------------
+#                       Water
+#-----------------------------------------------------------
+
+mark { object "Gliese 876/c" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "Gliese 876/b" size 15 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 9826/d" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 160691/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 11964/c" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 74156/c" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 216770/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 208487/c" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 93083/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 37124/c" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 82943/b" size 15 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 82943/c" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 169830/c" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 202206/c" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 12661/c" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 150706/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 92788/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 28185/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 142415/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 33564/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 177830/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 154857/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 4203/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 108874/c" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 128311/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 210277/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 188015/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 20367/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 114783/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 147513/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 222582/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 65216/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 183263/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 141937/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 41004/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 23079/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 186427/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 4208/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 45350/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 213240/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 10647/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 10697/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 95128/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 190228/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 114729/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 111232/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 2039/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 50554/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 196050/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 216437/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 216435/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 106252/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 23596/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+mark { object "HD 50499/b" size 16 color [ 1 1 1 ] symbol "diamond" }
+
+#-----------------------------------------------------------
+#                       Warm Water
+#-----------------------------------------------------------
+
+mark { object "HD 80606/b" size 14 color [ 1 1 0 ] symbol "diamond" }
+mark { object "HD 1237/b" size 14 color [ 1 1 0 ] symbol "diamond" }
+mark { object "HD 37124/b" size 14 color [ 1 1 0 ] symbol "diamond" }
+mark { object "HD 8574/b" size 14 color [ 1 1 0 ] symbol "diamond" }
+mark { object "HD 134987/b" size 14 color [ 1 1 0 ] symbol "diamond" }
+mark { object "HD 12661/b" size 14 color [ 1 1 0 ] symbol "diamond" }
+mark { object "HD 40979/b" size 14 color [ 1 1 0 ] symbol "diamond" }
+mark { object "HD 17051/b" size 14 color [ 1 1 0 ] symbol "diamond" }
+mark { object "HD 142/b" size 14 color [ 1 1 0 ] symbol "diamond" }
+mark { object "HD 196885/b" size 14 color [ 1 1 0 ] symbol "diamond" }
+mark { object "HD 27442/b" size 14 color [ 1 1 0 ] symbol "diamond" }
+mark { object "HD 19994/b" size 14 color [ 1 1 0 ] symbol "diamond" }
+mark { object "HD 222404/b" size 14 color [ 1 1 0 ] symbol "diamond" }
+
+#-----------------------------------------------------------
+#                       Clarified
+#-----------------------------------------------------------
+
+mark { object "HD 75732/c" size 12 color [ 0 0 1 ] symbol "diamond" }
+mark { object "HD 9826/c" size 12 color [ 0 0 1 ] symbol "diamond" }
+mark { object "HD 99492/b" size 12 color [ 0 0 1 ] symbol "diamond" }
+mark { object "HD 27894/b" size 12 color [ 0 0 1 ] symbol "diamond" }
+mark { object "HD 192263/b" size 12 color [ 0 0 1 ] symbol "diamond" }
+mark { object "HD 143761/b" size 12 color [ 0 0 1 ] symbol "diamond" }
+mark { object "HD 117618/b" size 12 color [ 0 0 1 ] symbol "diamond" }
+mark { object "HD 37605/b" size 12 color [ 0 0 1 ] symbol "diamond" }
+mark { object "HD 168443/b" size 12 color [ 0 0 1 ] symbol "diamond" }
+mark { object "HD 3651/b" size 12 color [ 0 0 1 ] symbol "diamond" }
+mark { object "HD 121504/b" size 12 color [ 0 0 1 ] symbol "diamond" }
+mark { object "HD 101930/b" size 12 color [ 0 0 1 ] symbol "diamond" }
+mark { object "HIP 94075/b" size 12 color [ 0 0 1 ] symbol "diamond" }
+mark { object "HD 16141/b" size 12 color [ 0 0 1 ] symbol "diamond" }
+mark { object "HD 117176/b" size 12 color [ 0 0 1 ] symbol "diamond" }
+mark { object "HD 52265/b" size 12 color [ 0 0 1 ] symbol "diamond" }
+mark { object "HD 208487/b" size 12 color [ 0 0 1 ] symbol "diamond" }
+mark { object "HD 34445/b" size 12 color [ 0 0 1 ] symbol "diamond" }
+mark { object "HD 73526/b" size 12 color [ 0 0 1 ] symbol "diamond" }
+mark { object "HD 169830/b" size 12 color [ 0 0 1 ] symbol "diamond" }
+mark { object "HD 89744/b" size 12 color [ 0 0 1 ] symbol "diamond" }
+mark { object "HD 11977/b" size 12 color [ 0 0 1 ] symbol "diamond" }
+
+#-----------------------------------------------------------
+#                       Warm Clarified
+#-----------------------------------------------------------
+
+mark { object "HD 75732/b" size 10 color [ 0 0 1 ] symbol "diamond" }
+mark { object "HD 130322/b" size 10 color [ 0 0 1 ] symbol "diamond" }
+mark { object "HD 108147/b" size 10 color [ 0 0 1 ] symbol "diamond" }
+mark { object "HD 13445/b" size 10 color [ 0 0 1 ] symbol "diamond" }
+mark { object "HD 195019/b" size 10 color [ 0 0 1 ] symbol "diamond" }
+mark { object "HD 102117/b" size 10 color [ 0 0 1 ] symbol "diamond" }
+mark { object "HD 6434/b" size 10 color [ 0 0 1 ] symbol "diamond" }
+mark { object "HD 11964/b" size 10 color [ 0 0 1 ] symbol "diamond" }
+mark { object "HD 74156/b" size 10 color [ 0 0 1 ] symbol "diamond" }
+mark { object "HD 104985/b" size 10 color [ 0 0 1 ] symbol "diamond" }
+mark { object "HD 59686/b" size 10 color [ 0 0 1 ] symbol "diamond" }
+mark { object "HD 137759/b" size 10 color [ 0 0 1 ] symbol "diamond" }
+mark { object "HD 47536/b" size 10 color [ 0 0 1 ] symbol "diamond" }
+
+#-----------------------------------------------------------
+#                         Sodium
+#-----------------------------------------------------------
+
+mark { object "OGLE-TR-113/b" size 8 color [ 1 0 1 ] symbol "diamond" }
+mark { object "HD 73256/b" size 8 color [ 1 0 1 ] symbol "diamond" }
+mark { object "HD 63454/b" size 8 color [ 1 0 1 ] symbol "diamond" }
+mark { object "HD 83443/b" size 8 color [ 1 0 1 ] symbol "diamond" }
+mark { object "HD 46375/b" size 8 color [ 1 0 1 ] symbol "diamond" }
+mark { object "TYC 2652-1324-1/TrES-1" size 8 color [ 1 0 1 ] symbol "diamond" }
+mark { object "HD 179949/b" size 8 color [ 1 0 1 ] symbol "diamond" }
+mark { object "HD 187123/b" size 8 color [ 1 0 1 ] symbol "diamond" }
+mark { object "OGLE-TR-10/b" size 8 color [ 1 0 1 ] symbol "diamond" }
+mark { object "HD 120136/b" size 8 color [ 1 0 1 ] symbol "diamond" }
+mark { object "HD 188753/b" size 8 color [ 1 0 1 ] symbol "diamond" }
+mark { object "HD 330075/b" size 8 color [ 1 0 1 ] symbol "diamond" }
+mark { object "HD 2638/b" size 8 color [ 1 0 1 ] symbol "diamond" }
+mark { object "TYC 5503-946-1/b" size 8 color [ 1 0 1 ] symbol "diamond" }
+mark { object "HD 75289/b" size 8 color [ 1 0 1 ] symbol "diamond" }
+mark { object "HD 209458/b" size 8 color [ 1 0 1 ] symbol "diamond" }
+mark { object "HD 76700/b" size 8 color [ 1 0 1 ] symbol "diamond" }
+mark { object "OGLE-TR-111/b" size 8 color [ 1 0 1 ] symbol "diamond" }
+mark { object "HD 149143/b" size 8 color [ 1 0 1 ] symbol "diamond" }
+mark { object "HD 217014/b" size 8 color [ 1 0 1 ] symbol "diamond" }
+mark { object "HD 9826/b" size 8 color [ 1 0 1 ] symbol "diamond" }
+mark { object "HD 49674/b" size 8 color [ 1 0 1 ] symbol "diamond" }
+mark { object "HD 109749/b" size 8 color [ 1 0 1 ] symbol "diamond" }
+mark { object "HD 118203/b" size 8 color [ 1 0 1 ] symbol "diamond" }
+mark { object "HD 68988/b" size 8 color [ 1 0 1 ] symbol "diamond" }
+mark { object "HD 168746/b" size 8 color [ 1 0 1 ] symbol "diamond" }
+mark { object "HD 217107/b" size 8 color [ 1 0 1 ] symbol "diamond" }
+mark { object "HD 38529/b" size 8 color [ 1 0 1 ] symbol "diamond" }
+mark { object "HD 219449/b" size 8 color [ 1 0 1 ] symbol "diamond" }
+
+#-----------------------------------------------------------
+#                         Silicate
+#-----------------------------------------------------------
+
+mark { object "OGLE-TR-56/b" size 8 color [ 0 1 0 ] symbol "diamond" }
+mark { object "OGLE-TR-132/b" size 8 color [ 0 1 0 ] symbol "diamond" }
+mark { object "HD 149026/b" size 8 color [ 0 1 0 ] symbol "diamond" }
+mark { object "HD 88133/b" size 8 color [ 0 1 0 ] symbol "diamond" }
+
+#-----------------------------------------------------------
+#                         Brown Dwarf
+#-----------------------------------------------------------
+
+mark { object "HD 38529/c" size 13 color [ 1 0 0 ] symbol "diamond" }
+mark { object "HD 168443/c" size 13 color [ 1 0 0 ] symbol "diamond" }
+mark { object "HD 114762/b" size 13 color [ 1 0 0 ] symbol "diamond" }
+mark { object "HD 202206/b" size 13 color [ 1 0 0 ] symbol "diamond" }
+mark { object "HD 8673/b" size 13 color [ 1 0 0 ] symbol "diamond" }
+mark { object "HD 136118/b" size 13 color [ 1 0 0 ] symbol "diamond" }
+mark { object "HD 162020/b" size 13 color [ 1 0 0 ] symbol "diamond" }
+
+#-----------------------------------------------------------
+#                         LDwarf
+#-----------------------------------------------------------
+
+mark { object "HD 13189/b" size 10 color [ 1 0 0 ] symbol "diamond" }
+
+
+#-----------------------------------------------------------
+wait { duration 5 }
+gotolonglat {time 10  distance 5.0e11  longitude 180  latitude 0}
+#-----------------------------------------------------------
+wait { duration 5 }
+gotolonglat {time 10  distance 7.5e11  longitude 180  latitude 0}
+#-----------------------------------------------------------
+wait { duration 10 }
+gotolonglat {time 10  distance 1.0e12  longitude 180  latitude 0}
+#-----------------------------------------------------------
+wait { duration 10 }
+gotolonglat {time 10  distance 5.0e12  longitude 180  latitude 0}
+#-----------------------------------------------------------
+wait { duration 10 }
+gotolonglat {time 10  distance 1.0e13  longitude 180  latitude 0}
+#-----------------------------------------------------------
+gotolonglat {time 10  distance 5e13  longitude 180  latitude 0}
+setvisibilitylimit { magnitude 11.3 }
+wait { duration 5 }
+#-----------------------------------------------------------
+gotolonglat {time 5  distance 1e14  longitude 180  latitude 0}
+setvisibilitylimit { magnitude 11.7 }
+wait { duration 5 }
+#-----------------------------------------------------------
+gotolonglat {time 5  distance 2e14  longitude 180  latitude 0}
+setvisibilitylimit { magnitude 11.7 }
+wait { duration 5 }
+#-----------------------------------------------------------
+
+
+
+
+
+#-----------------------------------------------------------
+#                     DESACELERACION
+#-----------------------------------------------------------
+timerate { rate 5000 }
+wait { duration 1 }
+timerate { rate 2500 }
+wait { duration 1 }
+timerate { rate 1200 }
+wait { duration 1 }
+timerate { rate 600 }
+wait { duration 1 }
+timerate { rate 300 }
+wait { duration 1 }
+timerate { rate 150 }
+wait { duration 1 }
+timerate { rate 75 }
+wait { duration 1 }
+timerate { rate 1 }
+wait { duration 3 }
+
+
+#-----------------------------------------------------------
+#                    R E G R E S O
+#-----------------------------------------------------------
+
+follow {}
+setvisibilitylimit { magnitude 7.0 }
+goto { time 10 distance 10 }
+
+
+#-----------------------------------------------------------
+#                        F I N
+#-----------------------------------------------------------
+wait { duration 9}
+
+print {text "We hope you have enjoyed this tour..." row -4 column 1 duration 4.0}
+wait {duration 5.0}
+
+
+print {text "The script is now finished.\nPress '!' to return to your current date and time..." row -4 column 1 duration 4.0}
+wait {duration 5.0}
+
+
+
+}
+
+	
