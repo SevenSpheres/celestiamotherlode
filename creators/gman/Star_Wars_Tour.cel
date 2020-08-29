@@ -1,0 +1,309 @@
+{
+print {text "Script written by Gary McNabb, Oct. 11th, 2005" row -5}
+wait { duration 6.0}
+select { object "Sol/Earth" }
+follow {}
+wait { duration 1 }
+center {}
+timerate {rate 500.0}
+goto { time 2 distance 8 upframe "ecliptical" }
+wait { duration 5 }
+print {text "Once Upon A Time," row -4 column 1 duration 4.0}
+wait { duration 6.0 }
+print {text "In A Galaxy Far Far Away ..." row -4 column 2 duration 4.0}
+wait {duration 5.0}
+#---------------------------------------------------------------------
+# start near the Protostar of Endor 
+wait { duration 0.5}
+time {jd 2451545.711}
+select { object "Rho Crb" }
+center {}
+wait { duration 1.0 }
+print {text "There Was Evil Luking Around This Star!" row -5}
+goto { time 2 distance 10 upframe "ecliptical" }
+wait { duration 6.0 }
+# set Celestia to a known state
+set { name "AmbientLightLevel" value 0.4 }
+set { name "FOV" value 45.0 }
+renderflags { 
+  clear "orbits|constellations|galaxies|pointstars|boundaries"
+  set   "planets|stars|moons" }
+labels {
+  clear "stars|asteroids|constellations|galaxies"
+  set   "planets|moons"
+}
+setvisibilitylimit { magnitude 6.5 }
+preloadtex { object "Rho Crb/Endor" }
+select { object "Rho Crb/Endor" } 
+follow {}
+wait { duration 1.0 }
+center {}
+wait { duration 1.0 }
+timerate {rate 500.0}
+# travel to Endor 
+goto { time 5 distance 15 }
+wait {duration 5}
+print {text "Welcome to Endor, Can You See the Death Star!" row -5}
+goto { time 2 distance 15 upframe "ecliptical" }
+wait { duration 4 }
+select { object "Rho Crb/Endor/Death Star" } 
+synchronous { }
+wait { duration 1.0 }
+center {}
+wait { duration 5.0 }
+timerate {rate 500.0}
+# travel to Endor/Death Star 
+goto { time 5 distance 15 }
+wait {duration 5 }
+print {text "Home Of The Emperor" row -5}
+goto { time 2 distance 10 upframe "ecliptical" }
+wait { duration 3 }
+orbit  { axis [ 0 1 0 ]
+         rate 30
+         duration 4 }
+print {text "X-Wing Fighter" row -5}
+wait { duration 4.0 }
+select { object "Rho Crb/Endor/Death Star/X-Wing" } 
+follow { }
+wait { duration 1.0 }
+center {}
+wait { duration 5.0 }
+timerate {rate 500.0}
+# travel to Endor/Death Star/X-Wing 
+goto { time 5 distance 8 }
+wait {duration 5}
+timerate {rate 1000.0}
+print { text "Can You See R2-D2 Right Behind The Cockpit?" row -5}
+wait { duration 4.0 }
+goto { time 2 distance 8 upframe "ecliptical" }
+wait { duration 12 }
+print {text "Let's Check Out His Dad's Ride Now" row -5}
+wait { duration 6 }
+select { object "Rho Crb/Endor/Death Star/Vader's Tie" } 
+follow { }
+wait { duration 1.0 }
+center {}
+wait { duration 5.0 }
+timerate {rate 500.0}
+# travel to Endor/Death Star/Vader's Tie 
+print {text "Luke, I Am Your Father!" row -5}
+goto { time 5 distance 15 }
+wait {duration 12}
+select { object "Rho Crb/Endor" } 
+follow {}
+wait { duration 1.0 }
+center {}
+wait { duration 1.0 }
+timerate {rate 500.0}
+# travel to Endor 
+print {text "Let's Take A Look At Some Other Spacecraft!" row -5}
+goto { time 5 distance 8 }
+wait {duration 1 }
+orbit  { axis [ 0 1 0 ]
+         rate 30
+         duration 6 }
+select { object "Rho Crb/Endor/A-Wing" } 
+follow { }
+wait { duration 1.0 }
+center {}
+wait { duration 1.0 }
+timerate {rate 500.0}
+# travel to Endor/A-Wing 
+goto { time 5 distance 15 }
+print {text "A-Wing" row -5}
+wait {duration 10}
+goto { time 2 distance 7 upframe "ecliptical" }
+wait { duration 15 }
+print {text "B-Wing" row -5}
+select { object "Rho Crb/Endor/B-Wing" } 
+follow { }
+wait { duration 1.0 }
+center {}
+wait { duration 1.0 }
+timerate {rate 500.0}
+# travel to Endor/B-Wing
+goto { time 5 distance 15 }
+wait {duration 10}
+goto { time 2 distance 7 upframe "ecliptical" }
+wait { duration 15 }
+print {text "Nebulon B" row -5}
+select { object "Rho Crb/Endor/Nebulon B" } 
+follow { }
+wait { duration 1.0 }
+center {}
+wait { duration 1.0 }
+timerate {rate 500.0}
+# travel to Endor/Nebulon B 
+goto { time 5 distance 4 }
+wait {duration 10 }
+goto { time 2 distance 4 upframe "ecliptical" }
+wait { duration 15}
+orbit  { axis [ 0 1 0 ]
+         rate 30
+         duration 6 }
+print {text "Tie Fighter" row -5}
+select { object "Rho Crb/Endor/Tie Fighter" } 
+follow { }
+wait { duration 1.0 }
+center {}
+wait { duration 1.0 }
+timerate {rate 500.0}
+# travel to Endor/Tie Fighter 
+goto { time 5 distance 10 }
+wait {duration 4}
+goto { time 2 distance 10 upframe "ecliptical" }
+wait { duration 15 }
+print {text "Shuttle Tyderium" row -5}
+select { object "Rho Crb/Endor/Shuttle Tyderium" } 
+follow { }
+wait { duration 1.0 }
+center {}
+wait { duration 1.0 }
+timerate {rate 500.0}
+# travel to Endor/Shuttle Tyderium 
+goto { time 5 distance 10 }
+wait {duration 5}
+goto { time 2 distance 10 upframe "ecliptical" }
+wait { duration 15}
+print {text "Star Destroyer2" row -5}
+select { object "Rho Crb/Endor/Star Destroyer2" } 
+follow { }
+wait { duration 1.0 }
+center {}
+wait { duration 1.0 }
+timerate {rate 500.0}
+# travel to Endor/Star Destroyer2
+goto { time 5 distance 15 }
+wait {duration 15}
+goto { time 2 distance 7 upframe "ecliptical" }
+wait { duration 15 }
+print {text "Off to Tatooine, Another Planet of Rho Crb" row -5}
+wait { duration 5 }
+select { object "Rho Crb/Tatooine" } 
+follow {}
+wait { duration 1.0 }
+center {}
+wait { duration 1.0 }
+timerate {rate 500.0}
+# travel to Tatooine 
+goto { time 5 distance 8 }
+wait {duration 5}
+print {text "Welcome to Tatooine, Luke's Home Planet!" row -5}
+goto { time 2 distance 10 upframe "ecliptical" }
+wait { duration 9 }
+orbit  { axis [ 0 1 0 ]
+         rate 30
+         duration 5 }
+print {text "Let's Check Out General Han Solo's Millenium Falcon" row -5}
+wait { duration 4 }
+select { object "Rho Crb/Tatooine/Millenium Falcon" } 
+follow { }
+wait { duration 1.0 }
+center {}
+wait { duration 1.0 }
+timerate {rate 10.0}
+# travel to Tatooine/Millenium Falcon 
+goto { time 5 distance 6 }
+wait {duration 10 }
+goto { time 2 distance 6 upframe "ecliptical" }
+wait { duration 15}
+rotate { duration 5
+         rate 10
+         axis [0 0 1] }
+wait   { duration 5 }
+select { object "Rho Crb/Tatooine" } 
+follow {}
+wait { duration 1.0 }
+print {text "Let's Zoom Out To See If We Can Find The Republic Cruiser" row -5}
+center {}
+wait { duration 1.0 }
+timerate {rate 500.0}
+# travel to Tatooine 
+goto { time 5 distance 8 }
+wait {duration 5}
+orbit  { axis [ 0 1 0 ]
+         rate 30
+         duration 12 }
+print {text "Republic Cruiser" row -5}
+wait { duration 4 }
+select { object "Rho Crb/Tatooine/Republic Cruiser" } 
+synchronous { }
+wait { duration 1.0 }
+center {}
+wait { duration 1.0 }
+timerate {rate 500.0}
+# travel to Tatooine/Republic Cruiser 
+goto { time 5 distance 6 }
+wait {duration 10 }
+goto { time 2 distance 6 upframe "ecliptical" }
+wait { duration 15}
+orbit  { axis [ 0 1 0 ]
+         rate 30
+         duration 12 }
+select { object "Rho Crb/Tatooine" } 
+follow {}
+wait { duration 1.0 }
+center {}
+wait { duration 1.0 }
+print {text "O.K. Let's Locate The Corvette Spacecraft" row -5}
+wait { duration 4 }
+timerate {rate 500.0}
+# travel to Tatooine 
+goto { time 5 distance 5 }
+wait { duration 4 }
+orbit  { axis [ 0 1 0 ]
+         rate 30
+         duration 3 }
+print {text "Corvette" row -5}
+wait { duration 4 }
+select { object "Rho Crb/Tatooine/Corvette" } 
+follow { }
+wait { duration 1.0 }
+center {}
+wait { duration 1.0 }
+timerate {rate 500.0}
+# travel to Tatooine/Corvette
+goto { time 5 distance 6 }
+wait {duration 10 }
+goto { time 2 distance 6 upframe "ecliptical" }
+wait { duration 15}
+select { object "Rho Crb/Tatooine" } 
+follow {}
+wait { duration 1.0 }
+center {}
+wait { duration 1.0 }
+timerate {rate 500.0}
+# travel to Tatooine 
+goto { time 5 distance 8 }
+wait {duration 5}
+print {text "Off  To Coruscant" row -5}
+wait { duration 4 }
+orbit  { axis [ 0 1 0 ]
+         rate 30
+         duration 6 }
+print {text "Coruscant" row -5}
+wait { duration 4 }
+select { object "Rho Crb/Coruscant" } 
+synchronous { }
+wait { duration 1.0 }
+center {}
+wait { duration 1.0 }
+timerate {rate 500.0}
+# travel to Rho Crb/Coruscant
+goto { time 5 distance 6 }
+wait {duration 10 }
+goto { time 2 distance 6 upframe "ecliptical" }
+wait { duration 15}
+#------------------------------------------------------------------
+# End the tour. 
+#------------------------------------------------------------------
+print {text "I hope you have enjoyed this tour!" row -4 column 1 duration 4.0}
+wait {duration 5.0}
+print {text "May The Force Be With You" row -4 column 1 duration 4.0}
+wait {duration 5.0}
+print {text "I Dedicate This Script To My Loving Family!" row -4 column 1 duration 4.0}
+wait {duration 10.0}
+timerate {rate 1.0}
+print {text "This script is finished... Press '!'\nkey to return to your date and time." row -4 column 1 duration 4.0}
+renderflags {clear "markers"}
+}
