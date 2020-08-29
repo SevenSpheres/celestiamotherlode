@@ -1,0 +1,12 @@
+The following files were removed as they are too big to upload to GitHub:
+- Activity1&2-161.zip
+- Activity10-161.zip
+- Activity3-161.zip
+- Activity3E-161.zip
+- Activity5-161.zip
+- Activity6-161.zip
+- Activity8-161.zip
+- Activity9-161.zip
+- CEA-161-WIN_setup.exe
+- Educational_Base_Package.zip
+- WoC-161.zip

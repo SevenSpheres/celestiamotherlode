@@ -1,0 +1,11 @@
+The following files were removed as they are too big to upload to GitHub:
+- Activity1&2-161.zip
+- Activity10-161.zip
+- Activity3-161.zip
+- Activity5-161.zip
+- Activity6-161.zip
+- Activity8-161.zip
+- Activity9-161.zip
+- Celestia161-ED-WIN_setup.zip
+- WoC-161.zip
+- WoC-161.zip_old
