@@ -1,0 +1,331 @@
+{
+#****************************************************************************
+#*                                                                          *
+#*    Introduction to the Celestia Educational Tour of our Solar System     *
+#*                                                                          *
+#****************************************************************************
+#* Designed by Frank Gregorio                                               *
+#* Written by Don Goyette                                                   *
+#* Velocity vector calculations by Harald Schmidt                           *
+#*                                                                          *
+#* This is a script for use with Celestia version 1.3.1 and up.             *
+#*                                                                          *
+#* Version: 1.0                                                             *
+#*    Date: Jan 30, 2004                                                    *
+#*                                                                          *
+#****************************************************************************
+
+
+#----------------------------------------------------------------------------
+#                     Set Celestia to a "known state"
+#----------------------------------------------------------------------------
+
+# Cancel follow and goto commands, and set Coordinate System to Universal...
+  cancel { }
+
+# Do not render the following objects...
+  renderflags { clear "boundaries|comettails|constellations|eclipseshadows" }
+  renderflags { clear "markers|orbits|pointstars|ringshadowscloudmaps|nightmaps" }
+  renderflags { clear ""atmospheres"|automag|grid" }
+
+# Render the following objects...
+  renderflags { set "galaxies|planets|stars" }
+
+# Do not label the following objects...
+  labels { clear "planets|moons|spacecraft|asteroids|constellations" }
+  labels { clear "stars|galaxies" }
+
+# Unmark any objects that are currently Marked and disable Marker display...
+  unmarkall { }
+
+# Set Minimum Orbit Size...
+  set { name "MinOrbitSize" value 1.0 }
+
+# Set Ambient Light Level...
+  set { name "AmbientLightLevel" value 0.10 }
+
+# Set Star Distance Limit...
+  set { name "StarDistanceLimit" value 1000000 }
+
+# Set visible star Magnitude...
+  setvisibilitylimit { magnitude 9.50 }
+
+# Set Faintest Auto-Magnitude Brightness...
+  setfaintestautomag45deg { magnitude 9.50 }
+
+
+#----------------------------------------------------------------------------
+#                            Begin the script
+#----------------------------------------------------------------------------
+
+# Go to a position 200 ly from Sol ...
+
+  seturl { url "cel://Follow/Sol/2003-12-27T13:36:11.94781?x=AAAAAEDpwsWUhfT7/////w&y=CkxgAKBCOkQFIBIC&z=VcpQAACchFReAAD1/////w&ow=0.174547&ox=0.014574&oy=0.980768&oz=0.086108&select=Sol&fov=31.999994&ts=1.000000&ltd=0&rf=40887&lm=49152" }
+
+
+#----------------------------------------------------------------------------
+# Display some introduction text ...
+#----------------------------------------------------------------------------
+  print  { text "Raumschiff Celestia 1 ist bereit ..."
+           row -7  column 1  duration 20 }
+  wait   { duration 24 }
+  
+  print  { text "Willkommen ...\nzur Celestia Entdeckungs-Tour\nunseres Sonnensytems."
+           row -7  column 1  duration 9 }
+  wait   { duration 10 }
+
+  print  { text "Fuer eine bessere Betrachtung,\ndruecke die 'v' Taste bis die gesamten Texte\naus der Anzeige des Bildschirms verschwinden ..."
+           row -7  column 1  duration 8 }
+  wait   { duration 8 }
+
+  print  { text "Wir empfehlen auch, die Anzeige des Fensters zu maximieren\nindem Du auf das kleine Quadrat in der oberen rechten Ecke klickst"
+           row -7  column 1  duration 8 }
+  wait   { duration 10 }
+
+  print  { text "Das Universum ist ein riesiger, endloser Raum."
+           row -7  column 1  duration 7 }
+  wait   { duration 10 }
+  
+  print  { text "Unsere Sonne, unsere Erde, und unser gesamtes\nSonnensystem sind nur ein winziger Teil davon."
+           row -7  column 1  duration 10 }
+  wait   { duration 10 }
+  
+  print  { text "Unsere Sonne ist da draussen ...\nirgendwo ...\nverloren zwischen den Sternen."
+           row -7  column 1  duration 5 }
+  wait   { duration 5 }
+
+#----------------------------------------------------------------------------
+# Rotate 360 degrees from right to left ...
+#----------------------------------------------------------------------------
+  rotate { duration 10  rate -12  axis [0 1 0] }
+
+  print  { text "Kannst Du sie finden?"
+           row -7  column 1  duration 8 }
+  rotate { duration 10  rate -12  axis [0 1 0] }
+
+  print  { text "Wie die beruehmte Stecknadelim Heuhaufen...."
+           row -7  column 1 duration 9 }
+  rotate { duration 10  rate -12  axis [0 1 0] }
+
+
+#----------------------------------------------------------------------------
+# Place a marker on Sol ...
+#----------------------------------------------------------------------------
+  print  { text "Wir helfen Dir, unser Sonnensystem zu lokalisieren,\nindem wir seine Position mit einem roten Quadrat markieren."
+           row -7  column 1  duration 10 }
+  wait   { duration 07 }
+
+  unmark { object "Sol" }
+  mark   { object "Sol"
+           size 10
+           color [1 0 0]
+           symbol "square" }
+
+  renderflags { set "markers" }
+  wait   { duration 0.5 }
+  renderflags { clear "markers" }
+  wait   { duration 0.5 }
+  renderflags { set "markers" }
+  wait   { duration 0.5 }
+  renderflags { clear "markers" }
+  wait   { duration 0.5 }
+  renderflags { set "markers" }
+  
+  wait   { duration 4 }
+
+  print  { text "Unser Sonnensystem ist 200 Lichtjahre entfernt ...\nNur ein winziger Punkt im roten Kasten.\nEin Lichtstrahl wuerde 200 Jahre bis dort brauchen!"
+           row -7  column 1  duration 14 }
+  wait   { duration 12 }
+
+  print  { text "Moechtest Du mit Hyperlichtgeschwindigkeit dort hinfliegen?\n(schneller als das Licht?)"
+           row -7  column 1  duration 8 }
+  wait   { duration 5 }
+
+  print  { text "Nun denn!\n\nBist Du bereit?"
+           row -7  column 1  duration 7 }
+  wait   { duration 7 }
+
+
+#----------------------------------------------------------------------------
+# Remove the marker from Sol and begin traveling ...
+#----------------------------------------------------------------------------
+  renderflags { clear "markers" }
+
+  move { duration 3
+         velocity [ 9636479844747.75  -4933270574006.7  26205292581481.5 ] }
+
+  print { text "Unsere Reisegeschwindigkeit:\n3 Lichtjahre pro SEKUNDE.\n95 MILLIONEN mal schneller als das Licht\n(oder 102,173,000,000,000,000 km/h)"
+          row -7  column 1  duration 13 }
+
+  move { duration 13
+         velocity [ 9636479844747.75  -4933270574006.7  26205292581481.5 ] }
+
+
+#----------------------------------------------------------------------------
+# Turn Star labels ON
+#----------------------------------------------------------------------------
+  labels { set "stars" }
+
+  move { duration 4
+         velocity [ 9636479844747.75  -4933270574006.7  26205292581481.5 ] }
+
+  print { text "Selbst bei diesem Wahnsinnstempo\nwirkt es sehr langsam,nicht wahr?"
+          row -7  column 1  duration 6 }
+  move { duration 8
+         velocity [ 9636479844747.75  -4933270574006.7  26205292581481.5 ] }
+
+  print { text "Es liegt daran, das das All(Universum), \nS-E-H-R G-R-O-S-S ist."
+          row -7  column 1  duration 7.5 }
+  move { duration 8
+         velocity [ 9636479844747.75  -4933270574006.7  26205292581481.5 ] }
+
+  print { text "Wir reisen nur 200 Lichtjahre weit,\naber das 'sichtbare' Universum ist\na unvorstellbare 180 BILLIONEN Lichtjahre gross!"
+          row -7  column 1  duration 8 }
+  move { duration 12
+         velocity [ 9636479844747.75  -4933270574006.7  26205292581481.5 ] }
+
+  print { text "Da ist ein Stern vorraus ...\nNein ... nicht unsere Sonne.\nEs ist Castor,ein Doppel- oder Zwillingsstern.\nWir sind noch 56 Lichtjahre von unserer Sonne entfernt."
+          row -7  column 1  duration 10 }
+  wait { duration 08 }
+
+
+#----------------------------------------------------------------------------
+# Castor fly-by
+#----------------------------------------------------------------------------
+  move {  duration 3.8
+          velocity [ 4818239922373.875  -2466635287003.35  13102646290740.75 ] }
+
+
+#----------------------------------------------------------------------------
+# Continue our travels ... Display a marker on Sol
+#----------------------------------------------------------------------------
+  unmark { object "Sol" }
+  mark   { object "Sol"
+           size 10
+           color [1 0 0]
+           symbol "square" }
+
+  print { text "Die Sonne ist unser Ziel ..."  row -7  column 1  duration 5 }
+
+  renderflags { set "markers" }
+  move { duration 2.2
+         velocity [ 9636479844747.75  -4933270574006.7  26205292581481.5 ] }
+  renderflags { clear "markers" }
+
+  move { duration 1
+         velocity [ 9636479844747.75  -4933270574006.7  26205292581481.5 ] }
+
+  renderflags { set "markers" }
+  move { duration 1
+         velocity [ 9636479844747.75  -4933270574006.7  26205292581481.5 ] }
+  renderflags { clear "markers" }
+
+  move { duration 1
+         velocity [ 9636479844747.75  -4933270574006.7  26205292581481.5 ] }
+
+  renderflags { set "markers" }
+  move { duration 1
+         velocity [ 9636479844747.75  -4933270574006.7  26205292581481.5 ] }
+  renderflags { clear "markers" }
+
+  move { duration 6.3
+         velocity [ 9636479844747.75  -4933270574006.7  26205292581481.5 ] }
+
+
+#----------------------------------------------------------------------------
+# Turn Star labels OFF
+#----------------------------------------------------------------------------
+  labels { clear "stars" }
+
+  print { text "Wir sind fast da!"
+          row -7  column 1  duration 3 }
+  move { duration 4
+         velocity [ 9636479844747.75  -4933270574006.7  26205292581481.5 ] }
+
+  changedistance { duration 15 rate -0.3 }
+
+
+#----------------------------------------------------------------------------
+# Turn ON planet labels
+#----------------------------------------------------------------------------
+  labels { set "planets" }
+  changedistance { duration 5 rate -0.3 }
+
+
+#----------------------------------------------------------------------------
+# Solar System is in view with planet orbits displayed
+#----------------------------------------------------------------------------
+  print { text "Unser Sonnensytem ... endlich!\nDie Umlaufbahnen der Planeten (ihr Orbit)\nsind blau gekennzeichnet."
+          row -6  column 1  duration 10 }
+  wait   { duration 10 }
+
+
+#----------------------------------------------------------------------------
+# Speed up time
+#----------------------------------------------------------------------------
+  print { text "Wenn wir die Zeit beschleunigen, kannst Du sehen\nwie die Planeten die Sonne umkreisen ..."
+          row -6  column 1  duration 12 }
+  timerate { rate 10000000 }
+  wait   { duration 10 }
+
+  print { text "Beobachte Plutos Bahn, dem aeussersten PLaneten,\nsie kippt im Vergleich zu denen der anderen Planeten."
+          row -6  column 1  duration 7 }
+  wait   { duration 6 }
+
+  changedistance { duration 9 rate -0.13 }
+
+
+#----------------------------------------------------------------------------
+# Slow down time
+#----------------------------------------------------------------------------
+  timerate { rate 1000000 }
+  changedistance { duration 14 rate -0.09 }
+
+
+#----------------------------------------------------------------------------
+# Slow down time some more
+#----------------------------------------------------------------------------
+  timerate { rate 100000 }
+
+  print { text "Endlich sehen wir unsere Sonne!"
+          row -6  column 1  duration 7 }
+
+
+#----------------------------------------------------------------------------
+# Turn OFF orbits and planet labels
+#----------------------------------------------------------------------------
+  changedistance { duration 22 rate -0.16 }
+  renderflags { clear "orbits" }
+  labels { clear "planets" }
+  timerate { rate 100000 }
+
+  changedistance { duration 16 rate -0.16 }
+  timerate { rate 10000 }
+
+  print { text "Wir haben die Sonne erreicht,\nder Beginn unserer Reise\ndurch das Sonnensystem." row -6  column 1  duration 10 }
+  wait   { duration 08 }
+
+
+#----------------------------------------------------------------------------
+# Set time to beginning of Activity
+#----------------------------------------------------------------------------
+  timerate { rate 10000 }
+
+
+#----------------------------------------------------------------------------
+# End of Script - Let the user know the script is done running ...
+#----------------------------------------------------------------------------
+  wait   { duration 3 }
+
+  print  { text "Nun kannst Du wieder die 'v' Taste druecken \num die Texte\nwieder einzuschalten ..."
+           row -7  column 1  duration 10 }
+  wait   { duration 10 }
+  timerate { rate 1 }
+
+  print  { text "Als naechstes starte bitte die ´Solar System Tour´."
+           row -3
+           column 1
+           duration 5 }
+  wait   { duration 5 }
+
+}
