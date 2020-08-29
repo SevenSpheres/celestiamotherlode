@@ -1,0 +1,5 @@
+The following files were removed as they are too big to upload to GitHub:
+- MOONNORMAL_LOLA_LEVEL4.zip
+- MOONNORMAL_LOLA_LEVEL5.zip
+- MOONTOPO_LOLA_LEVEL4.zip
+- MOONTOPO_LOLA_LEVEL5.zip
