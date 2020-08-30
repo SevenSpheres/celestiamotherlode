@@ -1,0 +1,7 @@
+The following files were removed as they are too big to upload to GitHub:
+- Bajor-B'hava'elFin.zip
+- CardassiaV3.zip
+- MedSys04v2.zip
+- MedSys05v2.zip
+- SiriusV4.zip
+- SolVol1v3.zip
