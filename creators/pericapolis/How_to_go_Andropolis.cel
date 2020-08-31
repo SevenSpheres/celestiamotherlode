@@ -1,0 +1,17 @@
+{
+#Use this file like a Celestia script
+# This script will take you to the Andropolis system
+#------------------------------------------------------------
+
+
+
+wait   {duration 2.0}
+
+select {object "HIP 26876"}
+center { time 1.5 }
+follow {}
+wait   {duration 4.0}
+gotolonglat   {time 5.0  distance 16.0  up [ 0 1 0 ]  longitude 0  latitude 0}
+wait   {duration 16.0}
+orbit {axis [0 -1 0] rate 30 duration 10.5}
+}
