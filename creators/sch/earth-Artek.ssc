@@ -1,0 +1,129 @@
+# International Children Centr "Artek" labels (Krimea, Ukraine)
+# 
+# Processed 2005-10-21 
+# by Alexandr Thernyshow sch@mgul.ac.ru
+#
+# Installation:
+# Just copy this file into you extras folder
+#
+# Recommended use with my Addons
+# Krimea_L5-7
+# Krimea_L8
+# Krimea_L9
+# Artek_L10
+#
+# Artek_L11, Artek_L12 (vt dds)
+# or
+# Artek_L11-12 (vt jpg)
+# ------------------------------------------------------ 
+
+
+Location "Adalary" "Sol/Earth"
+{
+#LongLat [ 34.2967 44.5414 0 ]
+LongLat [ 34.2997 44.5394 0 ]
+Importance   1
+Type "XX"
+}
+
+Location "Sultanka" "Sol/Earth"
+{
+LongLat [ 34.2990 44.5420 0 ]
+Importance   1
+Type "XX"
+}
+
+Location "Genues Rock" "Sol/Earth"
+{
+LongLat [ 34.2868 44.5395 0 ]
+Importance   1
+Type "XX"
+}
+
+Location "Ayu-Dag" "Sol/Earth"
+{
+LongLat [ 34.3383 44.5559 0 ]
+Importance   5
+Type "MO"
+}
+
+Location "Gurzuf" "Sol/Earth"
+{
+LongLat [ 34.2783 44.5397 0 ]
+Importance   2
+Type "City"
+}
+
+Location "Artek" "Sol/Earth"
+{
+LongLat [ 34.3145 44.5525 0 ]
+Importance   2
+Type "City"
+}
+
+Location "Artek Pribregnyj" "Sol/Earth"
+{
+LongLat [ 34.3046 44.5512 0 ]
+Importance   0.5
+Type "XX"
+}
+
+Location "Artek Lazurnyj" "Sol/Earth"
+{
+LongLat [ 34.2980 44.5445 0 ]
+Importance   0.5
+Type "XX"
+}
+
+Location "Artek Kiparisnyj" "Sol/Earth"
+{
+LongLat [ 34.2888 44.5419 0 ]
+Importance   0.5
+Type "XX"
+}
+
+Location "Artek Morskoj" "Sol/Earth"
+{
+LongLat [ 34.3140 44.5515 0 ]
+Importance   0.5
+Type "XX"
+}
+
+Location "Artek Gornyj" "Sol/Earth"
+{
+LongLat [ 34.3152 44.5552 0 ]
+Importance   0.5
+Type "XX"
+}
+
+Location "Port" "Sol/Earth"
+{
+LongLat [ 34.3064 44.5478 0 ]
+Importance   0.5
+Type "XX"
+}
+
+Location "Stadium" "Sol/Earth"
+{
+LongLat [ 34.3088 44.5555 0 ]
+Importance   0.5
+Type "XX"
+}
+
+Location "Old School" "Sol/Earth"
+{
+LongLat [ 34.3065 44.5565 0 ]
+Importance   0.5
+Type "XX"
+}
+
+Location "New School" "Sol/Earth"
+{
+LongLat [ 34.3159 44.5568 0 ]
+Importance   0.5
+Type "XX"
+}
+
+
+#Суук-Су (дворец) 44.5509620 34.2975015
+#Генуэзская скала 44.5423842 34.2837770
