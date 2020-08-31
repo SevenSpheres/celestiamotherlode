@@ -1,0 +1,87 @@
+function visit(object, pronunciation, meaning, constellation)
+  flyby(object)
+  info = object:getinfo()
+  summary = "Welcome to " .. object:name() .. " (" .. constellation .. ")"
+				.. "\nCatalog ID: " .. info["catalogNumber"]
+				.. "\n\nOriginal Arabic: " .. pronunciation 
+				.. "\nMeaning: " .. meaning 
+				.. "\n\nRadius: " .. object:radius() 
+				.. "\nRotation Period: " .. info["rotationPeriod"]
+				.. "\nSpectral Type: " .. object:spectraltype() 
+				.. "\nTemperature: " .. info["temperature"]
+				.. "\nAbsolute Magnitude: " .. object:absmag()
+				.. "\nBolometric Magnitude: " .. info["bolometricMagnitude"]
+				.. "\nLuminosity: " .. info["luminosity"]
+  waitForKey(summary)
+end
+
+function focusOn(object)
+  observer:track(nil)
+  observer:synchronous(object)
+  wait(0.1)
+  observer:center(object, 0.1)
+  wait(0.1)
+  observer:track(object)
+  wait(0.1)
+end
+
+function flyby(object)
+  -- go to within 6 radii of the object
+  orbit_distance_factor = 15
+  orbit_distance = orbit_distance_factor * object:radius()
+  observer:gotolonglat(object, 0, 0, orbit_distance, 5)
+  wait(5)
+
+  -- enter synchronous orbit
+  observer:synchronous(object)
+end
+
+function waitForKey(message)
+  local ends = {"\n\n- Press Any Key to Continue -","\n\n\\ Press Any Key to Continue \\","\n\n| Press Any Key to Continue |","\n\n/ Press Any Key to Continue /"}
+  celestia:print(message, 5, -1, 1, 0, -5)
+  paused = true;
+  celestia_keyboard_callback = unpause
+  celestia:requestkeyboard(true)
+  local index = 0
+  while paused do
+    for i,v in ipairs(ends) do
+      if not paused then
+        break
+      end
+      celestia:print(message .. v, 5, -1, 1, 0, -5)
+      wait(0.1)
+    end
+  end
+end
+
+function unpause()
+  celestia:print("", 0.1)
+  celestia:requestkeyboard(false)
+  paused = false
+end
+
+-- Create a list of stars to tour
+stars = { celestia:find("altair"), celestia:find("deneb"), celestia:find("vega"), celestia:find("rasalas"), celestia:find("betelgeuse"), celestia:find("rigel"), celestia:find("algenib"), celestia:find("algol"), celestia:find("dubhe"), celestia:find("fomalhaut"), celestia:find("rukbat") }
+pronunciations = {"al-nasr al-ta'ir", "dhanab al-jady", "al-nasr al-waqi", "ra's al-asad", "bat al-jauza/yad al-jauza", "rijl al-jauza", "al-janb", "ra's al-ghul", "al-dubb", "fam al-hut al-janubi", "rukbat al-rami" }
+meanings = {"The flying eagle", "The kid's tail", "The swooping eagle (or vulture)", "The lion's head", "The armpit/hand of Orion", "The foot of Orion", "The side", "The demon's head", "The bear", "The mouth of the southern fish", "The archer's knee" }
+constellations = {"Aquila", "Cygnus", "Lyra", "Leo", "Orion", "Orion", "Pegasus", "Perseus", "Ursa Major", "Piscis Austrinus", "sagittarius"}
+greek_letters = {"alpha", "alpha", "alpha", "mu", "alpha", "beta", "gamma", "beta", "alpha", "alpha", "alpha"}
+
+-- Configure display
+celestia:show("constellations")
+celestia:hide("orbits")
+observer = celestia:getobserver()
+home = celestia:find("Earth")
+wait(1)
+
+-- Visit each object in our tour list
+for i,v in ipairs(stars) do
+  focusOn(v)
+  observer:goto(home, 5)
+  waitForKey("This is the constellation " .. constellations[i])
+  celestia:print("We're on our way to " .. v:name(), 10)
+  celestia:settimescale(1000)
+  visit(v, pronunciations[i], meanings[i], greek_letters[i] .. " " .. constellations[i])
+  celestia:settimescale(1)
+end
+
