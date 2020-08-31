@@ -1,0 +1,697 @@
+--[[
+
+  Planetarium Script based on one of Ulrich Dickman's tips
+  using -  
+
+  show-azimuth-elevation.celx (v1.2)
+  
+  Celestia-script showing Azimuth and Elevation and RA/Dec.
+  by Harald Schmidt
+  http://www.h-schmidt.net/celestia/
+
+  This script was modified by Nicholas Lordi (lordi@bytheshore.com)
+  to allow positioning of an observer on Earth's surface at 
+  user-entered longitudes and latitudes, as well as entry of object
+  specific right ascensions and declinations.
+
+  Don Goyette's getUserInput (vs 1.0) and Celx 
+  Cleanup Functions (vs 1.2) have also been incorporated in the script. 
+  
+--]]
+
+
+
+-- useful constants:
+
+userKeypress = ""  -- Used with keyboard entry
+
+LOOK = celestia:newvector(0,0,-1)
+UP = celestia:newposition(0,1,0)
+UPV = celestia:newvector(0,1,0)
+EARTH = celestia:find("Sol/Earth")
+
+-- initializtion parameters:
+
+userLongitude = -74
+userLatitude = 40
+curLongitude = userLongitude
+curLatitude = userLatitude
+initAzimuth = 0
+initElevation = 45
+flag = 0
+
+
+ function getChar(char)
+    userKeypress = char
+    return true  -- Tell Celestia we will handle this keypress
+  end
+
+function getUserInput(prompt)
+    local inputLine = ""
+    
+    if prompt == nil then
+       celestia:print("getUserInput Error: Please include prompt text.",
+                       5, -1, -1, 1, 5)
+       wait(5)
+       return ""
+    end
+    
+    origTimeScale = celestia:gettimescale()  -- Get the current time-scale
+    celestia:settimescale(0)                 -- Pause time
+    userKeypress = ""                        -- Clear the userKeypress var
+    celestia:requestkeyboard(true)           -- Enable keyboard input
+
+    while true do                            -- Loop until we get Enter key
+      -- Display the prompt...
+      celestia:print(prompt .. inputLine, 100, -1, -1, 1, 15)
+      wait(0.01)
+
+      -- What key did the user press...
+      if userKeypress == "\013" then      -- Enter key, we're done
+         break
+
+      elseif userKeypress == "\008" then  -- Backspace key, remove last char
+         local strlen = string.len(inputLine)
+         if strlen <= 1 then
+            inputLine = ""
+         else
+            inputLine = string.sub(inputLine, 1, strlen - 1)
+         end
+
+      else  -- Add the character to inputLine...
+         inputLine = inputLine .. userKeypress
+
+      end
+      userKeypress = ""
+
+    end
+
+    celestia:requestkeyboard(false)       -- Disable keyboard input
+    celestia:settimescale(origTimeScale)  -- Reset the time scale
+    return inputLine
+  end
+
+
+--***************************************************************************
+--                    Get the users current settings
+--***************************************************************************
+  function getSettings()
+  -- Items from the celestia class...
+    orig_ambient           = celestia:getambient()
+    orig_faintestvisible   = celestia:getfaintestvisible()
+    orig_labelflags        = celestia:getlabelflags()
+    orig_orbitflags        = celestia:getorbitflags()
+    orig_renderflags       = celestia:getrenderflags()
+    orig_selection         = celestia:getselection()
+    orig_stardistancelimit = celestia:getstardistancelimit()
+    orig_starstyle         = celestia:getstarstyle()
+    orig_time              = celestia:gettime()
+    orig_timescale         = celestia:gettimescale()
+
+  -- Items from the observer class...  
+    orig_fov               = celestia:getobserver():getfov()
+    orig_frame             = celestia:getobserver():getframe()
+    orig_locationflags     = celestia:getobserver():getlocationflags()
+    orig_orientation       = celestia:getobserver():getorientation()
+    orig_position          = celestia:getobserver():getposition()
+    orig_speed             = celestia:getobserver():getspeed()
+    orig_surface           = celestia:getobserver():getsurface()
+  end
+
+
+--***************************************************************************
+--                                                                          *
+-- This function is called automatically when the script ends, be it        *
+-- because it reached it's end, or the user pressed ESC.                    *
+--                                                                          *
+-- Returns user settings to the way they were before the script ran.        *
+--                                                                          *
+--***************************************************************************
+  function celestia_cleanup_callback()
+
+-- Items from the celestia class...
+    celestia:setambient(orig_ambient)
+    celestia:setfaintestvisible(orig_faintestvisible)
+    celestia:setlabelflags(orig_labelflags)
+    celestia:setorbitflags(orig_orbitflags)
+    celestia:setrenderflags(orig_renderflags)
+    celestia:select(orig_selection)
+    celestia:setstardistancelimit(orig_stardistancelimit)
+    celestia:setstarstyle(orig_starstyle)
+    celestia:settimescale(orig_timescale)
+
+   -- Original Time PLUS the time it took the script to run (does not
+   -- take timescale into account)...
+    celestia:settime(orig_time + (celestia:getscripttime() / 24 / 3600) )
+
+-- UNcomment the following line if you used MultiView in your script...
+--    celestia:getobserver():singleview()
+
+-- Items from the observer class...  
+    celestia:getobserver():setfov(orig_fov)
+    celestia:getobserver():setframe(orig_frame)
+    celestia:getobserver():setlocationflags(orig_locationflags)
+    celestia:getobserver():setorientation(orig_orientation)
+    celestia:getobserver():setposition(orig_position)
+    celestia:getobserver():setspeed(orig_speed)
+    celestia:getobserver():setsurface(orig_surface)
+  end
+
+-- Go to desired longitude & latitude
+
+getSettings()
+
+
+
+--[[
+  ## transform a vector by a rotation ##
+]]
+
+function rotation_transform(v, rotation)
+  -- Use native method if available (1.3.2pre8?)
+  if rotation.transform ~= nil then
+    return rotation:transform(v)
+  end
+  matrix = { }
+
+  x = rotation.x;
+  y = rotation.y;
+  z = rotation.z;
+  w = rotation.w;
+
+  wx = w * x * 2;
+  wy = w * y * 2;
+  wz = w * z * 2;
+  xx = x * x * 2;
+  xy = x * y * 2;
+  xz = x * z * 2;
+  yy = y * y * 2;
+  yz = y * z * 2;
+  zz = z * z * 2;
+
+  matrix[0] = { x= 1 - yy - zz, y= xy - wz,     z= xz + wy }
+  matrix[1] = { x= xy + wz,     y= 1 - xx - zz, z= yz - wx }
+  matrix[2] = { x= xz - wy,     y= yz + wx,     z= 1 - xx - yy }
+
+  nx = (matrix[0].x * v.x + matrix[1].x * v.y + matrix[2].x * v.z)
+  ny = (matrix[0].y * v.x + matrix[1].y * v.y + matrix[2].y * v.z)
+  nz = (matrix[0].z * v.x + matrix[1].z * v.y + matrix[2].z * v.z)
+
+  return celestia:newvector(nx, ny, nz)
+end 
+
+--[[
+ ## Return a vector in the direction where the observer is looking ##
+]]
+function lookat(obs)
+  rot = obs:getorientation()
+  return (rotation_transform(LOOK,rot)):normalize()
+end
+
+--[[
+ ## Transform coordinates from cartesian to polar(?) ##
+]]
+function transform_xyz2rtp(x,y,z)
+  r = math.sqrt(x*x + y*y + z*z)
+  theta = math.atan(math.sqrt(x*x + y*y)/z)
+  if x < 0 then
+    phi = math.atan(y/x) + math.pi
+  elseif x > 0 then
+    phi = math.atan(y/x)
+  elseif y > 0 then
+    phi = math.pi/2
+  else
+    phi = -math.pi/2
+  end
+  return r,theta,phi
+end
+
+--[[
+ ## Transform coordinates from polar to cartesian ##
+]]
+function transform_pt2xyz(p,t)
+ -- B&S, p. 177
+  local r = 1
+  local x = r*math.sin(t)*math.cos(p)
+  local y = r*math.sin(t)*math.sin(p)
+  local z = r*math.cos(t)
+  return x,y,z
+end
+
+--[[ 
+ ## Create new axis. 
+ #
+ # local_up is a vector going from planet center to surface position
+ # rot_axis is a vector along the rotation axis, pointing "north"
+ # (both must be normalized)
+ # Returns three perpendicular and normalized vectors, 
+ # a vector from south to north, one from east to west and the original local_up
+ ##
+  ]]
+function create_local_axis(local_up, rot_axis)
+  -- the axis W-E is perpendicular to both the rotation axis
+  -- and the local UP (i.e. there is no EAST-WEST when at the poles)
+  
+  W2E = (rot_axis ^ local_up):normalize()
+  
+  -- the axis N-S is perpendicular to the local up, and the W-E axis
+  S2N = (local_up ^ W2E):normalize()
+  
+  -- NOW: local_up, W2E, S2N should all be perpendicular.
+  -- Test (all values should be near zero): 
+  -- celestia:print("lw:" .. local_up*W2E .. " ws:" .. W2E*S2N .. " ls:".. local_up*S2N)
+  
+  -- return X,Y,Z:
+  return S2N, W2E*(-1), local_up
+end
+
+--[[
+ ## Transform coordinate system:
+  # From universal coordinates to the one given by x_axis, y_axis, z_axis
+ ##
+]]  
+function transform(vec, x_axis, y_axis, z_axis)
+  old_vecs = { celestia:newvector(1,0,0), celestia:newvector(0,1,0), celestia:newvector(0,0,1) }
+  new_vecs = { x_axis, y_axis, z_axis }
+  old_coords = { vec.x, vec.y, vec.z }
+  new_coords = { 0, 0, 0}
+  -- Bronstein & Semendjajew, TB der Mathematik, p. 179
+  for new = 1, 3 do
+    new_coords[new] = 0
+    for old = 1, 3 do
+      new_coords[new] = new_coords[new] + (new_vecs[new]*old_vecs[old])*old_coords[old]
+    end
+  end
+  return celestia:newvector(new_coords[1], new_coords[2], new_coords[3])  
+end
+
+--[[
+ ## Return three axis for a coordinate system relative to surface of planet.
+ ## z_axis is pointing up (away from planet center)
+ ## x_axis is pointing north (parallel to surface, in direction of rotation axis)
+ ## y_axis is pointing west
+ ]]
+function get_surfacelocal_coordinatesystem(obs, selected_planet)
+  local frame = celestia:newframe("planetographic", selected_planet)
+  local objectcenter  = selected_planet:getposition()
+  -- this is the UP-vector for this frame in universal coords:
+  -- (rotation axis for body)
+  local univ_up = frame:from(UP) - objectcenter
+
+  local curpos = obs:getposition()
+
+  -- this is UP at the position of the observer (in univ. coords):
+  local local_up = (curpos - objectcenter):normalize()
+
+  local x_axis, y_axis, z_axis = create_local_axis(local_up, univ_up)
+  return x_axis, y_axis, z_axis
+end
+
+--[[
+ ## Return current azimuth and elevation of obs for selected_planet ##
+ ]]
+function get_az_elev(obs, selected_planet)
+  x_axis, y_axis, z_axis = get_surfacelocal_coordinatesystem(obs, selected_planet)
+  -- this is the direction where we are currently looking (i.e. observer orientation)
+  look = lookat(obs):normalize()
+  v = transform(look , x_axis, y_axis, z_axis)
+  r,theta,phi = transform_xyz2rtp(v.x, v.y, v.z)
+  -- change from ccw to cw (if seen from z>0):
+  phi = math.mod(720 - math.deg(phi), 360)
+  
+  -- change to elevation above/below ground:
+  if theta > 0 then
+    theta = (90 - math.deg(theta))
+  else
+    theta = - math.deg(theta) - 90
+  end
+  return phi, theta
+end
+
+--[[
+ ## Return current RA and Dec for obs (sel_pl is ignored) ##
+ ]]
+function get_ra_dec(obs, sel_pl)
+  base_rot = celestia:newrotation(celestia:newvector(1,0,0), -math.rad(23.4392911))
+  frame = celestia:newframe("planetographic", EARTH)
+  --[[center = frame:from(celestia:newposition(0,0,0), J2000)
+  x_axis = frame:from(celestia:newposition(1,0,0), J2000) - center
+  y_axis = frame:from(celestia:newposition(0,1,0), J2000) - center
+  z_axis = frame:from(celestia:newposition(0,0,1), J2000) - center]]
+  rot = obs:getorientation() * base_rot
+  --rot = frame:to(rot, J2000)
+  look = (rotation_transform(LOOK,rot)):normalize()
+  r,theta,phi = transform_xyz2rtp(look.x, look.z, look.y)
+  phi = math.mod(720 - math.deg(phi), 360)
+  theta = math.deg(theta)
+  if theta > 0 then
+    theta = 90 - theta
+  else
+    theta = (-90 - theta)
+  end
+  return phi, theta
+end
+
+--[[
+  ## Transform (positive) degrees to hours, minutes, seconds.
+  ]]
+function deg2hms(deg)
+  deg_p_hour = 360/24
+  deg_p_minute = 360 / (24*60)
+  deg_p_second = 360 / (24*60*60)
+  hours = math.floor(deg / deg_p_hour)
+  deg = deg - deg_p_hour * hours
+  minutes = math.floor(deg / deg_p_minute )
+  deg = deg - deg_p_minute * minutes
+  seconds = deg / deg_p_second
+  return hours, minutes, math.floor(10*seconds)/10
+end
+
+--[[ 
+ ## make obs look to az/elev (relative to selected_planet)
+ ]]
+function point_to(az, elev, obs, selected_planet)
+  -- change from cw to ccw:
+  local phi = math.mod(720 - az, 360)
+  local theta
+  -- change to elevation above/below ground:
+  if elev > 0 then
+    theta = (90 - elev)
+  else
+    theta = - elev - 90
+  end
+  local x_axis, y_axis, z_axis = get_surfacelocal_coordinatesystem(obs, selected_planet)
+  local x,y,z = transform_pt2xyz(math.rad(phi), math.rad(theta))
+  local v = x*x_axis + y*y_axis + z*z_axis
+  local pos = obs:getposition()
+  obs:lookat(pos + v, z_axis)
+end
+
+--[[
+ ## Force up being really UP
+ ]]
+function force_up(obs, selected_planet)
+  local x_axis, y_axis, z_axis = get_surfacelocal_coordinatesystem(obs, selected_planet)
+  local orientation = obs:getorientation()
+  local observer_up = rotation_transform(UPV, orientation)
+  
+  if z_axis * observer_up < 0.999 then
+    look_point = rotation_transform(LOOK, orientation)
+    obs:lookat(obs:getposition() + look_point, z_axis)
+  end
+end
+
+base_planet = EARTH
+
+auto_force_up = false
+
+--[[
+ ## Get user longitude and latitude
+ ]] 
+function setUserLongLat()
+  celestia_keyboard_callback = getChar
+  local obs = celestia:getobserver()
+  curLongitude = getUserInput(" Enter Observer LONGITUDE (-180 - +180 degrees): ")
+  if curLongitude == "" then
+     curLongitude = curlong     
+  end 
+  local nlong = math.rad(curLongitude)
+  curLatitude = getUserInput(" Enter Observer LATITUDE (-90 - +90 degrees): ")
+  if curLatitude == "" then
+     curLatitude = curlat
+  end 
+  local nlat = math.rad(curLatitude)
+  obs:gotolonglat(base_planet, nlong, nlat, 3)
+  wait(5)
+  obs:gotosurface(base_planet,4)
+  wait(5)
+  point_to(initAzimuth, initElevation, celestia:getobserver(), base_planet)
+  obs:setfov(math.rad(45))
+end
+
+--[[
+ ## Get new azimuth and altitude
+ ]]
+function setUserAzElev()
+  celestia_keyboard_callback = getChar
+  local obs = celestia:getobserver()
+  local az = getUserInput( " Enter Azimuth (0 - 360 Degrees): ")
+  if az == "" then
+    az = curaz
+  end
+  local elev = getUserInput(" Enter Altitude (0 - 90 Degrees):" )
+  if elev == "" then
+    elev = curelev
+  end
+  az = tonumber(az)
+  elev = tonumber(elev) 
+  point_to(az, elev, celestia:getobserver(), base_planet)
+  obs:setfov(math.rad(45))
+end
+ 
+--[[
+ ## Set right ascension and declination
+ ]]
+function setUserRaDec()
+  celestia_keyboard_callback = getChar
+  local obs = celestia:getobserver()
+  local ra = getUserInput(" Enter Right Ascension (0 - 24 Hours): ")
+  if ra == "" then  ra = curra  end
+  ra = tonumber(ra)
+  local dec = getUserInput(" Enter Declination (-90 - 90 Degrees): ") 
+  if dec == "" then  dec = curdec  end 
+  dec = tonumber(dec) 
+  njd = celestia:gettime()
+  local T = (njd - 2451545.0)/36525.0
+  local fracjd = njd + 0.5 - math.floor(njd + 0.5)
+  local LST = 6.6974 + 2400.051336*T + 24*fracjd +curLongitude/15
+  local HA = (LST - ra)*15
+  local latr = math.rad(curLatitude)
+  local HAr = math.rad(HA)
+  local decr = math.rad(dec) 
+  local sina = math.sin(latr)*math.sin(decr)+math.cos(latr)*math.cos(decr)*math.cos(HAr)
+  local relev = math.asin(sina)
+  local x = math.cos(HAr)*math.sin(latr) - math.tan(decr)*math.cos(latr)  
+  local y = math.sin(HAr)
+  raz = math.atan2(y,x)
+  point_to(180+math.deg(raz), math.deg(relev), obs, base_planet)
+  obs:setfov(math.rad(45))
+end
+
+--[[
+ ## Set default view
+ ]] 
+function initialView()
+  local obs = celestia:getobserver()
+  celestia:setrenderflags{galaxies=true, planets=true, stars=true, cloudmaps=false, atmospheres=false,
+         constellations=false, orbits=false}
+  celestia:setlabelflags{planets=true, stars=true}
+  celestia:setfaintestvisible(8.0) 
+  celestia:select(EARTH)
+  base_planet = EARTH  
+   curLongitude = userLongitude
+   curLatitude = userLatitude
+   local nlong = math.rad(userLongitude)
+   local nlat = math.rad(userLatitude)        
+   obs:gotolonglat(EARTH, nlong, nlat, 3)
+   wait(5)
+   obs:gotosurface(EARTH, 4)
+   wait(5)
+  point_to(initAzimuth, initElevation, celestia:getobserver(), EARTH) 
+  obs:setfov(math.rad(45))
+end
+
+--[[
+ ## Set increment value as function of fov
+ ]] 
+function setIncrement()
+  local fov = celestia:getobserver():getfov()
+  fov = math.deg(fov)
+  incr = 1
+  if fov > 100 then incr = 5
+   elseif fov > 80 then incr = 2
+   elseif fov > 40 then incr = 1
+   elseif fov > 20 then incr = 0.5
+   elseif fov > 10 then incr = 0.2
+   elseif fov > 1 then incr = 0.05
+   elseif fov > 0.1 then incr = 0.02
+   else incr = 0.002
+  end
+end
+
+-- ####################### KEYBOARD HANDLING ######################################
+--[[
+ ## General kb handler, activate other keyboard handlers on demand:
+ ]]
+function general_kb_handler(str)
+  if str == "S" then
+    local obj = celestia:getselection()
+    if obj and obj:type() == "planet" or "moon" or "spacecraft" then
+      base_planet = obj
+    end
+    return true
+  end
+  if str == "A" then flag = 1
+    return true
+   elseif str == "J" then flag = 2
+    return true   
+   elseif str == "K" then flag = 3
+    return true
+   elseif str == "L" then flag = 4
+    return true      
+   elseif str == "P" then flag = 5    
+    return true   
+   elseif str == "D" then flag = 6
+    return true
+  end 
+  if str == "F" then
+    auto_force_up = not auto_force_up
+    return true
+  end
+  if str == "Z" then  
+    userLongitude = curLongitude
+    userLatitude = curLatitude
+    return True
+  end
+  return false
+end
+
+
+ 
+function intro()
+  local message = [[
+  CELESTIA PLANETARIUM SIMULATION
+  
+  Displays Azimuth and Altitude, as well as, RA and Declination
+  of the screen's center relative from the point on Earth directly
+  below the observer.
+  
+  Press Shift-S to use the currently selected object instead of
+    Earth as the base planet for Az/Alt.
+  Press Shift-D to reset to default view.
+  Press Shift-F to force the the observer to have "up"
+    pointing away from the ground
+
+  Press Shift-A to enter values for Azimuth and Altitude
+    and then center on that direction. 
+  Press Shift-J/K to increase/decrease Azimuth.
+  Press UpArrow/DownArrow to increase/decrease Altitude. 
+  Press Shift-L to change Observer Location (Longitude and Latitude).
+  Press Shift-P to enter values for Right Ascension and Declination.  
+  Press Shift-Z to set default view to current Longitude/Latitude. 
+  
+  Press any key to continue...
+  ]]
+  celestia:print(message, 120, -1, 1, 7, -4)
+end
+
+into_finished = false
+function end_intro()
+  celestia:print("", 0.1)
+  celestia_keyboard_callback = general_kb_handler
+  intro_finished = true
+end
+
+
+
+celestia_keyboard_callback = end_intro
+
+celestia:requestkeyboard(true)
+
+intro()
+
+while not intro_finished do
+  wait(0.1)
+end
+
+initialView()
+initialView()
+
+
+-- ################################################################################
+
+
+
+--[[
+  ## main loop: Get Az/Elev, RA/Dec & Long/Lat and display values on screen ##
+  ]]
+while true do
+  local obs = celestia:getobserver()
+  
+  local planet_dist = obs:getposition():distanceto(base_planet:getposition())
+  local planet_radius = base_planet:radius()
+  
+  -- Check if the user has made a selection:
+   if flag == 1 then
+      setUserAzElev()
+      flag = 0
+      celestia:requestkeyboard(true)
+      celestia_keyboard_callback = general_kb_handler     
+     elseif flag == 2 then
+      az, elev = get_az_elev(celestia:getobserver(), base_planet)
+      az = tonumber(az)
+      elev = tonumber(elev)
+      az = az + incr
+      if az > 359 then
+        az = 0
+      end
+      wait(0.1)
+      point_to(az, elev, celestia:getobserver(), base_planet)
+      flag = 0
+      celestia:requestkeyboard(true)
+      celestia_keyboard_callback = general_kb_handler    
+     elseif flag == 3 then
+      az, elev = get_az_elev(celestia:getobserver(), base_planet)
+      az = tonumber(az)
+      elev = tonumber(elev)
+      az = az - incr
+      if az < 1 then
+        az = 359
+      end
+      wait(0.1)
+      point_to(az, elev, celestia:getobserver(), base_planet)
+      flag = 0
+      celestia:requestkeyboard(true)
+      celestia_keyboard_callback = general_kb_handler   
+     elseif flag == 4 then
+      setUserLongLat()
+      flag = 0
+      celestia:requestkeyboard(true)
+      celestia_keyboard_callback = general_kb_handler   
+     elseif flag == 5 then
+      setUserRaDec()
+      flag = 0
+      celestia:requestkeyboard(true)
+      celestia_keyboard_callback = general_kb_handler   
+     elseif flag == 6 then
+      initialView()
+      flag = 0
+      celestia:requestkeyboard(true)
+      celestia_keyboard_callback = general_kb_handler
+   end
+
+    az, elev = get_az_elev(obs, base_planet)
+    curaz = az
+    curelev = elev
+    local az_string = string.format("Azimuth: %3.2f° Altitude: %3.2f°" , az, elev)
+    
+    setIncrement()
+    
+    ra, dec = get_ra_dec(obs, base_planet)
+    curdec = dec
+    h,m,s = deg2hms(ra)
+    curra = h + (m/60) +(s/3600)
+    local radec_string = string.format("RA: %2ih %2im %2.1fs  Dec: %3.2f°", h, m, s, dec)
+    if auto_force_up then
+      force_up(obs, base_planet)
+      az_string = az_string .. " (auto-up)"
+    end
+   
+    observerLoc_string = string.format("Observer Location (degrees) at - Longitude: " .. tostring(curLongitude)
+      .. " Latitude: " .. tostring(curLatitude) ) 
+    curlong = curLongitude
+    curlat = curLatitude   
+    
+    celestia:print(az_string .. "\n" .. radec_string .. "\n" .. observerLoc_string, 1, 0, -1, -11, 4 )
+    wait(0.0)
+ end
