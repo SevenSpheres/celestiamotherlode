@@ -1,0 +1,4 @@
+The following files were removed as they are too big to upload to GitHub:
+- 72 Her Basic Package.zip
+- B72HerAddon1.zip
+- C72Her.zip
