@@ -1,0 +1,17725 @@
+#
+# Extended galaxy catalog for Celestia
+#
+# Version 1.00b (b denotes version with galaxy clusters)
+#  - Added version number
+#  - Added galaxies out to NGC 4151
+#  - Added Messier designations to globular clusters
+# 
+# An extension of the original galaxies.dat
+# Modified by Paul Baulch (pbaulch@au.infogrames.com)
+#
+# What to do with this file:
+#
+# 1) Copy this file to Celestia/Data/
+# 2) Back up a copy of 'galaxies.dat'
+# 3) Rename this file to 'galaxies.dat'.
+# 4) Run Celestia, and you should see the rest of the Universe!
+#
+# Current contents:
+#
+#  863 galaxies (M104 currently represented with two objects)
+#  143 globular clusters
+#  819 galaxy clusters
+#
+# Notes:
+#
+#  Tully's catalogue places gives identical distance values for almost all members
+#  of some galaxy clusters (e.g. 54.8Mly for Virgo), which gives a very unrealistic
+#  result when used directly, in that all galaxies in the cluster are located in a plane.
+#
+#  I have added 'random' variations along the terrestrial line-of-sight of up
+#  to +/- R, where R is the approximate radius of the cluster, using a methodology which:
+#  A) pays attention to interacting galaxies
+#  B) gives the cluster a spherical shape
+#  C) places spirals toward the exterior and ellipticals toward the interior
+#  D) assumes slightly brighter/larger galaxies are nearer, and vice versa.
+#
+#  This methodology has been applied to the following clusters/groups:
+#	Virgo
+#	Ursa Major I/II
+#	Coma Berenices
+#	Fornax
+#
+#  This should give a result which would be, relatively speaking, more accurate
+#  than that represented by Tully's raw estimates, and certainly looks better.
+#
+
+#############################################################################
+#
+#  Local Group of galaxies
+#
+
+"Milky Way"
+{
+	Type "SBa"
+	RA 17.75
+	Dec -28.93
+	Distance 28000
+	Radius 50000
+	Axis [ 0.712 0.533 0.456 ]
+	Angle 149
+}
+
+# Large Magellanic Cloud
+"LMC"
+{
+	Type "Irr"
+	RA   5.328
+	Dec  -68.95
+	Distance 179000
+	Radius 15000
+	Axis [ 0.9 -0.436 0.0 ]
+	Angle 100
+}
+
+# Small Magellanic Cloud / NGC 292
+"SMC"
+{
+	Type "Irr"
+	RA   0.862
+	Dec  -73.23
+	Distance 210000
+	Radius 10000
+	Axis [ 1 0 0 ]
+	Angle 100
+	Detail 0.5
+}
+
+# Andromeda / NGC 224
+"M31"
+{
+	Type "Sb"
+	RA        0.712
+	Dec      41.27
+	Distance  2.9e6
+	Radius   75000
+	Axis [ -0.596 -0.191 0.780 ]
+	Angle 195
+}
+
+# Triangulum spiral / NGC 598
+"M33"
+{
+	Type "Sb"
+	RA    1.565
+	Dec  30.65
+	Distance 3e6
+	Radius 30000
+}
+
+# NGC 205, satellite of M31
+"M110"
+{
+	Type "E5"
+	RA    0.6883
+	Dec   41.683
+	Distance 2.9e6
+	Radius 8500
+	Detail 0.5
+}
+
+# NGC 221, satellite of M31
+"M32"
+{
+	Type "E2"
+	RA    0.712
+        Dec  40.867
+	Distance 2.9e6
+	Radius 4000
+	Detail 0.5
+}
+
+# NGC 6822, Barnard's Galaxy
+"NGC 6822"
+{
+	Type "E3"
+	RA 19.74
+	Dec -14.76
+	Distance 1.7e6
+	Radius 15000
+}
+
+# NGC 185, remote satellite of M31
+"NGC 185"
+{
+	Type "E3"
+	RA 0.666
+	Dec 48.333
+	Distance 2.5e6
+	Radius 10000
+	Detail 0.5
+}
+
+# NGC 147, remote satellite of M31
+"NGC 147"
+{
+	Type "E5"
+	RA 0.369
+	Dec 48.517
+	Distance 2.4e6
+	Radius 10500
+	Detail 0.5
+	Axis [ -0.596 -0.191 0.780 ]
+}
+
+# IC 10 / UGC 192
+"IC 10"
+{
+	Type "Irr"
+	RA 0.295
+	Dec 59.017
+	Distance 2.0e6
+	Radius 10000
+	Detail 0.5
+}
+
+# IC 1613 / UGC 668
+"IC 1613"
+{
+	Type "Irr"
+	RA 1.079
+	Dec 2.12
+	Distance 2.3e6
+	Radius 10000
+	Detail 0.5
+}
+
+# UGC 5364
+"UGC 5364"
+{
+	Type "Irr"
+	RA 9.988
+	Dec 30.74
+	Distance 3.3e6
+	Radius 5000
+	Detail 0.5
+}
+
+# UGC 12613
+"UGC 12613"
+{
+	Type "Irr"
+	RA 23.475
+	Dec 14.74
+	Distance 3.3e6
+	Radius 10000
+	Detail 0.5
+}
+
+#############################################################################
+#
+#  Miscellaneous dwarf galaxies near the Local Group
+#
+
+# NGC 3109, outlying dwarf galaxy
+"NGC 3109"
+{
+	Type "Irr"
+	RA 10.052
+	Dec -26.15
+	Distance 4.0e6
+	Radius 20000
+}
+
+# UGC 6456
+"UGC 6456"
+{
+	Type "Irr"
+	RA 11.466
+	Dec 78.99
+	Distance 4.6e6
+	Radius 5000
+}
+
+# UGC 5373
+"UGC 5373"
+{
+	Type "Irr"
+	RA 10.0
+	Dec 5.33
+	Distance 5.2e6
+	Radius 10000
+}
+
+# UGC 8091
+"UGC 8091"
+{
+	Type "Irr"
+	RA 12.978
+	Dec 14.21
+	Distance 5.5e6
+	Radius 10000
+}
+
+# UGC 4459
+"UGC 4459"
+{
+	Type "Irr"
+	RA 8.567
+	Dec 66.16
+	Distance 6.5e6
+	Radius 10000
+}
+
+# UGC 3974
+"UGC 3974"
+{
+	Type "Irr"
+	RA 7.698
+	Dec 16.8
+	Distance 6.8e6
+	Radius 10000
+}
+
+# IC 2574 / UGC 5666
+"IC 2574"
+{
+	Type "Irr"
+	RA 10.474
+	Dec 68.41
+	Distance 8.8e6
+	Radius 15000
+}
+
+# UGC 4115
+"UGC 4115"
+{
+	Type "Irr"
+	RA 7.95
+	Dec 14.38
+	Distance 1.04e7
+	Radius 5000
+}
+
+#############################################################################
+#
+#  Ursa Major Group of galaxies
+#
+
+# M81 / NGC 3031, Bode's Galaxy
+# Distance estimate based on Hipparcos results and HST
+# observations of Cepheid variables.
+"M81"
+{
+	Type "Sb"
+	RA 9.9267
+	Dec 69.067
+	Distance 1.2e7
+	Radius 35000
+}
+
+# M82 / NGC 3034
+"M82"
+{
+	Type "E6"
+	RA 9.93
+	Dec 69.683
+	Distance 1.2e7
+	Radius 20000
+}
+
+# NGC 3077
+"NGC 3077"
+{
+	Type "E2"
+	RA 10.055
+	Dec 68.733
+	Distance 1.2e7
+	Radius 10000
+}
+
+# NGC 2976
+"NGC 2976"
+{
+	Type "Sc"
+	RA 9.788
+	Dec 67.917
+	Distance 1.2e7
+	Radius 30000
+}
+
+# NGC 2403, outlying member?
+"NGC 2403"
+{
+	Type "Sc"
+	RA 7.615
+	Dec 65.6
+	Distance 1.2e7
+	Radius 30000
+}
+
+# Holmberg I / UGC 5139, outlying member?
+"Holmberg I"
+{
+	Type "Irr"
+	RA 9.674
+	Dec 71.19
+	Distance 1.43e7
+	Radius 10000
+}
+
+# Arp 268 / UGC 4305, outlying member?
+"Arp 268"
+{
+	Type "Irr"
+	RA 8.322
+	Dec 70.71
+	Distance 1.47e7
+	Radius 20000
+}
+
+#############################################################################
+#
+#  Maffei Group of galaxies
+#
+
+# Maffei I
+"Maffei I"
+{
+	Type "E4"
+	RA 2.605
+	Dec 59.65
+	Distance 1.44e7
+	Radius 60000
+}
+
+# Maffei II
+"Maffei II"
+{
+	Type "SBa"
+	RA 2.698
+	Dec 59.6
+	Distance 1.2e7
+	Radius 40000
+}
+
+# Dwingeloo 1
+"Dwingeloo 1"
+{
+	Type "SB"
+	RA 2.948
+	Dec 58.917
+	Distance 1.63e7
+	Radius 50000
+}
+
+# IC 342 = UGC 2847
+"IC 342"
+{
+	Type "Sc"
+	RA 3.782
+	Dec 68.083
+	Distance 1.2e7
+	Radius 50000
+	Axis [ 0.712 0.533 0.456 ]
+	Angle 100
+}
+
+# NGC 1560
+"NGC 1560"
+{
+	Type "Sc"
+	RA 4.547
+	Dec 71.883
+	Distance 9.6e6
+	Radius 30000
+}
+
+# NGC 1569 - Membership in this group is uncertain.
+"NGC 1569"
+{
+	Type "E6"
+	RA 4.513
+	Dec 64.85
+	Distance 7.5e6
+	Radius 10000
+}
+
+# NGC 2366 - Membership in this group is uncertain.
+"NGC 2366"
+{
+	Type "Irr"
+	RA 1.572
+	Dec 69.217
+	Distance 9.3e6
+	Radius 20000
+}
+
+#############################################################################
+#
+#  Sculptor Group of galaxies
+#
+
+# NGC 253, Silver Coin Galaxy
+"NGC 253"
+{
+	Type "SBa"
+	RA 0.793
+	Dec -25.283
+	Distance 9.0e6
+	Radius 50000
+	Angle 110
+}
+
+# NGC 55
+"NGC 55"
+{
+	Type "Sc"
+	RA 0.248
+	Dec -39.183
+	Distance 7.0e6
+	Radius 35000
+}
+
+# NGC 300
+"NGC 300"
+{
+	Type "Sc"
+	RA 0.915
+	Dec -37.683
+	Distance 1.0e7
+	Radius 35000
+}
+
+# NGC 247
+"NGC 247"
+{
+	Type "Sb"
+	RA 0.785
+	Dec -20.767
+	Distance 7.0e6
+	Radius 40000
+	Angle 70
+}
+
+# NGC 7793
+"NGC 7793"
+{
+	Type "Sa"
+	RA 23.963
+	Dec -32.583
+	Distance 9.0e6
+	Radius 35000
+}
+
+# NGC 625
+"NGC 625"
+{
+	Type "E7"
+	RA 1.585
+	Dec -41.433
+	Distance 1.25e7
+	Radius 30000
+}
+
+#############################################################################
+#
+#  NGC 5128 Group of galaxies
+#
+
+# NGC 5128, Centaurus A
+"NGC 5128"
+{
+	Type "E0"
+	RA 13.425
+	Dec -43.0167
+	Distance 1.3e7
+	Radius 45000
+}
+
+# M83 / NGC 5236, Southern Pinwheel
+"M83"
+{
+	Type "SBa"
+	RA 13.617
+	Dec -29.867
+	Distance 1.5e7
+	Radius 50000
+}
+
+# NGC 5253
+"NGC 5253"
+{
+	Type "E6"
+	RA 13.665
+	Dec -31.65
+	Distance 1.5e7
+	Radius 30000
+}
+
+# NGC 4945
+"NGC 4945"
+{
+	Type "Sb"
+	RA 13.09
+	Dec -49.467
+	Distance 1.7e7
+	Radius 50000
+	Axis [ 0.712 0.533 0.456 ]
+	Angle 100
+}
+
+# NGC 5102
+"NGC 5102"
+{
+	Type "S0"
+	RA 13.367
+	Dec -36.633
+	Distance 1.13e7
+	Radius 30000
+}
+
+# NGC 5264
+"NGC 5264"
+{
+	Type "Irr"
+	RA 13.693
+	Dec -29.917
+	Distance 1.35e7
+	Radius 10000
+}
+
+# NGC 5408
+"NGC 5408"
+{
+	Type "Irr"
+	RA 14.055
+	Dec -41.383
+	Distance 1.58e7
+	Radius 20000
+}
+
+#############################################################################
+#
+#  NGC 1023 Group of galaxies
+#
+
+# NGC 891
+"NGC 891"
+{
+	Type "Sb"
+	RA 2.377
+	Dec 42.35
+	Distance 1.0e7
+	Radius 50000
+	Axis [ 0.712 0.533 0.456 ]
+	Angle 100
+}
+
+# NGC 1023
+"NGC 1023"
+{
+	Type "Sb"
+	RA 2.673
+	Dec 39.067
+	Distance 1.2e7
+	Radius 50000
+}
+
+# NGC 925
+"NGC 925"
+{
+	Type "SBc"
+	RA 2.455
+	Dec 33.583
+	Distance 1.0e7
+	Radius 50000
+}
+
+# NGC 949
+"NGC 949"
+{
+	Type "E6"
+	RA 2.513
+	Dec 37.133
+	Distance 1.0e7
+	Radius 35000
+}
+
+# NGC 959
+"NGC 959"
+{
+	Type "E4"
+	RA 2.538
+	Dec 35.5
+	Distance 1.0e7
+	Radius 30000
+}
+
+# NGC 1003
+"NGC 1003"
+{
+	Type "Sa"
+	RA 2.725
+	Dec 37.35
+	Distance 1.3e7
+	Radius 40000
+}
+
+# NGC 784, outlying member
+"NGC 784"
+{
+	Type "Sc"
+	RA 2.022
+	Dec 28.833
+	Distance 1.51e7
+	Radius 20000
+	Axis [ -0.596 -0.191 0.780 ]
+	Angle 160
+}
+
+# UGC 1281, near NGC 784
+"UGC 1281"
+{
+	Type "Sd"
+	RA 1.826
+	Dec 32.58
+	Distance 1.5e7
+	Radius 15000
+}
+
+# NGC 404, outlying member?
+"NGC 404"
+{
+	Type "E0"
+	RA 1.157
+	Dec 35.717
+	Distance 7.7e6
+	Radius 10000
+}
+
+#############################################################################
+#
+#  Leo Triplet of galaxies
+#
+
+# M65 / NGC 3623
+"M65"
+{
+	Type "Sa"
+	RA 11.315
+	Dec 13.083
+	Distance 3.5e7
+	Radius 50000
+}
+
+# M66 / NGC 3627
+"M66"
+{
+	Type "Sb"
+	RA 11.337
+	Dec 12.983
+	Distance 3.5e7
+	Radius 50000
+}
+
+# NGC 3628
+"NGC 3628"
+{
+	Type "Sc"
+	RA 11.338
+	Dec 13.6
+	Distance 3.5e7
+	Radius 50000
+	Axis [ -0.596 -0.191 0.780 ]
+	Angle 100
+}
+
+#############################################################################
+#
+#  Leo I / M96 Group of galaxies
+#
+
+# M96 / NGC 3368
+"M96"
+{
+	Type "Sa"
+	RA 10.78
+	Dec 11.817
+	Distance 3.8e7
+	Radius 50000
+}
+
+# M95 / NGC 3351
+"M95"
+{
+	Type "SBb"
+	RA 10.733
+	Dec 11.7
+	Distance 3.55e7
+	Radius 50000
+}
+
+# M105 / NGC 3379
+"M105"
+{
+	Type "E1"
+	RA 10.797
+	Dec 12.583
+	Distance 3.8e7
+	Radius 50000
+}
+
+# NGC 3377
+"NGC 3377"
+{
+	Type "E5"
+	RA 10.796
+	Dec 13.99
+	Distance 2.64e7
+	Radius 30000
+}
+
+# NGC 3384
+"NGC 3384"
+{
+	Type "S0"
+	RA 10.804
+	Dec 12.64
+	Distance 2.64e7
+	Radius 30000
+}
+
+# NGC 3239 / Arp 263
+"NGC 3239"
+{
+	Type "Irr"
+	RA 10.418
+	Dec 17.16
+	Distance 2.64e7
+	Radius 30000
+}
+
+# NGC 3495
+"NGC 3495"
+{
+	Type "Sd"
+	RA 11.02
+	Dec 3.61
+	Distance 4.17e7
+	Radius 30000
+}
+
+#############################################################################
+#
+#  M51-M101 Group of galaxies
+#
+
+# M51 /  NGC 5194
+"M51"
+{
+	Type "Sc"
+	RA 13.498
+	Dec 47.2
+	Distance 3.0e7
+	Radius 45000
+	Axis [ 0.712 0.533 0.456 ]
+	Angle 195
+}
+
+# NGC 5195, interacting with M51
+"NGC 5195"
+{
+	Type "E2"
+	RA 13.5
+	Dec 47.267
+	Distance 3.0e7
+	Radius 15000
+	Axis [ 0.712 0.533 0.456 ]
+	Angle 195
+}
+
+# M101 / NGC 5457
+"M101"
+{
+	Type "Sb"
+	RA 14.005
+	Dec 54.35
+	Distance 2.7e7
+	Radius 70000
+	Axis [ 0.712 0.533 0.456 ]
+	Angle 195
+}
+
+# M63 / NGC 5055
+"M63"
+{
+	Type "Sb"
+	RA 13.263
+	Dec 42.033
+	Distance 2.3e7
+	Radius 50000
+}
+
+# M106 / NGC 4258
+"M106"
+{
+	Type "Sb"
+	RA 12.317
+	Dec 47.3
+	Distance 2.3e7
+	Radius 50000
+}
+
+# UGC 7774
+"UGC 7774"
+{
+	Type "Sd"
+	RA 12.605
+	Dec 40.01
+	Distance 2.22e7
+	Radius 15000
+}
+
+# NGC 4248
+"NGC 4248"
+{
+	Type "Irr"
+	RA 12.298
+	Dec 47.41
+	Distance 2.38e7
+	Radius 20000
+}
+
+# NGC 4242
+"NGC 4242"
+{
+	Type "Sb"
+	RA 12.29
+	Dec 45.62
+	Distance 2.45e7
+	Radius 30000
+}
+
+# NGC 4618
+"NGC 4618"
+{
+	Type "Sc"
+	RA 12.693
+	Dec 41.14
+	Distance 2.38e7
+	Radius 30000
+}
+
+# NGC 4625
+"NGC 4625"
+{
+	Type "Irr"
+	RA 12.698
+	Dec 41.28
+	Distance 2.67e7
+	Radius 10000
+}
+
+# NGC 4490
+"NGC 4490"
+{
+	Type "Sb"
+	RA 12.512
+	Dec 41.64
+	Distance 3.0e7
+	Radius 30000
+}
+
+# NGC 4485, companion to NGC 4490
+"NGC 4485"
+{
+	Type "Irr"
+	RA 12.51
+	Dec 41.69
+	Distance 3.03e7
+	Radius 10000
+}
+
+# UGC 7719
+"UGC 7719"
+{
+	Type "E7"
+	RA 12.565
+	Dec 39.01
+	Distance 2.9e7
+	Radius 10000
+}
+
+# UGC 7950
+"UGC 7950"
+{
+	Type "Irr"
+	RA 12.781
+	Dec 51.64
+	Distance 2.9e7
+	Radius 10000
+}
+
+# UGC 8313
+"UGC 8313"
+{
+	Type "Sd"
+	RA 13.23
+	Dec 42.2
+	Distance 3.0e7
+	Radius 10000
+}
+
+# NGC 4288
+"NGC 4288"
+{
+	Type "Irr"
+	RA 12.344
+	Dec 46.31
+	Distance 2.61e7
+	Radius 15000
+}
+
+# NGC 3985
+"NGC 3985"
+{
+	Type "Irr"
+	RA 11.944
+	Dec 48.32
+	Distance 2.7e7
+	Radius 10000
+}
+
+# NGC 4707
+"NGC 4707"
+{
+	Type "Irr"
+	RA 12.806
+	Dec 51.16
+	Distance 2.61e7
+	Radius 10000
+}
+
+# NGC 4460
+"NGC 4460"
+{
+	Type "S0"
+	RA 12.48
+	Dec 44.87
+	Distance 2.64e7
+	Radius 20000
+}
+
+# UGC 6900
+"UGC 6900"
+{
+	Type "Irr"
+	RA 11.926
+	Dec 31.54
+	Distance 1.92e7
+	Radius 10000
+}
+
+# UGC 7699
+"UGC 7699"
+{
+	Type "Sd"
+	RA 12.547
+	Dec 37.62
+	Distance 2.02e7
+	Radius 15000
+}
+
+# UGC 7408
+"UGC 7408"
+{
+	Type "Irr"
+	RA 12.354
+	Dec 45.82
+	Distance 2.18e7
+	Radius 10000
+}
+
+# UGC 7916
+"UGC 7916"
+{
+	Type "Irr"
+	RA 12.742
+	Dec 34.39
+	Distance 2.35e7
+	Radius 10000
+}
+
+# UGC 7271
+"UGC 7271"
+{
+	Type "Irr"
+	RA 12.258
+	Dec 43.42
+	Distance 2.45e7
+	Radius 10000
+}
+
+# UGC 7690
+"UGC 7690"
+{
+	Type "Irr"
+	RA 12.54
+	Dec 42.71
+	Distance 2.45e7
+	Radius 10000
+}
+
+# UGC 7608
+"UGC 7608"
+{
+	Type "Irr"
+	RA 12.478
+	Dec 43.22
+	Distance 2.48e7
+	Radius 15000
+}
+
+# UGC 7267
+"UGC 7267"
+{
+	Type "E6"
+	RA 12.256
+	Dec 51.37
+	Distance 2.54e7
+	Radius 10000
+}
+
+# UGC 8683
+"UGC 8683"
+{
+	Type "Irr"
+	RA 13.709
+	Dec 39.67
+	Distance 3.33e7
+	Radius 15000
+}
+
+#############################################################################
+#
+#  M94 (CVn-I) group of galaxies
+#
+
+# M94 /  NGC 4736
+"M94"
+{
+	Type "Sa"
+	RA 12.848
+	Dec 41.117
+	Distance 1.38e7
+	Radius 40000
+}
+
+# M64 / NGC 4826
+"M64"
+{
+	Type "Sa"
+	RA 12.945
+	Dec 21.683
+	Distance 1.9e7
+	Radius 40000
+}
+
+# NGC 4455
+"NGC 4455"
+{
+	Type "Sdm"
+	RA 12.478
+	Dec 22.82
+	Distance 2.02e7
+	Radius 10000
+}
+
+# NGC 5023
+"NGC 5023"
+{
+	Type "Sc"
+	RA 13.203
+	Dec 44.033
+	Distance 1.9e7
+	Radius 45000
+	Axis [ 0.712 0.533 0.456 ]
+	Angle 90
+}
+
+# UGC 7639
+"UGC 7639"
+{
+	Type "Irr"
+	RA 12.498
+	Dec 47.52
+	Distance 1.89e7
+	Radius 10000
+}
+
+# NGC 4244
+"NGC 4244"
+{
+	Type "Sc"
+	RA 12.292
+	Dec 37.817
+	Distance 9.9e6
+	Radius 50000
+	Axis [ -0.596 -0.191 0.780 ]
+	Angle 220
+}
+
+# NGC 4163
+"NGC 4163"
+{
+	Type "E3"
+	RA 12.203
+	Dec 36.167
+	Distance 6.75e6
+	Radius 20000
+}
+
+# UGC 9128
+"UGC 9128"
+{
+	Type "Irr"
+	RA 14.264
+	Dec 23.05
+	Distance 7.2e6
+	Radius 10000
+}
+
+# NGC 4449
+"NGC 4449"
+{
+	Type "Irr"
+	RA   12.47
+	Dec  44.1
+	Distance 9.8e6
+	Radius 15000
+	Detail 0.5
+}
+
+# NGC 4190
+"NGC 4190"
+{
+	Type "E2"
+	RA 12.228
+	Dec 36.633
+	Distance 9.0e6
+	Radius 10000
+}
+
+# NGC 4214
+"NGC 4214"
+{
+	Type "Irr"
+	RA 12.26
+	Dec 36.333
+	Distance 1.13e7
+	Radius 13000
+}
+
+# NGC 4395
+"NGC 4395"
+{
+	Type "Irr"
+	RA 12.43
+	Dec 33.55
+	Distance 1.16e7
+	Radius 21000
+}
+
+# NGC 4068
+"NGC 4068"
+{
+	Type "E4"
+	RA 12.067
+	Dec 52.583
+	Distance 1.2e7
+	Radius 10000
+}
+
+# NGC 3738
+"NGC 3738"
+{
+	Type "Irr"
+	RA 11.597
+	Dec 54.517
+	Distance 1.38e7
+	Radius 10000
+}
+
+# NGC 4605
+"NGC 4605"
+{
+	Type "SBa"
+	RA 12.667
+	Dec 61.617
+	Distance 1.29e7
+	Radius 30000
+}
+
+# NGC 5204
+"NGC 5204"
+{
+	Type "Sdm"
+	RA 13.493
+	Dec 58.417
+	Distance 1.54e7
+	Radius 15000
+}
+
+# NGC 5238
+"NGC 5238"
+{
+	Type "Sdm"
+	RA 13.578
+	Dec 51.617
+	Distance 1.58e7
+	Radius 20000
+}
+
+# NGC 5474
+"NGC 5474"
+{
+	Type "Sdm"
+	RA 14.084
+	Dec 53.66
+	Distance 1.96e7
+	Radius 16000
+}
+
+# NGC 5477
+"NGC 5477"
+{
+	Type "Irr"
+	RA 14.092
+	Dec 54.46
+	Distance 2.09e7
+	Radius 10000
+}
+
+# NGC 5585
+"NGC 5585"
+{
+	Type "Sd"
+	RA 14.33
+	Dec 56.72
+	Distance 2.28e7
+	Radius 30000
+}
+
+# UGC 9405
+"UGC 9405"
+{
+	Type "Irr"
+	RA 14.589
+	Dec 57.27
+	Distance 1.86e7
+	Radius 10000
+}
+
+# NGC 5229
+"NGC 5229"
+{
+	Type "Sdm"
+	RA 13.568
+	Dec 47.91
+	Distance 2.09e7
+	Radius 10000
+}
+
+# NGC 4204
+"NGC 4204"
+{
+	Type "Sd"
+	RA 12.254
+	Dec 20.66
+	Distance 2.58e7
+	Radius 20000
+}
+
+# NGC 4020
+"NGC 4020"
+{
+	Type "Sd"
+	RA 11.981
+	Dec 30.4
+	Distance 2.61e7
+	Radius 20000
+}
+
+# NGC 3412
+"NGC 3412"
+{
+	Type "S0"
+	RA 12.849
+	Dec 13.42
+	Distance 2.64e7
+	Radius 15000
+}
+
+# UGC 8508
+"UGC 8508"
+{
+	Type "Irr"
+	RA 13.512
+	Dec 54.91
+	Distance 8.8e6
+	Radius 10000
+}
+
+# UGC 7559
+"UGC 7559"
+{
+	Type "Irr"
+	RA 12.451
+	Dec 37.14
+	Distance 9.1e6
+	Radius 5000
+}
+
+# UGC 8201
+"UGC 8201"
+{
+	Type "Irr"
+	RA 13.104
+	Dec 67.7
+	Distance 9.1e6
+	Radius 10000
+}
+
+# UGC 7577
+"UGC 7577"
+{
+	Type "Irr"
+	RA 12.46
+	Dec 43.49
+	Distance 9.8e6
+	Radius 10000
+}
+
+# UGC 6817
+"UGC 6817"
+{
+	Type "Irr"
+	RA 11.846
+	Dec 38.87
+	Distance 1.01e7
+	Radius 10000
+}
+
+# UGC 8308
+"UGC 8308"
+{
+	Type "Irr"
+	RA 13.223
+	Dec 46.32
+	Distance 1.04e7
+	Radius 10000
+}
+
+# UGC 8760
+"UGC 8760"
+{
+	Type "Irr"
+	RA 13.847
+	Dec 38.02
+	Distance 1.08e7
+	Radius 10000
+}
+
+# UGC 8651
+"UGC 8651"
+{
+	Type "Irr"
+	RA 13.666
+	Dec 40.75
+	Distance 1.11e7
+	Radius 10000
+}
+
+# UGC 7599
+"UGC 7599"
+{
+	Type "Irr"
+	RA 12.474
+	Dec 37.22
+	Distance 1.14e7
+	Radius 5000
+}
+
+# UGC 8320
+"UGC 8320"
+{
+	Type "Irr"
+	RA 13.24
+	Dec 45.92
+	Distance 1.17e7
+	Radius 10000
+}
+
+# UGC 8833
+"UGC 8833"
+{
+	Type "Irr"
+	RA 13.914
+	Dec 35.84
+	Distance 1.17e7
+	Radius 5000
+}
+
+# UGC 7605
+"UGC 7605"
+{
+	Type "Irr"
+	RA 12.478
+	Dec 35.72
+	Distance 1.21e7
+	Radius 5000
+}
+
+# UGC 9240
+"UGC 9240"
+{
+	Type "Irr"
+	RA 14.412
+	Dec 44.51
+	Distance 1.21e7
+	Radius 10000
+}
+
+# UGC 7321, very very thin edge-on disc galaxy
+"UGC 7321"
+{
+	Type "S0"
+	RA 12.292
+	Dec 22.54
+	Distance 1.24e7
+	Radius 15000
+}
+
+# UGC 7698
+"UGC 7698"
+{
+	Type "Irr"
+	RA 12.548
+	Dec 31.54
+	Distance 1.24e7
+	Radius 10000
+}
+
+# UGC 8215
+"UGC 8215"
+{
+	Type "Irr"
+	RA 13.133
+	Dec 46.85
+	Distance 1.27e7
+	Radius 5000
+}
+
+# UGC 8837
+"UGC 8837"
+{
+	Type "Irr"
+	RA 13.912
+	Dec 53.91
+	Distance 1.27e7
+	Radius 10000
+}
+
+# UGC 6541
+"UGC 6541"
+{
+	Type "Irr"
+	RA 11.558
+	Dec 49.24
+	Distance 1.3e7
+	Radius 10000
+}
+
+# UGC 8024
+"UGC 8024"
+{
+	Type "Irr"
+	RA 12.9
+	Dec 27.15
+	Distance 1.3e7
+	Radius 10000
+}
+
+# UGC 7949
+"UGC 7949"
+{
+	Type "Irr"
+	RA 12.783
+	Dec 36.49
+	Distance 1.37e7
+	Radius 5000
+}
+
+# IC 4182 / UGC 8188
+"IC 4182"
+{
+	Type "Irr"
+	RA 13.097
+	Dec 37.6
+	Distance 1.43e7
+	Radius 15000
+}
+
+# IC 3687 / UGC 7866
+"IC 3687"
+{
+	Type "Irr"
+	RA 12.702
+	Dec 38.49
+	Distance 1.47e7
+	Radius 10000
+}
+
+# UGC 8331
+"UGC 8331"
+{
+	Type "Irr"
+	RA 13.258
+	Dec 47.5
+	Distance 1.5e7
+	Radius 10000
+}
+
+# UGC 6782
+"UGC 6782"
+{
+	Type "Irr"
+	RA 11.814
+	Dec 23.84
+	Distance 1.63e7
+	Radius 5000
+}
+
+#############################################################################
+#
+#  M74 (Pisces) group of galaxies
+#
+
+# M74 / NGC 628
+"M74"
+{
+	Type "Sc"
+	RA 1.612
+	Dec 15.783
+	Distance 3.5e7
+	Radius 50000
+	Axis [ 0.712 0.533 0.456 ]
+	Angle 110
+}
+
+# UGC 1195
+"UGC 1195"
+{
+	Type "Irr"
+	RA 1.706
+	Dec 13.97
+	Distance 3.52e7
+	Radius 15000
+}
+
+# NGC 660
+"NGC 660"
+{
+	Type "SBc"
+	RA 1.717
+	Dec 13.633
+	Distance 3.0e7
+	Radius 50000
+}
+
+# NGC 1036
+"NGC 1036"
+{
+	Type "Irr"
+	RA 2.675
+	Dec 19.3
+	Distance 3.65e7
+	Radius 10000
+}
+
+# UGC 1176
+"UGC 1176"
+{
+	Type "Irr"
+	RA 1.67
+	Dec 15.9
+	Distance 3.03e7
+	Radius 20000
+}
+
+# UGC 1561
+"UGC 1561"
+{
+	Type "Irr"
+	RA 2.068
+	Dec 24.21
+	Distance 3.03e7
+	Radius 10000
+}
+
+# UGC 891
+"UGC 891"
+{
+	Type "Sd"
+	RA 1.354
+	Dec 12.41
+	Distance 3.06e7
+	Radius 15000
+}
+
+# NGC 672, outlying member
+"NGC 672"
+{
+	Type "SBc"
+	RA 1.797
+	Dec 27.43
+	Distance 2.45e7
+	Radius 40000
+}
+
+# UGC 1072, outlying member
+"UGC 1072"
+{
+	Type "E5"
+	RA 1.496
+	Dec -1.24
+	Distance 3.46e7
+	Radius 10000
+}
+
+#############################################################################
+#
+#  NGC 4631 group of galaxies
+#
+
+# NGC 4631, Whale/Herring Galaxy
+"NGC 4631"
+{
+	Type "Sb"
+	RA 12.702
+	Dec 32.55
+	Distance 3.0e7
+	Radius 60000
+	Angle 100
+}
+# NGC 4627, satellite of NGC4631
+"NGC 4627"
+{
+	Type "E4"
+	RA 12.7
+	Dec 32.567
+	Distance 3.0e7
+	Radius 8000
+}
+
+# NGC 4656
+"NGC 4656"
+{
+	Type "Sb"
+	RA 12.733
+	Dec 32.167
+	Distance 3.0e7
+	Radius 50000
+	Axis [ 0.712 0.533 0.456 ]
+	Angle 60
+}
+
+#############################################################################
+#
+#  NGC 2903 group of galaxies
+#
+
+# NGC 3521
+"NGC 3521"
+{
+	Type "Sa"
+	RA 11.097
+	Dec -0.033
+	Distance 2.5e7
+	Radius 40000
+}
+
+# NGC 2903
+"NGC 2903"
+{
+	Type "Sb"
+	RA 9.537
+	Dec 21.5
+	Distance 2.05e7
+	Radius 50000
+}
+
+# UGC 5340
+"UGC 5340"
+{
+	Type "Irr"
+	RA 9.944
+	Dec 28.83
+	Distance 1.92e7
+	Radius 10000
+}
+
+# UGC 5272
+"UGC 5272"
+{
+	Type "Irr"
+	RA 9.838
+	Dec 31.48
+	Distance 2.12e7
+	Radius 10000
+}
+
+# NGC 3299
+"NGC 3299"
+{
+	Type "Sdm"
+	RA 10.607
+	Dec 12.69
+	Distance 1.76e7
+	Radius 10000
+}
+
+# NGC 3377A / UGC 5889
+"NGC 3377A"
+{
+	Type "Irr"
+	RA 10.789
+	Dec 14.07
+	Distance 1.66e7
+	Radius 5000
+}
+
+# NGC 3344
+"NGC 3344"
+{
+	Type "Sb"
+	RA 10.725
+	Dec 24.92
+	Distance 1.96e7
+	Radius 30000
+}
+
+# NGC 3486
+"NGC 3486"
+{
+	Type "Sd"
+	RA 11.008
+	Dec 28.98
+	Distance 2.41e7
+	Radius 50000
+}
+
+# NGC 3432
+"NGC 3432"
+{
+	Type "Sd"
+	RA 10.875
+	Dec 36.63
+	Distance 2.54e7
+	Radius 20000
+}
+
+# NGC 3510
+"NGC 3510"
+{
+	Type "Sd"
+	RA 11.062
+	Dec 28.88
+	Distance 2.58e7
+	Radius 30000
+}
+
+# UGC 5829, "spider Galaxy"
+"UGC 5829"
+{
+	Type "Irr"
+	RA 10.71
+	Dec 34.45
+	Distance 2.61e7
+	Radius 20000
+}
+
+# NGC 3593
+"NGC 3593"
+{
+	Type "S0"
+	RA 11.243
+	Dec 12.81
+	Distance 1.79e7
+	Radius 20000
+}
+
+# NGC 3274
+"NGC 3274"
+{
+	Type "S0"
+	RA 10.538
+	Dec 27.66
+	Distance 1.92e7
+	Radius 10000
+}
+
+# UGC 5764
+"UGC 5764"
+{
+	Type "Irr"
+	RA 10.612
+	Dec 31.56
+	Distance 2.25e7
+	Radius 10000
+}
+
+# NGC 3489
+"NGC 3489"
+{
+	Type "S0"
+	RA 11.005
+	Dec 13.9
+	Distance 2.09e7
+	Radius 20000
+}
+
+#############################################################################
+#
+#  NGC 1512 - NGC 1433 group of galaxies
+#
+
+# NGC 1512
+"NGC 1512"
+{
+	Type "SBb"
+	RA 4.065
+	Dec -43.35
+	Distance 3.05e7
+	Radius 50000
+}
+
+# NGC 1510
+"NGC 1510"
+{
+	Type "E2"
+	RA 4.0583
+	Dec -43.417
+	Distance 3.1e7
+	Radius 20000
+}
+
+# NGC 1487, peculiar barred spiral
+"NGC 1487"
+{
+	Type "SBc"
+	RA 3.93
+	Dec -42.367
+	Distance 2.9e7
+	Radius 50000
+}
+
+# NGC 1291
+"NGC 1291"
+{
+	Type "SBc"
+	RA 3.288
+	Dec -41.133
+	Distance 2.8e7
+	Radius 60000
+}
+
+# NGC 1411
+"NGC 1411"
+{
+	Type "E5"
+	RA 3.646
+	Dec -44.09
+	Distance 3.65e7
+	Radius 15000
+}
+
+# NGC 1433
+"NGC 1433"
+{
+	Type "SBa"
+	RA 3.701
+	Dec -47.22
+	Distance 3.78e7
+	Radius 50000
+}
+
+# NGC 1493
+"NGC 1493"
+{
+	Type "Sc"
+	RA 3.958
+	Dec -46.21
+	Distance 3.68e7
+	Radius 40000
+}
+
+# NGC 1527
+"NGC 1527"
+{
+	Type "E6"
+	RA 4.139
+	Dec -47.89
+	Distance 3.59e7
+	Radius 30000
+}
+
+# NGC 1494
+"NGC 1494"
+{
+	Type "Sc"
+	RA 3.961
+	Dec -48.91
+	Distance 3.98e7
+	Radius 20000
+}
+
+# NGC 1483
+"NGC 1483"
+{
+	Type "Sb"
+	RA 3.878
+	Dec -47.49
+	Distance 4.08e7
+	Radius 15000
+}
+
+# NGC 1448
+"NGC 1448"
+{
+	Type "Sc"
+	RA 3.742
+	Dec -44.64
+	Distance 4.21e7
+	Radius 50000
+}
+
+# NGC 1827
+"NGC 1827"
+{
+	Type "Sc"
+	RA 5.169
+	Dec -36.97
+	Distance 3.78e7
+	Radius 25000
+}
+
+# NGC 1808
+"NGC 1808"
+{
+	Type "Sa"
+	RA 5.128
+	Dec -37.517
+	Distance 3.47e7
+	Radius 40000
+}
+
+# NGC 1679
+"NGC 1679"
+{
+	Type "Irr"
+	RA 4.833
+	Dec -31.98
+	Distance 3.85e7
+	Radius 20000
+}
+
+# NGC 1792
+"NGC 1792"
+{
+	Type "Sa"
+	RA 5.087
+	Dec -37.983
+	Distance 4.37e7
+	Radius 35000
+}
+
+# NGC 1249
+"NGC 1249"
+{
+	Type "Sc"
+	RA 3.167
+	Dec -53.34
+	Distance 3.49e7
+	Radius 30000
+}
+
+# NGC 1366
+"NGC 1366"
+{
+	Type "E5"
+	RA 3.565
+	Dec -31.2
+	Distance 3.78e7
+	Radius 15000
+}
+
+# NGC 1406
+"NGC 1406"
+{
+	Type "SBc"
+	RA 3.658
+	Dec -31.34
+	Distance 3.85e7
+	Radius 30000
+}
+
+# NGC 1947
+"NGC 1947"
+{
+	Type "S0"
+	RA 5.447
+	Dec -63.76
+	Distance 3.94e7
+	Radius 20000
+}
+
+# NGC 2082
+"NGC 2082"
+{
+	Type "Sb"
+	RA 5.697
+	Dec -64.29
+	Distance 3.94e7
+	Radius 20000
+}
+
+# NGC 1532, disturbed edge-on spiral
+"NGC 1532"
+{
+	Type "Sc"
+	RA 4.202
+	Dec -32.87
+	Distance 4.43e7
+	Radius 60000
+	Axis [ 0.712 0.533 0.456 ]
+	Angle 100
+}
+
+# NGC 1531, interacting with 1532?
+"NGC 1531"
+{
+	Type "E6"
+	RA 4.2
+	Dec -32.86
+	Distance 4.4e7
+	Radius 10000
+}
+
+# NGC 1800, outlying member?
+"NGC 1800"
+{
+	Type "S0"
+	RA 5.106
+	Dec -31.95
+	Distance 2.41e7
+	Radius 10000
+}
+
+# NGC 1744, outlying member?
+"NGC 1744"
+{
+	Type "Sd"
+	RA 4.998
+	Dec -26.03
+	Distance 2.54e7
+	Radius 45000
+}
+
+#############################################################################
+#
+#  NGC 1058 group of galaxies
+#
+
+# NGC 1058
+"NGC 1058"
+{
+	Type "Sc"
+	RA 2.722
+	Dec 37.35
+	Distance 2.97e7
+	Radius 30000
+}
+
+# UGC 1865
+"UGC 1865"
+{
+	Type "Irr"
+	RA 2.415
+	Dec 36.04
+	Distance 3.19e7
+	Radius 15000
+}
+
+# UGC 2014
+"UGC 2014"
+{
+	Type "Irr"
+	RA 2.548
+	Dec 38.69
+	Distance 3.23e7
+	Radius 15000
+}
+
+# UGC 2259
+"UGC 2259"
+{
+	Type "Sd"
+	RA 2.798
+	Dec 37.54
+	Distance 3.26e7
+	Radius 15000
+}
+
+# UGC 2023
+"UGC 2023"
+{
+	Type "Irr"
+	RA 2.555
+	Dec 33.5
+	Distance 3.29e7
+	Radius 15000
+}
+
+# UGC 2034
+"UGC 2034"
+{
+	Type "Irr"
+	RA 2.562
+	Dec 40.54
+	Distance 3.33e7
+	Radius 15000
+}
+
+# UGC 2082
+"UGC 2082"
+{
+	Type "Sc"
+	RA 2.604
+	Dec 25.43
+	Distance 3.49e7
+	Radius 30000
+}
+
+# UGC 1807
+"UGC 1807"
+{
+	Type "Irr"
+	RA 2.352
+	Dec 42.76
+	Distance 3.55e7
+	Radius 15000
+}
+
+#############################################################################
+#
+#  NGC 5832 group of galaxies
+#
+
+# NGC 5949
+"NGC 5949"
+{
+	Type "Sc"
+	RA 15.464
+	Dec 64.74
+	Distance 3.65e7
+	Radius 20000
+}
+
+# NGC 5832
+"NGC 5832"
+{
+	Type "Sb"
+	RA 14.963
+	Dec 71.68
+	Distance 3.75e7
+	Radius 25000
+}
+
+# UGC 9992
+"UGC 9992"
+{
+	Type "Irr"
+	RA 15.696
+	Dec 67.26
+	Distance 3.65e7
+	Radius 10000
+}
+
+# UGC 10669
+"UGC 10669"
+{
+	Type "Irr"
+	RA 17.009
+	Dec 70.3
+	Distance 3.78e7
+	Radius 10000
+}
+
+# UGC 10736
+"UGC 10736"
+{
+	Type "Irr"
+	RA 17.134
+	Dec 69.47
+	Distance 3.98e7
+	Radius 20000
+}
+
+# NGC 6689
+"NGC 6689"
+{
+	Type "Sc"
+	RA 18.58
+	Dec 70.53
+	Distance 3.98e7
+	Radius 25000
+}
+
+#############################################################################
+#
+#  NGC 2541 group of galaxies
+#
+
+# NGC 2841
+"NGC 2841"
+{
+	Type "Sa"
+	RA 9.367
+	Dec 50.967
+	Distance 3.6e7
+	Radius 45000
+}
+
+# NGC 2541
+"NGC 2541"
+{
+	Type "Scd"
+	RA 8.244
+	Dec 49.06
+	Distance 3.46e7
+	Radius 40000
+}
+
+# NGC 2681
+"NGC 2681"
+{
+	Type "S0"
+	RA 8.893
+	Dec 51.31
+	Distance 4.34e7
+	Radius 30000
+}
+
+# NGC 2500
+"NGC 2500"
+{
+	Type "Sc"
+	RA 8.032
+	Dec 50.76
+	Distance 3.29e7
+	Radius 20000
+}
+
+# NGC 2552
+"NGC 2552"
+{
+	Type "Sdm"
+	RA 8.322
+	Dec 50.01
+	Distance 3.26e7
+	Radius 20000
+}
+
+# IC 2233 / UGC 4278
+"IC 2233"
+{
+	Type "Sd"
+	RA 8.232
+	Dec 45.75
+	Distance 3.46e7
+	Radius 25000
+}
+
+# NGC 2537
+"NGC 2537"
+{
+	Type "Sc"
+	RA 8.22
+	Dec 46
+	Distance 2.93e7
+	Radius 10000
+}
+
+# NGC 2337
+"NGC 2337"
+{
+	Type "Irr"
+	RA 7.17
+	Dec 44.45
+	Distance 2.67e7
+	Radius 10000
+}
+
+# UGC 3817
+"UGC 3817"
+{
+	Type "Irr"
+	RA 7.38
+	Dec 45.1
+	Distance 2.71e7
+	Radius 10000
+}
+
+# UGC 3475
+"UGC 3475"
+{
+	Type "Irr"
+	RA 6.508
+	Dec 39.48
+	Distance 2.8e7
+	Radius 15000
+}
+
+# UGC 3860
+"UGC 3860"
+{
+	Type "Irr"
+	RA 7.47
+	Dec 40.76
+	Distance 2.35e7
+	Radius 10000
+}
+
+# UGC 3966
+"UGC 3966"
+{
+	Type "Irr"
+	RA 7.69
+	Dec 40.12
+	Distance 2.41e7
+	Radius 10000
+}
+
+# UGC 4704
+"UGC 4704"
+{
+	Type "Sd"
+	RA 8.983
+	Dec 39.21
+	Distance 2.84e7
+	Radius 20000
+}
+
+# UGC 4499
+"UGC 4499"
+{
+	Type "Irr"
+	RA 8.626
+	Dec 51.64
+	Distance 4.17e7
+	Radius 20000
+}
+
+# UGC 4514
+"UGC 4514"
+{
+	Type "Sd"
+	RA 8.66
+	Dec 53.46
+	Distance 4.24e7
+	Radius 15000
+}
+
+#############################################################################
+#
+#  NGC 100 group of galaxies
+#
+
+# NGC 100
+"NGC 100"
+{
+	Type "Sc"
+	RA 0.401
+	Dec 16.48
+	Distance 4.08e7
+	Radius 30000
+}
+
+# NGC 14
+"NGC 14"
+{
+	Type "Irr"
+	RA 0.146
+	Dec 15.81
+	Distance 4.17e7
+	Radius 20000
+}
+
+# UGC 122
+"UGC 122"
+{
+	Type "Irr"
+	RA 0.221
+	Dec 17.03
+	Distance 4.14e7
+	Radius 15000
+}
+
+# UGC 17
+"UGC 17"
+{
+	Type "Irr"
+	RA 0.061
+	Dec 15.23
+	Distance 4.24e7
+	Radius 20000
+}
+
+#############################################################################
+#
+#  M77 group of galaxies
+#
+
+# M77 / NGC 1068, Cetus A
+"M77"
+{
+	Type "Sb"
+	RA 2.712
+	Dec -0.017
+	Distance 4.7e7
+	Radius 70000
+	Angle 120
+}
+
+# NGC 1055, near M77
+"NGC 1055"
+{
+	Type "Sc"
+	RA 2.696
+	Dec 0.43
+	Distance 4.11e7
+	Radius 50000
+}
+
+# NGC 1073
+"NGC 1073"
+{
+	Type "SBc"
+	RA 2.728
+	Dec 1.38
+	Distance 4.96e7
+	Radius 40000
+}
+
+# UGC 2275
+"UGC 2275"
+{
+	Type "Sd"
+	RA 2.8
+	Dec 3.89
+	Distance 4.27e7
+	Radius 35000
+}
+
+# UGC 2302
+"UGC 2302"
+{
+	Type "Sd"
+	RA 2.82
+	Dec 2.14
+	Distance 4.56e7
+	Radius 35000
+}
+
+# UGC 2162
+"UGC 2162"
+{
+	Type "Irr"
+	RA 2.672
+	Dec 1.23
+	Distance 4.92e7
+	Radius 15000
+}
+
+#############################################################################
+#
+#  NGC4274-NGC4565 a.k.a. Coma I group of galaxies
+#
+
+# NGC 4565
+"NGC 4565"
+{
+	Type "Sb"
+	RA 12.605
+	Dec 25.983
+	Distance 3.1e7
+	Radius 50000
+	Axis [ -0.596 -0.191 0.780 ]
+	Angle 195
+}
+
+# NGC 4062
+"NGC 4062"
+{
+	Type "Sb"
+	RA 12.067
+	Dec 31.91
+	Distance 3.13e7
+	Radius 30000
+}
+
+# NGC 4136
+"NGC 4136"
+{
+	Type "Sc"
+	RA 12.154
+	Dec 29.92
+	Distance 3.11e7
+	Radius 20000
+}
+
+# NGC 4150
+"NGC 4150"
+{
+	Type "S0"
+	RA 12.175
+	Dec 30.41
+	Distance 3.16e7
+	Radius 15000
+}
+
+# NGC 4173
+"NGC 4173"
+{
+	Type "Sd"
+	RA 12.205
+	Dec 29.19
+	Distance 3.26e7
+	Radius 25000
+}
+
+# NGC 4203
+"NGC 4203"
+{
+	Type "S0"
+	RA 12.252
+	Dec 33.21
+	Distance 3.07e7
+	Radius 20000
+}
+
+# UGC 7300
+"UGC 7300"
+{
+	Type "Irr"
+	RA 12.277
+	Dec 28.72
+	Distance 3.13e7
+	Radius 10000
+}
+
+# NGC 4245
+"NGC 4245"
+{
+	Type "Sba"
+	RA 12.293
+	Dec 29.61
+	Distance 3.3e7
+	Radius 20000
+}
+
+# NGC 4251
+"NGC 4251"
+{
+	Type "S0"
+	RA 12.302
+	Dec 28.17
+	Distance 3.18e7
+	Radius 20000
+}
+
+# NGC 4274
+"NGC 4274"
+{
+	Type "Sab"
+	RA 12.332
+	Dec 29.61
+	Distance 3.0e7
+	Radius 45000
+}
+
+# NGC 4278
+"NGC 4278"
+{
+	Type "E3"
+	RA 12.335
+	Dec 29.29
+	Distance 3.16e7
+	Radius 30000
+}
+
+# NGC 4283
+"NGC 4283"
+{
+	Type "E1"
+	RA 12.338
+	Dec 29.31
+	Distance 3.22e7
+	Radius 20000
+}
+
+# NGC 4308
+"NGC 4308"
+{
+	Type "E0"
+	RA 12.365
+	Dec 30.06
+	Distance 3.10e7
+	Radius 10000
+}
+
+# NGC 4310
+"NGC 4310"
+{
+	Type "S0"
+	RA 12.373
+	Dec 29.21
+	Distance 3.28e7
+	Radius 20000
+}
+
+# NGC 4314
+"NGC 4314"
+{
+	Type "SBa"
+	RA 12.376
+	Dec 29.89
+	Distance 3.36e7
+	Radius 30000
+}
+
+# NGC 4359
+"NGC 4359"
+{
+	Type "Sc"
+	RA 12.401
+	Dec 31.52
+	Distance 3.25e7
+	Radius 20000
+}
+
+# NGC 4393
+"NGC 4393"
+{
+	Type "Sd"
+	RA 12.43
+	Dec 27.56
+	Distance 3.19e7
+	Radius 20000
+}
+
+# NGC 4414
+"NGC 4414"
+{
+	Type "Sa"
+	RA 12.441
+	Dec 31.22
+	Distance 3.06e7
+	Radius 30000
+}
+
+# NGC 4448
+"NGC 4448"
+{
+	Type "Sba"
+	RA 12.471
+	Dec 28.62
+	Distance 3.12e7
+	Radius 25000
+}
+
+# NGC 4494
+"NGC 4494"
+{
+	Type "E2"
+	RA 12.523
+	Dec 25.77
+	Distance 3.14e7
+	Radius 30000
+}
+
+# UGC 7673
+"UGC 7673"
+{
+	Type "Irr"
+	RA 12.532
+	Dec 29.72
+	Distance 3.2e7
+	Radius 10000
+}
+
+# NGC 4525
+"NGC 4525"
+{
+	Type "Sc"
+	RA 12.562
+	Dec 30.29
+	Distance 3.12e7
+	Radius 20000
+}
+
+# NGC 4562
+"NGC 4562"
+{
+	Type "Scd"
+	RA 12.593
+	Dec 25.86
+	Distance 3.22e7
+	Radius 15000
+}
+
+# NGC 4559
+"NGC 4559"
+{
+	Type "Sc"
+	RA 12.599
+	Dec 27.96
+	Distance 3.15e7
+	Radius 50000
+}
+
+# NGC 4534
+"NGC 4534"
+{
+	Type "Sdm"
+	RA 12.569
+	Dec 35.52
+	Distance 3.19e7
+	Radius 20000
+}
+
+# UGC 7007
+"UGC 7007"
+{
+	Type "Irr"
+	RA 12.024
+	Dec 33.34
+	Distance 2.9e7
+	Radius 10000
+}
+
+# NGC 4670, outlying member
+"NGC 4670"
+{
+	Type "S0"
+	RA 12.754
+	Dec 27.13
+	Distance 3.59e7
+	Radius 20000
+}
+
+#############################################################################
+#
+#  NGC 3184 group of galaxies
+#
+
+# NGC 3184
+"NGC 3184"
+{
+	Type "Sc"
+	RA 10.305
+	Dec 41.417
+	Distance 4.0e7
+	Radius 50000
+}
+
+# NGC 3198
+"NGC 3198"
+{
+	Type "Sc"
+	RA 10.329
+	Dec 45.57
+	Distance 3.52e7
+	Radius 50000
+}
+
+# NGC 3319
+"NGC 3319"
+{
+	Type "Sc"
+	RA 10.655
+	Dec 41.67
+	Distance 3.75e7
+	Radius 40000
+}
+
+# NGC 3104
+"NGC 3104"
+{
+	Type "Irr"
+	RA 10.065
+	Dec 40.76
+	Distance 3.06e7
+	Radius 20000
+}
+
+# UGC 5740
+"UGC 5740"
+{
+	Type "Irr"
+	RA 10.579
+	Dec 50.76
+	Distance 3.68e7
+	Radius 15000
+}
+
+# UGC 6161
+"UGC 6161"
+{
+	Type "Irr"
+	RA 11.113
+	Dec 43.73
+	Distance 4.01e7
+	Radius 20000
+}
+
+#############################################################################
+#
+#  NGC 5866 group of galaxies
+#
+
+# NGC 5866, thought possibly to be M102
+"NGC 5866"
+{
+	Type "S0"
+	RA 15.108
+	Dec 55.76
+	Distance 4.99e7
+	Radius 50000
+}
+
+# NGC 5907, "Splinter Galaxy"
+"NGC 5907"
+{
+	Type "Sb"
+	RA 15.265
+	Dec 56.33
+	Distance 4.86e7
+	Radius 60000
+}
+
+# NGC 5963
+"NGC 5963"
+{
+	Type "Irr"
+	RA 15.558
+	Dec 56.58
+	Distance 4.82e7
+	Radius 25000
+}
+
+# NGC 5879
+"NGC 5879"
+{
+	Type "Sbc"
+	RA 15.161
+	Dec 57.01
+	Distance 5.48e7
+	Radius 35000
+}
+
+# UGC 9776
+"UGC 9776"
+{
+	Type "Irr"
+	RA 15.216
+	Dec 56.98
+	Distance 5.67e7
+	Radius 10000
+}
+
+# NGC 5866B
+"NGC 5866B"
+{
+	Type "Sd"
+	RA 15.2
+	Dec 55.8
+	Distance 5.77e7
+	Radius 25000
+}
+
+# UGC 10031
+"UGC 10031"
+{
+	Type "Irr"
+	RA 15.764
+	Dec 61.56
+	Distance 5.93e7
+	Radius 15000
+}
+
+# NGC 6015
+"NGC 6015"
+{
+	Type "Sb"
+	RA 15.858
+	Dec 62.32
+	Distance 5.71e7
+	Radius 50000
+}
+
+#############################################################################
+#
+#  NGC 2997 group of galaxies
+#
+
+# NGC 2997
+"NGC 2997"
+{
+	Type "Sc"
+	RA 9.722
+	Dec -30.95
+	Distance 4.4e7
+	Radius 50000
+	Axis [ -0.596 -0.191 0.780 ]
+	Angle 100
+}
+
+# NGC 3056
+"NGC 3056"
+{
+	Type "S0"
+	RA 9.909
+	Dec -28.3
+	Distance 4.37e7
+	Radius 15000
+}
+
+# NGC 3113
+"NGC 3113"
+{
+	Type "Sc"
+	RA 10.076
+	Dec -28.44
+	Distance 4.66e7
+	Radius 30000
+}
+
+# NGC 3137
+"NGC 3137"
+{
+	Type "Sc"
+	RA 10.152
+	Dec -29.06
+	Distance 4.73e7
+	Radius 50000
+}
+
+# NGC 3175
+"NGC 3175"
+{
+	Type "Sb"
+	RA 10.246
+	Dec -28.87
+	Distance 4.86e7
+	Radius 45000
+}
+
+#############################################################################
+#
+#  NGC 7331 group of galaxies
+#
+
+# NGC 7331
+"NGC 7331"
+{
+	Type "Sb"
+	RA 22.618
+	Dec 34.417
+	Distance 4.66e7
+	Radius 50000
+}
+
+# NGC 7320, nearby galaxy in Stephan's Quintet
+"NGC 7320"
+{
+	Type "Sd"
+	RA 22.6
+	Dec 33.93
+	Distance 4.5e7
+	Radius 15000
+}
+
+# NGC 7363
+# This looks like a much-farther away spiral to me.
+"NGC 7363"
+{
+	Type "Sd"
+	RA 22.722
+	Dec 34
+	Distance 4.63e7
+	Radius 10000
+}
+
+# UGC 12082
+"UGC 12082"
+{
+	Type "Sd"
+	RA 22.571
+	Dec 32.88
+	Distance 4.53e7
+	Radius 25000
+}
+
+# UGC 12212
+"UGC 12212"
+{
+	Type "Sd"
+	RA 22.841
+	Dec 29.13
+	Distance 4.79e7
+	Radius 20000
+}
+
+# UGC 12060
+"UGC 12060"
+{
+	Type "Irr"
+	RA 22.508
+	Dec 33.82
+	Distance 4.92e7
+	Radius 15000
+}
+
+#############################################################################
+#
+#  NGC 2146 group of galaxies
+#
+
+# IC 396 / UGC 3203
+"IC 396"
+{
+	Type "S0"
+	RA 4.967
+	Dec 68.31
+	Distance 4.69e7
+	Radius 20000
+}
+
+# IC 356 / UGC 2953
+"IC 356"
+{
+	Type "Sb"
+	RA 4.128
+	Dec 69.82
+	Distance 5.28e7
+	Radius 50000
+}
+
+# NGC 2146, very disturbed lenticular/spiral
+"NGC 2146"
+{
+	Type "S0"
+	RA 6.31
+	Dec 78.35
+	Distance 5.61e7
+	Radius 45000
+}
+
+# UGC 4173
+"UGC 4173"
+{
+	Type "Irr"
+	RA 8.112
+	Dec 80.12
+	Distance 5.44e7
+	Radius 25000
+}
+
+# UGC 3137
+"UGC 3137"
+{
+	Type "Sb"
+	RA 4.771
+	Dec 76.43
+	Distance 5.84e7
+	Radius 30000
+}
+
+#############################################################################
+#
+#  Fornax Cluster of galaxies
+#
+
+# NGC 1399 - Tully's angular size estimate is way too low.
+"NGC 1399"
+{
+	Type "E2"
+	RA 3.642
+	Dec -35.45
+	Distance 5.51e7
+	Radius 50000
+}
+
+# NGC 1365, giant barred spiral
+"NGC 1365"
+{
+	Type "SBc"
+	RA 3.562
+	Dec -36.13
+	Distance 5.21e7
+	Radius 90000
+}
+
+# NGC 1350
+"NGC 1350"
+{
+	Type "SBc"
+	RA 3.518
+	Dec -33.61
+	Distance 5.48e7
+	Radius 50000
+}
+
+# NGC 1380
+"NGC 1380"
+{
+	Type "S0"
+	RA 3.607
+	Dec -34.97
+	Distance 5.44e7
+	Radius 35000
+}
+
+# NGC 1404
+"NGC 1404"
+{
+	Type "E3"
+	RA 3.648
+	Dec -35.59
+	Distance 5.58e7
+	Radius 35000
+}
+
+# NGC 1427
+"NGC 1427"
+{
+	Type "E3"
+	RA 3.705
+	Dec -35.41
+	Distance 5.44e7
+	Radius 30000
+}
+
+# NGC 1428
+"NGC 1428"
+{
+	Type "E4"
+	RA 3.706
+	Dec -35.16
+	Distance 5.54e7
+	Radius 15000
+}
+
+# NGC 1387
+"NGC 1387"
+{
+	Type "E0"
+	RA 3.616
+	Dec -35.52
+	Distance 5.5e7
+	Radius 30000
+}
+
+# NGC 1374
+"NGC 1374"
+{
+	Type "E1"
+	RA 3.588
+	Dec -35.23
+	Distance 5.51e7
+	Radius 20000
+}
+
+# NGC 1375
+"NGC 1375"
+{
+	Type "E6"
+	RA 3.587
+	Dec -35.27
+	Distance 5.61e7
+	Radius 20000
+}
+
+# NGC 1326
+"NGC 1326"
+{
+	Type "SBc"
+	RA 3.398
+	Dec -36.46
+	Distance 5.51e7
+	Radius 35000
+}
+
+# NGC 1316
+"NGC 1316"
+{
+	Type "S0"
+	RA 3.378
+	Dec -37.21
+	Distance 5.31e7
+	Radius 60000
+}
+
+# NGC 1317
+"NGC 1317"
+{
+	Type "SBa"
+	RA 3.38
+	Dec -37.11
+	Distance 5.63e7
+	Radius 30000
+}
+
+# NGC 1310
+"NGC 1310"
+{
+	Type "Sbc"
+	RA 3.35
+	Dec -37.14
+	Distance 5.56e7
+	Radius 20000
+}
+
+# NGC 1341
+"NGC 1341"
+{
+	Type "Sb"
+	RA 3.466
+	Dec -37.14
+	Distance 5.41e7
+	Radius 20000
+}
+
+# NGC 1351
+"NGC 1351"
+{
+	Type "E6"
+	RA 3.509
+	Dec -34.86
+	Distance 5.43e7
+	Radius 30000
+}
+
+# NGC 1379
+"NGC 1379"
+{
+	Type "E0"
+	RA 3.602
+	Dec -35.45
+	Distance 5.4e7
+	Radius 25000
+}
+
+# NGC 1381
+"NGC 1381"
+{
+	Type "S0"
+	RA 3.61
+	Dec -35.3
+	Distance 5.61e7
+	Radius 25000
+}
+
+# NGC 1389
+"NGC 1389"
+{
+	Type "E5"
+	RA 3.62
+	Dec -35.75
+	Distance 5.36e7
+	Radius 25000
+}
+
+# NGC 1344
+"NGC 1344"
+{
+	Type "E5"
+	RA 3.472
+	Dec -31.067
+	Distance 4.47e7
+	Radius 30000
+}
+
+# NGC 1339
+"NGC 1339"
+{
+	Type "E4"
+	RA 3.468
+	Dec -32.29
+	Distance 4.76e7
+	Radius 20000
+}
+
+#############################################################################
+#
+#  Dorado Cluster of galaxies
+#
+
+# NGC 1566, beautiful grand design spiral
+# This is probably my favourite spiral galaxy.
+"NGC 1566"
+{
+	Type "Sc"
+	RA 4.333
+	Dec -54.933
+	Distance 4.3e7
+	Radius 55000
+	Axis [ 0.712 0.533 0.456 ]
+	Angle 195
+}
+
+# NGC 1549
+"NGC 1549"
+{
+	Type "E3"
+	RA 4.262
+	Dec -55.6
+	Distance 4.3e7
+	Radius 45000
+}
+
+# NGC 1553
+"NGC 1553"
+{
+	Type "E5"
+	RA 4.27
+	Dec -55.783
+	Distance 4.3e7
+	Radius 40000
+}
+
+# NGC 1533
+"NGC 1533"
+{
+	Type "SBa"
+	RA 4.165
+	Dec -56.117
+	Distance 4.4e7
+	Radius 35000
+}
+
+# NGC 1574
+"NGC 1574"
+{
+	Type "E1"
+	RA 4.367
+	Dec -56.937
+	Distance 4.3e7
+	Radius 40000
+}
+
+# NGC 1543
+"NGC 1543"
+{
+	Type "SBc"
+	RA 4.213
+	Dec -57.733
+	Distance 4.3e7
+	Radius 50000
+	Axis [ 0.712 0.533 0.456 ]
+	Angle 195
+}
+
+# NGC 1515
+"NGC 1515"
+{
+	Type "Sa"
+	RA 4.068
+	Dec -54.1
+	Distance 4.3e7
+	Radius 50000
+}
+
+# NGC 1536
+"NGC 1536"
+{
+	Type "Sc"
+	RA 4.184
+	Dec -56.49
+	Distance 4.37e7
+	Radius 20000
+}
+
+# NGC 1546
+"NGC 1546"
+{
+	Type "S0"
+	RA 4.242
+	Dec -56.06
+	Distance 4.37e7
+	Radius 25000
+}
+
+# NGC 1596
+"NGC 1596"
+{
+	Type "S0"
+	RA 4.46
+	Dec -55.02
+	Distance 4.37e7
+	Radius 25000
+	Angle 100
+}
+
+# NGC 1617
+"NGC 1617"
+{
+	Type "Sb"
+	RA 4.528
+	Dec -54.59
+	Distance 4.37e7
+	Radius 30000
+}
+
+#############################################################################
+#
+#  NGC 1672 group of galaxies near Dorado cluster
+#
+
+# NGC 1672
+"NGC 1672"
+{
+	Type "Sb"
+	RA 4.761
+	Dec -59.24
+	Distance 4.73e7
+	Radius 40000
+}
+
+# NGC 1688
+"NGC 1688"
+{
+	Type "Sc"
+	RA 4.807
+	Dec -59.8
+	Distance 4.4e7
+	Radius 20000
+}
+
+# NGC 1824
+"NGC 1824"
+{
+	Type "Sd"
+	RA 5.115
+	Dec -59.72
+	Distance 4.53e7
+	Radius 25000
+}
+
+# NGC 1559
+"NGC 1559"
+{
+	Type "Sb"
+	RA 4.293
+	Dec -62.78
+	Distance 4.66e7
+	Radius 25000
+}
+
+# NGC 1853
+"NGC 1853"
+{
+	Type "Sd"
+	RA 5.204
+	Dec -57.39
+	Distance 5.09e7
+	Radius 25000
+}
+
+#############################################################################
+#
+#  NGC 4536 group of galaxies
+#
+
+# NGC 4536
+"NGC 4536"
+{
+	Type "Sc"
+	RA 12.574
+	Dec 2.19
+	Distance 4.34e7
+	Radius 50000
+}
+
+# NGC 4496
+"NGC 4496"
+{
+	Type "Irr"
+	RA 12.527
+	Dec 3.92
+	Distance 4.27e7
+	Radius 25000
+}
+
+# NGC 4527
+"NGC 4527"
+{
+	Type "Sb"
+	RA 12.569
+	Dec 2.66
+	Distance 4.4e7
+	Radius 40000
+}
+
+# NGC 4420
+"NGC 4420"
+{
+	Type "Sc"
+	RA 12.449
+	Dec 2.49
+	Distance 4.53e7
+	Radius 20000
+}
+
+# NGC 4666
+"NGC 4666"
+{
+	Type "Sc"
+	RA 12.752
+	Dec -0.46
+	Distance 4.6e7
+	Radius 30000
+}
+
+# NGC 4632
+"NGC 4632"
+{
+	Type "Sc"
+	RA 12.709
+	Dec -0.09
+	Distance 4.63e7
+	Radius 20000
+}
+
+# NGC 4753
+"NGC 4753"
+{
+	Type "E6"
+	RA 12.872
+	Dec -1.2
+	Distance 4.92e7
+	Radius 30000
+}
+
+# NGC 4517A / UGC 7685
+"NGC 4517A"
+{
+	Type "Sd"
+	RA 12.541
+	Dec 0.36
+	Distance 4.73e7
+	Radius 30000
+}
+
+# UGC 8041
+"UGC 8041"
+{
+	Type "Sd"
+	RA 12.919
+	Dec 0.11
+	Distance 4.63e7
+	Radius 25000
+}
+
+# UGC 7354
+"UGC 7354"
+{
+	Type "E3"
+	RA 12.319
+	Dec 3.86
+	Distance 4.76e7
+	Radius 10000
+}
+
+# UGC 7612
+"UGC 7612"
+{
+	Type "Sd"
+	RA 12.484
+	Dec 2.72
+	Distance 4.76e7
+	Radius 20000
+}
+
+# UGC 7512
+"UGC 7512"
+{
+	Type "Irr"
+	RA 12.429
+	Dec 2.16
+	Distance 4.92e7
+	Radius 10000
+}
+
+#############################################################################
+#
+#  NGC 1042 group of galaxies (Scl - PsA)
+#
+
+# NGC 1042
+"NGC 1042"
+{
+	Type "Sc"
+	RA 2.672
+	Dec -8.44
+	Distance 5.44e7
+	Radius 40000
+}
+
+# NGC 1035
+"NGC 1035"
+{
+	Type "Sc"
+	RA 2.659
+	Dec -8.12
+	Distance 4.89e7
+	Radius 25000
+}
+
+# NGC 1051
+"NGC 1051"
+{
+	Type "Sd"
+	RA 2.684
+	Dec -6.94
+	Distance 5.18e7
+	Radius 25000
+}
+
+# NGC 1110
+"NGC 1110"
+{
+	Type "Sd"
+	RA 2.82
+	Dec -7.84
+	Distance 5.31e7
+	Radius 25000
+}
+
+# NGC 1084
+"NGC 1084"
+{
+	Type "Sb"
+	RA 2.766
+	Dec -7.57
+	Distance 5.57e7
+	Radius 30000
+}
+
+# NGC 1022
+"NGC 1022"
+{
+	Type "SBa"
+	RA 2.642
+	Dec -6.67
+	Distance 6.03e7
+	Radius 25000
+}
+
+# NGC 991
+"NGC 991"
+{
+	Type "Sc"
+	RA 2.592
+	Dec -7.15
+	Distance 6.13e7
+	Radius 30000
+}
+
+# NGC 1140
+"NGC 1140"
+{
+	Type "E5"
+	RA 2.91
+	Dec -10.03
+	Distance 5.93e7
+	Radius 15000
+}
+
+# NGC 1052
+"NGC 1052"
+{
+	Type "E4"
+	RA 2.684
+	Dec -8.25
+	Distance 5.8e7
+	Radius 25000
+}
+
+# NGC 988
+"NGC 988"
+{
+	Type "Sc"
+	RA 2.589
+	Dec -9.37
+	Distance 5.97e7
+	Radius 35000
+}
+
+#############################################################################
+#
+#  NGC 1087 group of galaxies (Scl - PsA)
+#
+
+# NGC 955
+"NGC 955"
+{
+	Type "Sb"
+	RA 2.509
+	Dec -1.11
+	Distance 6.26e7
+	Radius 30000
+}
+
+# UGC 2345
+"UGC 2345"
+{
+	Type "Irr"
+	RA 2.864
+	Dec -1.15
+	Distance 6.13e7
+	Radius 35000
+}
+
+# NGC 1087
+"NGC 1087"
+{
+	Type "SBc"
+	RA 2.774
+	Dec -0.51
+	Distance 6.19e7
+	Radius 35000
+}
+
+# PGC 9559
+"PGC 9559"
+{
+	Type "Sd"
+	RA 2.512
+	Dec -3.8
+	Distance 6.59e7
+	Radius 35000
+}
+
+# UGC 1839
+"UGC 1839"
+{
+	Type "Sd"
+	RA 2.376
+	Dec -0.62
+	Distance 6.23e7
+	Radius 30000
+}
+
+#############################################################################
+#
+#  NGC 7507 group of galaxies (Scl - PsA)
+#
+
+# NGC 7314
+"NGC 7314"
+{
+	Type "Sb"
+	RA 22.596
+	Dec -26.05
+	Distance 5.97e7
+	Radius 40000
+	Axis [ -0.596 -0.191 0.780 ]
+	Angle 100
+}
+
+# NGC 7507
+"NGC 7507"
+{
+	Type "E1"
+	RA 23.202
+	Dec -28.54
+	Distance 6.29e7
+	Radius 20000
+}
+
+# NGC 7513
+"NGC 7513"
+{
+	Type "SBc"
+	RA 23.22
+	Dec -28.367
+	Distance 6.5e7
+	Radius 40000
+}
+
+#############################################################################
+#
+#  NGC 4861 group of galaxies
+#
+
+# NGC 4861
+"NGC 4861"
+{
+	Type "Irr"
+	RA 12.984
+	Dec 34.86
+	Distance 5.8e7
+	Radius 35000
+}
+
+# UGC 8246
+"UGC 8246"
+{
+	Type "Sc"
+	RA 13.167
+	Dec 34.18
+	Distance 5.64e7
+	Radius 30000
+}
+
+# UGC 8323
+"UGC 8323"
+{
+	Type "Irr"
+	RA 13.246
+	Dec 34.89
+	Distance 5.84e7
+	Radius 15000
+}
+
+# UGC 8261
+"UGC 8261"
+{
+	Type "Irr"
+	RA 13.184
+	Dec 35.52
+	Distance 5.9e7
+	Radius 10000
+}
+
+# IC 4213 / UGC 8280
+"IC 4213"
+{
+	Type "Sc"
+	RA 13.202
+	Dec 35.67
+	Distance 5.67e7
+	Radius 25000
+}
+
+# NGC 5107, outlying member
+"NGC 5107"
+{
+	Type "Sc"
+	RA 13.357
+	Dec 38.54
+	Distance 6.49e7
+	Radius 20000
+}
+
+#############################################################################
+#
+#  NGC 3930 group of galaxies
+#
+
+# NGC 3930
+"NGC 3930"
+{
+	Type "Sc"
+	RA 11.861
+	Dec 38.01
+	Distance 6.03e7
+	Radius 40000
+}
+
+# NGC 3941
+"NGC 3941"
+{
+	Type "E7"
+	RA 11.881
+	Dec 36.99
+	Distance 6.16e7
+	Radius 35000
+}
+
+# UGC 6955
+"UGC 6955"
+{
+	Type "Sd"
+	RA 11.972
+	Dec 38.07
+	Distance 6.1e7
+	Radius 45000
+}
+
+# UGC 7257
+"UGC 7257"
+{
+	Type "Irr"
+	RA 12.25
+	Dec 35.96
+	Distance 6.59e7
+	Radius 20000
+}
+
+# NGC 4151, peculiar 'lobed' spiral
+"NGC 4151"
+{
+	Type "SBb"
+	RA 12.175
+	Dec 39.41
+	Distance 6.62e7
+	Radius 50000
+}
+
+#############################################################################
+#
+#  NGC 7531 group of galaxies
+#
+
+# NGC 7590
+"NGC 7590"
+{
+	Type "Sa"
+	RA 23.316
+	Dec -42.24
+	Distance 5.64e7
+	Radius 25000
+}
+
+# NGC 7582
+"NGC 7582"
+{
+	Type "SBa"
+	RA 23.306
+	Dec -42.38
+	Distance 5.74e7
+	Radius 40000
+}
+
+# NGC 7531
+"NGC 7531"
+{
+	Type "Sb"
+	RA 23.246
+	Dec -43.61
+	Distance 6.29e7
+	Radius 50000
+}
+
+# NGC 7632
+"NGC 7632"
+{
+	Type "S0"
+	RA 23.368
+	Dec -42.49
+	Distance 6.29e7
+	Radius 20000
+}
+
+# NGC 7552
+"NGC 7552"
+{
+	Type "Sb"
+	RA 23.271
+	Dec -42.61
+	Distance 6.36e7
+	Radius 35000
+}
+
+# NGC 7599
+"NGC 7599"
+{
+	Type "Sc"
+	RA 23.322
+	Dec -42.26
+	Distance 6.59e7
+	Radius 50000
+}
+
+# NGC 7496
+"NGC 7496"
+{
+	Type "SBc"
+	RA 23.163
+	Dec -43.43
+	Distance 6.55e7
+	Radius 45000
+}
+
+#############################################################################
+#
+#  NGC 3447 group of galaxies
+#
+
+# NGC 3447
+"NGC 3447"
+{
+	Type "Sc"
+	RA 10.889
+	Dec 16.77
+	Distance 6.55e7
+	Radius 40000
+}
+
+# NGC 3447B / UGC 6007
+"NGC 3447B"
+{
+	Type "Irr"
+	RA 10.892
+	Dec 16.78
+	Distance 6.42e7
+	Radius 20000
+}
+
+# UGC 6035
+"UGC 6035"
+{
+	Type "Irr"
+	RA 10.924
+	Dec 17.13
+	Distance 6.62e7
+	Radius 15000
+}
+
+# NGC 3507
+"NGC 3507"
+{
+	Type "SBb"
+	RA 11.057
+	Dec 18.13
+	Distance 6.45e7
+	Radius 30000
+}
+
+# NGC 3607
+"NGC 3607"
+{
+	Type "E1"
+	RA 11.282
+	Dec 18.06
+	Distance 6.49e7
+	Radius 50000
+}
+
+# UGC 5675
+"UGC 5675"
+{
+	Type "Irr"
+	RA 10.475
+	Dec 19.56
+	Distance 6.36e7
+	Radius 20000
+}
+
+#############################################################################
+#
+#  NGC 5846 group of galaxies
+#
+
+# NGC 5846
+"NGC 5846"
+{
+	Type "E1"
+	RA 15.106
+	Dec 1.6
+	Distance 7.6e7
+	Radius 50000
+}
+
+# NGC 5850
+"NGC 5850"
+{
+	Type "SBc"
+	RA 15.118
+	Dec 1.55
+	Distance 7.7e7
+	Radius 50000
+}
+
+# NGC 5839
+"NGC 5839"
+{
+	Type "E3"
+	RA 15.092
+	Dec 1.633
+	Distance 7.6e7
+	Radius 15000
+}
+
+# NGC 5845
+"NGC 5845"
+{
+	Type "E5"
+	RA 15.1
+	Dec 1.633
+	Distance 7.65e7
+	Radius 10000
+}
+
+# NGC 5813
+"NGC 5813"
+{
+	Type "E3"
+	RA 15.02
+	Dec 1.7
+	Distance 8.07e7
+	Radius 40000
+}
+
+# NGC 5921, outlying member?
+"NGC 5921"
+{
+	Type "SBc"
+	RA 15.365
+	Dec 5.067
+	Distance 6.3e7
+	Radius 50000
+}
+
+# NGC 5838, outlying member?
+"NGC 5838"
+{
+	Type "S0"
+	RA 15.09
+	Dec 2.1
+	Distance 6.0e7
+	Radius 40000
+}
+
+#############################################################################
+#
+#  Eridanus Cluster of galaxies
+#
+
+# NGC 1309
+"NGC 1309"
+{
+	Type "Sb"
+	RA 3.368
+	Dec -15.4
+	Distance 8.4e7
+	Radius 40000
+}
+
+# NGC 1407
+"NGC 1407"
+{
+	Type "E0"
+	RA 3.67
+	Dec -18.583
+	Distance 6.9e7
+	Radius 50000
+}
+
+# NGC 1300
+"NGC 1300"
+{
+	Type "SBc"
+	RA 3.329
+	Dec -19.4
+	Distance 6.13e7
+	Radius 55000
+}
+
+# NGC 1232
+"NGC 1232"
+{
+	Type "Sc"
+	RA 3.162
+	Dec -20.58
+	Distance 6.52e7
+	Radius 70000
+}
+
+# NGC 1332
+"NGC 1332"
+{
+	Type "S0"
+	RA 3.438
+	Dec -21.34
+	Distance 5.77e7
+	Radius 40000
+	Axis [ 0.712 0.533 0.456 ]
+	Angle 195
+}
+
+# NGC 1331, companion to 1332
+"NGC 1331"
+{
+	Type "E1"
+	RA 3.442
+	Dec -21.36
+	Distance 5.78e7
+	Radius 20000
+}
+
+# NGC 1315
+"NGC 1315"
+{
+	Type "SB0"
+	RA 3.385
+	Dec -21.37
+	Distance 5.77e7
+	Radius 15000
+}
+
+# NGC 1325
+"NGC 1325"
+{
+	Type "Sb"
+	RA 3.408
+	Dec -21.51
+	Distance 5.77e7
+	Radius 45000
+}
+
+# NGC 1353
+"NGC 1353"
+{
+	Type "Sb"
+	RA 3.535
+	Dec -20.8
+	Distance 5.8e7
+	Radius 30000
+}
+
+# NGC 1345
+"NGC 1345"
+{
+	Type "Irr"
+	RA 3.489
+	Dec -17.8
+	Distance 5.9e7
+	Radius 20000
+}
+
+# NGC 1415
+"NGC 1415"
+{
+	Type "Sb"
+	RA 3.683
+	Dec -22.56
+	Distance 5.77e7
+	Radius 35000
+}
+
+# NGC 1440
+"NGC 1440"
+{
+	Type "SB0"
+	RA 3.75
+	Dec -18.26
+	Distance 5.93e7
+	Radius 20000
+}
+
+# NGC 1187
+"NGC 1187"
+{
+	Type "Sc"
+	RA 3.043
+	Dec -22.867
+	Distance 5.24e7
+	Radius 40000
+}
+
+# NGC 1395
+"NGC 1395"
+{
+	Type "E3"
+	RA 3.641
+	Dec -23.02
+	Distance 6.52e7
+	Radius 40000
+}
+
+# NGC 1385, disturbed spiral
+"NGC 1385"
+{
+	Type "Sb"
+	RA 3.622
+	Dec -24.5
+	Distance 5.71e7
+	Radius 40000
+}
+
+# NGC 1371
+"NGC 1371"
+{
+	Type "SBb"
+	RA 3.582
+	Dec -24.92
+	Distance 5.57e7
+	Radius 55000
+}
+
+# NGC 1426
+"NGC 1426"
+{
+	Type "E4"
+	RA 3.713
+	Dec -22.11
+	Distance 5.48e7
+	Radius 25000
+}
+
+# NGC 1292
+"NGC 1292"
+{
+	Type "Sc"
+	RA 3.302
+	Dec -27.62
+	Distance 5.12e7
+	Radius 25000
+}
+
+# NGC 1398
+"NGC 1398"
+{
+	Type "SBb"
+	RA 3.648
+	Dec -26.333
+	Distance 5.18e7
+	Radius 50000
+}
+
+# NGC 1425
+"NGC 1425"
+{
+	Type "Sb"
+	RA 3.705
+	Dec -29.89
+	Distance 5.67e7
+	Radius 55000
+}
+
+# NGC 1297
+"NGC 1297"
+{
+	Type "E0"
+	RA 3.321
+	Dec -19.1
+	Distance 5.97e7
+	Radius 20000
+}
+
+# NGC 1401
+"NGC 1401"
+{
+	Type "E7"
+	RA 3.656
+	Dec -22.72
+	Distance 6.0e7
+	Radius 20000
+}
+
+# NGC 1482
+"NGC 1482"
+{
+	Type "Sa"
+	RA 3.912
+	Dec -20.5
+	Distance 6.39e7
+	Radius 20000
+}
+
+# NGC 1439
+"NGC 1439"
+{
+	Type "E0"
+	RA 3.746
+	Dec -21.93
+	Distance 6.42e7
+	Radius 25000
+}
+
+# NGC 1461
+"NGC 1461"
+{
+	Type "S0"
+	RA 3.808
+	Dec -16.4
+	Distance 5.57e7
+	Radius 30000
+}
+
+# NGC 1302
+"NGC 1302"
+{
+	Type "SBc"
+	RA 3.33
+	Dec -26.05
+	Distance 6.52e7
+	Radius 40000
+}
+
+# NGC 1255
+"NGC 1255"
+{
+	Type "Sc"
+	RA 3.226
+	Dec -25.73
+	Distance 6.49e7
+	Radius 35000
+}
+
+# NGC 1201
+"NGC 1201"
+{
+	Type "S0"
+	RA 3.069
+	Dec -26.07
+	Distance 6.59e7
+	Radius 30000
+}
+
+#############################################################################
+#
+#  Grus Cluster of galaxies
+#
+
+# IC 1459
+"IC 1459"
+{
+	Type "E3"
+	RA 22.953
+	Dec -36.47
+	Distance 6.52e7
+	Radius 40000
+}
+
+# NGC 7418
+"NGC 7418"
+{
+	Type "Sc"
+	RA 22.943
+	Dec -37.02
+	Distance 5.8e7
+	Radius 30000
+}
+
+#############################################################################
+#
+#  Virgo Cluster of galaxies
+#
+#  The Virgo cluster data presented here also contains these additional galaxies
+#  not present in Tully's catalogue:
+#
+#  NGC 4470
+#  NGC 4488
+#  NGC 4330
+#  NGC 4313
+#  NGC 4415
+#  NGC 4445
+#
+
+# M49 / NGC 4472
+"M49"
+{
+	Type "E4"
+	RA 12.497
+	Dec 8.000
+	Distance 5.48e7
+	Radius 90000
+}
+
+# M58 / NGC 4579
+"M58"
+{
+	Type "SBc"
+	RA 12.628
+	Dec 11.83
+	Distance 5.2e7
+	Radius 45000
+}
+
+# M59 / NGC 4621
+"M59"
+{
+	Type "E5"
+	RA 12.7
+	Dec 11.64
+	Distance 5.52e7
+	Radius 45000
+}
+
+# M60 / NGC 4649
+"M60"
+{
+	Type "E2"
+	RA 12.728
+	Dec 11.56
+	Distance 5.3e7
+	Radius 60000
+}
+
+# M61 / NGC 4303
+"M61"
+{
+	Type "Sc"
+	RA 12.365
+	Dec 4.467
+	Distance 4.96e7
+	Radius 50000
+	Axis [ 0.712 0.533 0.456 ]
+	Angle 195
+}
+
+# M84 / NGC 4374
+"M84"
+{
+	Type "E2"
+	RA 12.418
+	Dec 12.883
+	Distance 5.6e7
+	Radius 50000
+}
+
+# M85 / NGC 4382
+"M85"
+{
+	Type "S0"
+	RA 12.424
+	Dec 18.19
+	Distance 5.4e7
+	Radius 60000
+}
+
+# M86 / NGC 4406
+"M86"
+{
+	Type "E5"
+	RA 12.437
+	Dec 12.94
+	Distance 5.35e7
+	Radius 60000
+}
+
+# M87 / NGC 4486, Virgo A
+"M87"
+{
+	Type "E0"
+	RA 12.514
+	Dec 12.39
+	Distance 5.48e7
+	Radius 100000
+}
+
+# M88 / NGC 4501
+"M88"
+{
+	Type "Sb"
+	RA 12.532
+	Dec 14.42
+	Distance 5.14e7
+	Radius 50000
+}
+
+# M89 / NGC 4552
+"M89"
+{
+	Type "E1"
+	RA 12.594
+	Dec 12.56
+	Distance 5.41e7
+	Radius 30000
+}
+
+# M90 / NGC 4569
+"M90"
+{
+	Type "Sc"
+	RA 12.614
+	Dec 13.16
+	Distance 5.0e7
+	Radius 60000
+}
+
+# IC 3583 / UGC 7784, interacting with M90
+"IC 3583"
+{
+	Type "Irr"
+	RA 12.612
+	Dec 13.26
+	Distance 5.01e7
+	Radius 20000
+}
+
+# M91 / NGC 4548
+"M91"
+{
+	Type "SBb"
+	RA 12.59
+	Dec 14.49
+	Distance 5.12e7
+	Radius 50000
+	Axis [ 0.712 0.533 0.456 ]
+	Angle 195
+}
+
+# M98 / NGC 4192
+"M98"
+{
+	Type "Sb"
+	RA 12.23
+	Dec 14.9
+	Distance 5.52e7
+	Radius 50000
+	Axis [ -0.596 -0.191 0.780 ]
+	Angle 100
+}
+
+# M99 / NGC 4254
+"M99"
+{
+	Type "Sc"
+	RA 12.313
+	Dec 14.417
+	Distance 5.13e7
+	Radius 50000
+	Axis [ 0.712 0.533 0.456 ]
+	Angle 195
+}
+
+# M100 / NGC 4321
+"M100"
+{
+	Type "Sc"
+	RA 12.382
+	Dec 15.817
+	Distance 5.18e7
+	Radius 50000
+	Axis [ 0.712 0.533 0.456 ]
+	Angle 195
+}
+
+# NGC 4124
+"NGC 4124"
+{
+	Type "S0"
+	RA 12.136
+	Dec 10.37
+	Distance 5.44e7
+	Radius 40000
+}
+
+# NGC 4168
+"NGC 4168"
+{
+	Type "E2"
+	RA 12.204
+	Dec 13.21
+	Distance 5.5e7
+	Radius 25000
+}
+
+# IC 769 / UGC 7209
+"IC 769"
+{
+	Type "Sc"
+	RA 12.209
+	Dec 12.12
+	Distance 5.6e7
+	Radius 25000
+}
+
+# NGC 4178
+"NGC 4178"
+{
+	Type "Sc"
+	RA 12.212
+	Dec 10.87
+	Distance 5.3e7
+	Radius 40000
+}
+
+# NGC 4189
+"NGC 4189"
+{
+	Type "Sc"
+	RA 12.229
+	Dec 13.44
+	Distance 5.65e7
+	Radius 25000
+}
+
+# UGC 7249
+"UGC 7249"
+{
+	Type "Irr"
+	RA 12.244
+	Dec 12.81
+	Distance 5.22e7
+	Radius 15000
+}
+
+# NGC 4206
+"NGC 4206"
+{
+	Type "Sb"
+	RA 12.254
+	Dec 13.02
+	Distance 5.2e7
+	Radius 45000
+}
+
+# NGC 4212
+"NGC 4212"
+{
+	Type "Sb"
+	RA 12.26
+	Dec 13.91
+	Distance 5.7e7
+	Radius 25000
+}
+
+# IC 3074 / UGC 7279
+"IC 3074"
+{
+	Type "Sd"
+	RA 12.262
+	Dec 10.69
+	Distance 5.53e7
+	Radius 20000
+}
+
+# NGC 4216
+"NGC 4216"
+{
+	Type "Sb"
+	RA 12.266
+	Dec 13.16
+	Distance 5.39e7
+	Radius 60000
+}
+
+# UGC 7307
+"UGC 7307"
+{
+	Type "Irr"
+	RA 12.286
+	Dec 10.01
+	Distance 5.54e7
+	Radius 15000
+}
+
+# NGC 4237
+"NGC 4237"
+{
+	Type "Sb"
+	RA 12.287
+	Dec 15.32
+	Distance 5.62e7
+	Radius 20000
+}
+
+# IC 776 / UGC 7352
+"IC 776"
+{
+	Type "Sd"
+	RA 12.317
+	Dec 8.86
+	Distance 5.55e7
+	Radius 20000
+}
+
+# NGC 4262
+"NGC 4262"
+{
+	Type "S0"
+	RA 12.325
+	Dec 14.87
+	Distance 5.52e7
+	Radius 20000
+}
+
+# NGC 4267
+"NGC 4267"
+{
+	Type "S0"
+	RA 12.329
+	Dec 12.81
+	Distance 5.42e7
+	Radius 25000
+}
+
+# NGC 4294
+"NGC 4294"
+{
+	Type "Sc"
+	RA 12.356
+	Dec 11.51
+	Distance 5.7e7
+	Radius 25000
+}
+
+# NGC 4298
+"NGC 4298"
+{
+	Type "Sb"
+	RA 12.358
+	Dec 14.61
+	Distance 5.63e7
+	Radius 25000
+}
+
+# NGC 4299
+"NGC 4299"
+{
+	Type "Sd"
+	RA 12.362
+	Dec 11.51
+	Distance 5.8e7
+	Radius 15000
+}
+
+# NGC 4302
+"NGC 4302"
+{
+	Type "Sc"
+	RA 12.362
+	Dec 14.61
+	Distance 5.29e7
+	Radius 40000
+}
+
+# NGC 4307
+"NGC 4307"
+{
+	Type "S0"
+	RA 12.369
+	Dec 9.04
+	Distance 5.46e7
+	Radius 30000
+}
+
+# NGC 4313
+"NGC 4313"
+{
+	Type "S0"
+	RA 12.377
+	Dec 11.801
+	Distance 5.4e7
+	Radius 30000
+}
+
+# NGC 4318
+"NGC 4318"
+{
+	Type "E3"
+	RA 12.379
+	Dec 8.21
+	Distance 5.43e7
+	Radius 10000
+}
+
+# NGC 4330
+"NGC 4330"
+{
+	Type "Sc"
+	RA 12.388
+	Dec 11.369
+	Distance 5.3e7
+	Radius 40000
+}
+
+# NGC 4342
+"NGC 4342"
+{
+	Type "E7"
+	RA 12.394
+	Dec 7.06
+	Distance 5.53e7
+	Radius 15000
+}
+
+# NGC 4340
+"NGC 4340"
+{
+	Type "SBa"
+	RA 12.394
+	Dec 16.72
+	Distance 5.59e7
+	Radius 25000
+}
+
+# IC 3258 / UGC 7470
+"IC 3258"
+{
+	Type "Irr"
+	RA 12.395
+	Dec 12.47
+	Distance 5.76e7
+	Radius 15000
+}
+
+# NGC 4350
+"NGC 4350"
+{
+	Type "E7"
+	RA 12.398
+	Dec 16.69
+	Distance 5.45e7
+	Radius 25000
+}
+
+# NGC 4351
+"NGC 4351"
+{
+	Type "Sb"
+	RA 12.4
+	Dec 12.21
+	Distance 5.33e7
+	Radius 15000
+}
+
+# NGC 4365
+"NGC 4365"
+{
+	Type "E4"
+	RA 12.407
+	Dec 7.32
+	Distance 5.4e7
+	Radius 55000
+}
+
+# NGC 4371
+"NGC 4371"
+{
+	Type "S0"
+	RA 12.415
+	Dec 11.71
+	Distance 5.5e7
+	Radius 40000
+}
+
+# NGC 4377
+"NGC 4377"
+{
+	Type "E7"
+	RA 12.42
+	Dec 14.76
+	Distance 5.46e7
+	Radius 15000
+}
+
+# NGC 4379
+"NGC 4379"
+{
+	Type "S0"
+	RA 12.42
+	Dec 15.61
+	Distance 5.56e7
+	Radius 15000
+}
+
+# NGC 4380
+"NGC 4380"
+{
+	Type "Sb"
+	RA 12.422
+	Dec 10.01
+	Distance 5.62e7
+	Radius 30000
+}
+
+# NGC 4383
+"NGC 4383"
+{
+	Type "E7"
+	RA 12.424
+	Dec 16.47
+	Distance 5.49e7
+	Radius 15000
+}
+
+# UGC 7513
+"UGC 7513"
+{
+	Type "Sc"
+	RA 12.429
+	Dec 7.22
+	Distance 5.28e7
+	Radius 30000
+}
+
+# NGC 4387
+"NGC 4387"
+{
+	Type "E5"
+	RA 12.428
+	Dec 12.81
+	Distance 5.51e7
+	Radius 15000
+}
+
+# NGC 4388
+"NGC 4388"
+{
+	Type "Sb"
+	RA 12.43
+	Dec 12.66
+	Distance 5.2e7
+	Radius 45000
+}
+
+# NGC 4394
+"NGC 4394"
+{
+	Type "SBb"
+	RA 12.432
+	Dec 18.21
+	Distance 5.6e7
+	Radius 30000
+}
+
+# NGC 4411
+"NGC 4411"
+{
+	Type "Sd"
+	RA 12.442
+	Dec 8.87
+	Distance 5.75e7
+	Radius 20000
+}
+
+# NGC 4413
+"NGC 4413"
+{
+	Type "SBb"
+	RA 12.442
+	Dec 12.61
+	Distance 5.9e7
+	Radius 25000
+}
+
+# NGC 4415
+"NGC 4415"
+{
+	Type "E1"
+	RA 12.444
+	Dec 8.435
+	Distance 5.5e7
+	Radius 10000
+}
+
+# NGC 4417
+"NGC 4417"
+{
+	Type "S0"
+	RA 12.446
+	Dec 9.57
+	Distance 5.4e7
+	Radius 30000
+}
+
+# IC 3356 / UGC 7547
+"IC 3356"
+{
+	Type "Irr"
+	RA 12.447
+	Dec 11.57
+	Distance 5.82e7
+	Radius 15000
+}
+
+# IC 3343 / UGC 7546
+"IC 3343"
+{
+	Type "Sd"
+	RA 12.447
+	Dec 8.87
+	Distance 5.8e7
+	Radius 25000
+}
+
+# NGC 4419
+"NGC 4419"
+{
+	Type "E7"
+	RA 12.448
+	Dec 15.04
+	Distance 5.38e7
+	Radius 25000
+}
+
+# NGC 4421
+"NGC 4421"
+{
+	Type "S0"
+	RA 12.45
+	Dec 15.46
+	Distance 5.28e7
+	Radius 25000
+}
+
+# IC 3365 / UGC 7563
+"IC 3365"
+{
+	Type "Irr"
+	RA 12.452
+	Dec 15.91
+	Distance 5.15e7
+	Radius 20000
+}
+
+# UGC 7557
+"UGC 7557"
+{
+	Type "Sd"
+	RA 12.454
+	Dec 7.26
+	Distance 5.63e7
+	Radius 25000
+}
+
+# NGC 4424
+"NGC 4424"
+{
+	Type "Sb"
+	RA 12.454
+	Dec 9.42
+	Distance 5.55e7
+	Radius 30000
+}
+
+# NGC 4425
+"NGC 4425"
+{
+	Type "E7"
+	RA 12.454
+	Dec 12.74
+	Distance 5.52e7
+	Radius 25000
+}
+
+# NGC 4429
+"NGC 4429"
+{
+	Type "S0"
+	RA 12.457
+	Dec 11.11
+	Distance 5.32e7
+	Radius 45000
+}
+
+# NGC 4435
+"NGC 4435"
+{
+	Type "S0"
+	RA 12.46
+	Dec 13.07
+	Distance 5.4e7
+	Radius 30000
+}
+
+# NGC 4438, highly disturbed spiral/lenticular
+"NGC 4438"
+{
+	Type "S0"
+	RA 12.464
+	Dec 13.01
+	Distance 5.38e7
+	Radius 50000
+}
+
+# NGC 4442
+"NGC 4442"
+{
+	Type "S0"
+	RA 12.467
+	Dec 9.81
+	Distance 5.45e7
+	Radius 35000
+}
+
+# NGC 4445
+"NGC 4445"
+{
+	Type "S0"
+	RA 12.471
+	Dec 9.436
+	Distance 5.32e7
+	Radius 20000
+}
+
+# NGC 4450
+"NGC 4450"
+{
+	Type "Sb"
+	RA 12.475
+	Dec 17.09
+	Distance 5.35e7
+	Radius 40000
+}
+
+# NGC 4451
+"NGC 4451"
+{
+	Type "E5"
+	RA 12.477
+	Dec 9.26
+	Distance 5.48e7
+	Radius 15000
+}
+
+# NGC 4452
+"NGC 4452"
+{
+	Type "E7"
+	RA 12.478
+	Dec 11.76
+	Distance 5.59e7
+	Radius 25000
+}
+
+# NGC 4458
+"NGC 4458"
+{
+	Type "E1"
+	RA 12.482
+	Dec 13.24
+	Distance 5.61e7
+	Radius 15000
+}
+
+# NGC 4459
+"NGC 4459"
+{
+	Type "E2"
+	RA 12.484
+	Dec 13.97
+	Distance 5.56e7
+	Radius 35000
+}
+
+# NGC 4461
+"NGC 4461"
+{
+	Type "S0"
+	RA 12.484
+	Dec 13.19
+	Distance 5.27e7
+	Radius 30000
+}
+
+# NGC 4464
+"NGC 4464"
+{
+	Type "E3"
+	RA 12.489
+	Dec 8.16
+	Distance 5.38e7
+	Radius 10000
+}
+
+# NGC 4469
+"NGC 4469"
+{
+	Type "S0"
+	RA 12.49
+	Dec 8.74
+	Distance 5.3e7
+	Radius 25000
+}
+
+# NGC 4467
+"NGC 4467"
+{
+	Type "E2"
+	RA 12.492
+	Dec 7.99
+	Distance 5.6e7
+	Radius 10000
+}
+
+# NGC 4470
+"NGC 4470"
+{
+	Type "E3"
+	RA 12.494
+	Dec 7.824
+	Distance 5.53e7
+	Radius 10000
+}
+
+# NGC 4473
+"NGC 4473"
+{
+	Type "E5"
+	RA 12.497
+	Dec 13.42
+	Distance 5.46e7
+	Radius 40000
+}
+
+# NGC 4474
+"NGC 4474"
+{
+	Type "S0"
+	RA 12.498
+	Dec 14.07
+	Distance 5.31e7
+	Radius 20000
+}
+
+# NGC 4476
+"NGC 4476"
+{
+	Type "E7"
+	RA 12.5
+	Dec 12.36
+	Distance 5.34e7
+	Radius 15000
+}
+
+# NGC 4477
+"NGC 4477"
+{
+	Type "S0"
+	RA 12.5
+	Dec 13.64
+	Distance 5.23e7
+	Radius 30000
+}
+
+# NGC 4478
+"NGC 4478"
+{
+	Type "E2"
+	RA 12.505
+	Dec 12.32
+	Distance 5.67e7
+	Radius 15000
+}
+
+# NGC 4479
+"NGC 4479"
+{
+	Type "S0"
+	RA 12.505
+	Dec 13.57
+	Distance 5.53e7
+	Radius 15000
+}
+
+# NGC 4483
+"NGC 4483"
+{
+	Type "S0"
+	RA 12.51
+	Dec 9.02
+	Distance 5.2e7
+	Radius 15000
+}
+
+# NGC 4488
+"NGC 4488"
+{
+	Type "SB0"
+	RA 12.514
+	Dec 8.36
+	Distance 5.37e7
+	Radius 30000
+}
+
+# NGC 4492
+"NGC 4492"
+{
+	Type "Sa"
+	RA 12.517
+	Dec 8.07
+	Distance 5.74e7
+	Radius 20000
+}
+
+# IC 3453 / UGC 7666
+"IC 3453"
+{
+	Type "Irr"
+	RA 12.525
+	Dec 14.86
+	Distance 5.81e7
+	Radius 15000
+}
+
+# NGC 4498
+"NGC 4498"
+{
+	Type "Sd"
+	RA 12.526
+	Dec 16.86
+	Distance 5.55e7
+	Radius 30000
+}
+
+# NGC 4503
+"NGC 4503"
+{
+	Type "S0"
+	RA 12.535
+	Dec 11.17
+	Distance 5.6e7
+	Radius 30000
+}
+
+# NGC 4519
+"NGC 4519"
+{
+	Type "Sc"
+	RA 12.558
+	Dec 8.66
+	Distance 5.66e7
+	Radius 30000
+}
+
+# NGC 4522
+"NGC 4522"
+{
+	Type "Sb"
+	RA 12.56
+	Dec 9.16
+	Distance 5.79e7
+	Radius 35000
+}
+
+# NGC 4523
+"NGC 4523"
+{
+	Type "Irr"
+	RA 12.563
+	Dec 15.16
+	Distance 5.25e7
+	Radius 20000
+}
+
+# NGC 4526, giant lenticular
+"NGC 4526"
+{
+	Type "S0"
+	RA 12.567
+	Dec 7.71
+	Distance 5.52e7
+	Radius 60000
+}
+
+# NGC 4535, slightly disturbed barred spiral
+# HST Cepheid distance - 52+/-3 million ly
+"NGC 4535"
+{
+	Type "SBc"
+	RA 12.572
+	Dec 8.19
+	Distance 5.17e7
+	Radius 50000
+}
+
+# NGC 4540
+"NGC 4540"
+{
+	Type "Sd"
+	RA 12.58
+	Dec 15.56
+	Distance 5.31e7
+	Radius 20000
+}
+
+# IC 3522 / UGC 7737
+"IC 3522"
+{
+	Type "Irr"
+	RA 12.58
+	Dec 15.22
+	Distance 5.75e7
+	Radius 10000
+}
+
+# NGC 4550
+"NGC 4550"
+{
+	Type "E7"
+	RA 12.592
+	Dec 12.22
+	Distance 5.69e7
+	Radius 30000
+}
+
+# NGC 4551
+"NGC 4551"
+{
+	Type "E4"
+	RA 12.594
+	Dec 12.26
+	Distance 5.55e7
+	Radius 15000
+}
+
+# NGC 4564
+"NGC 4564"
+{
+	Type "E7"
+	RA 12.607
+	Dec 11.44
+	Distance 5.44e7
+	Radius 25000
+}
+
+# NGC 4567, very near NGC 4568
+"NGC 4567"
+{
+	Type "Sc"
+	RA 12.608
+	Dec 11.26
+	Distance 5.78e7
+	Radius 30000
+}
+
+# NGC 4568, very near NGC 4567
+# This one appears to be in front.
+"NGC 4568"
+{
+	Type "Sb"
+	RA 12.608
+	Dec 11.24
+	Distance 5.13e7
+	Radius 40000
+}
+
+# IC 3576 / UGC 7781
+"IC 3576"
+{
+	Type "Irr"
+	RA 12.61
+	Dec 6.62
+	Distance 5.57e7
+	Radius 25000
+}
+
+# NGC 4570
+"NGC 4570"
+{
+	Type "E7"
+	RA 12.616
+	Dec 7.24
+	Distance 5.4e7
+	Radius 30000
+}
+
+# NGC 4571
+"NGC 4571"
+{
+	Type "Sd"
+	RA 12.615
+	Dec 14.21
+	Distance 5.72e7
+	Radius 30000
+}
+
+# NGC 4578
+"NGC 4578"
+{
+	Type "S0"
+	RA 12.625
+	Dec 9.56
+	Distance 5.58e7
+	Radius 25000
+}
+
+# IC 3617 / UGC 7822
+"IC 3617"
+{
+	Type "Irr"
+	RA 12.657
+	Dec 7.96
+	Distance 5.6e7
+	Radius 10000
+}
+
+# NGC 4596, barred lenticular
+"NGC 4596"
+{
+	Type "SB0"
+	RA 12.665
+	Dec 10.18
+	Distance 5.4e7
+	Radius 40000
+}
+
+# NGC 4595
+"NGC 4595"
+{
+	Type "Sd"
+	RA 12.665
+	Dec 15.29
+	Distance 5.4e7
+	Radius 15000
+}
+
+# NGC 4608, barred lenticular
+"NGC 4608"
+{
+	Type "SB0"
+	RA 12.687
+	Dec 10.14
+	Distance 5.51e7
+	Radius 30000
+}
+
+# NGC 4612
+"NGC 4612"
+{
+	Type "E4"
+	RA 12.692
+	Dec 7.31
+	Distance 5.43e7
+	Radius 25000
+}
+
+# NGC 4623
+"NGC 4623"
+{
+	Type "E7"
+	RA 12.702
+	Dec 7.68
+	Distance 5.5e7
+	Radius 20000
+}
+
+# NGC 4638
+"NGC 4638"
+{
+	Type "E6"
+	RA 12.714
+	Dec 11.44
+	Distance 5.41e7
+	Radius 20000
+}
+
+# NGC 4639
+"NGC 4639"
+{
+	Type "Sb"
+	RA 12.715
+	Dec 13.26
+	Distance 5.61e7
+	Radius 25000
+}
+
+# NGC 4647
+"NGC 4647"
+{
+	Type "Sb"
+	RA 12.725
+	Dec 11.58
+	Distance 5.68e7
+	Radius 25000
+}
+
+# NGC 4651
+"NGC 4651"
+{
+	Type "Sc"
+	RA 12.728
+	Dec 16.38
+	Distance 5.34e7
+	Radius 30000
+}
+
+# NGC 4654
+"NGC 4654"
+{
+	Type "Sc"
+	RA 12.732
+	Dec 13.11
+	Distance 5.22e7
+	Radius 40000
+}
+
+# NGC 4660
+"NGC 4660"
+{
+	Type "E3"
+	RA 12.742
+	Dec 11.19
+	Distance 5.5e7
+	Radius 25000
+}
+
+# NGC 4689
+"NGC 4689"
+{
+	Type "Sc"
+	RA 12.796
+	Dec 13.76
+	Distance 5.56e7
+	Radius 30000
+}
+
+# NGC 4694
+"NGC 4694"
+{
+	Type "E7"
+	RA 12.805
+	Dec 10.98
+	Distance 5.38e7
+	Radius 30000
+}
+
+# NGC 4698
+"NGC 4698"
+{
+	Type "Sb"
+	RA 12.807
+	Dec 8.49
+	Distance 5.58e7
+	Radius 30000
+}
+
+# NGC 4710
+"NGC 4710"
+{
+	Type "S0"
+	RA 12.828
+	Dec 15.16
+	Distance 5.48e7
+	Radius 40000
+}
+
+# NGC 4754
+"NGC 4754"
+{
+	Type "S0"
+	RA 12.872
+	Dec 11.31
+	Distance 5.5e7
+	Radius 35000
+}
+
+# NGC 4762, slightly disturbed(?) edge-on lenticular
+"NGC 4762"
+{
+	Type "S0"
+	RA 12.882
+	Dec 11.23
+	Distance 5.46e7
+	Radius 60000
+}
+
+# NGC 4532, outlying member
+"NGC 4532"
+{
+	Type "Irr"
+	RA 12.572
+	Dec 6.47
+	Distance 5.05e7
+	Radius 25000
+}
+
+# Holmberg VII / UGC 7739, outlying member
+"Holmberg VII"
+{
+	Type "Irr"
+	RA 12.579
+	Dec 6.29
+	Distance 4.96e7
+	Radius 10000
+}
+
+# NGC 4758
+"NGC 4758"
+{
+	Type "Sb"
+	RA 12.88
+	Dec 15.85
+	Distance 5.28e7
+	Radius 25000
+}
+
+# NGC 4880
+"NGC 4880"
+{
+	Type "S0"
+	RA 13.003
+	Dec 12.48
+	Distance 5.12e7
+	Radius 30000
+}
+
+# NGC 4866
+"NGC 4866"
+{
+	Type "S0"
+	RA 12.991
+	Dec 14.18
+	Distance 5.22e7
+	Radius 50000
+}
+
+# NGC 4293
+"NGC 4293"
+{
+	Type "SBc"
+	RA 12.354
+	Dec 18.39
+	Distance 5.54e7
+	Radius 50000
+}
+
+# NGC 4636
+"NGC 4636"
+{
+	Type "E2"
+	RA 12.714
+	Dec 2.69
+	Distance 5.54e7
+	Radius 50000
+}
+
+# NGC 4688
+"NGC 4688"
+{
+	Type "Sc"
+	RA 12.797
+	Dec 4.33
+	Distance 5.57e7
+	Radius 35000
+}
+
+# NGC 4037
+"NGC 4037"
+{
+	Type "SBc"
+	RA 12.022
+	Dec 13.39
+	Distance 5.61e7
+	Radius 25000
+}
+
+# NGC 4630
+"NGC 4630"
+{
+	Type "Irr"
+	RA 12.709
+	Dec 3.96
+	Distance 5.84e7
+	Radius 15000
+}
+
+# NGC 4665
+"NGC 4665"
+{
+	Type "SB0"
+	RA 12.752
+	Dec 3.06
+	Distance 5.84e7
+	Radius 35000
+}
+
+# NGC 4713
+"NGC 4713"
+{
+	Type "Sc"
+	RA 12.834
+	Dec 5.31
+	Distance 5.84e7
+	Radius 30000
+}
+
+# NGC 4900
+"NGC 4900"
+{
+	Type "Sc"
+	RA 13.012
+	Dec 2.5
+	Distance 5.64e7
+	Radius 25000
+}
+
+# NGC 4457
+"NGC 4457"
+{
+	Type "S0"
+	RA 12.482
+	Dec 3.57
+	Distance 5.67e7
+	Radius 30000
+}
+
+# NGC 4586
+"NGC 4586"
+{
+	Type "Sb"
+	RA 12.64
+	Dec 4.31
+	Distance 5.71e7
+	Radius 30000
+}
+
+# UGC 8285
+"UGC 8285"
+{
+	Type "Sd"
+	RA 13.208
+	Dec 7.18
+	Distance 5.71e7
+	Radius 20000
+}
+
+# NGC 4065
+"NGC 4065"
+{
+	Type "E3"
+	RA 12.069
+	Dec 20.22
+	Distance 5.22e7
+	Radius 10000
+}
+
+# UGC 7943
+"UGC 7943"
+{
+	Type "Sd"
+	RA 12.778
+	Dec 5.96
+	Distance 5.64e7
+	Radius 25000
+}
+
+# UGC 7332, outlying member?
+"UGC 7332"
+{
+	Type "Irr"
+	RA 12.299
+	Dec 0.44
+	Distance 5.74e7
+	Radius 20000
+}
+
+# NGC 4061, outlying member?
+"NGC 4061"
+{
+	Type "E2"
+	RA 12.067
+	Dec 20.22
+	Distance 4.76e7
+	Radius 10000
+}
+
+#############################################################################
+#
+#  Ursa Major clusters of galaxies
+#
+#  Classified as two groups, north and south
+#
+
+# NGC 4096
+"NGC 4096"
+{
+	Type "Sc"
+	RA 12.1
+	Dec 47.47
+	Distance 2.87e7
+	Radius 30000
+}
+
+# NGC 4144
+# Newer estimates give a distance of around 31Mly.
+"NGC 4144"
+{
+	Type "Sa"
+	RA 12.167
+	Dec 46.45
+	Distance 3.16e7
+	Radius 30000
+}
+
+# M109 / NGC 3992
+"M109"
+{
+	Type "SBb"
+	RA 11.96
+	Dec 53.37
+	Distance 5.3e7
+	Radius 50000
+	Axis [ -0.596 -0.191 0.780 ]
+	Angle 50
+}
+
+# NGC 3953
+"NGC 3953"
+{
+	Type "SBb"
+	RA 11.896
+	Dec 52.34
+	Distance 5.2e7
+	Radius 50000
+}
+
+# NGC 4088
+"NGC 4088"
+{
+	Type "SBc"
+	RA 12.092
+	Dec 50.54
+	Distance 5.34e7
+	Radius 45000
+}
+
+# NGC 4026
+"NGC 4026"
+{
+	Type "S0"
+	RA 11.991
+	Dec 50.96
+	Distance 5.54e7
+	Radius 50000
+}
+
+# NGC 3917
+"NGC 3917"
+{
+	Type "Sa"
+	RA 11.847
+	Dec 51.84
+	Distance 5.6e7
+	Radius 40000
+}
+
+# NGC 4102
+"NGC 4102"
+{
+	Type "Sa"
+	RA 12.105
+	Dec 52.71
+	Distance 5.5e7
+	Radius 30000
+}
+
+# UGC 6399
+"UGC 6399"
+{
+	Type "Sd"
+	RA 11.39
+	Dec 50.91
+	Distance 5.54e7
+	Radius 30000
+}
+
+# UGC 6446
+"UGC 6446"
+{
+	Type "Sc"
+	RA 11.443
+	Dec 53.74
+	Distance 5.5e7
+	Radius 35000
+}
+
+# NGC 3718, peculiar lenticular galaxy
+"NGC 3718"
+{
+	Type "SB0"
+	RA 11.544
+	Dec 53.07
+	Distance 5.53e7
+	Radius 50000
+}
+
+# NGC 3726
+"NGC 3726"
+{
+	Type "SBc"
+	RA 11.556
+	Dec 47.04
+	Distance 5.52e7
+	Radius 45000
+}
+
+# NGC 3729, peculiar (disturbed?) galaxy
+"NGC 3729"
+{
+	Type "Sa"
+	RA 11.564
+	Dec 53.14
+	Distance 5.55e7
+	Radius 30000
+}
+
+# NGC 3769
+"NGC 3769"
+{
+	Type "Sb"
+	RA 11.628
+	Dec 47.89
+	Distance 5.74e7
+	Radius 30000
+}
+
+# NGC 3782
+"NGC 3782"
+{
+	Type "Irr"
+	RA 11.654
+	Dec 46.51
+	Distance 5.65e7
+	Radius 15000
+}
+
+# UGC 6628
+"UGC 6628"
+{
+	Type "Sd"
+	RA 11.668
+	Dec 45.92
+	Distance 5.46e7
+	Radius 30000
+}
+
+# UGC 6667
+"UGC 6667"
+{
+	Type "Sc"
+	RA 11.706
+	Dec 51.61
+	Distance 5.8e7
+	Radius 30000
+}
+
+# UGC 6713
+"UGC 6713"
+{
+	Type "Irr"
+	RA 11.74
+	Dec 48.84
+	Distance 5.28e7
+	Radius 20000
+}
+
+# NGC 3870
+"NGC 3870"
+{
+	Type "E4"
+	RA 11.766
+	Dec 50.22
+	Distance 5.45e7
+	Radius 10000
+}
+
+# NGC 3877
+"NGC 3877"
+{
+	Type "Sb"
+	RA 11.769
+	Dec 47.49
+	Distance 5.44e7
+	Radius 45000
+}
+
+# NGC 3893
+"NGC 3893"
+{
+	Type "Sc"
+	RA 11.812
+	Dec 48.72
+	Distance 5.76e7
+	Radius 40000
+}
+
+# NGC 3913
+"NGC 3913"
+{
+	Type "Sd"
+	RA 11.844
+	Dec 55.36
+	Distance 5.64e7
+	Radius 25000
+}
+
+# UGC 6816
+"UGC 6816"
+{
+	Type "Irr"
+	RA 11.846
+	Dec 56.46
+	Distance 5.52e7
+	Radius 15000
+}
+
+# UGC 6818
+"UGC 6818"
+{
+	Type "Irr"
+	RA 11.846
+	Dec 45.81
+	Distance 5.58e7
+	Radius 20000
+}
+
+# NGC 3928
+"NGC 3928"
+{
+	Type "E0"
+	RA 11.863
+	Dec 48.69
+	Distance 5.54e7
+	Radius 15000
+}
+
+# UGC 6840
+"UGC 6840"
+{
+	Type "Sd"
+	RA 11.868
+	Dec 52.11
+	Distance 5.4e7
+	Radius 25000
+}
+
+# NGC 3924
+"NGC 3924"
+{
+	Type "Sd"
+	RA 11.876
+	Dec 50.02
+	Distance 5.79e7
+	Radius 20000
+}
+
+# NGC 3938
+"NGC 3938"
+{
+	Type "SBc"
+	RA 11.88
+	Dec 44.12
+	Distance 5.38e7
+	Radius 40000
+}
+
+# NGC 3949
+"NGC 3949"
+{
+	Type "Sa"
+	RA 11.895
+	Dec 47.86
+	Distance 5.66e7
+	Radius 25000
+}
+
+# NGC 3972
+"NGC 3972"
+{
+	Type "Sb"
+	RA 11.928
+	Dec 55.32
+	Distance 5.42e7
+	Radius 35000
+}
+
+# UGC 6917
+"UGC 6917"
+{
+	Type "Sd"
+	RA 11.941
+	Dec 50.42
+	Distance 5.25e7
+	Radius 40000
+}
+
+# NGC 3982
+"NGC 3982"
+{
+	Type "Sa"
+	RA 11.941
+	Dec 55.12
+	Distance 5.72e7
+	Radius 20000
+}
+
+# UGC 6923
+"UGC 6923"
+{
+	Type "Irr"
+	RA 11.946
+	Dec 53.17
+	Distance 5.69e7
+	Radius 20000
+}
+
+# UGC 6930
+"UGC 6930"
+{
+	Type "Sc"
+	RA 11.954
+	Dec 49.27
+	Distance 5.36e7
+	Radius 35000
+}
+
+# NGC 3990
+"NGC 3990"
+{
+	Type "E6"
+	RA 11.96
+	Dec 55.46
+	Distance 5.56e7
+	Radius 15000
+}
+
+# UGC 6956
+"UGC 6956"
+{
+	Type "Irr"
+	RA 11.973
+	Dec 50.92
+	Distance 5.73e7
+	Radius 20000
+}
+
+# NGC 4010
+"NGC 4010"
+{
+	Type "Sb"
+	RA 11.976
+	Dec 47.26
+	Distance 5.5e7
+	Radius 30000
+}
+
+# NGC 4013
+"NGC 4013"
+{
+	Type "Sb"
+	RA 11.976
+	Dec 43.96
+	Distance 5.59e7
+	Radius 40000
+}
+
+# IC 749 / UGC 6962
+"IC 749"
+{
+	Type "Sd"
+	RA 11.976
+	Dec 42.74
+	Distance 5.67e7
+	Radius 20000
+}
+
+# IC 750 / UGC 6973
+"IC 750"
+{
+	Type "Sa"
+	RA 11.981
+	Dec 42.72
+	Distance 5.49e7
+	Radius 25000
+}
+
+# UGC 6983
+"UGC 6983"
+{
+	Type "Sc"
+	RA 11.986
+	Dec 52.71
+	Distance 5.6e7
+	Radius 35000
+}
+
+# NGC 4051
+"NGC 4051"
+{
+	Type "Sc"
+	RA 12.052
+	Dec 44.52
+	Distance 5.3e7
+	Radius 45000
+}
+
+# NGC 4085
+"NGC 4085"
+{
+	Type "Sb"
+	RA 12.088
+	Dec 50.36
+	Distance 5.66e7
+	Radius 20000
+}
+
+# UGC 7089
+"UGC 7089"
+{
+	Type "Sd"
+	RA 12.099
+	Dec 43.14
+	Distance 5.7e7
+	Radius 30000
+}
+
+# NGC 4100
+"NGC 4100"
+{
+	Type "Sb"
+	RA 12.102
+	Dec 49.59
+	Distance 5.59e7
+	Radius 45000
+}
+
+# NGC 4111
+"NGC 4111"
+{
+	Type "S0"
+	RA 12.117
+	Dec 43.07
+	Distance 5.5e7
+	Radius 40000
+}
+
+# NGC 4138
+"NGC 4138"
+{
+	Type "E5"
+	RA 12.158
+	Dec 43.69
+	Distance 5.63e7
+	Radius 25000
+}
+
+# NGC 4143
+"NGC 4143"
+{
+	Type "E5"
+	RA 12.16
+	Dec 42.54
+	Distance 5.65e7
+	Radius 25000
+}
+
+# NGC 4157
+"NGC 4157"
+{
+	Type "Sb"
+	RA 12.185
+	Dec 50.49
+	Distance 5.43e7
+	Radius 60000
+}
+
+# UGC 7218
+"UGC 7218"
+{
+	Type "Irr"
+	RA 12.214
+	Dec 52.27
+	Distance 5.57e7
+	Radius 15000
+}
+
+# NGC 4183
+"NGC 4183"
+{
+	Type "Sc"
+	RA 12.222
+	Dec 43.69
+	Distance 5.21e7
+	Radius 45000
+}
+
+# NGC 4217
+"NGC 4217"
+{
+	Type "Sb"
+	RA 12.263
+	Dec 47.09
+	Distance 5.32e7
+	Radius 45000
+}
+
+# NGC 4220
+"NGC 4220"
+{
+	Type "E7"
+	RA 12.27
+	Dec 47.89
+	Distance 5.46e7
+	Radius 35000
+}
+
+# NGC 4346
+"NGC 4346"
+{
+	Type "E7"
+	RA 12.39
+	Dec 46.99
+	Distance 5.55e7
+	Radius 30000
+}
+
+# NGC 4389
+"NGC 4389"
+{
+	Type "SBc"
+	RA 12.426
+	Dec 45.69
+	Distance 5.41e7
+	Radius 25000
+}
+
+# UGC 6251, outlying member?
+"UGC 6251"
+{
+	Type "Irr"
+	RA 11.222
+	Dec 53.59
+	Distance 5.9e7
+	Radius 20000
+}
+
+#############################################################################
+#
+#  Miscellaneous galaxies
+#
+#  These galaxies are (relatively) isolated.
+#
+
+# M104 / NGC 4594, The Sombrero Galaxy
+"M104"
+{
+	Type "Sa"
+	RA 12.665
+	Dec -11.62
+	Distance 6.52e7
+	Radius 70000
+}
+# The Sombrero Galaxy's bulge
+"M104"
+{
+	Type "E4"
+	RA 12.665
+	Dec -11.62
+	Distance 6.52e7
+	Radius 70000
+}
+
+# NGC 4597
+"NGC 4597"
+{
+	Type "SBc"
+	RA 12.668
+	Dec -5.81
+	Distance 5.54e7
+	Radius 30000
+}
+
+# NGC 936
+"NGC 936"
+{
+	Type "SB0"
+	RA 2.46
+	Dec -1.16
+	Distance 5.51e7
+	Radius 50000
+}
+
+# NGC 1172
+"NGC 1172"
+{
+	Type "E2"
+	RA 3.027
+	Dec -14.84
+	Distance 5.97e7
+	Radius 20000
+}
+
+# NGC 3115, Spindle Galaxy
+"NGC 3115"
+{
+	Type "S0"
+	RA 10.087
+	Dec -7.717
+	Distance 3.0e7
+	Radius 40000
+	Angle 220
+}
+
+# NGC 1313, nearby irregular spiral
+"NGC 1313"
+{
+	Type "Sc"
+	RA 3.303
+	Dec -66.5
+	Distance 1.2e7
+	Radius 30000
+}
+
+# NGC 5033
+# Tully says 60.1Mly, other sources say 37Mly
+# I'll go with 37 because it gives the galaxy
+# a more realistic size.
+"NGC 5033"
+{
+	Type "Sc"
+	RA 13.225
+	Dec 36.59
+	Distance 3.7e7
+	Radius 55000
+}
+
+# NGC 4236
+"NGC 4236"
+{
+	Type "Irr"
+	RA 12.278
+	Dec 69.467
+	Distance 7.0e6
+	Radius 37000
+}
+
+# NGC 3621
+"NGC 3621"
+{
+	Type "Sc"
+	RA 11.305
+	Dec -32.817
+	Distance 2.0e7
+	Radius 50000
+	Axis [ 0.712 0.533 0.456 ]
+	Angle 195
+}
+
+# NGC 6946
+"NGC 6946"
+{
+	Type "Sc"
+	RA 20.580
+	Dec 60.150
+	Distance 1.0e7
+	Radius 50000
+	Axis [ -0.596 -0.191 0.780 ]
+	Angle 195
+}
+
+# NGC 1495
+"NGC 1495"
+{
+	Type "Sb"
+	RA 3.973
+	Dec -44.467
+	Distance 5.0e7
+	Radius 50000
+	Axis [ -0.596 -0.191 0.780 ]
+	Angle 195
+}
+
+# NGC 6744
+"NGC 6744"
+{
+	Type "Sc"
+	RA 19.163
+	Dec -63.85
+	Distance 3.3e7
+	Radius 80000
+}
+
+# NGC 6684, near NGC 6744
+"NGC 6684"
+{
+	Type "S0"
+	RA 18.817
+	Dec -65.18
+	Distance 3.55e7
+	Radius 30000
+}
+
+# NGC 4725
+"NGC 4725"
+{
+	Type "SBa"
+	RA 12.84
+	Dec 25.5
+	Distance 4.0e7
+	Radius 64000
+	Axis [ -0.596 -0.191 0.780 ]
+	Angle 195
+}
+
+# NGC 4747, near 4725
+"NGC 4747"
+{
+	Type "SBc"
+	RA 12.862
+	Dec 25.76
+	Distance 4.01e7
+	Radius 25000
+}
+
+# NGC 2683
+"NGC 2683"
+{
+	Type "Sa"
+	RA 8.878
+	Dec 33.417
+	Distance 1.6e7
+	Radius 40000
+	Axis [ -0.596 -0.191 0.780 ]
+	Angle 100
+}
+
+# NGC 7606
+"NGC 7606"
+{
+	Type "Sa"
+	RA 23.318
+	Dec -8.483
+	Distance 9.3e7
+	Radius 75000
+}
+
+# NGC 7727 - Peculiar spiral galaxy
+"NGC 7727"
+{
+	Type "Sc"
+	RA 23.665
+	Dec -12.3
+	Distance 7.5e7
+	Radius 60000
+}
+
+# NGC 7723, in proximity to 7727
+"NGC 7723"
+{
+	Type "Sa"
+	RA 23.648
+	Dec -12.967
+	Distance 7.6e7
+	Radius 40000
+}
+
+# NGC 1637
+"NGC 1637"
+{
+	Type "SBb"
+	RA 4.692
+	Dec -2.85
+	Distance 2.8e7
+	Radius 40000
+}
+
+# UGC 3174, near NGC 1637
+"UGC 3174"
+{
+	Type "Irr"
+	RA 4.809
+	Dec 0.24
+	Distance 2.67e7
+	Radius 10000
+}
+
+# NGC 6207, near line-of-sight with M13
+"NGC 6207"
+{
+	Type "Sc"
+	RA 16.718
+	Dec 36.84
+	Distance 5.67e7
+	Radius 30000
+}
+
+# NGC 6255
+"NGC 6255"
+{
+	Type "Sc"
+	RA 16.911
+	Dec 36.5
+	Distance 5.97e7
+	Radius 30000
+}
+
+# NGC 6384
+"NGC 6384"
+{
+	Type "Sc"
+	RA 17.54
+	Dec 7.067
+	Distance 6.0e7
+	Radius 50000
+}
+
+# NGC 578
+"NGC 578"
+{
+	Type "Sc"
+	RA 1.506
+	Dec -22.68
+	Distance 6.36e7
+	Radius 50000
+}
+
+# NGC 613, in proximity to 578
+"NGC 613"
+{
+	Type "Sb"
+	RA 1.572
+	Dec -29.41
+	Distance 5.71e7
+	Radius 45000
+}
+
+# NGC 2915
+"NGC 2915"
+{
+	Type "Irr"
+	RA 9.437
+	Dec -76.633
+	Distance 1.06e7
+	Radius 10000
+}
+
+# NGC 1400
+"NGC 1400"
+{
+	Type "E2"
+	RA 3.658
+	Dec -18.683
+	Distance 1.61e7
+	Radius 20000
+}
+
+# NGC 1311
+"NGC 1311"
+{
+	Type "Sb"
+	RA 3.335
+	Dec -52.167
+	Distance 1.67e7
+	Radius 40000
+}
+
+# NGC 24
+"NGC 24"
+{
+	Type "Sb"
+	RA 0.166
+	Dec -24.97
+	Distance 2.22e7
+	Radius 40000
+}
+
+# NGC 45
+"NGC 45"
+{
+	Type "S0"
+	RA 0.232
+	Dec -23.17
+	Distance 1.92e7
+	Radius 30000
+}
+
+# NGC 1705
+"NGC 1705"
+{
+	Type "S0"
+	RA 4.904
+	Dec -53.37
+	Distance 1.96e7
+	Radius 10000
+}
+
+# NGC 6503
+"NGC 6503"
+{
+	Type "Sb"
+	RA 17.823
+	Dec 70.15
+	Distance 1.99e7
+	Radius 30000
+}
+
+# NGC 1156
+"NGC 1156"
+{
+	Type "Irr"
+	RA 2.995
+	Dec 25.23
+	Distance 2.09e7
+	Radius 10000
+}
+
+# NGC 4941
+"NGC 4941"
+{
+	Type "Sa"
+	RA 13.07
+	Dec -5.55
+	Distance 2.09e7
+	Radius 30000
+}
+
+# NGC 5068
+"NGC 5068"
+{
+	Type "Sdm"
+	RA 13.316
+	Dec -21.05
+	Distance 2.18e7
+	Radius 30000
+}
+
+# NGC 2784
+"NGC 2784"
+{
+	Type "S0"
+	RA 9.205
+	Dec -24.17
+	Distance 2.31e7
+	Radius 30000
+}
+
+# NGC 2188
+"NGC 2188"
+{
+	Type "Sd"
+	RA 6.17
+	Dec -34.11
+	Distance 2.58e7
+	Radius 20000
+}
+
+# NGC 7713
+"NGC 7713"
+{
+	Type "Scd"
+	RA 23.604
+	Dec -37.92
+	Distance 2.67e7
+	Radius 30000
+}
+
+# NGC 7640
+"NGC 7640"
+{
+	Type "Sc"
+	RA 23.368
+	Dec 40.84
+	Distance 2.8e7
+	Radius 40000
+}
+
+# UGC 12632
+"UGC 12632"
+{
+	Type "Irr"
+	RA 23.5
+	Dec 40.99
+	Distance 3.0e7
+	Radius 15000
+}
+
+# UGC 12588
+"UGC 12588"
+{
+	Type "Irr"
+	RA 23.412
+	Dec 41.34
+	Distance 3.03e7
+	Radius 10000
+}
+
+# NGC 4687, strung betweeb CVn(I) and Coma(I)
+"NGC 4687"
+{
+	Type "E2"
+	RA 12.79
+	Dec 35.36
+	Distance 2.74e7
+	Radius 10000
+}
+
+# NGC 4517
+"NGC 4517"
+{
+	Type "Sc"
+	RA 12.546
+	Dec 0.11
+	Distance 3.19e7
+	Radius 45000
+}
+
+# NGC 4592, near NGC 4517
+"NGC 4592"
+{
+	Type "Irr"
+	RA 12.654
+	Dec -0.54
+	Distance 3.13e7
+	Radius 40000
+}
+
+# NGC 7090
+"NGC 7090"
+{
+	Type "Sc"
+	RA 21.608
+	Dec -54.56
+	Distance 3.39e7
+	Radius 40000
+}
+
+# NGC 7064, near NGC 7090
+"NGC 7064"
+{
+	Type "Sc"
+	RA 21.484
+	Dec -52.76
+	Distance 3.46e7
+	Radius 20000
+}
+
+# NGC 7518
+"NGC 7518"
+{
+	Type "Sa"
+	RA 23.218
+	Dec 6.32
+	Distance 3.26e7
+	Radius 10000
+}
+
+# NGC 2090
+"NGC 2090"
+{
+	Type "Sc"
+	RA 5.783
+	Dec -34.23
+	Distance 3.33e7
+	Radius 50000
+}
+
+# NGC 1518
+"NGC 1518"
+{
+	Type "Sdm"
+	RA 4.114
+	Dec -21.17
+	Distance 3.42e7
+	Radius 20000
+}
+
+# NGC 1507
+"NGC 1507"
+{
+	Type "Sm"
+	RA 4.074
+	Dec -2.18
+	Distance 3.46e7
+	Radius 20000
+}
+
+# NGC 1796
+"NGC 1796"
+{
+	Type "Sc"
+	RA 5.045
+	Dec -61.13
+	Distance 3.46e7
+	Radius 10000
+}
+
+# NGC 3600
+"NGC 3600"
+{
+	Type "Sa"
+	RA 11.262
+	Dec 41.59
+	Distance 3.42e7
+	Radius 20000
+}
+
+# NGC 3365
+"NGC 3365"
+{
+	Type "Sc"
+	RA 10.771
+	Dec 1.82
+	Distance 3.49e7
+	Radius 30000
+}
+
+# NGC 3423
+"NGC 3423"
+{
+	Type "Sc"
+	RA 10.854
+	Dec 5.85
+	Distance 3.55e7
+	Radius 30000
+}
+
+# NGC 2835
+"NGC 2835"
+{
+	Type "Sc"
+	RA 9.299
+	Dec -22.36
+	Distance 3.52e7
+	Radius 40000
+}
+
+# NGC 2427
+"NGC 2427"
+{
+	Type "Sc"
+	RA 7.607
+	Dec -47.63
+	Distance 3.55e7
+	Radius 40000
+}
+
+# NGC 244
+"NGC 244"
+{
+	Type "Irr"
+	RA 0.763
+	Dec -15.59
+	Distance 3.78e7
+	Radius 10000
+}
+
+# NGC 7424
+"NGC 7424"
+{
+	Type "SBc"
+	RA 22.955
+	Dec -41.08
+	Distance 3.75e7
+	Radius 50000
+}
+
+# NGC 7462
+"NGC 7462"
+{
+	Type "Sb"
+	RA 23.046
+	Dec -40.85
+	Distance 4.24e7
+	Radius 35000
+}
+
+# NGC 7456
+"NGC 7456"
+{
+	Type "Sc"
+	RA 23.036
+	Dec -39.58
+	Distance 4.79e7
+	Radius 45000
+}
+
+# NGC 7690
+"NGC 7690"
+{
+	Type "Sb"
+	RA 23.548
+	Dec -51.69
+	Distance 5.35e7
+	Radius 20000
+}
+
+# NGC 7361
+"NGC 7361"
+{
+	Type "Sc"
+	RA 22.706
+	Dec -30.07
+	Distance 5.18e7
+	Radius 35000
+}
+
+# NGC 278
+"NGC 278"
+{
+	Type "Sb"
+	RA 0.868
+	Dec 47.55
+	Distance 3.85e7
+	Radius 20000
+}
+
+# UGC 731, near NGC 278
+"UGC 731"
+{
+	Type "Irr"
+	RA 1.177
+	Dec 49.6
+	Distance 3.85e7
+	Radius 15000
+}
+
+# NGC 746
+"NGC 746"
+{
+	Type "SBc"
+	RA 1.965
+	Dec 44.93
+	Distance 4.01e7
+	Radius 20000
+}
+
+# NGC 4561
+"NGC 4561"
+{
+	Type "Sdm"
+	RA 12.602
+	Dec 19.32
+	Distance 4.01e7
+	Radius 20000
+}
+
+# NGC 2104
+"NGC 2104"
+{
+	Type "Sb"
+	RA 5.784
+	Dec -51.55
+	Distance 4.14e7
+	Radius 20000
+}
+
+# NGC 2101, near 2104
+"NGC 2101"
+{
+	Type "Irr"
+	RA 5.774
+	Dec -52.08
+	Distance 4.34e7
+	Radius 15000
+}
+
+# NGC 7457
+"NGC 7457"
+{
+	Type "S0"
+	RA 23.016
+	Dec 30.15
+	Distance 4.01e7
+	Radius 30000
+}
+
+# NGC 7741
+"NGC 7741"
+{
+	Type "SBc"
+	RA 23.732
+	Dec 26.08
+	Distance 4.01e7
+	Radius 30000
+}
+
+# UGC 12732
+"UGC 12732"
+{
+	Type "Irr"
+	RA 23.676
+	Dec 26.23
+	Distance 4.04e7
+	Radius 20000
+}
+
+# UGC 12791
+"UGC 12791"
+{
+	Type "Sd"
+	RA 23.814
+	Dec 26.23
+	Distance 4.21e7
+	Radius 15000
+}
+
+# NGC 7814
+"NGC 7814"
+{
+	Type "Sc"
+	RA 0.054
+	Dec 16.15
+	Distance 4.92e7
+	Radius 45000
+}
+
+# UGC 156
+"UGC 156"
+{
+	Type "Irr"
+	RA 0.279
+	Dec 12.34
+	Distance 5.18e7
+	Radius 20000
+}
+
+# UGC 191
+"UGC 191"
+{
+	Type "Irr"
+	RA 0.336
+	Dec 10.88
+	Distance 5.18e7
+	Radius 20000
+}
+
+# NGC 3675
+"NGC 3675"
+{
+	Type "Sb"
+	RA 11.437
+	Dec 43.59
+	Distance 4.17e7
+	Radius 40000
+}
+
+# NGC 2787
+"NGC 2787"
+{
+	Type "S0"
+	RA 9.321
+	Dec 69.21
+	Distance 4.24e7
+	Radius 30000
+}
+
+# NGC 5608
+"NGC 5608"
+{
+	Type "Irr"
+	RA 14.388
+	Dec 41.77
+	Distance 4.14e7
+	Radius 20000
+}
+
+# NGC 7077
+"NGC 7077"
+{
+	Type "E4"
+	RA 21.498
+	Dec 2.42
+	Distance 4.34e7
+	Radius 10000
+}
+
+# NGC 7177
+"NGC 7177"
+{
+	Type "Sb"
+	RA 22.011
+	Dec 17.74
+	Distance 5.93e7
+	Radius 30000
+}
+
+# UGC 11820
+"UGC 11820"
+{
+	Type "Irr"
+	RA 21.823
+	Dec 14.25
+	Distance 5.57e7
+	Radius 15000
+}
+
+# UGC 11868
+"UGC 11868"
+{
+	Type "Sd"
+	RA 21.984
+	Dec 18.17
+	Distance 5.61e7
+	Radius 25000
+}
+
+# UGC 11782
+"UGC 11782"
+{
+	Type "Irr"
+	RA 21.636
+	Dec 8.98
+	Distance 5.54e7
+	Radius 20000
+}
+
+# NGC 1473
+"NGC 1473"
+{
+	Type "Sd"
+	RA 3.79
+	Dec -68.21
+	Distance 4.89e7
+	Radius 15000
+}
+
+# NGC 1511, near 1473
+"NGC 1511"
+{
+	Type "Sb"
+	RA 3.992
+	Dec -67.63
+	Distance 4.92e7
+	Radius 30000
+}
+
+# NGC 1809, behind the LMC
+"NGC 1809"
+{
+	Type "Sc"
+	RA 5.034
+	Dec -69.56
+	Distance 4.79e7
+	Radius 30000
+}
+
+# NGC 1892, behind the LMC
+"NGC 1892"
+{
+	Type "Sb"
+	RA 5.285
+	Dec -64.96
+	Distance 5.02e7
+	Radius 20000
+}
+
+# NGC 2310
+"NGC 2310"
+{
+	Type "S0"
+	RA 6.905
+	Dec -40.86
+	Distance 4.43e7
+	Radius 25000
+}
+
+# MCG-01-03-065, 0059-07 in Tully's catalogue
+"MCG-01-03-065"
+{
+	Type "Sc"
+	RA 1.025
+	Dec -7.6
+	Distance 4.47e7
+	Radius 45000
+}
+
+# M108 / NGC 3556
+"M108"
+{
+	Type "Sb"
+	RA 11.193
+	Dec 55.68
+	Distance 4.6e7
+	Radius 55000
+}
+
+# NGC 3359
+# Tully's distance estimate is 6.26
+# Others favour 50Mly which gives a more
+# conventional galaxy size
+"NGC 3359"
+{
+	Type "SBc"
+	RA 10.778
+	Dec 63.24
+	Distance 5.0e7
+	Radius 50000
+}
+
+# NGC 3353, peculiar galaxy
+"NGC 3353"
+{
+	Type "Irr"
+	RA 10.756
+	Dec 55.95
+	Distance 5.48e7
+	Radius 15000
+}
+
+# UGC 5848
+"UGC 5848"
+{
+	Type "Irr"
+	RA 10.74
+	Dec 56.42
+	Distance 5.31e7
+	Radius 20000
+}
+
+# NGC 3264
+"NGC 3264"
+{
+	Type "SBc"
+	RA 10.54
+	Dec 56.08
+	Distance 5.84e7
+	Radius 30000
+}
+
+# NGC 7013
+"NGC 7013"
+{
+	Type "S0"
+	RA 21.058
+	Dec 29.9
+	Distance 4.63e7
+	Radius 35000
+}
+
+# UGC 11707
+"UGC 11707"
+{
+	Type "Sd"
+	RA 21.241
+	Dec 26.74
+	Distance 5.12e7
+	Radius 30000
+}
+
+# NGC 1879
+"NGC 1879"
+{
+	Type "Irr"
+	RA 5.329
+	Dec -32.15
+	Distance 4.63e7
+	Radius 20000
+}
+
+# NGC 1963
+"NGC 1963"
+{
+	Type "Sc"
+	RA 5.556
+	Dec -36.42
+	Distance 4.92e7
+	Radius 25000
+}
+
+# NGC 6300
+"NGC 6300"
+{
+	Type "Sc"
+	RA 17.283
+	Dec -62.82
+	Distance 4.66e7
+	Radius 40000
+}
+
+# NGC 1012
+"NGC 1012"
+{
+	Type "Irr"
+	RA 2.654
+	Dec 30.15
+	Distance 4.69e7
+	Radius 25000
+}
+
+# UGC 2017
+"UGC 2017"
+{
+	Type "Irr"
+	RA 2.547
+	Dec 28.84
+	Distance 4.82e7
+	Radius 15000
+}
+
+# UGC 2053
+"UGC 2053"
+{
+	Type "Irr"
+	RA 2.574
+	Dec 29.75
+	Distance 4.92e7
+	Radius 20000
+}
+
+# NGC 1097, interacting spiral
+"NGC 1097"
+{
+	Type "SBc"
+	RA 2.774
+	Dec -30.27
+	Distance 4.73e7
+	Radius 65000
+	Angle 210
+}
+
+# MCG-05-07-022, interacting with NGC 1097
+"MCG-05-07-022"
+{
+	Type "E4"
+	RA 2.767
+	Dec -30.241
+	Distance 4.73e7
+	Radius 10000
+}
+
+# NGC 1079
+"NGC 1079"
+{
+	Type "Sc"
+	RA 2.729
+	Dec -29.01
+	Distance 5.51e7
+	Radius 50000
+}
+
+# NGC 3059
+"NGC 3059"
+{
+	Type "Sc"
+	RA 9.836
+	Dec -73.92
+	Distance 4.82e7
+	Radius 35000
+}
+
+# NGC 428
+"NGC 428"
+{
+	Type "Sd"
+	RA 1.216
+	Dec 0.98
+	Distance 4.86e7
+	Radius 35000
+}
+
+# NGC 2397
+"NGC 2397"
+{
+	Type "Sb"
+	RA 7.356
+	Dec -69
+	Distance 4.86e7
+	Radius 20000
+}
+
+# NGC 2434
+"NGC 2434"
+{
+	Type "E0"
+	RA 7.581
+	Dec -69.28
+	Distance 5.35e7
+	Radius 15000
+}
+
+# NGC 2442, large disturbed grand-design spiral
+"NGC 2442"
+{
+	Type "Sc"
+	RA 7.607
+	Dec -69.53
+	Distance 5.57e7
+	Radius 45000
+}
+
+# NGC 1337
+"NGC 1337"
+{
+	Type "Sc"
+	RA 3.468
+	Dec -8.39
+	Distance 4.89e7
+	Radius 35000
+}
+
+# NGC 685
+"NGC 685"
+{
+	Type "Sc"
+	RA 1.796
+	Dec -52.78
+	Distance 4.96e7
+	Radius 35000
+}
+
+# NGC 1537
+"NGC 1537"
+{
+	Type "E7"
+	RA 4.227
+	Dec -31.64
+	Distance 4.96e7
+	Radius 25000
+}
+
+# NGC 4800
+"NGC 4800"
+{
+	Type "Sb"
+	RA 12.91
+	Dec 46.53
+	Distance 4.96e7
+	Radius 25000
+}
+
+# NGC 3511
+"NGC 3511"
+{
+	Type "Sc"
+	RA 11.054
+	Dec -23.1
+	Distance 5.05e7
+	Radius 50000
+}
+
+# NGC 3513
+"NGC 3513"
+{
+	Type "SBc"
+	RA 11.062
+	Dec -23.24
+	Distance 5.54e7
+	Radius 30000
+}
+
+# NGC 4156
+"NGC 4156"
+{
+	Type "Sc"
+	RA 12.18
+	Dec 39.47
+	Distance 5.05e7
+	Radius 20000
+}
+
+# NGC 7217
+"NGC 7217"
+{
+	Type "Sb"
+	RA 22.13
+	Dec 31.36
+	Distance 5.22e7
+	Radius 35000
+}
+
+# NGC 7292
+"NGC 7292"
+{
+	Type "Irr"
+	RA 22.473
+	Dec 30.31
+	Distance 5.28e7
+	Radius 20000
+}
+
+# UGC 10310
+"UGC 10310"
+{
+	Type "Irr"
+	RA 16.271
+	Dec 47.04
+	Distance 5.15e7
+	Radius 25000
+}
+
+# UGC 3371
+"UGC 3371"
+{
+	Type "Sd"
+	RA 5.945
+	Dec 75.31
+	Distance 5.09e7
+	Radius 35000
+}
+
+# NGC 4845
+"NGC 4845"
+{
+	Type "Sb"
+	RA 12.966
+	Dec 1.56
+	Distance 5.09e7
+	Radius 35000
+}
+
+# NGC 4772
+"NGC 4772"
+{
+	Type "Sa"
+	RA 12.89
+	Dec 2.16
+	Distance 5.31e7
+	Radius 25000
+}
+
+# NGC 3001
+"NGC 3001"
+{
+	Type "SBc"
+	RA 9.772
+	Dec -30.433
+	Distance 1.05e8
+	Radius 50000
+}
+
+# NGC 3223- Tully's catalogue says 123Mly, which would
+# make this galaxy ~150kly across - I'm assuming ~84Mly.
+"NGC 3223"
+{
+	Type "Sc"
+	RA 10.36
+	Dec -34.267
+	Distance 8.4e7
+	Radius 50000
+}
+
+# NGC 2935
+"NGC 2935"
+{
+	Type "SBc"
+	RA 9.612
+	Dec -21.133
+	Distance 9.4e7
+	Radius 50000
+}
+
+# NGC 2344
+"NGC 2344"
+{
+	Type "Sc"
+	RA 7.208
+	Dec 47.17
+	Distance 5.22e7
+	Radius 25000
+}
+
+# NGC 2685
+"NGC 2685"
+{
+	Type "S0"
+	RA 8.926
+	Dec 58.74
+	Distance 5.28e7
+	Radius 40000
+}
+
+# UGC 4683
+"UGC 4683"
+{
+	Type "Irr"
+	RA 8.965
+	Dec 59.07
+	Distance 5.51e7
+	Radius 20000
+}
+
+# UGC 3946
+"UGC 3946"
+{
+	Type "Irr"
+	RA 7.634
+	Dec 3.3
+	Distance 5.38e7
+	Radius 15000
+}
+
+# UGC 3912
+"UGC 3912"
+{
+	Type "Sd"
+	RA 7.57
+	Dec 4.54
+	Distance 5.57e7
+	Radius 25000
+}
+
+# UGC 3964
+"UGC 3964"
+{
+	Type "Irr"
+	RA 7.672
+	Dec -1.58
+	Distance 6.39e7
+	Radius 20000
+}
+
+# NGC 3605
+"NGC 3605"
+{
+	Type "E3"
+	RA 11.278
+	Dec 18.03
+	Distance 5.48e7
+	Radius 15000
+}
+
+# NGC 1386
+"NGC 1386"
+{
+	Type "E6"
+	RA 2.615
+	Dec -36
+	Distance 5.51e7
+	Radius 30000
+}
+
+# NGC 1437
+"NGC 1437"
+{
+	Type "Sa"
+	RA 2.726
+	Dec -35.86
+	Distance 5.51e7
+	Radius 30000
+}
+
+# UGC 3658
+"UGC 3658"
+{
+	Type "Irr"
+	RA 7.078
+	Dec 17.61
+	Distance 5.51e7
+	Radius 20000
+}
+
+# UGC 3587
+"UGC 3587"
+{
+	Type "Irr"
+	RA 6.897
+	Dec 19.3
+	Distance 5.87e7
+	Radius 25000
+}
+
+# NGC 3810
+"NGC 3810"
+{
+	Type "Sbc"
+	RA 11.683
+	Dec 11.47
+	Distance 5.51e7
+	Radius 35000
+}
+
+# NGC 3773
+"NGC 3773"
+{
+	Type "E0"
+	RA 11.636
+	Dec 12.11
+	Distance 5.54e7
+	Radius 15000
+}
+
+# NGC 3705
+"NGC 3705"
+{
+	Type "SBb"
+	RA 11.501
+	Dec 9.24
+	Distance 5.54e7
+	Radius 40000
+}
+
+# NGC 3666
+"NGC 3666"
+{
+	Type "Sb"
+	RA 11.406
+	Dec 11.34
+	Distance 5.54e7
+	Radius 35000
+}
+
+# NGC 4064
+"NGC 4064"
+{
+	Type "Sb"
+	RA 12.069
+	Dec 18.44
+	Distance 5.51e7
+	Radius 35000
+}
+
+# NGC 5530
+"NGC 5530"
+{
+	Type "Sb"
+	RA 14.309
+	Dec -43.38
+	Distance 5.51e7
+	Radius 35000
+}
+
+# NGC 5643
+"NGC 5643"
+{
+	Type "SBa"
+	RA 14.544
+	Dec -44.2
+	Distance 5.51e7
+	Radius 45000
+}
+
+# NGC 2775
+"NGC 2775"
+{
+	Type "Sa"
+	RA 9.172
+	Dec 7.05
+	Distance 5.54e7
+	Radius 40000
+}
+
+# UGC 4797
+"UGC 4797"
+{
+	Type "Sd"
+	RA 9.136
+	Dec 5.93
+	Distance 6.39e7
+	Radius 25000
+}
+
+# NGC 254
+"NGC 254"
+{
+	Type "S0"
+	RA 0.79
+	Dec -31.43
+	Distance 5.57e7
+	Radius 20000
+}
+
+# UGC 2684
+"UGC 2684"
+{
+	Type "Irr"
+	RA 3.34
+	Dec 17.3
+	Distance 1.79e7
+	Radius 10000
+}
+
+# UGC 4426
+"UGC 4426"
+{
+	Type "Irr"
+	RA 8.476
+	Dec 41.87
+	Distance 2.05e7
+	Radius 10000
+}
+
+# UGC 5151
+"UGC 5151"
+{
+	Type "E2"
+	RA 9.674
+	Dec 48.34
+	Distance 2.25e7
+	Radius 5000
+}
+
+# IC 1727 / UGC 1249
+"IC 1727"
+{
+	Type "Irr"
+	RA 1.792
+	Dec 27.33
+	Distance 2.09e7
+	Radius 25000
+}
+
+# UGC 3303
+"UGC 3303"
+{
+	Type "Irr"
+	RA 5.416
+	Dec 4.51
+	Distance 2.15e7
+	Radius 15000
+}
+
+# UGC 12713
+"UGC 12713"
+{
+	Type "E7"
+	RA 23.636
+	Dec 30.71
+	Distance 2.25e7
+	Radius 5000
+}
+
+# UGC 5918
+"UGC 5918"
+{
+	Type "Irr"
+	RA 10.825
+	Dec 65.54
+	Distance 2.31e7
+	Radius 10000
+}
+
+# UGC 4787
+"UGC 4787"
+{
+	Type "E6"
+	RA 9.124
+	Dec 33.26
+	Distance 2.54e7
+	Radius 10000
+}
+
+# UGC 5423
+"UGC 5423"
+{
+	Type "Irr"
+	RA 10.091
+	Dec 70.37
+	Distance 2.93e7
+	Radius 10000
+}
+
+# UGC 11891
+"UGC 11891"
+{
+	Type "Irr"
+	RA 22.059
+	Dec 43.74
+	Distance 3.42e7
+	Radius 20000
+}
+
+# UGC 7490
+"UGC 7490"
+{
+	Type "Irr"
+	RA 12.406
+	Dec 70.34
+	Distance 3.62e7
+	Radius 20000
+}
+
+# UGC 3273
+"UGC 3273"
+{
+	Type "Irr"
+	RA 5.296
+	Dec 53.55
+	Distance 3.72e7
+	Radius 20000
+}
+
+# UGC 6670
+"UGC 6670"
+{
+	Type "Irr"
+	RA 11.706
+	Dec 18.32
+	Distance 5.61e7
+	Radius 25000
+}
+
+# UGC 6655
+"UGC 6655"
+{
+	Type "Irr"
+	RA 11.696
+	Dec 15.97
+	Distance 5.84e7
+	Radius 10000
+}
+
+# NGC 406
+"NGC 406"
+{
+	Type "Sb"
+	RA 1.123
+	Dec -69.88
+	Distance 5.64e7
+	Radius 30000
+}
+
+# NGC 1703
+"NGC 1703"
+{
+	Type "Sb"
+	RA 4.88
+	Dec -59.74
+	Distance 5.67e7
+	Radius 35000
+}
+
+# UGC 8578
+"UGC 8578"
+{
+	Type "Irr"
+	RA 13.593
+	Dec 29.23
+	Distance 5.77e7
+	Radius 10000
+}
+
+# UGC 300
+"UGC 300"
+{
+	Type "Irr"
+	RA 0.501
+	Dec 3.51
+	Distance 5.8e7
+	Radius 15000
+}
+
+# NGC 779
+"NGC 779"
+{
+	Type "Sa"
+	RA 1.995
+	Dec -5.96
+	Distance 5.64e7
+	Radius 40000
+}
+
+# NGC 7184 - Tully's catalogue says 109mly, which would
+# make this galaxy >180kly across - I doubt it.
+"NGC 7184"
+{
+	Type "Sb"
+	RA 22.045
+	Dec -20.817
+	Distance 6.0e7
+	Radius 40000
+}
+
+# NGC 7180
+"NGC 7180"
+{
+	Type "E7"
+	RA 22.038
+	Dec -20.54
+	Distance 5.8e7
+	Radius 15000
+}
+
+# UGC 4148
+"UGC 4148"
+{
+	Type "Sd"
+	RA 8.006
+	Dec 42.18
+	Distance 4.17e7
+	Radius 20000
+}
+
+# UGC 12423
+"UGC 12423"
+{
+	Type "Sc"
+	RA 23.218
+	Dec 6.41
+	Distance 4.24e7
+	Radius 25000
+}
+
+# IC 239 / UGC 2080
+"IC 239"
+{
+	Type "Sc"
+	RA 2.607
+	Dec 38.97
+	Distance 4.63e7
+	Radius 40000
+}
+
+# UGC 8146
+"UGC 8146"
+{
+	Type "Sc"
+	RA 13.034
+	Dec 58.7
+	Distance 4.63e7
+	Radius 25000
+}
+
+# UGC 11000
+"UGC 11000"
+{
+	Type "E4"
+	RA 17.824
+	Dec 36.14
+	Distance 4.73e7
+	Radius 10000
+}
+
+# UGC 9211
+"UGC 9211"
+{
+	Type "Irr"
+	RA 14.375
+	Dec 45.37
+	Distance 4.79e7
+	Radius 20000
+}
+
+# UGC 7534
+"UGC 7534"
+{
+	Type "Irr"
+	RA 12.436
+	Dec 58.31
+	Distance 4.89e7
+	Radius 25000
+}
+
+# UGC 9893
+"UGC 9893"
+{
+	Type "Irr"
+	RA 15.548
+	Dec 46.45
+	Distance 4.89e7
+	Radius 10000
+}
+
+# IC 745 / UGC 6877
+"IC 745"
+{
+	Type "E1"
+	RA 11.904
+	Dec 0.14
+	Distance 5.02e7
+	Radius 10000
+}
+
+# NGC 7332
+"NGC 7332"
+{
+	Type "S0"
+	RA 22.623
+	Dec 23.79
+	Distance 5.93e7
+	Radius 35000
+}
+
+# NGC 7339
+"NGC 7339"
+{
+	Type "Sb"
+	RA 22.63
+	Dec 23.79
+	Distance 6.29e7
+	Radius 25000
+}
+
+# NGC 5398
+"NGC 5398"
+{
+	Type "SBc"
+	RA 14.024
+	Dec -33.06
+	Distance 5.97e7
+	Radius 30000
+}
+
+# NGC 148
+"NGC 148"
+{
+	Type "S0"
+	RA 0.571
+	Dec -31.79
+	Distance 6.0e7
+	Radius 20000
+}
+
+# NGC 134
+# Tully's catalogue says 62Mly, sounds dubious to me
+"NGC 134"
+{
+	Type "Sb"
+	RA 0.506
+	Dec -33.26
+	Distance 6.19e7
+	Radius 70000
+}
+
+# NGC 178
+"NGC 178"
+{
+	Type "Irr"
+	RA 0.652
+	Dec -14.18
+	Distance 6.0e7
+	Radius 20000
+}
+
+# NGC 150
+"NGC 150"
+{
+	Type "Sb"
+	RA 0.571
+	Dec -27.79
+	Distance 6.26e7
+	Radius 35000
+}
+
+# NGC 216 - Classification uncertain
+"NGC 216"
+{
+	Type "E7"
+	RA 0.691
+	Dec -21.04
+	Distance 6.23e7
+	Radius 20000
+}
+
+# NGC 210
+"NGC 210"
+{
+	Type "SBb"
+	RA 0.676
+	Dec -13.88
+	Distance 6.62e7
+	Radius 50000
+}
+
+# NGC 255
+"NGC 255"
+{
+	Type "Sc"
+	RA 0.796
+	Dec -11.48
+	Distance 6.52e7
+	Radius 35000
+}
+
+# PGC 2689
+"PGC 2689"
+{
+	Type "Irr"
+	RA 0.768
+	Dec -11.53
+	Distance 6.59e7
+	Radius 25000
+}
+
+# NGC 289, beautiful spiral with extensive structure
+"NGC 289"
+{
+	Type "Sc"
+	RA 0.878
+	Dec -31.206
+	Distance 6.32e7
+	Radius 75000
+}
+
+# PGC 708504, probable companion to NGC 289
+# Found using the LEDA database http://leda.univ-lyon1.fr/
+"PGC 708504"
+{
+	Type "Irr"
+	RA 0.877
+	Dec -31.156
+	Distance 6.325e7
+	Radius 20000
+}
+
+# NGC 2788
+"NGC 2788"
+{
+	Type "E7"
+	RA 9.15
+	Dec -67.94
+	Distance 6.0e7
+	Radius 15000
+}
+
+# NGC 3156
+"NGC 3156"
+{
+	Type "E6"
+	RA 10.211
+	Dec 3.14
+	Distance 6.06e7
+	Radius 20000
+}
+
+# NGC 3169
+"NGC 3169"
+{
+	Type "Sa"
+	RA 10.236
+	Dec 3.47
+	Distance 6.42e7
+	Radius 50000
+}
+
+# UGC 5708
+"UGC 5708"
+{
+	Type "Sd"
+	RA 10.52
+	Dec 4.48
+	Distance 6.32e7
+	Radius 30000
+}
+
+# UGC 5522
+"UGC 5522"
+{
+	Type "Sd"
+	RA 10.232
+	Dec 7.02
+	Distance 6.49e7
+	Radius 30000
+}
+
+# NGC 4976
+"NGC 4976"
+{
+	Type "E4"
+	RA 13.144
+	Dec -49.52
+	Distance 6.06e7
+	Radius 40000
+}
+
+# NGC 6140
+"NGC 6140"
+{
+	Type "SBc"
+	RA 16.347
+	Dec 65.38
+	Distance 6.06e7
+	Radius 50000
+}
+
+# UGC 3234
+"UGC 3234"
+{
+	Type "Irr"
+	RA 5.056
+	Dec 16.4
+	Distance 6.1e7
+	Radius 20000
+}
+
+# NGC 3310
+"NGC 3310"
+{
+	Type "Sb"
+	RA 10.646
+	Dec 53.51
+	Distance 6.1e7
+	Radius 35000
+}
+
+# NGC 2549
+"NGC 2549"
+{
+	Type "S0"
+	RA 8.317
+	Dec 57.81
+	Distance 6.13e7
+	Radius 35000
+}
+
+# UGC 4121
+"UGC 4121"
+{
+	Type "Sd"
+	RA 7.982
+	Dec 58.05
+	Distance 6.16e7
+	Radius 25000
+}
+
+# UGC 10806
+"UGC 10806"
+{
+	Type "Sd"
+	RA 17.314
+	Dec 49.87
+	Distance 6.13e7
+	Radius 25000
+}
+
+# UGC 11909
+"UGC 11909"
+{
+	Type "Irr"
+	RA 22.104
+	Dec 47.24
+	Distance 6.13e7
+	Radius 30000
+}
+
+# NGC 6239
+"NGC 6239"
+{
+	Type "Sb"
+	RA 16.834
+	Dec 42.73
+	Distance 6.16e7
+	Radius 25000
+}
+
+# NGC 3073
+"NGC 3073"
+{
+	Type "E1"
+	RA 10.014
+	Dec 55.63
+	Distance 6.29e7
+	Radius 15000
+}
+
+# UGC 5459
+"UGC 5459"
+{
+	Type "Sc"
+	RA 10.134
+	Dec 53.09
+	Distance 6.62e7
+	Radius 40000
+}
+
+# UGC 5460
+"UGC 5460"
+{
+	Type "SBd"
+	RA 10.135
+	Dec 51.84
+	Distance 6.49e7
+	Radius 25000
+}
+
+# UGC 5846
+"UGC 5846"
+{
+	Type "Irr"
+	RA 10.74
+	Dec 60.37
+	Distance 6.29e7
+	Radius 20000
+}
+
+# UGC 6448
+"UGC 6448"
+{
+	Type "Irr"
+	RA 11.446
+	Dec 64.14
+	Distance 6.19e7
+	Radius 20000
+}
+
+# UGC 5612, Irregular spiral
+"UGC 5612"
+{
+	Type "Sd"
+	RA 10.4
+	Dec 70.88
+	Distance 6.23e7
+	Radius 30000
+}
+
+# NGC 3027
+"NGC 3027"
+{
+	Type "Sc"
+	RA 9.926
+	Dec 72.21
+	Distance 6.36e7
+	Radius 45000
+}
+
+# UGC 8333
+"UGC 8333"
+{
+	Type "Irr"
+	RA 13.264
+	Dec 25.44
+	Distance 6.19e7
+	Radius 15000
+}
+
+# NGC 1640
+"NGC 1640"
+{
+	Type "SBb"
+	RA 4.704
+	Dec -20.44
+	Distance 6.23e7
+	Radius 30000
+}
+
+# NGC 1964
+"NGC 1964"
+{
+	Type "Sb"
+	RA 5.555
+	Dec -21.95
+	Distance 6.52e7
+	Radius 60000
+}
+
+# NGC 2217, ringed barred spiral
+"NGC 2217"
+{
+	Type "SBc"
+	RA 6.361
+	Dec -27.24
+	Distance 6.36e7
+	Radius 45000
+}
+
+# NGC 7343
+# Tully's distance value (62.3Mly) simply cannot
+# be correct for this one - it would be way too small.
+# I estimate it would be at least twice as far away.
+"NGC 7343"
+{
+	Type "SBb"
+	RA 22.643
+	Dec 34.08
+	Distance 1.2e8
+	Radius 25000
+}
+
+# NGC 3887
+"NGC 3887"
+{
+	Type "SBb"
+	RA 11.786
+	Dec -16.86
+	Distance 6.29e7
+	Radius 35000
+}
+
+# NGC 6221
+"NGC 6221"
+{
+	Type "Sc"
+	RA 16.879
+	Dec -59.22
+	Distance 6.32e7
+	Radius 35000
+}
+
+# PGC 59635
+"PGC 59635"
+{
+	Type "Sc"
+	RA 17.116
+	Dec -62.08
+	Distance 6.36e7
+	Radius 40000
+}
+
+# NGC 676
+"NGC 676"
+{
+	Type "Sb"
+	RA 1.815
+	Dec 5.9
+	Distance 6.36e7
+	Radius 40000
+}
+
+# NGC 864
+"NGC 864"
+{
+	Type "SBb"
+	RA 2.257
+	Dec 6.0
+	Distance 6.52e7
+	Radius 45000
+}
+
+# NGC 918
+"NGC 918"
+{
+	Type "Sc"
+	RA 2.431
+	Dec 18.49
+	Distance 6.62e7
+	Radius 35000
+}
+
+# NGC 4504
+"NGC 4504"
+{
+	Type "Sc"
+	RA 12.538
+	Dec -7.56
+	Distance 6.36e7
+	Radius 50000
+}
+
+# NGC 4487
+"NGC 4487"
+{
+	Type "Sc"
+	RA 12.516
+	Dec -8.08
+	Distance 6.49e7
+	Radius 40000
+}
+
+# NGC 908
+"NGC 908"
+{
+	Type "Sb"
+	RA 2.385
+	Dec -21.22
+	Distance 5.8e7
+	Radius 50000
+}
+
+# NGC 899
+"NGC 899"
+{
+	Type "Irr"
+	RA 2.365
+	Dec -20.81
+	Distance 6.03e7
+	Radius 15000
+}
+
+# NGC 2559
+"NGC 2559"
+{
+	Type "SBc"
+	RA 8.284
+	Dec -27.47
+	Distance 6.52e7
+	Radius 45000
+}
+
+# PGC 24131
+"PGC 24131"
+{
+	Type "Sc"
+	RA 8.593
+	Dec -32.16
+	Distance 6.42e7
+	Radius 40000
+}
+
+# UGC 9912
+"UGC 9912"
+{
+	Type "Irr"
+	RA 15.584
+	Dec 16.55
+	Distance 6.42e7
+	Radius 20000
+}
+
+# UGC 2800
+"UGC 2800"
+{
+	Type "Sd"
+	RA 3.668
+	Dec 71.4
+	Distance 6.52e7
+	Radius 30000
+}
+
+# UGC 2855
+"UGC 2855"
+{
+	Type "Sc"
+	RA 3.807
+	Dec 70.14
+	Distance 6.62e7
+	Radius 45000
+}
+
+# NGC 7410
+"NGC 7410"
+{
+	Type "Sa"
+	RA 22.917
+	Dec -39.67
+	Distance 6.55e7
+	Radius 50000
+}
+
+# UGC 12682
+"UGC 12682"
+{
+	Type "Irr"
+	RA 23.582
+	Dec 18.23
+	Distance 6.52e7
+	Radius 20000
+}
+
+# PGC 2445, peculiar spiral
+"PGC 2445"
+{
+	Type "Sc"
+	RA 0.679
+	Dec -63.44
+	Distance 6.55e7
+	Radius 25000
+}
+
+# NGC 720
+"NGC 720"
+{
+	Type "E6"
+	RA 1.884
+	Dec -13.74
+	Distance 6.62e7
+	Radius 45000
+}
+
+# NGC 755
+"NGC 755"
+{
+	Type "Sb"
+	RA 1.939
+	Dec -9.07
+	Distance 6.55e7
+	Radius 35000
+}
+
+# UGC 8053
+"UGC 8053"
+{
+	Type "Sd"
+	RA 12.93
+	Dec 4.01
+	Distance 6.59e7
+	Radius 20000
+}
+
+# IC 600 / PGC 30041
+"IC 600"
+{
+	Type "Sc"
+	RA 10.287
+	Dec -3.5
+	Distance 6.62e7
+	Radius 25000
+}
+
+########
+######## New galaxies added here
+########
+
+#############################################################################
+#
+#  Globular clusters, rendered as galaxies to get them included
+#
+#  Assuming that (ideally) cluster luminosity is proportional to volume, then
+#  radii are approximated assuming the following relation:
+#
+#  Radius = (2.512^(-AbsMag/3))*500
+#
+
+# Globular cluster Omega Centauri
+"Omega Centauri"
+{
+	Type "E1"
+	RA 13.4461
+	Dec -47.477
+	Distance 1.598e4
+	Radius 180
+}
+# Globular cluster 47 Tucanae
+"47 Tucanae"
+{
+	Type "E0"
+	RA 0.4015
+	Dec -72.081
+	Distance 1.337e4
+	Radius 150
+}
+# Globular cluster M22 / NGC 6656
+"M22"
+{
+	Type "E0"
+	RA 18.607
+	Dec -23.903
+	Distance 1.011e4
+	Radius 85
+}
+# Globular cluster NGC 6752
+"NGC 6752"
+{
+	Type "E0"
+	RA 19.181
+	Dec -59.9819
+	Distance 1.239e4
+	Radius 90
+}
+# Globular cluster M4 / NGC 6121
+"M4"
+{
+	Type "E0"
+	RA 16.393
+	Dec -26.525
+	Distance 6.848e3
+	Radius 55
+}
+# Globular cluster M5 / NGC 5904
+"M5"
+{
+	Type "E0"
+	RA 15.309
+	Dec 2.083
+	Distance 2.282e4
+	Radius 125
+}
+# Globular cluster NGC 6397
+"NGC 6397"
+{
+	Type "E0"
+	RA 17.678
+	Dec -53.674
+	Distance 7.174e3
+	Radius 55
+}
+# Globular cluster M13 / NGC 6205
+"M13"
+{
+	Type "E0"
+	RA 16.695
+	Dec 36.46
+	Distance 2.217e4
+	Radius 120
+}
+# Globular cluster M3 / NGC 5272
+"M3"
+{
+	Type "E0"
+	RA 13.703
+	Dec 28.376
+	Distance 3.163e4
+	Radius 130
+}
+# Globular cluster NGC 2808
+"NGC 2808"
+{
+	Type "E0"
+	RA 9.201
+	Dec -64.863
+	Distance 2.902e4
+	Radius 125
+}
+# Globular cluster M15 / NGC 7078
+"M15"
+{
+	Type "E0"
+	RA 21.5
+	Dec 12.167
+	Distance 3.261e4
+	Radius 135
+}
+# Globular cluster NGC 6541
+"NGC 6541"
+{
+	Type "E0"
+	RA 18.134
+	Dec -43.706
+	Distance 2.348e4
+	Radius 105
+}
+# Globular cluster M55 / NGC 6809
+"M55"
+{
+	Type "E0"
+	RA 19.667
+	Dec -30.962
+	Distance 1.663e4
+	Radius 80
+}
+# Globular cluster NGC 362
+"NGC 362"
+{
+	Type "E0"
+	RA 1.054
+	Dec -70.848
+	Distance 2.609e4
+	Radius 110
+}
+# Globular cluster M92 / NGC 6341
+"M92"
+{
+	Type "E0"
+	RA 17.285
+	Dec 43.136
+	Distance 2.609e4
+	Radius 105
+}
+# Globular cluster M62 / NGC 6266
+"M62"
+{
+	Type "E0"
+	RA 17.02
+	Dec -30.112
+	Distance 2.152e4
+	Radius 95
+}
+# Globular cluster M2 / NGC 7089
+"M2"
+{
+	Type "E0"
+	RA 21.558
+	Dec -0.823
+	Distance 3.62e4
+	Radius 135
+}
+# Globular cluster M10 / NGC 6254
+"M10"
+{
+	Type "E0"
+	RA 16.953
+	Dec -4.099
+	Distance 1.337e4
+	Radius 65
+}
+# Globular cluster M12 / NGC 6218
+"M12"
+{
+	Type "E0"
+	RA 16.787
+	Dec -1.948
+	Distance 1.761e4
+	Radius 75
+}
+# Globular cluster NGC 6388
+"NGC 6388"
+{
+	Type "E0"
+	RA 17.605
+	Dec -44.735
+	Distance 3.554e4
+	Radius 120
+}
+# Globular cluster NGC 3201
+"NGC 3201"
+{
+	Type "E0"
+	RA 10.294
+	Dec -46.411
+	Distance 1.598e4
+	Radius 70
+}
+# Globular cluster M19 / NGC 6273
+"M19"
+{
+	Type "E0"
+	RA 17.044
+	Dec -26.268
+	Distance 2.707e4
+	Radius 100
+}
+# Globular cluster M28 / NGC 6626
+"M28"
+{
+	Type "E0"
+	RA 18.409
+	Dec -24.87
+	Distance 1.794e4
+	Radius 75
+}
+# Globular cluster NGC 4833
+"NGC 4833"
+{
+	Type "E0"
+	RA 12.993
+	Dec -70.87
+	Distance 1.859e4
+	Radius 75
+}
+# Globular cluster NGC 6723
+"NGC 6723"
+{
+	Type "E0"
+	RA 18.993
+	Dec -36.6317
+	Distance 2.674e4
+	Radius 90
+}
+# Globular cluster NGC 1851
+"NGC 1851"
+{
+	Type "E0"
+	RA 5.235
+	Dec -40.047
+	Distance 3.815e4
+	Radius 110
+}
+# Globular cluster NGC 6441
+"NGC 6441"
+{
+	Type "E0"
+	RA 17.837
+	Dec -37.051
+	Distance 3.000e4
+	Radius 95
+}
+# Globular cluster M30 / NGC 7099
+"M30"
+{
+	Type "E0"
+	RA 21.673
+	Dec -23.179
+	Distance 2.511e4
+	Radius 85
+}
+# Globular cluster NGC 4372
+"NGC 4372"
+{
+	Type "E0"
+	RA 12.429
+	Dec -72.659
+	Distance 1.5e4
+	Radius 55
+}
+# Globular cluster M80 / NGC 6093
+"M80"
+{
+	Type "E0"
+	RA 16.284
+	Dec -22.975
+	Distance 2.739e4
+	Radius 85
+}
+# Globular cluster NGC 5286
+"NGC 5286"
+{
+	Type "E0"
+	RA 13.774
+	Dec -51.373
+	Distance 3.685e4
+	Radius 100
+}
+# Globular cluster NGC 5986
+"NGC 5986"
+{
+	Type "E0"
+	RA 15.768
+	Dec -37.786
+	Distance 3.261e4
+	Radius 90
+}
+# Globular cluster M14 / NGC 6402
+"M14"
+{
+	Type "E0"
+	RA 17.627
+	Dec -3.246
+	Distance 2.739e4
+	Radius 75
+}
+# Globular cluster M54 / NGC 6715
+"M54"
+{
+	Type "E0"
+	RA 18.918
+	Dec -30.478
+	Distance 8.283e4
+	Radius 165
+}
+# Globular cluster M53 / NGC 5024
+"M53"
+{
+	Type "E0"
+	RA 13.215
+	Dec 18.169
+	Distance 5.902e4
+	Radius 130
+}
+# Globular cluster M69 / NGC 6637
+"M69"
+{
+	Type "E0"
+	RA 18.523
+	Dec -32.348
+	Distance 2.544e4
+	Radius 70
+}
+# Globular cluster M9 / NGC 6333
+"M9"
+{
+	Type "E0"
+	RA 17.32
+	Dec -18.516
+	Distance 2.641e4
+	Radius 70
+}
+# Globular cluster M79 / NGC 1904
+"M79"
+{
+	Type "E0"
+	RA 5.403
+	Dec -24.524
+	Distance 3.978e4
+	Radius 95
+}
+# Globular cluster NGC 6362
+"NGC 6362"
+{
+	Type "E0"
+	RA 17.532
+	Dec -67.048
+	Distance 2.348e4
+	Radius 65
+}
+# Globular cluster NGC 6544
+"NGC 6544"
+{
+	Type "E0"
+	RA 18.122
+	Dec -24.998
+	Distance 7.826e3
+	Radius 30
+}
+# Globular cluster M68 / NGC 4590
+"M68"
+{
+	Type "E0"
+	RA 12.658
+	Dec -26.742
+	Distance 3.228e4
+	Radius 80
+}
+# Globular cluster NGC 6624
+"NGC 6624"
+{
+	Type "E0"
+	RA 18.395
+	Dec -30.361
+	Distance 2.413e4
+	Radius 65
+}
+# Globular cluster M70 / NGC 6681
+"M70"
+{
+	Type "E0"
+	RA 18.72
+	Dec -32.292
+	Distance 2.804e4
+	Radius 70
+}
+# Globular cluster M107 / NGC 6171
+"M107"
+{
+	Type "E0"
+	RA 16.542
+	Dec -13.054
+	Distance 1.957e4
+	Radius 55
+}
+# Globular cluster NGC 6352
+"NGC 6352"
+{
+	Type "E0"
+	RA 17.425
+	Dec -48.423
+	Distance 1.728e4
+	Radius 50
+}
+# Globular cluster NGC 5927
+"NGC 5927"
+{
+	Type "E0"
+	RA 15.467
+	Dec -50.673
+	Distance 2.283e4
+	Radius 60
+}
+# Globular cluster NGC 6553
+"NGC 6553"
+{
+	Type "E0"
+	RA 18.154
+	Dec -25.908
+	Distance 1.337e4
+	Radius 40
+}
+# Globular cluster NGC 288
+"NGC 288"
+{
+	Type "E0"
+	RA 0.88
+	Dec 13.1982
+	Distance 2.641e4
+	Radius 65
+}
+# Globular cluster NGC 6712
+"NGC 6712"
+{
+	Type "E0"
+	RA 18.885
+	Dec -8.706
+	Distance 2.087e4
+	Radius 55
+}
+# Globular cluster M71 / NGC 6838
+"M71"
+{
+	Type "E0"
+	RA 19.896
+	Dec 18.778
+	Distance 1.174e4
+	Radius 35
+}
+# Globular cluster NGC 6293
+"NGC 6293"
+{
+	Type "E0"
+	RA 17.17
+	Dec -26.582
+	Distance 2.804e4
+	Radius 65
+}
+# Globular cluster NGC 6304
+"NGC 6304"
+{
+	Type "E0"
+	RA 17.242
+	Dec -29.462
+	Distance 1.826e4
+	Radius 50
+}
+# Globular cluster NGC 6356
+"NGC 6356"
+{
+	Type "E0"
+	RA 17.393
+	Dec -17.813
+	Distance 4.5e4
+	Radius 90
+}
+# Globular cluster NGC 6522
+"NGC 6522"
+{
+	Type "E0"
+	RA 18.06
+	Dec -30.034
+	Distance 2.217e4
+	Radius 55
+}
+# Globular cluster NGC 6584
+"NGC 6584"
+{
+	Type "E0"
+	RA 18.311
+	Dec -52.215
+	Distance 4.076e4
+	Radius 80
+}
+# Globular cluster M56 / NGC 6779
+"M56"
+{
+	Type "E0"
+	RA 19.277
+	Dec 30.185
+	Distance 3.163e4
+	Radius 70
+}
+# Globular cluster NGC 1261
+"NGC 1261"
+{
+	Type "E0"
+	RA 3.204
+	Dec -55.217
+	Distance 4.957e4
+	Radius 95
+}
+# Globular cluster NGC 6316
+"NGC 6316"
+{
+	Type "E0"
+	RA 17.277
+	Dec -28.14
+	Distance 3.554e4
+	Radius 70
+}
+# Globular cluster M75 / NGC 6864
+"M75"
+{
+	Type "E0"
+	RA 20.101
+	Dec -21.921
+	Distance 5.772e4
+	Radius 95
+}
+# Globular cluster NGC 5897
+"NGC 5897"
+{
+	Type "E0"
+	RA 15.29
+	Dec -21.01
+	Distance 4.044e4
+	Radius 75
+}
+# Globular cluster NGC 6496
+"NGC 6496"
+{
+	Type "E0"
+	RA 17.984
+	Dec -44.265
+	Distance 3.554e4
+	Radius 70
+}
+# Globular cluster NGC 6569
+"NGC 6569"
+{
+	Type "E0"
+	RA 18.228
+	Dec -31.826
+	Distance 2.641e4
+	Radius 55
+}
+# Globular cluster NGC 6652
+"NGC 6652"
+{
+	Type "E0"
+	RA 18.596
+	Dec -32.99
+	Distance 2.935e4
+	Radius 60
+}
+# Globular cluster NGC 6284
+"NGC 6284"
+{
+	Type "E0"
+	RA 17.075
+	Dec -24.765
+	Distance 4.5e4
+	Radius 75
+}
+# Globular cluster NGC 6934
+"NGC 6934"
+{
+	Type "E0"
+	RA 20.57
+	Dec 7.404
+	Distance 4.696e4
+	Radius 75
+}
+# Globular cluster NGC 6760
+"NGC 6760"
+{
+	Type "E0"
+	RA 19.187
+	Dec 1.031
+	Distance 2.25e4
+	Radius 45
+}
+# Globular cluster NGC 6139
+"NGC 6139"
+{
+	Type "E0"
+	RA 16.461
+	Dec -38.849
+	Distance 2.968e4
+	Radius 50
+}
+# Globular cluster NGC 6144
+"NGC 6144"
+{
+	Type "E0"
+	RA 16.454
+	Dec -26.025
+	Distance 3.196e4
+	Radius 55
+}
+# Globular cluster NGC 6638
+"NGC 6638"
+{
+	Type "E0"
+	RA 18.516
+	Dec -25.496
+	Distance 2.544e4
+	Radius 45
+}
+# Globular cluster NGC 5466
+"NGC 5466"
+{
+	Type "E0"
+	RA 14.091
+	Dec 28.535
+	Distance 5.315e4
+	Radius 75
+}
+# Globular cluster NGC 5824
+"NGC 5824"
+{
+	Type "E0"
+	RA 15.066
+	Dec -33.068
+	Distance 1.05e5
+	Radius 120
+}
+# Globular cluster NGC 6642
+"NGC 6642"
+{
+	Type "E0"
+	RA 18.532
+	Dec -23.476
+	Distance 2.381e4
+	Radius 45
+}
+# Globular cluster NGC 6355
+"NGC 6355"
+{
+	Type "E0"
+	RA 17.4
+	Dec -26.354
+	Distance 2.217e4
+	Radius 40
+}
+# Globular cluster NGC 6101
+"NGC 6101"
+{
+	Type "E0"
+	RA 16.43
+	Dec -72.202
+	Distance 4.794e4
+	Radius 70
+}
+# Globular cluster NGC 6366
+"NGC 6366"
+{
+	Type "E0"
+	RA 17.462
+	Dec -5.077
+	Distance 1.109e4
+	Radius 25
+}
+# Globular cluster NGC 6440
+"NGC 6440"
+{
+	Type "E0"
+	RA 17.815
+	Dec -20.359
+	Distance 2.446e4
+	Radius 45
+}
+# Globular cluster NGC 6558
+"NGC 6558"
+{
+	Type "E0"
+	RA 18.172
+	Dec -31.764
+	Distance 2.837e4
+	Radius 45
+}
+# Globular cluster M72 / NGC 6981
+"M72"
+{
+	Type "E0"
+	RA 20.891
+	Dec -12.537
+	Distance 5.283e4
+	Radius 70
+}
+# Globular cluster NGC 6717
+"NGC 6717"
+{
+	Type "E0"
+	RA 18.918
+	Dec -22.701
+	Distance 2.152e4
+	Radius 40
+}
+# Globular cluster NGC 2298
+"NGC 2298"
+{
+	Type "E0"
+	RA 6.816
+	Dec -36.005
+	Distance 3.391e4
+	Radius 50
+}
+# Globular cluster NGC 6540
+"NGC 6540"
+{
+	Type "E0"
+	RA 18.102
+	Dec -27.765
+	Distance 1.109e4
+	Radius 25
+}
+# Globular cluster NGC 6539
+"NGC 6539"
+{
+	Type "E0"
+	RA 18.081
+	Dec -7.586
+	Distance 2.446e4
+	Radius 40
+}
+# Globular cluster NGC 6287
+"NGC 6287"
+{
+	Type "E0"
+	RA 17.086
+	Dec -22.708
+	Distance 2.674e4
+	Radius 45
+}
+# Globular cluster NGC 6229
+"NGC 6229"
+{
+	Type "E0"
+	RA 16.783
+	Dec 47.528
+	Distance 9.229e4
+	Radius 100
+}
+# Globular cluster NGC 6401
+"NGC 6401"
+{
+	Type "E0"
+	RA 17.644
+	Dec -23.909
+	Distance 2.348e4
+	Radius 40
+}
+# Globular cluster NGC 5053
+"NGC 5053"
+{
+	Type "E0"
+	RA 13.274
+	Dec 17.698
+	Distance 5.218e4
+	Radius 65
+}
+# Globular cluster NGC 5634
+"NGC 5634"
+{
+	Type "E0"
+	RA 14.494
+	Dec -5.976
+	Distance 8.022e4
+	Radius 90
+}
+# Globular cluster NGC 6528
+"NGC 6528"
+{
+	Type "E0"
+	RA 18.08
+	Dec -30.056
+	Distance 2.283e4
+	Radius 35
+}
+# Globular cluster NGC 5946
+"NGC 5946"
+{
+	Type "E0"
+	RA 15.591
+	Dec -50.66
+	Distance 3.881e4
+	Radius 50
+}
+# Globular cluster NGC 6342
+"NGC 6342"
+{
+	Type "E0"
+	RA 17.353
+	Dec -19.587
+	Distance 2.804e4
+	Radius 40
+}
+# Globular cluster IC 4499
+"IC 4499"
+{
+	Type "E0"
+	RA 15.005
+	Dec -82.214
+	Distance 5.739e4
+	Radius 65
+}
+# Globular cluster Pal 11
+"Pal 11"
+{
+	Type "E0"
+	RA 19.754
+	Dec -8.007
+	Distance 3.881e4
+	Radius 50
+}
+# Globular cluster Djorg 2
+"Djorg 2"
+{
+	Type "E0"
+	RA 18.03
+	Dec -27.826
+	Distance 4.305e4
+	Radius 50
+}
+# Globular cluster NGC 6235
+"NGC 6235"
+{
+	Type "E0"
+	RA 16.89
+	Dec -22.177
+	Distance 3.065e4
+	Radius 40
+}
+# Globular cluster NGC 6453
+"NGC 6453"
+{
+	Type "E0"
+	RA 17.848
+	Dec -34.599
+	Distance 3.424e4
+	Radius 40
+}
+# Globular cluster NGC 5694
+"NGC 5694"
+{
+	Type "E0"
+	RA 14.66
+	Dec -26.538
+	Distance 1.076e5
+	Radius 85
+}
+# Globular cluster NGC 6517
+"NGC 6517"
+{
+	Type "E0"
+	RA 18.031
+	Dec -8.959
+	Distance 3.294e4
+	Radius 40
+}
+# Globular cluster NGC 4147
+"NGC 4147"
+{
+	Type "E0"
+	RA 12.168
+	Dec 18.542
+	Distance 5.968e4
+	Radius 55
+}
+# Globular cluster NGC 6325
+"NGC 6325"
+{
+	Type "E0"
+	RA 17.3
+	Dec -23.766
+	Distance 2.935e4
+	Radius 35
+}
+# Globular cluster IC 1276
+"IC 1276"
+{
+	Type "E0"
+	RA 18.179
+	Dec -7.208
+	Distance 2.902e4
+	Radius 35
+}
+# Globular cluster NGC 2419
+"NGC 2419"
+{
+	Type "E0"
+	RA 7.636
+	Dec 38.882
+	Distance 2.948e5
+	Radius 160
+}
+# Globular cluster NGC 6535
+"NGC 6535"
+{
+	Type "E0"
+	RA 18.064
+	Dec -0.297
+	Distance 2.152e4
+	Radius 25
+}
+# Globular cluster NGC 7006
+"NGC 7006"
+{
+	Type "E0"
+	RA 21.025
+	Dec 16.188
+	Distance 1.288e5
+	Radius 85
+}
+# Globular cluster Rup 106
+"Rup 106"
+{
+	Type "E0"
+	RA 12.645
+	Dec -51.15
+	Distance 6.62e4
+	Radius 50
+}
+# Globular cluster NGC 6426
+"NGC 6426"
+{
+	Type "E0"
+	RA 17.749
+	Dec 3.17
+	Distance 6.098e4
+	Radius 45
+}
+# Globular cluster Pal 8
+"Pal 8"
+{
+	Type "E0"
+	RA 18.692
+	Dec -19.826
+	Distance 3.815e4
+	Radius 30
+}
+# Globular cluster NGC 6256
+"NGC 6256"
+{
+	Type "E0"
+	RA 16.992
+	Dec -37.121
+	Distance 2.902e4
+	Radius 25
+}
+# Globular cluster NGC 7492
+"NGC 7492"
+{
+	Type "E0"
+	RA 23.141
+	Dec -15.611
+	Distance 7.924e4
+	Radius 50
+}
+# Globular cluster E 3
+"E 3"
+{
+	Type "E0"
+	RA 9.35
+	Dec -77.283
+	Distance 1.304e4
+	Radius 15
+}
+# Globular cluster Pal 6
+"Pal 6"
+{
+	Type "E0"
+	RA 17.728
+	Dec -26.223
+	Distance 2.022e4
+	Radius 15
+}
+# Globular cluster HP 1
+"HP 1"
+{
+	Type "E0"
+	RA 17.518
+	Dec -29.982
+	Distance 2.641e4
+	Radius 20
+}
+# Globular cluster Pal 5
+"Pal 5"
+{
+	Type "E0"
+	RA 15.268
+	Dec -0.111
+	Distance 7.109e4
+	Radius 40
+}
+# Globular cluster Pal 12
+"Pal 12"
+{
+	Type "E0"
+	RA 21.777
+	Dec -21.251
+	Distance 5.805e4
+	Radius 30
+}
+# Globular cluster Terzan 3
+"Terzan 3"
+{
+	Type "E0"
+	RA 16.478
+	Dec -35.354
+	Distance 8.218e4
+	Radius 40
+}
+# Globular cluster 1636-283
+"1636-283"
+{
+	Type "E0"
+	RA 16.657
+	Dec -28.398
+	Distance 2.381e4
+	Radius 15
+}
+# Globular cluster Terzan 7
+"Terzan 7"
+{
+	Type "E0"
+	RA 19.296
+	Dec -34.658
+	Distance 7.142e4
+	Radius 35
+}
+# Globular cluster Ton 2
+"Ton 2"
+{
+	Type "E0"
+	RA 17.603
+	Dec -38.553
+	Distance 2.674e4
+	Radius 15
+}
+# Globular cluster Arp 2
+"Arp 2"
+{
+	Type "E0"
+	RA 19.479
+	Dec -30.354
+	Distance 9.457e4
+	Radius 40
+}
+# Globular cluster Terzan 8
+"Terzan 8"
+{
+	Type "E0"
+	RA 19.696
+	Dec -34.0
+	Distance 8.087e4
+	Radius 35
+}
+# Globular cluster NGC 6749
+"NGC 6749"
+{
+	Type "E0"
+	RA 19.088
+	Dec 1.901
+	Distance 3.163e4
+	Radius 15
+}
+# Globular cluster Pyxis
+"Pyxis"
+{
+	Type "E0"
+	RA 9.133
+	Dec -37.221
+	Distance 1.138e5
+	Radius 40
+}
+# Globular cluster Pal 2
+"Pal 2"
+{
+	Type "E0"
+	RA 4.768
+	Dec 31.381
+	Distance 4.468e4
+	Radius 20
+}
+# Globular cluster Pal 10
+"Pal 10"
+{
+	Type "E0"
+	RA 19.301
+	Dec 18.572
+	Distance 3.457e4
+	Radius 15
+}
+# Globular cluster Pal 1
+"Pal 1"
+{
+	Type "E0"
+	RA 3.556
+	Dec 79.581
+	Distance 3.0e4
+	Radius 10
+}
+# Globular cluster Djorg 1
+"Djorg 1"
+{
+	Type "E0"
+	RA 17.791
+	Dec -33.066
+	Distance 2.87e4
+	Radius 10
+}
+# Globular cluster Pal 13
+"Pal 13"
+{
+	Type "E0"
+	RA 23.112
+	Dec 12.772
+	Distance 7.989e4
+	Radius 20
+}
+# Globular cluster Terzan 5
+"Terzan 5"
+{
+	Type "E0"
+	RA 17.801
+	Dec -24.813
+	Distance 1.598e4
+	Radius 5
+}
+# Globular cluster Terzan 6
+"Terzan 6"
+{
+	Type "E0"
+	RA 17.846
+	Dec -31.275
+	Distance 2.315e4
+	Radius 10
+}
+# Globular cluster BH 176
+"BH 176"
+{
+	Type "E0"
+	RA 15.652
+	Dec -50.051
+	Distance 4.728e4
+	Radius 15
+}
+# Globular cluster Pal 15
+"Pal 15"
+{
+	Type "E0"
+	RA 17.001
+	Dec -0.542
+	Distance 1.386e5
+	Radius 30
+}
+# Globular cluster Pal 4
+"Pal 4"
+{
+	Type "E0"
+	RA 11.488
+	Dec 28.974
+	Distance 3.137e5
+	Radius 50
+}
+# Globular cluster Pal 3
+"Pal 3"
+{
+	Type "E0"
+	RA 10.092
+	Dec 0.071
+	Distance 2.827e5
+	Radius 45
+}
+# Globular cluster Terzan 2
+"Terzan 2"
+{
+	Type "E0"
+	RA 17.459
+	Dec -30.802
+	Distance 2.902e4
+	Radius 10
+}
+# Globular cluster Eridanus
+"Eridanus"
+{
+	Type "E0"
+	RA 4.412
+	Dec -21.187
+	Distance 2.544e5
+	Radius 35
+}
+# Globular cluster Pal 14
+"Pal 14"
+{
+	Type "E0"
+	RA 16.185
+	Dec 14.958
+	Distance 2.276e5
+	Radius 35
+}
+# Globular cluster Terzan 10
+"Terzan 10"
+{
+	Type "E0"
+	RA 18.049
+	Dec -26.067
+	Distance 2.576e4
+	Radius 5
+}
+# Globular cluster AM 1
+"AM 1"
+{
+	Type "E0"
+	RA 3.917
+	Dec -49.614
+	Distance 3.779e5
+	Radius 35
+}
+# Globular cluster AM 4
+"AM 4"
+{
+	Type "E0"
+	RA 13.931
+	Dec -27.173
+	Distance 9.294e4
+	Radius 10
+}
+# Globular cluster Terzan 1
+"Terzan 1"
+{
+	Type "E0"
+	RA 17.597
+	Dec -30.47
+	Distance 1.989e4
+	Radius 5
+}
+# Globular cluster Terzan 9
+"Terzan 9"
+{
+	Type "E0"
+	RA 18.027
+	Dec -26.84
+	Distance 2.413e4
+	Radius 5
+}
+# Globular cluster Liller 1
+"Liller 1"
+{
+	Type "E0"
+	RA 17.557
+	Dec -33.389
+	Distance 3.326e4
+	Radius 5
+}
+# Globular cluster UKS 1
+"UKS 1"
+{
+	Type "E0"
+	RA 17.908
+	Dec -24.145
+	Distance 2.348e4
+	Radius 5
+}
+# Globular cluster Lynga 7
+"Lynga 7"
+{
+	Type "E0"
+	RA 16.184
+	Dec -55.314
+	Distance 2.152e4
+	Radius 5
+}
+
+#############################################################################
+#
+# Galaxy clusters, rendered as galaxies
+# These really need their own shader so they don't look like big bright blobs.
+#
+# Taken from 'Rich Clusters of Galaxies' (Abell+ 1989)
+#
+# Notes:
+#
+# Only clusters with redshifts have been included.
+# 'Abell' denotes an entry that had a redshift in the original Abell catalogue.
+# 'ACOS' denotes a member of the southern hemisphere survey.
+#
+# Due to lack of data, Cluster radii have been 'made up', on the assumption that the
+# density of galaxies across all clusters is constant, and that for an Abell catalogue
+# entry, each galaxy contributing to the 'count' field occupies 1 cubic Mly. Total volume
+# for the cluster can therefore give the radius by V = 4 * pi * r^3.
+#
+# Distances were calculated from redshifts using the following formulas:
+#
+# Rvel = c * ((1+z)^2-1) / ((1+z)^2+1)
+# dist = Rvel * 3.26 / H0  (H0 = 75km/s/Mpc, Hubble Constant)
+#
+
+# ACOS 373 is currently more well represented by individual galaxies.
+#"AS373"
+#{
+#	Type "E0"
+#	RA 3.642
+#	Dec -35.45
+#	Distance 6.0e7
+#	Radius 9.26e5
+#}
+
+"AS636"
+{
+	Type "E0"
+	RA 10.5
+	Dec -35.32
+	Distance 1.13e8
+	Radius 1.29e6
+}
+
+"AS851"
+{
+	Type "E0"
+	RA 20.165
+	Dec -48.39
+	Distance 1.30e8
+	Radius 2.34e6
+}
+
+"A3560"
+{
+	Type "E0"
+	RA 13.531
+	Dec -33.22
+	Distance 1.41e8
+	Radius 7.32e6
+}
+
+"A3565"
+{
+	Type "E0"
+	RA 13.611
+	Dec -33.97
+	Distance 1.41e8
+	Radius 5.15e6
+}
+
+"A3526"
+{
+	Type "E0"
+	RA 12.815
+	Dec -41.31
+	Distance 1.43e8
+	Radius 4.13e6
+}
+
+"Abell 1060"
+{
+	Type "E0"
+	RA 10.614
+	Dec -27.53
+	Distance 1.48e8
+	Radius 4.75e6
+}
+
+"AS805"
+{
+	Type "E0"
+	RA 18.787
+	Dec -63.33
+	Distance 1.80e8
+	Radius 2.58e6
+}
+
+"AS574"
+{
+	Type "E0"
+	RA 6.21
+	Dec -45.08
+	Distance 1.81e8
+	Radius 3.44e6
+}
+
+"AS753"
+{
+	Type "E0"
+	RA 14.061
+	Dec -33.97
+	Distance 1.81e8
+	Radius 3.38e6
+}
+
+
+"A3574"
+{
+	Type "E0"
+	RA 13.819
+	Dec -30.3
+	Distance 1.83e8
+	Radius 4.05e6
+}
+
+
+"A3627"
+{
+	Type "E0"
+	RA 16.259
+	Dec -60.91
+	Distance 1.85e8
+	Radius 5.02e6
+}
+
+"AS521"
+{
+	Type "E0"
+	RA 5.317
+	Dec -37.1
+	Distance 1.94e8
+	Radius 9.26e5
+}
+
+
+"AS840"
+{
+	Type "E0"
+	RA 20.057
+	Dec -55.96
+	Distance 1.97e8
+	Radius 3.18e6
+}
+
+
+"A3554"
+{
+	Type "E0"
+	RA 13.325
+	Dec -33.48
+	Distance 1.98e8
+	Radius 5.02e6
+}
+
+
+"A262"
+{
+	Type "E0"
+	RA 1.881
+	Dec 36.15
+	Distance 2.08e8
+	Radius 4.41e6
+}
+
+
+"A3742"
+{
+	Type "E0"
+	RA 21.111
+	Dec -47.15
+	Distance 2.13e8
+	Radius 4.21e6
+}
+
+"A3537"
+{
+	Type "E0"
+	RA 13.017
+	Dec -32.44
+	Distance 2.16e8
+	Radius 4.21e6
+}
+
+"AS182"
+{
+	Type "E0"
+	RA 1.723
+	Dec -36.37
+	Distance 2.26e8
+	Radius 2.2e6
+}
+
+"A194"
+{
+	Type "E0"
+	RA 1.426
+	Dec -1.51
+	Distance 2.3e8
+	Radius 4.3e6
+}
+
+"A426"
+{
+	Type "E0"
+	RA 3.31
+	Dec 41.52
+	Distance 2.36e8
+	Radius 5.73e6
+}
+
+"AS866"
+{
+	Type "E0"
+	RA 20.364
+	Dec -49.71
+	Distance 2.36e8
+	Radius 9.27e5
+}
+
+"A3656"
+{
+	Type "E0"
+	RA 20.009
+	Dec -38.53
+	Distance 2.39e8
+	Radius 4.21e6
+}
+
+"A347"
+{
+	Type "E0"
+	RA 2.431
+	Dec 41.87
+	Distance 2.41e8
+	Radius 4.09e6
+}
+
+"AS500"
+{
+	Type "E0"
+	RA 4.779
+	Dec -62.46
+	Distance 2.45e8
+	Radius 9.27e5
+}
+
+"A569"
+{
+	Type "E0"
+	RA 7.153
+	Dec 48.62
+	Distance 2.53e8
+	Radius 4.25e6
+}
+
+"AS85"
+{
+	Type "E0"
+	RA 0.832
+	Dec -47.38
+	Distance 2.53e8
+	Radius 9.27e5
+}
+
+"A3706"
+{
+	Type "E0"
+	RA 20.704
+	Dec -38.34
+	Distance 2.58e8
+	Radius 4.44e6
+}
+
+"AS316"
+{
+	Type "E0"
+	RA 3.005
+	Dec -37.04
+	Distance 2.59e8
+	Radius 2.34e6
+}
+
+"A2911"
+{
+	Type "E0"
+	RA 1.434
+	Dec -37.97
+	Distance 2.61e8
+	Radius 5.36e6
+}
+
+"AS639"
+{
+	Type "E0"
+	RA 10.676
+	Dec -46.19
+	Distance 2.63e8
+	Radius 3.11e6
+}
+
+"A539"
+{
+	Type "E0"
+	RA 5.277
+	Dec 6.45
+	Distance 2.64e8
+	Radius 4.75e6
+}
+
+"AS141"
+{
+	Type "E0"
+	RA 1.229
+	Dec -31.75
+	Distance 2.66e8
+	Radius 2.95e6
+}
+
+"A2933"
+{
+	Type "E0"
+	RA 1.678
+	Dec -54.56
+	Distance 2.68e8
+	Radius 5.48e6
+}
+
+"AS283"
+{
+	Type "E0"
+	RA 2.592
+	Dec -50.32
+	Distance 2.73e8
+	Radius 2.68e6
+}
+
+"A1367"
+{
+	Type "E0"
+	RA 11.741
+	Dec 19.84
+	Distance 2.77e8
+	Radius 6.3e6
+}
+
+"AS301"
+{
+	Type "E0"
+	RA 2.827
+	Dec -31.19
+	Distance 2.87e8
+	Radius 2.2e6
+}
+
+"A3879"
+{
+	Type "E0"
+	RA 22.464
+	Dec -69.03
+	Distance 2.89e8
+	Radius 6.25e6
+}
+
+"AS897"
+{
+	Type "E0"
+	RA 20.791
+	Dec -38.42
+	Distance 2.89e8
+	Radius 3.77e6
+}
+
+"A400"
+{
+	Type "E0"
+	RA 2.961
+	Dec 6.03
+	Distance 2.99e8
+	Radius 4.99e6
+}
+
+"A1656"
+{
+	Type "E0"
+	RA 13.0
+	Dec 27.98
+	Distance 2.99e8
+	Radius 6.1e6
+}
+
+"AS778"
+{
+	Type "E0"
+	RA 14.941
+	Dec -37.6
+	Distance 3.05e8
+	Radius 2.05e6
+}
+
+"A2877"
+{
+	Type "E0"
+	RA 1.164
+	Dec -45.9
+	Distance 3.1e8
+	Radius 4.0e6
+}
+
+"AS45"
+{
+	Type "E0"
+	RA 0.428
+	Dec -56.97
+	Distance 3.1e8
+	Radius 3.5e6
+}
+
+"AS900"
+{
+	Type "E0"
+	RA 20.812
+	Dec -38.0
+	Distance 3.13e8
+	Radius 2.95e6
+}
+
+#A3389 / AS585
+"A3389"
+{
+	Type "E0"
+	RA 6.363
+	Dec -64.96
+	Distance 3.19e8
+	Radius 4.21e6
+}
+
+"A2870"
+{
+	Type "E0"
+	RA 1.129
+	Dec -46.92
+	Distance 3.21e8
+	Radius 4.13e6
+}
+
+"AS892"
+{
+	Type "E0"
+	RA 20.695
+	Dec -37.65
+	Distance 3.27e8
+	Radius 3.25e6
+}
+
+"AS137"
+{
+	Type "E0"
+	RA 1.197
+	Dec -61.53
+	Distance 3.38e8
+	Radius 9.27e5
+}
+
+"AS311"
+{
+	Type "E0"
+	RA 2.907
+	Dec -66.41
+	Distance 3.38e8
+	Radius 3.18e6
+}
+
+"A2666"
+{
+	Type "E0"
+	RA 23.849
+	Dec 27.14
+	Distance 3.41e8
+	Radius 4.17e6
+}
+
+"A634"
+{
+	Type "E0"
+	RA 8.243
+	Dec 58.05
+	Distance 3.43e8
+	Radius 4.41e6
+}
+
+"A2860"
+{
+	Type "E0"
+	RA 1.069
+	Dec -39.78
+	Distance 3.45e8
+	Radius 4.44e6
+}
+
+"AS6"
+{
+	Type "E0"
+	RA 0.079
+	Dec -30.49
+	Distance 3.47e8
+	Radius 2.47e6
+}
+
+"A2806"
+{
+	Type "E0"
+	RA 0.669
+	Dec -56.16
+	Distance 3.48e8
+	Radius 4.29e6
+}
+
+"AS754"
+{
+	Type "E0"
+	RA 14.106
+	Dec -39.82
+	Distance 3.61e8
+	Radius 9.27e5
+}
+
+"A3381"
+{
+	Type "E0"
+	RA 6.165
+	Dec -33.59
+	Distance 3.62e8
+	Radius 5.28e6
+}
+
+"AS898"
+{
+	Type "E0"
+	RA 20.791
+	Dec -30.17
+	Distance 3.62e8
+	Radius 1.86e6
+}
+
+"A4038"
+{
+	Type "E0"
+	RA 23.795
+	Dec -28.14
+	Distance 3.64e8
+	Radius 6.3e6
+}
+
+"A4049"
+{
+	Type "E0"
+	RA 23.86
+	Dec -28.37
+	Distance 3.64e8
+	Radius 4.37e6
+}
+
+"AS74"
+{
+	Type "E0"
+	RA 0.762
+	Dec -49.94
+	Distance 3.64e8
+	Radius 3.56e6
+}
+
+"A3990"
+{
+	Type "E0"
+	RA 23.313
+	Dec -67.78
+	Distance 3.67e8
+	Radius 5.94e6
+}
+
+"AS1065"
+{
+	Type "E0"
+	RA 22.822
+	Dec -37.49
+	Distance 3.7e8
+	Radius 9.27e5
+}
+
+"AS882"
+{
+	Type "E0"
+	RA 20.591
+	Dec -43.44
+	Distance 3.73e8
+	Radius 9.27e5
+}
+
+"AS921"
+{
+	Type "E0"
+	RA 21.114
+	Dec -44.83
+	Distance 3.73e8
+	Radius 3.87e6
+}
+
+"AS1165"
+{
+	Type "E0"
+	RA 23.978
+	Dec -29.85
+	Distance 3.84e8
+	Radius 1.86e6
+}
+
+"A2197"
+{
+	Type "E0"
+	RA 16.469
+	Dec 40.91
+	Distance 3.89e8
+	Radius 5.38e6
+}
+
+"A2199"
+{
+	Type "E0"
+	RA 16.477
+	Dec 39.52
+	Distance 3.89e8
+	Radius 5.73e6
+}
+
+"A1185"
+{
+	Type "E0"
+	RA 11.18
+	Dec 28.68
+	Distance 3.9e8
+	Radius 4.81e6
+}
+
+"A3747"
+{
+	Type "E0"
+	RA 21.145
+	Dec -43.5
+	Distance 3.93e8
+	Radius 4.55e6
+}
+
+"AS922"
+{
+	Type "E0"
+	RA 21.115
+	Dec -39.65
+	Distance 3.93e8
+	Radius 3.72e6
+}
+
+"AS274"
+{
+	Type "E0"
+	RA 2.519
+	Dec -57.93
+	Distance 3.97e8
+	Radius 9.27e5
+}
+
+"A2634"
+{
+	Type "E0"
+	RA 23.639
+	Dec 27.03
+	Distance 4.0e8
+	Radius 4.81e6
+}
+
+"A2731"
+{
+	Type "E0"
+	RA 0.17
+	Dec -56.99
+	Distance 4.0e8
+	Radius 4.37e6
+}
+
+"AS743"
+{
+	Type "E0"
+	RA 13.771
+	Dec -39.9
+	Distance 4.04e8
+	Radius 9.27e5
+}
+
+"A1177"
+{
+	Type "E0"
+	RA 11.158
+	Dec 21.7
+	Distance 4.05e8
+	Radius 4.09e6
+}
+
+"AS109"
+{
+	Type "E0"
+	RA 0.955
+	Dec -30.93
+	Distance 4.05e8
+	Radius 9.27e5
+}
+
+"A2896"
+{
+	Type "E0"
+	RA 1.305
+	Dec -37.1
+	Distance 4.07e8
+	Radius 4.55e6
+}
+
+"A999"
+{
+	Type "E0"
+	RA 10.389
+	Dec 12.85
+	Distance 4.08e8
+	Radius 4.13e6
+}
+
+"AS665"
+{
+	Type "E0"
+	RA 11.431
+	Dec -35.39
+	Distance 4.08e8
+	Radius 2.95e6
+}
+
+"A496"
+{
+	Type "E0"
+	RA 4.56
+	Dec -13.25
+	Distance 4.1e8
+	Radius 4.75e6
+}
+
+"A2162"
+{
+	Type "E0"
+	RA 16.208
+	Dec 29.54
+	Distance 4.1e8
+	Radius 4.29e6
+}
+
+"A3749"
+{
+	Type "E0"
+	RA 21.171
+	Dec -45.81
+	Distance 4.1e8
+	Radius 4.9e6
+}
+
+"A1016"
+{
+	Type "E0"
+	RA 10.451
+	Dec 10.98
+	Distance 4.12e8
+	Radius 4.29e6
+}
+
+"A1267"
+{
+	Type "E0"
+	RA 11.466
+	Dec 26.86
+	Distance 4.12e8
+	Radius 4.29e6
+}
+
+"AS112"
+{
+	Type "E0"
+	RA 0.973
+	Dec -66.81
+	Distance 4.12e8
+	Radius 3.25e6
+}
+
+"AS1055"
+{
+	Type "E0"
+	RA 22.721
+	Dec -39.87
+	Distance 4.13e8
+	Radius 9.27e5
+}
+
+"AS971"
+{
+	Type "E0"
+	RA 21.77
+	Dec -46.52
+	Distance 4.16e8
+	Radius 9.27e5
+}
+
+"A397"
+{
+	Type "E0"
+	RA 2.95
+	Dec 15.95
+	Distance 4.17e8
+	Radius 4.21e6
+}
+
+"AS497"
+{
+	Type "E0"
+	RA 4.769
+	Dec -44.73
+	Distance 4.22e8
+	Radius 9.27e5
+}
+
+"A3677"
+{
+	Type "E0"
+	RA 20.439
+	Dec -33.35
+	Distance 4.23e8
+	Radius 5.04e6
+}
+
+"A2506"
+{
+	Type "E0"
+	RA 22.943
+	Dec 13.33
+	Distance 4.24e8
+	Radius 5.46e6
+}
+
+"AS1060"
+{
+	Type "E0"
+	RA 22.779
+	Dec -46.02
+	Distance 4.24e8
+	Radius 3.61e6
+}
+
+"A189"
+{
+	Type "E0"
+	RA 1.395
+	Dec 1.64
+	Distance 4.29e8
+	Radius 4.75e6
+}
+
+"AS740"
+{
+	Type "E0"
+	RA 13.725
+	Dec -38.18
+	Distance 4.31e8
+	Radius 1.62e6
+}
+
+"A2063"
+{
+	Type "E0"
+	RA 15.384
+	Dec 8.64
+	Distance 4.32e8
+	Radius 5.13e6
+}
+
+"A1257"
+{
+	Type "E0"
+	RA 11.435
+	Dec 35.32
+	Distance 4.34e8
+	Radius 4.48e6
+}
+
+"A3193"
+{
+	Type "E0"
+	RA 3.97
+	Dec -52.34
+	Distance 4.36e8
+	Radius 4.44e6
+}
+
+"A1314"
+{
+	Type "E0"
+	RA 11.58
+	Dec 49.04
+	Distance 4.37e8
+	Radius 4.55e6
+}
+
+"AS1106"
+{
+	Type "E0"
+	RA 23.291
+	Dec -42.84
+	Distance 4.43e8
+	Radius 9.27e5
+}
+
+"AS981"
+{
+	Type "E0"
+	RA 21.929
+	Dec -55.58
+	Distance 4.44e8
+	Radius 3.56e6
+}
+
+"A260"
+{
+	Type "E0"
+	RA 1.865
+	Dec 33.16
+	Distance 4.46e8
+	Radius 4.78e6
+}
+
+"A2052"
+{
+	Type "E0"
+	RA 15.279
+	Dec 7.0
+	Distance 4.46e8
+	Radius 4.44e6
+}
+
+"A1228"
+{
+	Type "E0"
+	RA 11.358
+	Dec 34.33
+	Distance 4.48e8
+	Radius 4.75e6
+}
+
+"Abell 1736"
+{
+	Type "E0"
+	RA 13.451
+	Dec -27.16
+	Distance 4.48e8
+	Radius 6.06e6
+}
+
+"A3816"
+{
+	Type "E0"
+	RA 21.841
+	Dec -55.32
+	Distance 4.51e8
+	Radius 4.37e6
+}
+
+"A1142"
+{
+	Type "E0"
+	RA 11.015
+	Dec 10.55
+	Distance 4.52e8
+	Radius 4.21e6
+}
+
+"AS1020"
+{
+	Type "E0"
+	RA 22.404
+	Dec -56.48
+	Distance 4.55e8
+	Radius 3.77e6
+}
+
+"A2147"
+{
+	Type "E0"
+	RA 16.038
+	Dec 15.9
+	Distance 4.56e8
+	Radius 4.81e6
+}
+
+"AS540"
+{
+	Type "E0"
+	RA 5.669
+	Dec -40.84
+	Distance 4.58e8
+	Radius 3.61e6
+}
+
+"AS1129"
+{
+	Type "E0"
+	RA 23.497
+	Dec -31.11
+	Distance 4.58e8
+	Radius 1.86e6
+}
+
+"A1836"
+{
+	Type "E0"
+	RA 14.028
+	Dec -11.61
+	Distance 4.65e8
+	Radius 4.44e6
+}
+
+"AS479"
+{
+	Type "E0"
+	RA 4.629
+	Dec -51.43
+	Distance 4.65e8
+	Radius 9.27e5
+}
+
+"AS989"
+{
+	Type "E0"
+	RA 22.073
+	Dec -50.07
+	Distance 4.65e8
+	Radius 3.77e6
+}
+
+"AS404"
+{
+	Type "E0"
+	RA 3.939
+	Dec -53.87
+	Distance 4.67e8
+	Radius 3.66e6
+}
+
+"A3664"
+{
+	Type "E0"
+	RA 20.233
+	Dec -80.65
+	Distance 4.72e8
+	Radius 5.15e6
+}
+
+"AS413"
+{
+	Type "E0"
+	RA 4.045
+	Dec -63.8
+	Distance 4.73e8
+	Radius 9.27e5
+}
+
+"A2151"
+{
+	Type "E0"
+	RA 16.087
+	Dec 17.75
+	Distance 4.75e8
+	Radius 5.71e6
+}
+
+"AS873"
+{
+	Type "E0"
+	RA 20.431
+	Dec -33.55
+	Distance 4.75e8
+	Radius 9.27e5
+}
+
+"A3570"
+{
+	Type "E0"
+	RA 13.781
+	Dec -37.92
+	Distance 4.76e8
+	Radius 4.05e6
+}
+
+"AS487"
+{
+	Type "E0"
+	RA 4.674
+	Dec -44.64
+	Distance 4.76e8
+	Radius 9.27e5
+}
+
+"A2152"
+{
+	Type "E0"
+	RA 16.089
+	Dec 16.45
+	Distance 4.78e8
+	Radius 5.04e6
+}
+
+"A1837"
+{
+	Type "E0"
+	RA 14.029
+	Dec -11.16
+	Distance 4.81e8
+	Radius 4.75e6
+}
+
+"A2995"
+{
+	Type "E0"
+	RA 2.253
+	Dec -24.83
+	Distance 4.83e8
+	Radius 5.28e6
+}
+
+"AS411"
+{
+	Type "E0"
+	RA 4.013
+	Dec -64.98
+	Distance 4.86e8
+	Radius 9.27e5
+}
+
+"A576"
+{
+	Type "E0"
+	RA 7.357
+	Dec 55.74
+	Distance 4.87e8
+	Radius 5.07e6
+}
+
+"A3911"
+{
+	Type "E0"
+	RA 22.769
+	Dec -52.72
+	Distance 4.87e8
+	Radius 4.99e6
+}
+
+"A1139"
+{
+	Type "E0"
+	RA 10.968
+	Dec 1.5
+	Distance 4.9e8
+	Radius 4.25e6
+}
+
+"AS338"
+{
+	Type "E0"
+	RA 3.303
+	Dec -52.25
+	Distance 4.91e8
+	Radius 9.27e5
+}
+
+"A3545"
+{
+	Type "E0"
+	RA 13.19
+	Dec -34.08
+	Distance 4.92e8
+	Radius 4.37e6
+}
+
+"A484"
+{
+	Type "E0"
+	RA 4.272
+	Dec -7.66
+	Distance 4.93e8
+	Radius 4.75e6
+}
+
+"A3733"
+{
+	Type "E0"
+	RA 21.033
+	Dec -28.05
+	Distance 4.93e8
+	Radius 5.02e6
+}
+
+"A3202"
+{
+	Type "E0"
+	RA 4.004
+	Dec -53.66
+	Distance 4.96e8
+	Radius 5.18e6
+}
+
+"A2247"
+{
+	Type "E0"
+	RA 16.789
+	Dec 81.57
+	Distance 5.01e8
+	Radius 4.21e6
+}
+
+"AS399"
+{
+	Type "E0"
+	RA 3.908
+	Dec -53.8
+	Distance 5.03e8
+	Radius 2.87e6
+}
+
+"AS463"
+{
+	Type "E0"
+	RA 4.486
+	Dec -53.83
+	Distance 5.03e8
+	Radius 3.82e6
+}
+
+"A2572"
+{
+	Type "E0"
+	RA 23.307
+	Dec 18.74
+	Distance 5.05e8
+	Radius 4.09e6
+}
+
+"AS5"
+{
+	Type "E0"
+	RA 0.077
+	Dec -45.62
+	Distance 5.05e8
+	Radius 9.27e5
+}
+
+"A3869"
+{
+	Type "E0"
+	RA 22.357
+	Dec -55.13
+	Distance 5.06e8
+	Radius 4.71e6
+}
+
+"AS549"
+{
+	Type "E0"
+	RA 5.844
+	Dec -32.27
+	Distance 5.15e8
+	Radius 9.27e5
+}
+
+"A3676"
+{
+	Type "E0"
+	RA 20.422
+	Dec -40.35
+	Distance 5.16e8
+	Radius 4.13e6
+}
+
+"AS569"
+{
+	Type "E0"
+	RA 6.161
+	Dec -47.63
+	Distance 5.17e8
+	Radius 9.27e5
+}
+
+"AS844"
+{
+	Type "E0"
+	RA 20.124
+	Dec -53.14
+	Distance 5.17e8
+	Radius 3.11e6
+}
+
+"AS988"
+{
+	Type "E0"
+	RA 22.076
+	Dec -58.12
+	Distance 5.17e8
+	Radius 3.25e6
+}
+
+"Abell 419"
+{
+	Type "E0"
+	RA 3.137
+	Dec -23.69
+	Distance 5.19e8
+	Radius 3.91e6
+}
+
+"AS894"
+{
+	Type "E0"
+	RA 20.727
+	Dec -26.42
+	Distance 5.22e8
+	Radius 2.2e6
+}
+
+"AS353"
+{
+	Type "E0"
+	RA 3.439
+	Dec -51.41
+	Distance 5.24e8
+	Radius 9.27e5
+}
+
+"Abell 548"
+{
+	Type "E0"
+	RA 5.782
+	Dec -25.63
+	Distance 5.24e8
+	Radius 5.81e6
+}
+
+"A2657"
+{
+	Type "E0"
+	RA 23.747
+	Dec 9.14
+	Distance 5.29e8
+	Radius 4.78e6
+}
+
+"A76"
+{
+	Type "E0"
+	RA 0.663
+	Dec 6.77
+	Distance 5.31e8
+	Radius 4.48e6
+}
+
+"AS63"
+{
+	Type "E0"
+	RA 0.597
+	Dec -52.19
+	Distance 5.32e8
+	Radius 9.27e5
+}
+
+"A688"
+{
+	Type "E0"
+	RA 8.625
+	Dec 15.86
+	Distance 5.37e8
+	Radius 4.75e6
+}
+
+"A2107"
+{
+	Type "E0"
+	RA 15.663
+	Dec 21.77
+	Distance 5.37e8
+	Radius 4.78e6
+}
+
+"A2589"
+{
+	Type "E0"
+	RA 23.4
+	Dec 16.82
+	Distance 5.37e8
+	Radius 4.41e6
+}
+
+"A195"
+{
+	Type "E0"
+	RA 1.449
+	Dec 19.18
+	Distance 5.39e8
+	Radius 4.09e6
+}
+
+"A3144"
+{
+	Type "E0"
+	RA 3.618
+	Dec -55.02
+	Distance 5.4e8
+	Radius 4.87e6
+}
+
+"AS377"
+{
+	Type "E0"
+	RA 3.679
+	Dec -55.21
+	Distance 5.42e8
+	Radius 3.44e6
+}
+
+"AS839"
+{
+	Type "E0"
+	RA 20.023
+	Dec -52.93
+	Distance 5.43e8
+	Radius 3.31e6
+}
+
+"AS1003"
+{
+	Type "E0"
+	RA 22.223
+	Dec -61.92
+	Distance 5.43e8
+	Radius 9.27e5
+}
+
+"AS1011"
+{
+	Type "E0"
+	RA 22.333
+	Dec -62.1
+	Distance 5.43e8
+	Radius 1.86e6
+}
+
+"A2593"
+{
+	Type "E0"
+	RA 23.409
+	Dec 14.64
+	Distance 5.52e8
+	Radius 4.48e6
+}
+
+"A3225"
+{
+	Type "E0"
+	RA 4.155
+	Dec -59.6
+	Distance 5.52e8
+	Radius 4.29e6
+}
+
+"AS889"
+{
+	Type "E0"
+	RA 20.667
+	Dec -53.06
+	Distance 5.57e8
+	Radius 2.47e6
+}
+
+"A147"
+{
+	Type "E0"
+	RA 1.136
+	Dec 2.17
+	Distance 5.58e8
+	Radius 4.09e6
+}
+
+"A119"
+{
+	Type "E0"
+	RA 0.939
+	Dec -1.26
+	Distance 5.61e8
+	Radius 5.28e6
+}
+
+"A957"
+{
+	Type "E0"
+	RA 10.233
+	Dec -0.92
+	Distance 5.61e8
+	Radius 4.9e6
+}
+
+"A1983"
+{
+	Type "E0"
+	RA 14.879
+	Dec 16.75
+	Distance 5.62e8
+	Radius 4.78e6
+}
+
+"AS601"
+{
+	Type "E0"
+	RA 7.018
+	Dec -49.74
+	Distance 5.62e8
+	Radius 3.25e6
+}
+
+"A2148"
+{
+	Type "E0"
+	RA 16.055
+	Dec 25.46
+	Distance 5.63e8
+	Radius 4.44e6
+}
+
+"A3338"
+{
+	Type "E0"
+	RA 5.377
+	Dec -48.27
+	Distance 5.68e8
+	Radius 4.05e6
+}
+
+"A160"
+{
+	Type "E0"
+	RA 1.214
+	Dec 15.51
+	Distance 5.7e8
+	Radius 4.17e6
+}
+
+"Abell 1644"
+{
+	Type "E0"
+	RA 12.954
+	Dec -17.4
+	Distance 5.72e8
+	Radius 5.81e6
+}
+
+"A168"
+{
+	Type "E0"
+	RA 1.253
+	Dec 0.25
+	Distance 5.76e8
+	Radius 5.75e6
+}
+
+"AS393"
+{
+	Type "E0"
+	RA 3.805
+	Dec -45.55
+	Distance 5.78e8
+	Radius 2.87e6
+}
+
+"A1100"
+{
+	Type "E0"
+	RA 10.815
+	Dec 22.24
+	Distance 5.8e8
+	Radius 4.21e6
+}
+
+"A3376"
+{
+	Type "E0"
+	RA 6.012
+	Dec -40.05
+	Distance 5.8e8
+	Radius 4.48e6
+}
+
+"A2040"
+{
+	Type "E0"
+	RA 15.213
+	Dec 7.43
+	Distance 5.81e8
+	Radius 4.81e6
+}
+
+"A3716"
+{
+	Type "E0"
+	RA 20.859
+	Dec -52.71
+	Distance 5.81e8
+	Radius 5.21e6
+}
+
+"A4059"
+{
+	Type "E0"
+	RA 23.945
+	Dec -34.67
+	Distance 5.81e8
+	Radius 5.21e6
+}
+
+"AS1157"
+{
+	Type "E0"
+	RA 23.865
+	Dec -34.42
+	Distance 5.81e8
+	Radius 3.44e6
+}
+
+"A261"
+{
+	Type "E0"
+	RA 1.857
+	Dec -2.24
+	Distance 5.95e8
+	Radius 5.13e6
+}
+
+"AS412"
+{
+	Type "E0"
+	RA 4.028
+	Dec -56.9
+	Distance 5.95e8
+	Radius 9.27e5
+}
+
+"AS906"
+{
+	Type "E0"
+	RA 20.873
+	Dec -51.96
+	Distance 5.95e8
+	Radius 3.96e6
+}
+
+"A1213"
+{
+	Type "E0"
+	RA 11.275
+	Dec 29.26
+	Distance 5.96e8
+	Radius 4.78e6
+}
+
+"A407"
+{
+	Type "E0"
+	RA 3.029
+	Dec 35.83
+	Distance 5.98e8
+	Radius 4.62e6
+}
+
+"AS835"
+{
+	Type "E0"
+	RA 19.975
+	Dec -52.63
+	Distance 5.98e8
+	Radius 3.18e6
+}
+
+"A3559"
+{
+	Type "E0"
+	RA 13.498
+	Dec -29.52
+	Distance 6.0e8
+	Radius 6.7e6
+}
+
+"Abell 533"
+{
+	Type "E0"
+	RA 5.022
+	Dec -22.63
+	Distance 6.01e8
+	Radius 4.29e6
+}
+
+"A480"
+{
+	Type "E0"
+	RA 4.251
+	Dec 0.99
+	Distance 6.02e8
+	Radius 4.41e6
+}
+
+"AS584"
+{
+	Type "E0"
+	RA 6.383
+	Dec -53.59
+	Distance 6.02e8
+	Radius 1.29e6
+}
+
+"A3653"
+{
+	Type "E0"
+	RA 19.877
+	Dec -52.02
+	Distance 6.04e8
+	Radius 4.48e6
+}
+
+"A1308"
+{
+	Type "E0"
+	RA 11.547
+	Dec -3.98
+	Distance 6.12e8
+	Radius 4.29e6
+}
+
+"AS1014"
+{
+	Type "E0"
+	RA 22.403
+	Dec -80.18
+	Distance 6.12e8
+	Radius 3.25e6
+}
+
+"A193"
+{
+	Type "E0"
+	RA 1.419
+	Dec 8.69
+	Distance 6.13e8
+	Radius 4.99e6
+}
+
+"A3558"
+{
+	Type "E0"
+	RA 13.465
+	Dec -31.49
+	Distance 6.13e8
+	Radius 7.84e6
+}
+
+"AS250"
+{
+	Type "E0"
+	RA 2.371
+	Dec -51.11
+	Distance 6.16e8
+	Radius 9.27e5
+}
+
+"A2824"
+{
+	Type "E0"
+	RA 0.809
+	Dec -21.34
+	Distance 6.18e8
+	Radius 4.62e6
+}
+
+"A3736"
+{
+	Type "E0"
+	RA 21.055
+	Dec -43.32
+	Distance 6.19e8
+	Radius 4.21e6
+}
+
+"AS919"
+{
+	Type "E0"
+	RA 21.085
+	Dec -43.43
+	Distance 6.19e8
+	Radius 2.34e6
+}
+
+"A376"
+{
+	Type "E0"
+	RA 2.763
+	Dec 36.86
+	Distance 6.22e8
+	Radius 4.25e6
+}
+
+"A671"
+{
+	Type "E0"
+	RA 8.475
+	Dec 30.42
+	Distance 6.28e8
+	Radius 4.33e6
+}
+
+"AS1066"
+{
+	Type "E0"
+	RA 22.837
+	Dec -46.27
+	Distance 6.31e8
+	Radius 3.77e6
+}
+
+"A2717"
+{
+	Type "E0"
+	RA 0.054
+	Dec -35.95
+	Distance 6.33e8
+	Radius 4.81e6
+}
+
+"A3395"
+{
+	Type "E0"
+	RA 6.459
+	Dec -54.4
+	Distance 6.33e8
+	Radius 4.87e6
+}
+
+"AS41"
+{
+	Type "E0"
+	RA 0.425
+	Dec -33.02
+	Distance 6.33e8
+	Radius 3.82e6
+}
+
+"A3562"
+{
+	Type "E0"
+	RA 13.559
+	Dec -31.67
+	Distance 6.34e8
+	Radius 6.51e6
+}
+
+"AS729"
+{
+	Type "E0"
+	RA 13.359
+	Dec -35.79
+	Distance 6.34e8
+	Radius 3.44e6
+}
+
+"AS1172"
+{
+	Type "E0"
+	RA 0.023
+	Dec -38.77
+	Distance 6.36e8
+	Radius 2.58e6
+}
+
+"AS734"
+{
+	Type "E0"
+	RA 13.465
+	Dec -41.13
+	Distance 6.39e8
+	Radius 2.58e6
+}
+
+"AS893"
+{
+	Type "E0"
+	RA 20.755
+	Dec -73.42
+	Distance 6.39e8
+	Radius 9.27e5
+}
+
+"A838"
+{
+	Type "E0"
+	RA 9.619
+	Dec -5.01
+	Distance 6.44e8
+	Radius 4.41e6
+}
+
+"A1631"
+{
+	Type "E0"
+	RA 12.881
+	Dec -15.44
+	Distance 6.45e8
+	Radius 4.17e6
+}
+
+"A2295"
+{
+	Type "E0"
+	RA 17.999
+	Dec 69.22
+	Distance 6.45e8
+	Radius 4.68e6
+}
+
+"AS801"
+{
+	Type "E0"
+	RA 18.457
+	Dec -51.54
+	Distance 6.49e8
+	Radius 9.27e5
+}
+
+"A1377"
+{
+	Type "E0"
+	RA 11.783
+	Dec 55.74
+	Distance 6.53e8
+	Radius 5.02e6
+}
+
+"A757"
+{
+	Type "E0"
+	RA 9.213
+	Dec 47.71
+	Distance 6.54e8
+	Radius 4.09e6
+}
+
+"A3925"
+{
+	Type "E0"
+	RA 22.863
+	Dec -46.58
+	Distance 6.55e8
+	Radius 4.33e6
+}
+
+"A85"
+{
+	Type "E0"
+	RA 0.694
+	Dec -9.34
+	Distance 6.58e8
+	Radius 5.02e6
+}
+
+"AS823"
+{
+	Type "E0"
+	RA 19.659
+	Dec -53.17
+	Distance 6.58e8
+	Radius 3.56e6
+}
+
+"AS542"
+{
+	Type "E0"
+	RA 5.751
+	Dec -48.1
+	Distance 6.59e8
+	Radius 3.72e6
+}
+
+"A1003"
+{
+	Type "E0"
+	RA 10.418
+	Dec 47.8
+	Distance 6.6e8
+	Radius 4.29e6
+}
+
+"A780"
+{
+	Type "E0"
+	RA 9.309
+	Dec -12.26
+	Distance 6.63e8
+	Radius 4.37e6
+}
+
+"A1216"
+{
+	Type "E0"
+	RA 11.296
+	Dec -4.47
+	Distance 6.65e8
+	Radius 4.96e6
+}
+
+"A151"
+{
+	Type "E0"
+	RA 1.148
+	Dec -15.42
+	Distance 6.68e8
+	Radius 5.36e6
+}
+
+"A978"
+{
+	Type "E0"
+	RA 10.342
+	Dec -6.52
+	Distance 6.69e8
+	Radius 4.9e6
+}
+
+"A754"
+{
+	Type "E0"
+	RA 9.147
+	Dec -9.64
+	Distance 6.7e8
+	Radius 5.81e6
+}
+
+"A3851"
+{
+	Type "E0"
+	RA 22.279
+	Dec -52.58
+	Distance 6.71e8
+	Radius 4.13e6
+}
+
+"A1291"
+{
+	Type "E0"
+	RA 11.535
+	Dec 56.02
+	Distance 6.73e8
+	Radius 5.07e6
+}
+
+"A2055"
+{
+	Type "E0"
+	RA 15.313
+	Dec 6.2
+	Distance 6.73e8
+	Radius 4.41e6
+}
+
+"A3667"
+{
+	Type "E0"
+	RA 20.209
+	Dec -56.82
+	Distance 6.73e8
+	Radius 5.67e6
+}
+
+"A3391"
+{
+	Type "E0"
+	RA 6.437
+	Dec -53.68
+	Distance 6.74e8
+	Radius 4.41e6
+}
+
+"AS329"
+{
+	Type "E0"
+	RA 3.21
+	Dec -49.63
+	Distance 6.74e8
+	Radius 9.27e5
+}
+
+"A993"
+{
+	Type "E0"
+	RA 10.365
+	Dec -4.95
+	Distance 6.76e8
+	Radius 4.25e6
+}
+
+"A1913"
+{
+	Type "E0"
+	RA 14.448
+	Dec 16.68
+	Distance 6.76e8
+	Radius 4.84e6
+}
+
+"AS968"
+{
+	Type "E0"
+	RA 21.759
+	Dec -51.6
+	Distance 6.78e8
+	Radius 3.5e6
+}
+
+"A117"
+{
+	Type "E0"
+	RA 0.933
+	Dec -10.03
+	Distance 6.79e8
+	Radius 4.41e6
+}
+
+"A1899"
+{
+	Type "E0"
+	RA 14.356
+	Dec 17.69
+	Distance 6.8e8
+	Radius 4.13e6
+}
+
+"AS854"
+{
+	Type "E0"
+	RA 20.19
+	Dec -56.73
+	Distance 6.8e8
+	Radius 3.72e6
+}
+
+"AS461"
+{
+	Type "E0"
+	RA 4.47
+	Dec -50.54
+	Distance 6.84e8
+	Radius 2.95e6
+}
+
+"A526"
+{
+	Type "E0"
+	RA 4.998
+	Dec 5.44
+	Distance 6.86e8
+	Radius 5.33e6
+}
+
+"A2366"
+{
+	Type "E0"
+	RA 21.714
+	Dec -6.87
+	Distance 6.87e8
+	Radius 4.65e6
+}
+
+"A505"
+{
+	Type "E0"
+	RA 5.003
+	Dec 80.01
+	Distance 6.89e8
+	Radius 4.37e6
+}
+
+"AS976"
+{
+	Type "E0"
+	RA 21.824
+	Dec -64.5
+	Distance 6.89e8
+	Radius 9.27e5
+}
+
+"AS113"
+{
+	Type "E0"
+	RA 1.01
+	Dec -40.23
+	Distance 6.91e8
+	Radius 2.95e6
+}
+
+"AS339"
+{
+	Type "E0"
+	RA 3.321
+	Dec -53.87
+	Distance 6.92e8
+	Radius 3.18e6
+}
+
+"A179"
+{
+	Type "E0"
+	RA 1.363
+	Dec 19.48
+	Distance 6.94e8
+	Radius 4.05e6
+}
+
+"A979"
+{
+	Type "E0"
+	RA 10.34
+	Dec -7.89
+	Distance 6.97e8
+	Radius 4.37e6
+}
+
+"A2184"
+{
+	Type "E0"
+	RA 16.351
+	Dec 50.2
+	Distance 6.97e8
+	Radius 4.05e6
+}
+
+"A3528"
+{
+	Type "E0"
+	RA 12.905
+	Dec -29.02
+	Distance 7.01e8
+	Radius 5.31e6
+}
+
+"A3128"
+{
+	Type "E0"
+	RA 3.503
+	Dec -52.56
+	Distance 7.02e8
+	Radius 6.69e6
+}
+
+"AS1039"
+{
+	Type "E0"
+	RA 22.582
+	Dec -52.46
+	Distance 7.02e8
+	Radius 3.72e6
+}
+
+"A1334"
+{
+	Type "E0"
+	RA 11.647
+	Dec -4.31
+	Distance 7.03e8
+	Radius 4.37e6
+}
+
+"A2665"
+{
+	Type "E0"
+	RA 23.846
+	Dec 6.11
+	Distance 7.05e8
+	Radius 4.17e6
+}
+
+"A3782"
+{
+	Type "E0"
+	RA 21.575
+	Dec -62.03
+	Distance 7.06e8
+	Radius 4.41e6
+}
+
+"A44"
+{
+	Type "E0"
+	RA 0.493
+	Dec 12.03
+	Distance 7.08e8
+	Radius 5.04e6
+}
+
+"A2022"
+{
+	Type "E0"
+	RA 15.072
+	Dec 28.42
+	Distance 7.15e8
+	Radius 4.75e6
+}
+
+"A2319"
+{
+	Type "E0"
+	RA 19.346
+	Dec 43.96
+	Distance 7.15e8
+	Radius 5.26e6
+}
+
+"AS1101"
+{
+	Type "E0"
+	RA 23.233
+	Dec -42.73
+	Distance 7.15e8
+	Radius 3.91e6
+}
+
+"A1318"
+{
+	Type "E0"
+	RA 11.607
+	Dec 54.96
+	Distance 7.17e8
+	Radius 4.93e6
+}
+
+"Abell 114"
+{
+	Type "E0"
+	RA 0.899
+	Dec -21.73
+	Distance 7.17e8
+	Radius 4.0e6
+}
+
+"A3380"
+{
+	Type "E0"
+	RA 6.116
+	Dec -49.49
+	Distance 7.18e8
+	Radius 4.41e6
+}
+
+"A2271"
+{
+	Type "E0"
+	RA 17.288
+	Dec 78.02
+	Distance 7.19e8
+	Radius 4.21e6
+}
+
+"AS955"
+{
+	Type "E0"
+	RA 21.658
+	Dec -83.34
+	Distance 7.21e8
+	Radius 3.87e6
+}
+
+"A1890"
+{
+	Type "E0"
+	RA 14.293
+	Dec 8.19
+	Distance 7.22e8
+	Radius 4.29e6
+}
+
+"A3231"
+{
+	Type "E0"
+	RA 4.198
+	Dec -64.61
+	Distance 7.22e8
+	Radius 5.18e6
+}
+
+"A2626"
+{
+	Type "E0"
+	RA 23.609
+	Dec 21.16
+	Distance 7.26e8
+	Radius 4.65e6
+}
+
+"AS261"
+{
+	Type "E0"
+	RA 2.419
+	Dec -63.23
+	Distance 7.27e8
+	Radius 3.38e6
+}
+
+"A358"
+{
+	Type "E0"
+	RA 2.503
+	Dec -13.2
+	Distance 7.29e8
+	Radius 4.17e6
+}
+
+"A2020"
+{
+	Type "E0"
+	RA 15.063
+	Dec 7.92
+	Distance 7.32e8
+	Radius 4.65e6
+}
+
+"A1169"
+{
+	Type "E0"
+	RA 11.135
+	Dec 43.95
+	Distance 7.37e8
+	Radius 5.38e6
+}
+
+"A3093"
+{
+	Type "E0"
+	RA 3.181
+	Dec -47.4
+	Distance 7.40e8
+	Radius 5.84e6
+}
+
+"AS324"
+{
+	Type "E0"
+	RA 3.166
+	Dec -47.33
+	Distance 7.40e8
+	Radius 2.68e6
+}
+
+"A1991"
+{
+	Type "E0"
+	RA 14.909
+	Dec 18.63
+	Distance 7.42e8
+	Radius 5.04e6
+}
+
+"AS303"
+{
+	Type "E0"
+	RA 2.811
+	Dec -71.38
+	Distance 7.42e8
+	Radius 2.2e6
+}
+
+"A2399"
+{
+	Type "E0"
+	RA 21.959
+	Dec -7.79
+	Distance 7.43e8
+	Radius 4.81e6
+}
+
+"A3651"
+{
+	Type "E0"
+	RA 19.87
+	Dec -55.09
+	Distance 7.44e8
+	Radius 5.43e6
+}
+
+"AS424"
+{
+	Type "E0"
+	RA 4.127
+	Dec -43.42
+	Distance 7.45e8
+	Radius 9.27e5
+}
+
+"A1749"
+{
+	Type "E0"
+	RA 13.492
+	Dec 37.63
+	Distance 7.46e8
+	Radius 4.9e6
+}
+
+"A3158"
+{
+	Type "E0"
+	RA 3.717
+	Dec -53.64
+	Distance 7.46e8
+	Radius 5.66e6
+}
+
+"AS726"
+{
+	Type "E0"
+	RA 13.253
+	Dec -33.65
+	Distance 7.46e8
+	Radius 2.95e6
+}
+
+"A1507"
+{
+	Type "E0"
+	RA 12.264
+	Dec 59.97
+	Distance 7.49e8
+	Radius 4.37e6
+}
+
+"A3125"
+{
+	Type "E0"
+	RA 3.456
+	Dec -53.51
+	Distance 7.5e8
+	Radius 4.62e6
+}
+
+"A3266"
+{
+	Type "E0"
+	RA 4.519
+	Dec -61.48
+	Distance 7.51e8
+	Radius 5.79e6
+}
+
+"A150"
+{
+	Type "E0"
+	RA 1.154
+	Dec 13.17
+	Distance 7.54e8
+	Radius 4.9e6
+}
+
+"AS974"
+{
+	Type "E0"
+	RA 21.803
+	Dec -46.02
+	Distance 7.54e8
+	Radius 3.38e6
+}
+
+"A2415"
+{
+	Type "E0"
+	RA 22.09
+	Dec -5.59
+	Distance 7.55e8
+	Radius 4.41e6
+}
+
+"A2457"
+{
+	Type "E0"
+	RA 22.596
+	Dec 1.48
+	Distance 7.55e8
+	Radius 4.84e6
+}
+
+"AS366"
+{
+	Type "E0"
+	RA 3.583
+	Dec -53.58
+	Distance 7.56e8
+	Radius 9.27e5
+}
+
+"A3078"
+{
+	Type "E0"
+	RA 3.007
+	Dec -51.84
+	Distance 7.59e8
+	Radius 4.41e6
+}
+
+"A2256"
+{
+	Type "E0"
+	RA 17.062
+	Dec 78.72
+	Distance 7.6e8
+	Radius 5.73e6
+}
+
+"AS927"
+{
+	Type "E0"
+	RA 21.283
+	Dec -59.41
+	Distance 7.61e8
+	Radius 3.96e6
+}
+
+"A1275"
+{
+	Type "E0"
+	RA 11.499
+	Dec 36.67
+	Distance 7.62e8
+	Radius 4.58e6
+}
+
+"A1383"
+{
+	Type "E0"
+	RA 11.803
+	Dec 54.62
+	Distance 7.62e8
+	Radius 4.87e6
+}
+
+"Abell 133"
+{
+	Type "E0"
+	RA 1.046
+	Dec -21.88
+	Distance 7.64e8
+	Radius 5.04e6
+}
+
+"AS390"
+{
+	Type "E0"
+	RA 3.783
+	Dec -54.03
+	Distance 7.65e8
+	Radius 9.27e5
+}
+
+"A450"
+{
+	Type "E0"
+	RA 3.694
+	Dec 23.49
+	Distance 7.67e8
+	Radius 4.41e6
+}
+
+"A2625"
+{
+	Type "E0"
+	RA 23.605
+	Dec 20.53
+	Distance 7.7e8
+	Radius 4.58e6
+}
+
+"Abell 86"
+{
+	Type "E0"
+	RA 0.711
+	Dec -21.79
+	Distance 7.71e8
+	Radius 4.44e6
+}
+
+"A3164"
+{
+	Type "E0"
+	RA 3.764
+	Dec -57.05
+	Distance 7.72e8
+	Radius 4.13e6
+}
+
+"A2388"
+{
+	Type "E0"
+	RA 21.893
+	Dec 8.24
+	Distance 7.77e8
+	Radius 4.62e6
+}
+
+"A1795"
+{
+	Type "E0"
+	RA 13.817
+	Dec 26.59
+	Distance 7.78e8
+	Radius 6.26e6
+}
+
+"A240"
+{
+	Type "E0"
+	RA 1.699
+	Dec 7.62
+	Distance 7.81e8
+	Radius 4.51e6
+}
+
+"A1825"
+{
+	Type "E0"
+	RA 13.966
+	Dec 20.66
+	Distance 7.81e8
+	Radius 4.71e6
+}
+
+"AS315"
+{
+	Type "E0"
+	RA 2.987
+	Dec -51.02
+	Distance 7.81e8
+	Radius 9.27e5
+}
+
+"A3685"
+{
+	Type "E0"
+	RA 20.537
+	Dec -56.43
+	Distance 7.83e8
+	Radius 4.0e6
+}
+
+"A2622"
+{
+	Type "E0"
+	RA 23.581
+	Dec 27.43
+	Distance 7.84e8
+	Radius 4.44e6
+}
+
+"A592"
+{
+	Type "E0"
+	RA 7.711
+	Dec 9.36
+	Distance 7.88e8
+	Radius 4.84e6
+}
+
+"A75"
+{
+	Type "E0"
+	RA 0.664
+	Dec 21.26
+	Distance 7.91e8
+	Radius 4.48e6
+}
+
+"A1254"
+{
+	Type "E0"
+	RA 11.447
+	Dec 71.07
+	Distance 7.93e8
+	Radius 4.99e6
+}
+
+"A1069"
+{
+	Type "E0"
+	RA 10.665
+	Dec -8.61
+	Distance 7.95e8
+	Radius 4.58e6
+}
+
+"A1452"
+{
+	Type "E0"
+	RA 12.061
+	Dec 51.74
+	Distance 7.97e8
+	Radius 4.62e6
+}
+
+"A3009"
+{
+	Type "E0"
+	RA 2.369
+	Dec -48.57
+	Distance 7.97e8
+	Radius 4.87e6
+}
+
+"A102"
+{
+	Type "E0"
+	RA 0.811
+	Dec 1.37
+	Distance 7.98e8
+	Radius 4.37e6
+}
+
+"A3108"
+{
+	Type "E0"
+	RA 3.254
+	Dec -47.63
+	Distance 7.98e8
+	Radius 5.38e6
+}
+
+"A2241"
+{
+	Type "E0"
+	RA 16.995
+	Dec 32.54
+	Distance 8.02e8
+	Radius 4.0e6
+}
+
+"A3004"
+{
+	Type "E0"
+	RA 2.314
+	Dec -48.0
+	Distance 8.02e8
+	Radius 4.25e6
+}
+
+"AS239"
+{
+	Type "E0"
+	RA 2.279
+	Dec -47.82
+	Distance 8.02e8
+	Radius 3.5e6
+}
+
+"Abell 14"
+{
+	Type "E0"
+	RA 0.252
+	Dec -23.89
+	Distance 8.08e8
+	Radius 3.96e6
+}
+
+"A2004"
+{
+	Type "E0"
+	RA 14.977
+	Dec 24.93
+	Distance 8.08e8
+	Radius 4.17e6
+}
+
+"AS957"
+{
+	Type "E0"
+	RA 21.594
+	Dec -52.54
+	Distance 8.08e8
+	Radius 2.95e6
+}
+
+"A2764"
+{
+	Type "E0"
+	RA 0.341
+	Dec -49.22
+	Distance 8.09e8
+	Radius 4.9e6
+}
+
+"AS1071"
+{
+	Type "E0"
+	RA 22.899
+	Dec -17.63
+	Distance 8.1e8
+	Radius 9.27e5
+}
+
+"A158"
+{
+	Type "E0"
+	RA 1.196
+	Dec 16.88
+	Distance 8.14e8
+	Radius 4.62e6
+}
+
+"A3106"
+{
+	Type "E0"
+	RA 3.242
+	Dec -58.1
+	Distance 8.14e8
+	Radius 4.55e6
+}
+
+"A1436"
+{
+	Type "E0"
+	RA 12.008
+	Dec 56.26
+	Distance 8.15e8
+	Radius 5.28e6
+}
+
+"A2382"
+{
+	Type "E0"
+	RA 21.867
+	Dec -15.65
+	Distance 8.17e8
+	Radius 4.75e6
+}
+
+"AS416"
+{
+	Type "E0"
+	RA 4.081
+	Dec -43.85
+	Distance 8.17e8
+	Radius 9.27e5
+}
+
+"A1630"
+{
+	Type "E0"
+	RA 12.863
+	Dec 4.56
+	Distance 8.19e8
+	Radius 4.87e6
+}
+
+"A2988"
+{
+	Type "E0"
+	RA 2.215
+	Dec -47.13
+	Distance 8.19e8
+	Radius 5.36e6
+}
+
+"A1020"
+{
+	Type "E0"
+	RA 10.464
+	Dec 10.41
+	Distance 8.2e8
+	Radius 5.26e6
+}
+
+"A3123"
+{
+	Type "E0"
+	RA 3.383
+	Dec -52.02
+	Distance 8.2e8
+	Radius 4.29e6
+}
+
+"A3831"
+{
+	Type "E0"
+	RA 22.055
+	Dec -45.82
+	Distance 8.2e8
+	Radius 5.57e6
+}
+
+"A2124"
+{
+	Type "E0"
+	RA 15.75
+	Dec 36.06
+	Distance 8.25e8
+	Radius 4.75e6
+}
+
+"A2250"
+{
+	Type "E0"
+	RA 17.179
+	Dec 39.69
+	Distance 8.25e8
+	Radius 4.81e6
+}
+
+"A2469"
+{
+	Type "E0"
+	RA 22.675
+	Dec 12.26
+	Distance 8.27e8
+	Radius 5.07e6
+}
+
+"A154"
+{
+	Type "E0"
+	RA 1.183
+	Dec 17.67
+	Distance 8.3e8
+	Radius 5.21e6
+}
+
+"A2079"
+{
+	Type "E0"
+	RA 15.468
+	Dec 28.88
+	Distance 8.34e8
+	Radius 4.96e6
+}
+
+"A2248"
+{
+	Type "E0"
+	RA 16.963
+	Dec 77.01
+	Distance 8.36e8
+	Radius 4.17e6
+}
+
+"A116"
+{
+	Type "E0"
+	RA 0.931
+	Dec 0.64
+	Distance 8.38e8
+	Radius 4.68e6
+}
+
+"A595"
+{
+	Type "E0"
+	RA 7.814
+	Dec 52.07
+	Distance 8.39e8
+	Radius 4.58e6
+}
+
+"AS367"
+{
+	Type "E0"
+	RA 3.591
+	Dec -45.17
+	Distance 8.39e8
+	Radius 9.27e5
+}
+
+"Abell 500"
+{
+	Type "E0"
+	RA 4.647
+	Dec -22.12
+	Distance 8.39e8
+	Radius 4.99e6
+}
+
+"A2889"
+{
+	Type "E0"
+	RA 1.246
+	Dec -48.5
+	Distance 8.41e8
+	Radius 5.18e6
+}
+
+"A1827"
+{
+	Type "E0"
+	RA 13.971
+	Dec 21.71
+	Distance 8.42e8
+	Radius 5.26e6
+}
+
+"AS433"
+{
+	Type "E0"
+	RA 4.242
+	Dec -50.79
+	Distance 8.42e8
+	Radius 1.62e6
+}
+
+"A2092"
+{
+	Type "E0"
+	RA 15.555
+	Dec 31.15
+	Distance 8.43e8
+	Radius 4.9e6
+}
+
+"A553"
+{
+	Type "E0"
+	RA 6.211
+	Dec 48.6
+	Distance 8.44e8
+	Radius 4.0e6
+}
+
+"AS346"
+{
+	Type "E0"
+	RA 3.373
+	Dec -49.32
+	Distance 8.44e8
+	Radius 2.58e6
+}
+
+"A3109"
+{
+	Type "E0"
+	RA 3.277
+	Dec -43.85
+	Distance 8.48e8
+	Radius 4.09e6
+}
+
+"A2630"
+{
+	Type "E0"
+	RA 23.625
+	Dec 15.83
+	Distance 8.5e8
+	Radius 4.05e6
+}
+
+"AS468"
+{
+	Type "E0"
+	RA 4.528
+	Dec -46.11
+	Distance 8.5e8
+	Radius 1.29e6
+}
+
+"A3849"
+{
+	Type "E0"
+	RA 22.265
+	Dec -51.55
+	Distance 8.54e8
+	Radius 4.48e6
+}
+
+"AS1140"
+{
+	Type "E0"
+	RA 23.658
+	Dec -45.97
+	Distance 8.59e8
+	Radius 1.86e6
+}
+
+"AS811"
+{
+	Type "E0"
+	RA 19.287
+	Dec -52.43
+	Distance 8.66e8
+	Radius 9.27e5
+}
+
+"A1270"
+{
+	Type "E0"
+	RA 11.491
+	Dec 54.06
+	Distance 8.67e8
+	Radius 4.41e6
+}
+
+"AS958"
+{
+	Type "E0"
+	RA 21.604
+	Dec -56.19
+	Distance 8.7e8
+	Radius 3.5e6
+}
+
+"A225"
+{
+	Type "E0"
+	RA 1.649
+	Dec 18.89
+	Distance 8.71e8
+	Radius 4.78e6
+}
+
+"A695"
+{
+	Type "E0"
+	RA 8.69
+	Dec 32.29
+	Distance 8.73e8
+	Radius 5.13e6
+}
+
+"A1775"
+{
+	Type "E0"
+	RA 13.699
+	Dec 26.36
+	Distance 8.76e8
+	Radius 5.81e6
+}
+
+"A3120"
+{
+	Type "E0"
+	RA 3.365
+	Dec -51.32
+	Distance 8.76e8
+	Radius 4.41e6
+}
+
+"A1356"
+{
+	Type "E0"
+	RA 11.708
+	Dec 10.44
+	Distance 8.78e8
+	Radius 5.48e6
+}
+
+"Abell 2462"
+{
+	Type "E0"
+	RA 22.653
+	Dec -17.34
+	Distance 8.78e8
+	Radius 4.09e6
+}
+
+"A3969"
+{
+	Type "E0"
+	RA 23.094
+	Dec -44.15
+	Distance 8.79e8
+	Radius 4.9e6
+}
+
+"AS1080"
+{
+	Type "E0"
+	RA 23.027
+	Dec -44.0
+	Distance 8.79e8
+	Radius 3.56e6
+}
+
+"A246"
+{
+	Type "E0"
+	RA 1.745
+	Dec 5.8
+	Distance 8.81e8
+	Radius 4.93e6
+}
+
+"A1767"
+{
+	Type "E0"
+	RA 13.6
+	Dec 59.21
+	Distance 8.82e8
+	Radius 5.18e6
+}
+
+"AS1142"
+{
+	Type "E0"
+	RA 23.689
+	Dec -30.22
+	Distance 8.82e8
+	Radius 3.5e6
+}
+
+"A3112"
+{
+	Type "E0"
+	RA 3.299
+	Dec -44.23
+	Distance 8.84e8
+	Radius 6.28e6
+}
+
+"A644"
+{
+	Type "E0"
+	RA 8.291
+	Dec -7.59
+	Distance 8.85e8
+	Radius 4.48e6
+}
+
+"A2618"
+{
+	Type "E0"
+	RA 23.563
+	Dec 23.01
+	Distance 8.87e8
+	Radius 4.21e6
+}
+
+"AS1147"
+{
+	Type "E0"
+	RA 23.774
+	Dec -46.97
+	Distance 8.87e8
+	Radius 2.05e6
+}
+
+"A171"
+{
+	Type "E0"
+	RA 1.279
+	Dec 16.26
+	Distance 8.88e8
+	Radius 4.48e6
+}
+
+"A257"
+{
+	Type "E0"
+	RA 1.817
+	Dec 13.98
+	Distance 8.88e8
+	Radius 4.78e6
+}
+
+"A1904"
+{
+	Type "E0"
+	RA 14.369
+	Dec 48.56
+	Distance 8.9e8
+	Radius 5.62e6
+}
+
+"A3703"
+{
+	Type "E0"
+	RA 20.667
+	Dec -61.34
+	Distance 8.9e8
+	Radius 4.81e6
+}
+
+"A1149"
+{
+	Type "E0"
+	RA 11.05
+	Dec 7.63
+	Distance 8.93e8
+	Radius 4.17e6
+}
+
+"A399"
+{
+	Type "E0"
+	RA 2.966
+	Dec 13.02
+	Distance 8.99e8
+	Radius 4.96e6
+}
+
+"A1238"
+{
+	Type "E0"
+	RA 11.383
+	Dec 1.09
+	Distance 9.0e8
+	Radius 5.13e6
+}
+
+"A1589"
+{
+	Type "E0"
+	RA 12.693
+	Dec 18.59
+	Distance 9.02e8
+	Radius 4.33e6
+}
+
+"A77"
+{
+	Type "E0"
+	RA 0.676
+	Dec 29.52
+	Distance 9.04e8
+	Radius 4.75e6
+}
+
+"A2065"
+{
+	Type "E0"
+	RA 15.379
+	Dec 27.72
+	Distance 9.06e8
+	Radius 6.15e6
+}
+
+"A1691"
+{
+	Type "E0"
+	RA 13.19
+	Dec 39.2
+	Distance 9.07e8
+	Radius 5.15e6
+}
+
+"AS1061"
+{
+	Type "E0"
+	RA 22.833
+	Dec -84.14
+	Distance 9.08e8
+	Radius 9.27e5
+}
+
+"A71"
+{
+	Type "E0"
+	RA 0.629
+	Dec 29.59
+	Distance 9.1e8
+	Radius 4.0e6
+}
+
+"A1800"
+{
+	Type "E0"
+	RA 13.828
+	Dec 28.07
+	Distance 9.1e8
+	Radius 4.41e6
+}
+
+"A2675"
+{
+	Type "E0"
+	RA 23.926
+	Dec 11.43
+	Distance 9.12e8
+	Radius 5.04e6
+}
+
+"A744"
+{
+	Type "E0"
+	RA 9.121
+	Dec 16.66
+	Distance 9.16e8
+	Radius 4.48e6
+}
+
+"Abell 514"
+{
+	Type "E0"
+	RA 4.798
+	Dec -20.43
+	Distance 9.18e8
+	Radius 5.04e6
+}
+
+"A2067"
+{
+	Type "E0"
+	RA 15.387
+	Dec 30.91
+	Distance 9.19e8
+	Radius 4.99e6
+}
+
+"A1831"
+{
+	Type "E0"
+	RA 13.986
+	Dec 27.99
+	Distance 9.21e8
+	Radius 5.23e6
+}
+
+"Abell 2412"
+{
+	Type "E0"
+	RA 22.068
+	Dec -21.44
+	Distance 9.23e8
+	Radius 3.66e6
+}
+
+"A2459"
+{
+	Type "E0"
+	RA 22.609
+	Dec -15.66
+	Distance 9.24e8
+	Radius 4.13e6
+}
+
+"A1927"
+{
+	Type "E0"
+	RA 14.517
+	Dec 25.66
+	Distance 9.29e8
+	Radius 4.75e6
+}
+
+"A2089"
+{
+	Type "E0"
+	RA 15.545
+	Dec 28.02
+	Distance 9.33e8
+	Radius 5.31e6
+}
+
+"A3825"
+{
+	Type "E0"
+	RA 21.973
+	Dec -60.39
+	Distance 9.34e8
+	Radius 5.48e6
+}
+
+"AS336"
+{
+	Type "E0"
+	RA 3.292
+	Dec -44.7
+	Distance 9.34e8
+	Radius 2.2e6
+}
+
+"A2670"
+{
+	Type "E0"
+	RA 23.903
+	Dec -10.41
+	Distance 9.35e8
+	Radius 6.72e6
+}
+
+"A3806"
+{
+	Type "E0"
+	RA 21.777
+	Dec -57.29
+	Distance 9.37e8
+	Radius 6.26e6
+}
+
+"A401"
+{
+	Type "E0"
+	RA 2.983
+	Dec 13.58
+	Distance 9.39e8
+	Radius 5.77e6
+}
+
+"A3886"
+{
+	Type "E0"
+	RA 22.528
+	Dec -54.74
+	Distance 9.41e8
+	Radius 4.05e6
+}
+
+"A568"
+{
+	Type "E0"
+	RA 7.127
+	Dec 35.04
+	Distance 9.42e8
+	Radius 4.25e6
+}
+
+"A3826"
+{
+	Type "E0"
+	RA 21.999
+	Dec -58.16
+	Distance 9.46e8
+	Radius 5.1e6
+}
+
+"A3110"
+{
+	Type "E0"
+	RA 3.275
+	Dec -50.9
+	Distance 9.47e8
+	Radius 4.29e6
+}
+
+"A3796"
+{
+	Type "E0"
+	RA 21.658
+	Dec -51.39
+	Distance 9.48e8
+	Radius 4.62e6
+}
+
+"A559"
+{
+	Type "E0"
+	RA 6.669
+	Dec 69.69
+	Distance 9.5e8
+	Radius 4.13e6
+}
+
+"AS372"
+{
+	Type "E0"
+	RA 3.621
+	Dec -55.42
+	Distance 9.51e8
+	Radius 2.47e6
+}
+
+"A819"
+{
+	Type "E0"
+	RA 9.538
+	Dec 9.66
+	Distance 9.52e8
+	Radius 4.25e6
+}
+
+"A3687"
+{
+	Type "E0"
+	RA 20.557
+	Dec -63.03
+	Distance 9.52e8
+	Radius 4.62e6
+}
+
+"A3822"
+{
+	Type "E0"
+	RA 21.902
+	Dec -57.85
+	Distance 9.53e8
+	Radius 6.23e6
+}
+
+"A1781"
+{
+	Type "E0"
+	RA 13.741
+	Dec 29.85
+	Distance 9.56e8
+	Radius 4.44e6
+}
+
+"A1365"
+{
+	Type "E0"
+	RA 11.74
+	Dec 30.91
+	Distance 9.57e8
+	Radius 4.78e6
+}
+
+"A2056"
+{
+	Type "E0"
+	RA 15.32
+	Dec 28.27
+	Distance 9.57e8
+	Radius 4.75e6
+}
+
+"A1783"
+{
+	Type "E0"
+	RA 13.723
+	Dec 55.6
+	Distance 9.6e8
+	Radius 4.65e6
+}
+
+"A2029"
+{
+	Type "E0"
+	RA 15.183
+	Dec 5.76
+	Distance 9.62e8
+	Radius 5.6e6
+}
+
+"A2061"
+{
+	Type "E0"
+	RA 15.354
+	Dec 30.65
+	Distance 9.63e8
+	Radius 5.33e6
+}
+
+"AS501"
+{
+	Type "E0"
+	RA 4.836
+	Dec -51.13
+	Distance 9.63e8
+	Radius 1.62e6
+}
+
+"A2177"
+{
+	Type "E0"
+	RA 16.349
+	Dec 25.75
+	Distance 9.64e8
+	Radius 4.55e6
+}
+
+"A2028"
+{
+	Type "E0"
+	RA 15.159
+	Dec 7.53
+	Distance 9.68e8
+	Radius 4.75e6
+}
+
+"A3785"
+{
+	Type "E0"
+	RA 21.575
+	Dec -53.63
+	Distance 9.71e8
+	Radius 4.58e6
+}
+
+"A1873"
+{
+	Type "E0"
+	RA 14.195
+	Dec 28.15
+	Distance 9.72e8
+	Radius 4.44e6
+}
+
+"A1400"
+{
+	Type "E0"
+	RA 11.857
+	Dec 55.11
+	Distance 9.75e8
+	Radius 4.33e6
+}
+
+"A564"
+{
+	Type "E0"
+	RA 7.011
+	Dec 69.81
+	Distance 9.76e8
+	Radius 4.93e6
+}
+
+"A1569"
+{
+	Type "E0"
+	RA 12.605
+	Dec 16.59
+	Distance 9.82e8
+	Radius 4.41e6
+}
+
+"A415"
+{
+	Type "E0"
+	RA 3.113
+	Dec -12.04
+	Distance 9.87e8
+	Radius 5.23e6
+}
+
+"A690"
+{
+	Type "E0"
+	RA 8.654
+	Dec 28.84
+	Distance 9.87e8
+	Radius 4.81e6
+}
+
+"A1809"
+{
+	Type "E0"
+	RA 13.889
+	Dec 5.15
+	Distance 9.87e8
+	Radius 5.5e6
+}
+
+"AS1023"
+{
+	Type "E0"
+	RA 22.427
+	Dec -55.83
+	Distance 9.88e8
+	Radius 3.87e6
+}
+
+"A245"
+{
+	Type "E0"
+	RA 1.735
+	Dec 6.38
+	Distance 9.89e8
+	Radius 4.41e6
+}
+
+"A680"
+{
+	Type "E0"
+	RA 8.589
+	Dec 36.86
+	Distance 9.89e8
+	Radius 5.07e6
+}
+
+"A1186"
+{
+	Type "E0"
+	RA 11.231
+	Dec 75.39
+	Distance 9.9e8
+	Radius 6.11e6
+}
+
+"A1187"
+{
+	Type "E0"
+	RA 11.195
+	Dec 39.58
+	Distance 9.9e8
+	Radius 4.9e6
+}
+
+"A1474"
+{
+	Type "E0"
+	RA 12.133
+	Dec 14.96
+	Distance 9.9e8
+	Radius 5.31e6
+}
+
+"A1218"
+{
+	Type "E0"
+	RA 11.314
+	Dec 51.71
+	Distance 9.92e8
+	Radius 4.65e6
+}
+
+"A527"
+{
+	Type "E0"
+	RA 5.171
+	Dec 73.7
+	Distance 9.94e8
+	Radius 4.17e6
+}
+
+"A1190"
+{
+	Type "E0"
+	RA 11.196
+	Dec 40.84
+	Distance 9.94e8
+	Radius 5.71e6
+}
+
+"A2559"
+{
+	Type "E0"
+	RA 23.219
+	Dec -13.69
+	Distance 9.96e8
+	Radius 5.38e6
+}
+
+"A3771"
+{
+	Type "E0"
+	RA 21.492
+	Dec -50.81
+	Distance 9.96e8
+	Radius 4.48e6
+}
+
+"A279"
+{
+	Type "E0"
+	RA 1.939
+	Dec 1.06
+	Distance 9.98e8
+	Radius 5.31e6
+}
+
+"A423"
+{
+	Type "E0"
+	RA 3.188
+	Dec -12.11
+	Distance 9.98e8
+	Radius 5.75e6
+}
+
+"A2198"
+{
+	Type "E0"
+	RA 16.468
+	Dec 43.82
+	Distance 9.99e8
+	Radius 5.66e6
+}
+
+"A1035"
+{
+	Type "E0"
+	RA 10.535
+	Dec 40.21
+	Distance 1.0e9
+	Radius 5.86e6
+}
+
+"A2255"
+{
+	Type "E0"
+	RA 17.209
+	Dec 64.09
+	Distance 1.001e9
+	Radius 6.02e6
+}
+
+"A449"
+{
+	Type "E0"
+	RA 3.826
+	Dec 75.19
+	Distance 1.004e9
+	Radius 4.93e6
+}
+
+"A2410"
+{
+	Type "E0"
+	RA 22.035
+	Dec -9.89
+	Distance 1.008e9
+	Radius 4.87e6
+}
+
+"A2377"
+{
+	Type "E0"
+	RA 21.766
+	Dec -10.04
+	Distance 1.011e9
+	Radius 5.86e6
+}
+
+"A2249"
+{
+	Type "E0"
+	RA 17.162
+	Dec 34.46
+	Distance 1.012e9
+	Radius 4.37e6
+}
+
+"A2448"
+{
+	Type "E0"
+	RA 22.529
+	Dec -8.44
+	Distance 1.013e9
+	Radius 4.25e6
+}
+
+"Abell 2538"
+{
+	Type "E0"
+	RA 23.143
+	Dec -19.91
+	Distance 1.022e9
+	Radius 5.62e6
+}
+
+"Abell 2566"
+{
+	Type "E0"
+	RA 23.271
+	Dec -20.49
+	Distance 1.026e9
+	Radius 5.23e6
+}
+
+"A104"
+{
+	Type "E0"
+	RA 0.829
+	Dec 24.52
+	Distance 1.028e9
+	Radius 4.75e6
+}
+
+"A1651"
+{
+	Type "E0"
+	RA 12.99
+	Dec -4.19
+	Distance 1.031e9
+	Radius 5.31e6
+}
+
+"A2638"
+{
+	Type "E0"
+	RA 23.675
+	Dec -11.71
+	Distance 1.031e9
+	Radius 6.41e6
+}
+
+"A1337"
+{
+	Type "E0"
+	RA 11.657
+	Dec 10.16
+	Distance 1.032e9
+	Radius 4.75e6
+}
+
+"A1385"
+{
+	Type "E0"
+	RA 11.801
+	Dec 11.56
+	Distance 1.038e9
+	Radius 4.81e6
+}
+
+"A1616"
+{
+	Type "E0"
+	RA 12.794
+	Dec 55.04
+	Distance 1.041e9
+	Radius 4.37e6
+}
+
+"A509"
+{
+	Type "E0"
+	RA 4.795
+	Dec 2.29
+	Distance 1.044e9
+	Radius 5.36e6
+}
+
+"A1552"
+{
+	Type "E0"
+	RA 12.497
+	Dec 11.74
+	Distance 1.046e9
+	Radius 5.43e6
+}
+
+"A16"
+{
+	Type "E0"
+	RA 0.279
+	Dec 6.74
+	Distance 1.047e9
+	Radius 5.69e6
+}
+
+"A2420"
+{
+	Type "E0"
+	RA 22.173
+	Dec -12.19
+	Distance 1.047e9
+	Radius 5.73e6
+}
+
+"A1412"
+{
+	Type "E0"
+	RA 11.929
+	Dec 73.47
+	Distance 1.048e9
+	Radius 5.69e6
+}
+
+"A1468"
+{
+	Type "E0"
+	RA 12.094
+	Dec 51.42
+	Distance 1.054e9
+	Radius 4.75e6
+}
+
+"A1650"
+{
+	Type "E0"
+	RA 12.979
+	Dec -1.75
+	Distance 1.055e9
+	Radius 6.25e6
+}
+
+"A1793"
+{
+	Type "E0"
+	RA 13.806
+	Dec 32.28
+	Distance 1.06e9
+	Radius 4.87e6
+}
+
+"A1126"
+{
+	Type "E0"
+	RA 10.899
+	Dec 16.85
+	Distance 1.063e9
+	Radius 4.9e6
+}
+
+"A2597"
+{
+	Type "E0"
+	RA 23.422
+	Dec -12.11
+	Distance 1.063e9
+	Radius 4.51e6
+}
+
+"A3629"
+{
+	Type "E0"
+	RA 16.654
+	Dec -82.47
+	Distance 1.066e9
+	Radius 4.09e6
+}
+
+"A465"
+{
+	Type "E0"
+	RA 3.849
+	Dec 6.3
+	Distance 1.067e9
+	Radius 5.13e6
+}
+
+"A1750"
+{
+	Type "E0"
+	RA 13.515
+	Dec -1.84
+	Distance 1.073e9
+	Radius 4.41e6
+}
+
+"A3126"
+{
+	Type "E0"
+	RA 3.478
+	Dec -55.71
+	Distance 1.075e9
+	Radius 5.43e6
+}
+
+"Abell 2556"
+{
+	Type "E0"
+	RA 23.219
+	Dec -21.64
+	Distance 1.079e9
+	Radius 5.18e6
+}
+
+"A623"
+{
+	Type "E0"
+	RA 8.094
+	Dec -0.94
+	Distance 1.086e9
+	Radius 4.96e6
+}
+
+"A2301"
+{
+	Type "E0"
+	RA 18.246
+	Dec 69.65
+	Distance 1.09e9
+	Radius 4.17e6
+}
+
+"A272"
+{
+	Type "E0"
+	RA 1.922
+	Dec 33.94
+	Distance 1.093e9
+	Radius 4.81e6
+}
+
+"A281"
+{
+	Type "E0"
+	RA 1.952
+	Dec -5.84
+	Distance 1.097e9
+	Radius 4.65e6
+}
+
+"A991"
+{
+	Type "E0"
+	RA 10.374
+	Dec 18.88
+	Distance 1.097e9
+	Radius 4.78e6
+}
+
+"A858"
+{
+	Type "E0"
+	RA 9.724
+	Dec 5.89
+	Distance 1.098e9
+	Radius 4.55e6
+}
+
+"A2400"
+{
+	Type "E0"
+	RA 21.963
+	Dec -11.38
+	Distance 1.098e9
+	Radius 4.93e6
+}
+
+"A1939"
+{
+	Type "E0"
+	RA 14.621
+	Dec 24.83
+	Distance 1.1e9
+	Radius 5.02e6
+}
+
+"A912"
+{
+	Type "E0"
+	RA 10.019
+	Dec -0.11
+	Distance 1.106e9
+	Radius 4.25e6
+}
+
+"A3963"
+{
+	Type "E0"
+	RA 23.064
+	Dec -44.31
+	Distance 1.109e9
+	Radius 4.41e6
+}
+
+"A1609"
+{
+	Type "E0"
+	RA 12.774
+	Dec 26.43
+	Distance 1.11e9
+	Radius 4.93e6
+}
+
+"A1541"
+{
+	Type "E0"
+	RA 12.457
+	Dec 8.84
+	Distance 1.111e9
+	Radius 4.99e6
+}
+
+"A278"
+{
+	Type "E0"
+	RA 1.955
+	Dec 32.23
+	Distance 1.116e9
+	Radius 4.33e6
+}
+
+"A410"
+{
+	Type "E0"
+	RA 3.065
+	Dec 3.79
+	Distance 1.117e9
+	Radius 5.31e6
+}
+
+"A2142"
+{
+	Type "E0"
+	RA 15.971
+	Dec 27.22
+	Distance 1.119e9
+	Radius 5.75e6
+}
+
+"A478"
+{
+	Type "E0"
+	RA 4.223
+	Dec 10.48
+	Distance 1.121e9
+	Radius 6.06e6
+}
+
+"A3330"
+{
+	Type "E0"
+	RA 5.245
+	Dec -49.06
+	Distance 1.124e9
+	Radius 4.81e6
+}
+
+"A2440"
+{
+	Type "E0"
+	RA 22.398
+	Dec -1.6
+	Distance 1.125e9
+	Radius 4.09e6
+}
+
+"A1399"
+{
+	Type "E0"
+	RA 11.853
+	Dec -3.09
+	Distance 1.136e9
+	Radius 5.6e6
+}
+
+"A945"
+{
+	Type "E0"
+	RA 10.261
+	Dec 69.08
+	Distance 1.141e9
+	Radius 4.58e6
+}
+
+"A2108"
+{
+	Type "E0"
+	RA 15.668
+	Dec 17.89
+	Distance 1.143e9
+	Radius 4.58e6
+}
+
+"A3040"
+{
+	Type "E0"
+	RA 2.669
+	Dec -55.42
+	Distance 1.148e9
+	Radius 5.28e6
+}
+
+"A79"
+{
+	Type "E0"
+	RA 0.677
+	Dec 18.14
+	Distance 1.153e9
+	Radius 5.38e6
+}
+
+"A2178"
+{
+	Type "E0"
+	RA 16.358
+	Dec 24.65
+	Distance 1.154e9
+	Radius 4.78e6
+}
+
+"AS1022"
+{
+	Type "E0"
+	RA 22.422
+	Dec -64.25
+	Distance 1.163e9
+	Radius 2.05e6
+}
+
+"A1496"
+{
+	Type "E0"
+	RA 12.223
+	Dec 59.27
+	Distance 1.169e9
+	Radius 4.99e6
+}
+
+"Abell 2384"
+{
+	Type "E0"
+	RA 21.873
+	Dec -19.55
+	Distance 1.172e9
+	Radius 5.36e6
+}
+
+"A2048"
+{
+	Type "E0"
+	RA 15.255
+	Dec 4.38
+	Distance 1.174e9
+	Radius 5.43e6
+}
+
+"A277"
+{
+	Type "E0"
+	RA 1.93
+	Dec -7.37
+	Distance 1.176e9
+	Radius 4.75e6
+}
+
+"A21"
+{
+	Type "E0"
+	RA 0.342
+	Dec 28.63
+	Distance 1.177e9
+	Radius 4.93e6
+}
+
+"A3334"
+{
+	Type "E0"
+	RA 5.299
+	Dec -58.55
+	Distance 1.183e9
+	Radius 5.6e6
+}
+
+"Abell 2528"
+{
+	Type "E0"
+	RA 23.093
+	Dec -21.4
+	Distance 1.186e9
+	Radius 5.36e6
+}
+
+"A2694"
+{
+	Type "E0"
+	RA 0.043
+	Dec 8.43
+	Distance 1.189e9
+	Radius 6.56e6
+}
+
+"A1346"
+{
+	Type "E0"
+	RA 11.686
+	Dec 5.69
+	Distance 1.203e9
+	Radius 5.02e6
+}
+
+"A2244"
+{
+	Type "E0"
+	RA 17.045
+	Dec 34.05
+	Distance 1.203e9
+	Radius 5.75e6
+}
+
+"A2110"
+{
+	Type "E0"
+	RA 15.662
+	Dec 30.71
+	Distance 1.213e9
+	Radius 4.87e6
+}
+
+"A2175"
+{
+	Type "E0"
+	RA 16.34
+	Dec 29.92
+	Distance 1.213e9
+	Radius 5.07e6
+}
+
+"A2700"
+{
+	Type "E0"
+	RA 0.065
+	Dec 2.06
+	Distance 1.213e9
+	Radius 5.02e6
+}
+
+"A566"
+{
+	Type "E0"
+	RA 7.075
+	Dec 63.29
+	Distance 1.22e9
+	Radius 6.47e6
+}
+
+"A1859"
+{
+	Type "E0"
+	RA 14.086
+	Dec 60.1
+	Distance 1.225e9
+	Radius 4.58e6
+}
+
+"A924"
+{
+	Type "E0"
+	RA 10.117
+	Dec 35.66
+	Distance 1.226e9
+	Radius 5.43e6
+}
+
+"A3827"
+{
+	Type "E0"
+	RA 22.029
+	Dec -59.94
+	Distance 1.23e9
+	Radius 5.98e6
+}
+
+"A2021"
+{
+	Type "E0"
+	RA 15.059
+	Dec 23.02
+	Distance 1.232e9
+	Radius 4.81e6
+}
+
+"A190"
+{
+	Type "E0"
+	RA 1.395
+	Dec -9.86
+	Distance 1.256e9
+	Radius 4.13e6
+}
+
+"Abell 2541"
+{
+	Type "E0"
+	RA 23.173
+	Dec -22.96
+	Distance 1.26e9
+	Radius 5.46e6
+}
+
+"A1446"
+{
+	Type "E0"
+	RA 12.031
+	Dec 58.02
+	Distance 1.272e9
+	Radius 5.66e6
+}
+
+"A186"
+{
+	Type "E0"
+	RA 1.378
+	Dec -10.42
+	Distance 1.273e9
+	Radius 4.93e6
+}
+
+"A84"
+{
+	Type "E0"
+	RA 0.697
+	Dec 21.41
+	Distance 1.274e9
+	Radius 5.46e6
+}
+
+"A1999"
+{
+	Type "E0"
+	RA 14.901
+	Dec 54.31
+	Distance 1.276e9
+	Radius 5.26e6
+}
+
+"A403"
+{
+	Type "E0"
+	RA 2.987
+	Dec 3.5
+	Distance 1.277e9
+	Radius 5.98e6
+}
+
+"A1225"
+{
+	Type "E0"
+	RA 11.355
+	Dec 53.76
+	Distance 1.277e9
+	Radius 4.51e6
+}
+
+"A1235"
+{
+	Type "E0"
+	RA 11.382
+	Dec 19.63
+	Distance 1.288e9
+	Radius 6.39e6
+}
+
+"A1559"
+{
+	Type "E0"
+	RA 12.551
+	Dec 67.11
+	Distance 1.288e9
+	Radius 4.75e6
+}
+
+"A121"
+{
+	Type "E0"
+	RA 0.959
+	Dec -7.01
+	Distance 1.295e9
+	Radius 5.23e6
+}
+
+"A98"
+{
+	Type "E0"
+	RA 0.774
+	Dec 20.49
+	Distance 1.297e9
+	Radius 7.34e6
+}
+
+"Abell 458"
+{
+	Type "E0"
+	RA 3.763
+	Dec -24.28
+	Distance 1.297e9
+	Radius 5.77e6
+}
+
+"A2263"
+{
+	Type "E0"
+	RA 17.387
+	Dec 26.94
+	Distance 1.298e9
+	Radius 4.62e6
+}
+
+"A23"
+{
+	Type "E0"
+	RA 0.363
+	Dec -0.89
+	Distance 1.3e9
+	Radius 4.58e6
+}
+
+"A1382"
+{
+	Type "E0"
+	RA 11.806
+	Dec 71.44
+	Distance 1.301e9
+	Radius 4.96e6
+}
+
+"A2257"
+{
+	Type "E0"
+	RA 17.299
+	Dec 32.58
+	Distance 1.302e9
+	Radius 5.07e6
+}
+
+"A1674"
+{
+	Type "E0"
+	RA 13.059
+	Dec 67.5
+	Distance 1.303e9
+	Radius 7.06e6
+}
+
+"Abell 2554"
+{
+	Type "E0"
+	RA 23.206
+	Dec -21.54
+	Distance 1.309e9
+	Radius 5.98e6
+}
+
+"A1342"
+{
+	Type "E0"
+	RA 11.678
+	Dec 10.07
+	Distance 1.31e9
+	Radius 4.84e6
+}
+
+"A439"
+{
+	Type "E0"
+	RA 3.508
+	Dec 24.79
+	Distance 1.312e9
+	Radius 4.21e6
+}
+
+"A1364"
+{
+	Type "E0"
+	RA 11.728
+	Dec -1.76
+	Distance 1.321e9
+	Radius 5.41e6
+}
+
+"A7"
+{
+	Type "E0"
+	RA 0.195
+	Dec 32.41
+	Distance 1.324e9
+	Radius 4.9e6
+}
+
+"A2064"
+{
+	Type "E0"
+	RA 15.35
+	Dec 48.64
+	Distance 1.328e9
+	Radius 4.29e6
+}
+
+"A2471"
+{
+	Type "E0"
+	RA 22.697
+	Dec 7.26
+	Distance 1.33e9
+	Radius 5.81e6
+}
+
+"A2443"
+{
+	Type "E0"
+	RA 22.435
+	Dec 17.34
+	Distance 1.332e9
+	Radius 6.3e6
+}
+
+"Abell 88"
+{
+	Type "E0"
+	RA 0.716
+	Dec -26.06
+	Distance 1.339e9
+	Radius 4.21e6
+}
+
+"Abell 42"
+{
+	Type "E0"
+	RA 0.477
+	Dec -23.64
+	Distance 1.34e9
+	Radius 6.7e6
+}
+
+"A1345"
+{
+	Type "E0"
+	RA 11.687
+	Dec 10.69
+	Distance 1.35e9
+	Radius 5.33e6
+}
+
+"A562"
+{
+	Type "E0"
+	RA 6.866
+	Dec 69.27
+	Distance 1.355e9
+	Radius 5.309e6
+}
+
+"AS84"
+{
+	Type "E0"
+	RA 0.822
+	Dec -29.53
+	Distance 1.355e9
+	Radius 2.87e6
+}
+
+"Abell 2548"
+{
+	Type "E0"
+	RA 23.187
+	Dec -20.46
+	Distance 1.357e9
+	Radius 4.33e6
+}
+
+"A1322"
+{
+	Type "E0"
+	RA 11.617
+	Dec 63.22
+	Distance 1.36e9
+	Radius 4.58e6
+}
+
+"A1840"
+{
+	Type "E0"
+	RA 14.025
+	Dec 30.58
+	Distance 1.36e9
+	Radius 4.21e6
+}
+
+"A2220"
+{
+	Type "E0"
+	RA 16.661
+	Dec 53.75
+	Distance 1.362e9
+	Radius 4.48e6
+}
+
+"A43"
+{
+	Type "E0"
+	RA 0.482
+	Dec 17.58
+	Distance 1.372e9
+	Radius 4.29e6
+}
+
+"A95"
+{
+	Type "E0"
+	RA 0.764
+	Dec -0.86
+	Distance 1.373e9
+	Radius 4.81e6
+}
+
+"A243"
+{
+	Type "E0"
+	RA 1.708
+	Dec -10.23
+	Distance 1.375e9
+	Radius 4.65e6
+}
+
+"Abell 2546"
+{
+	Type "E0"
+	RA 23.178
+	Dec -22.66
+	Distance 1.378e9
+	Radius 5.1e6
+}
+
+"A1227"
+{
+	Type "E0"
+	RA 11.359
+	Dec 48.03
+	Distance 1.379e9
+	Radius 6.21e6
+}
+
+"A2001"
+{
+	Type "E0"
+	RA 14.951
+	Dec 22.75
+	Distance 1.381e9
+	Radius 4.96e6
+}
+
+"Abell 2686"
+{
+	Type "E0"
+	RA 23.985
+	Dec -20.77
+	Distance 1.383e9
+	Radius 5.07e6
+}
+
+"A2762"
+{
+	Type "E0"
+	RA 0.324
+	Dec -53.54
+	Distance 1.383e9
+	Radius 4.58e6
+}
+
+"A217"
+{
+	Type "E0"
+	RA 1.61
+	Dec -8.05
+	Distance 1.386e9
+	Radius 5.15e6
+}
+
+"A1372"
+{
+	Type "E0"
+	RA 11.758
+	Dec 11.52
+	Distance 1.386e9
+	Radius 5.31e6
+}
+
+"A2798"
+{
+	Type "E0"
+	RA 0.626
+	Dec -28.54
+	Distance 1.386e9
+	Radius 4.99e6
+}
+
+"A2053"
+{
+	Type "E0"
+	RA 15.288
+	Dec -0.68
+	Distance 1.387e9
+	Radius 5.43e6
+}
+
+"Abell 2339"
+{
+	Type "E0"
+	RA 21.349
+	Dec -21.45
+	Distance 1.388e9
+	Radius 3.82e6
+}
+
+"Abell 2330"
+{
+	Type "E0"
+	RA 20.961
+	Dec -22.04
+	Distance 1.4e9
+	Radius 6.02e6
+}
+
+"A2721"
+{
+	Type "E0"
+	RA 0.103
+	Dec -34.72
+	Distance 1.402e9
+	Radius 7.43e6
+}
+
+"A2730"
+{
+	Type "E0"
+	RA 0.165
+	Dec -35.69
+	Distance 1.402e9
+	Radius 5.53e6
+}
+
+"A2083"
+{
+	Type "E0"
+	RA 15.491
+	Dec 30.75
+	Distance 1.405e9
+	Radius 5.04e6
+}
+
+"A2703"
+{
+	Type "E0"
+	RA 0.089
+	Dec 16.1
+	Distance 1.406e9
+	Radius 4.62e6
+}
+
+"A1738"
+{
+	Type "E0"
+	RA 13.419
+	Dec 57.61
+	Distance 1.409e9
+	Radius 5.66e6
+}
+
+"A2252"
+{
+	Type "E0"
+	RA 17.231
+	Dec 49.39
+	Distance 1.41e9
+	Radius 5.126e6
+}
+
+"A1980"
+{
+	Type "E0"
+	RA 14.859
+	Dec 22.66
+	Distance 1.416e9
+	Radius 4.75e6
+}
+
+"A166"
+{
+	Type "E0"
+	RA 1.243
+	Dec -16.27
+	Distance 1.42e9
+	Radius 5.46e6
+}
+
+"A216"
+{
+	Type "E0"
+	RA 1.612
+	Dec -6.41
+	Distance 1.423e9
+	Radius 5.31e6
+}
+
+"A733"
+{
+	Type "E0"
+	RA 9.022
+	Dec 55.62
+	Distance 1.424e9
+	Radius 5.15e6
+}
+
+"Abell 389"
+{
+	Type "E0"
+	RA 2.856
+	Dec -24.94
+	Distance 1.425e9
+	Radius 6.57e6
+}
+
+"A1988"
+{
+	Type "E0"
+	RA 14.891
+	Dec 20.78
+	Distance 1.425e9
+	Radius 4.44e6
+}
+
+"A2069"
+{
+	Type "E0"
+	RA 15.399
+	Dec 29.89
+	Distance 1.425e9
+	Radius 5.92e6
+}
+
+"A2356"
+{
+	Type "E0"
+	RA 21.596
+	Dec 0.12
+	Distance 1.426e9
+	Radius 5.75e6
+}
+
+"A923"
+{
+	Type "E0"
+	RA 10.109
+	Dec 25.91
+	Distance 1.427e9
+	Radius 4.75e6
+}
+
+"A2036"
+{
+	Type "E0"
+	RA 15.191
+	Dec 18.06
+	Distance 1.428e9
+	Radius 4.37e6
+}
+
+"A2006"
+{
+	Type "E0"
+	RA 14.993
+	Dec 19.67
+	Distance 1.43e9
+	Radius 4.99e6
+}
+
+"A1976"
+{
+	Type "E0"
+	RA 14.839
+	Dec 20.96
+	Distance 1.435e9
+	Radius 4.84e6
+}
+
+"A1354"
+{
+	Type "E0"
+	RA 11.703
+	Dec 10.16
+	Distance 1.446e9
+	Radius 4.96e6
+}
+
+"A1986"
+{
+	Type "E0"
+	RA 14.886
+	Dec 21.91
+	Distance 1.45e9
+	Radius 5.23e6
+}
+
+"A2050"
+{
+	Type "E0"
+	RA 15.273
+	Dec 0.1
+	Distance 1.451e9
+	Radius 4.75e6
+}
+
+"A1972"
+{
+	Type "E0"
+	RA 14.805
+	Dec 23.94
+	Distance 1.458e9
+	Radius 4.33e6
+}
+
+"A2584"
+{
+	Type "E0"
+	RA 23.368
+	Dec 27.56
+	Distance 1.466e9
+	Radius 4.62e6
+}
+
+"A3593"
+{
+	Type "E0"
+	RA 14.32
+	Dec -19.48
+	Distance 1.466e9
+	Radius 4.09e6
+}
+
+"Abell 2347"
+{
+	Type "E0"
+	RA 21.494
+	Dec -22.26
+	Distance 1.466e9
+	Radius 4.21e6
+}
+
+"A3136"
+{
+	Type "E0"
+	RA 3.537
+	Dec -71.83
+	Distance 1.474e9
+	Radius 5.26e6
+}
+
+"Abell 15"
+{
+	Type "E0"
+	RA 0.252
+	Dec -26.04
+	Distance 1.482e9
+	Radius 4.81e6
+}
+
+"A3854"
+{
+	Type "E0"
+	RA 22.295
+	Dec -35.72
+	Distance 1.487e9
+	Radius 6.52e6
+}
+
+"A1884"
+{
+	Type "E0"
+	RA 14.197
+	Dec 61.38
+	Distance 1.494e9
+	Radius 4.58e6
+}
+
+"A188"
+{
+	Type "E0"
+	RA 1.379
+	Dec -0.89
+	Distance 1.505e9
+	Radius 4.96e6
+}
+
+"A1984"
+{
+	Type "E0"
+	RA 14.873
+	Dec 27.95
+	Distance 1.507e9
+	Radius 5.84e6
+}
+
+"A2496"
+{
+	Type "E0"
+	RA 22.849
+	Dec -16.4
+	Distance 1.509e9
+	Radius 6.06e6
+}
+
+"A1123"
+{
+	Type "E0"
+	RA 10.945
+	Dec 75.52
+	Distance 1.511e9
+	Radius 6.13e6
+}
+
+"A784"
+{
+	Type "E0"
+	RA 9.375
+	Dec 54.97
+	Distance 1.512e9
+	Radius 5.15e6
+}
+
+"A786"
+{
+	Type "E0"
+	RA 9.481
+	Dec 74.8
+	Distance 1.518e9
+	Radius 4.58e6
+}
+
+"A1877"
+{
+	Type "E0"
+	RA 14.174
+	Dec 59.78
+	Distance 1.518e9
+	Radius 5.33e6
+}
+
+"A2355"
+{
+	Type "E0"
+	RA 21.589
+	Dec 1.39
+	Distance 1.521e9
+	Radius 6.21e6
+}
+
+"A655"
+{
+	Type "E0"
+	RA 8.422
+	Dec 47.12
+	Distance 1.523e9
+	Radius 6.72e6
+}
+
+"A1"
+{
+	Type "E0"
+	RA 0.126
+	Dec 16.51
+	Distance 1.527e9
+	Radius 4.78e6
+}
+
+"A2005"
+{
+	Type "E0"
+	RA 14.979
+	Dec 27.82
+	Distance 1.536e9
+	Radius 6.08e6
+}
+
+"A1264"
+{
+	Type "E0"
+	RA 11.453
+	Dec 17.14
+	Distance 1.548e9
+	Radius 5.96e6
+}
+
+"A1990"
+{
+	Type "E0"
+	RA 14.896
+	Dec 28.08
+	Distance 1.55e9
+	Radius 6.89e6
+}
+
+"Abell 2565"
+{
+	Type "E0"
+	RA 23.263
+	Dec -21.18
+	Distance 1.552e9
+	Radius 5.18e6
+}
+
+"A259"
+{
+	Type "E0"
+	RA 1.837
+	Dec -11.99
+	Distance 1.555e9
+	Radius 4.05e6
+}
+
+"A226"
+{
+	Type "E0"
+	RA 1.649
+	Dec -10.25
+	Distance 1.565e9
+	Radius 5.43e6
+}
+
+"A2165"
+{
+	Type "E0"
+	RA 16.236
+	Dec 26.67
+	Distance 1.569e9
+	Radius 4.17e6
+}
+
+"A175"
+{
+	Type "E0"
+	RA 1.326
+	Dec 14.88
+	Distance 1.57e9
+	Radius 5.64e6
+}
+
+"A228"
+{
+	Type "E0"
+	RA 1.653
+	Dec -10.05
+	Distance 1.573e9
+	Radius 4.13e6
+}
+
+"A274"
+{
+	Type "E0"
+	RA 1.912
+	Dec -6.27
+	Distance 1.573e9
+	Radius 6.69e6
+}
+
+"A1278"
+{
+	Type "E0"
+	RA 11.503
+	Dec 20.47
+	Distance 1.574e9
+	Radius 6.86e6
+}
+
+"Abell 2540"
+{
+	Type "E0"
+	RA 23.158
+	Dec -22.16
+	Distance 1.582e9
+	Radius 4.62e6
+}
+
+"A646"
+{
+	Type "E0"
+	RA 8.369
+	Dec 47.11
+	Distance 1.589e9
+	Radius 4.68e6
+}
+
+"A1920"
+{
+	Type "E0"
+	RA 14.455
+	Dec 55.78
+	Distance 1.597e9
+	Radius 6.04e6
+}
+
+"A1930"
+{
+	Type "E0"
+	RA 14.544
+	Dec 31.61
+	Distance 1.6e9
+	Radius 5.04e6
+}
+
+"A1373"
+{
+	Type "E0"
+	RA 11.757
+	Dec -2.39
+	Distance 1.601e9
+	Radius 5.86e6
+}
+
+"A1343"
+{
+	Type "E0"
+	RA 11.689
+	Dec 60.66
+	Distance 1.606e9
+	Radius 4.09e6
+}
+
+"A468"
+{
+	Type "E0"
+	RA 3.879
+	Dec 21.41
+	Distance 1.614e9
+	Radius 4.17e6
+}
+
+"A762"
+{
+	Type "E0"
+	RA 9.318
+	Dec 74.29
+	Distance 1.622e9
+	Radius 4.09e6
+}
+
+"A2196"
+{
+	Type "E0"
+	RA 16.456
+	Dec 41.49
+	Distance 1.622e9
+	Radius 4.62e6
+}
+
+"A24"
+{
+	Type "E0"
+	RA 0.375
+	Dec 23.29
+	Distance 1.628e9
+	Radius 6.47e6
+}
+
+"A1437"
+{
+	Type "E0"
+	RA 12.008
+	Dec 3.34
+	Distance 1.63e9
+	Radius 6.9e6
+}
+
+"A96"
+{
+	Type "E0"
+	RA 0.774
+	Dec 39.51
+	Distance 1.635e9
+	Radius 5.07e6
+}
+
+"A2158"
+{
+	Type "E0"
+	RA 16.137
+	Dec 43
+	Distance 1.641e9
+	Radius 4.58e6
+}
+
+"A180"
+{
+	Type "E0"
+	RA 1.365
+	Dec 3.01
+	Distance 1.642e9
+	Radius 4.13e6
+}
+
+"Abell 2518"
+{
+	Type "E0"
+	RA 23.013
+	Dec -24.13
+	Distance 1.643e9
+	Radius 4.51e6
+}
+
+"A787"
+{
+	Type "E0"
+	RA 9.476
+	Dec 74.4
+	Distance 1.644e9
+	Radius 6.1e6
+}
+
+"A1921"
+{
+	Type "E0"
+	RA 14.488
+	Dec 23.09
+	Distance 1.644e9
+	Radius 5.13e6
+}
+
+"A2211"
+{
+	Type "E0"
+	RA 16.568
+	Dec 40.93
+	Distance 1.648e9
+	Radius 4.87e6
+}
+
+"A795"
+{
+	Type "E0"
+	RA 9.401
+	Dec 14.17
+	Distance 1.65e9
+	Radius 6.86e6
+}
+
+"Abell 2521"
+{
+	Type "E0"
+	RA 23.036
+	Dec -22.03
+	Distance 1.652e9
+	Radius 5.66e6
+}
+
+"A2179"
+{
+	Type "E0"
+	RA 16.337
+	Dec 42.42
+	Distance 1.653e9
+	Radius 4.81e6
+}
+
+"A1132"
+{
+	Type "E0"
+	RA 10.972
+	Dec 56.78
+	Distance 1.657e9
+	Radius 5.41e6
+}
+
+"A2183"
+{
+	Type "E0"
+	RA 16.359
+	Dec 42.72
+	Distance 1.659e9
+	Radius 4.93e6
+}
+
+"A1524"
+{
+	Type "E0"
+	RA 12.363
+	Dec 7.84
+	Distance 1.663e9
+	Radius 6.04e6
+}
+
+"A629"
+{
+	Type "E0"
+	RA 8.25
+	Dec 66.43
+	Distance 1.676e9
+	Radius 5.5e6
+}
+
+"A2240"
+{
+	Type "E0"
+	RA 16.901
+	Dec 66.74
+	Distance 1.676e9
+	Radius 7.06e6
+}
+
+"A1392"
+{
+	Type "E0"
+	RA 11.843
+	Dec -0.58
+	Distance 1.678e9
+	Radius 4.62e6
+}
+
+"A1937"
+{
+	Type "E0"
+	RA 14.574
+	Dec 58.27
+	Distance 1.678e9
+	Radius 5.96e6
+}
+
+"Abell 2555"
+{
+	Type "E0"
+	RA 23.214
+	Dec -22.21
+	Distance 1.681e9
+	Radius 5.13e6
+}
+
+"A1936"
+{
+	Type "E0"
+	RA 14.575
+	Dec 54.82
+	Distance 1.683e9
+	Radius 5.28e6
+}
+
+"A2172"
+{
+	Type "E0"
+	RA 16.279
+	Dec 42.39
+	Distance 1.684e9
+	Radius 5.28e6
+}
+
+"A1073"
+{
+	Type "E0"
+	RA 10.707
+	Dec 36.64
+	Distance 1.687e9
+	Radius 5.6e6
+}
+
+"A1940"
+{
+	Type "E0"
+	RA 14.591
+	Dec 55.15
+	Distance 1.694e9
+	Radius 6.52e6
+}
+
+"Abell 2568"
+{
+	Type "E0"
+	RA 23.286
+	Dec -22.19
+	Distance 1.696e9
+	Radius 4.48e6
+}
+
+"A516"
+{
+	Type "E0"
+	RA 4.835
+	Dec -8.81
+	Distance 1.706e9
+	Radius 5.07e6
+}
+
+"A882"
+{
+	Type "E0"
+	RA 9.854
+	Dec 8.25
+	Distance 1.707e9
+	Radius 4.68e6
+}
+
+"Abell 1146"
+{
+	Type "E0"
+	RA 11.021
+	Dec -22.72
+	Distance 1.71e9
+	Radius 7.02e6
+}
+
+"A1880"
+{
+	Type "E0"
+	RA 14.22
+	Dec 22.4
+	Distance 1.713e9
+	Radius 5.23e6
+}
+
+"A1918"
+{
+	Type "E0"
+	RA 14.419
+	Dec 63.16
+	Distance 1.715e9
+	Radius 6.72e6
+}
+
+"A951"
+{
+	Type "E0"
+	RA 10.232
+	Dec 34.72
+	Distance 1.729e9
+	Radius 4.81e6
+}
+
+"A1413"
+{
+	Type "E0"
+	RA 11.923
+	Dec 23.37
+	Distance 1.729e9
+	Radius 7.48e6
+}
+
+"A1495"
+{
+	Type "E0"
+	RA 12.224
+	Dec 29.24
+	Distance 1.731e9
+	Radius 6.41e6
+}
+
+"Abell 22"
+{
+	Type "E0"
+	RA 0.342
+	Dec -25.72
+	Distance 1.734e9
+	Radius 7.429e6
+}
+
+"A1283"
+{
+	Type "E0"
+	RA 11.521
+	Dec 60.76
+	Distance 1.736e9
+	Radius 4.87e6
+}
+
+"A1396"
+{
+	Type "E0"
+	RA 11.854
+	Dec 54.86
+	Distance 1.744e9
+	Radius 4.51e6
+}
+
+"Abell 2344"
+{
+	Type "E0"
+	RA 21.429
+	Dec -20.78
+	Distance 1.751e9
+	Radius 4.81e6
+}
+
+"A2210"
+{
+	Type "E0"
+	RA 16.579
+	Dec 5.48
+	Distance 1.771e9
+	Radius 4.75e6
+}
+
+"Abell 2328"
+{
+	Type "E0"
+	RA 20.804
+	Dec -17.81
+	Distance 1.777e9
+	Radius 4.62e6
+}
+
+"A508"
+{
+	Type "E0"
+	RA 4.765
+	Dec 2.01
+	Distance 1.787e9
+	Radius 5.66e6
+}
+
+"A513"
+{
+	Type "E0"
+	RA 4.803
+	Dec -9.71
+	Distance 1.8e9
+	Radius 4.09e6
+}
+
+"Abell 2547"
+{
+	Type "E0"
+	RA 23.181
+	Dec -21.14
+	Distance 1.801e9
+	Radius 6.47e6
+}
+
+"A46"
+{
+	Type "E0"
+	RA 0.504
+	Dec -12.87
+	Distance 1.81e9
+	Radius 5.5e6
+}
+
+"A2224"
+{
+	Type "E0"
+	RA 16.723
+	Dec 13.34
+	Distance 1.815e9
+	Radius 6.66e6
+}
+
+"A1872"
+{
+	Type "E0"
+	RA 14.151
+	Dec 61.95
+	Distance 1.819e9
+	Radius 4.37e6
+}
+
+"A2012"
+{
+	Type "E0"
+	RA 15.031
+	Dec 16.52
+	Distance 1.822e9
+	Radius 4.84e6
+}
+
+"A2235"
+{
+	Type "E0"
+	RA 16.916
+	Dec 40.02
+	Distance 1.822e9
+	Radius 5.38e6
+}
+
+"Abell 140"
+{
+	Type "E0"
+	RA 1.075
+	Dec -23.98
+	Distance 1.832e9
+	Radius 5.53e6
+}
+
+"A2204"
+{
+	Type "E0"
+	RA 16.546
+	Dec 5.58
+	Distance 1.836e9
+	Radius 6.57e6
+}
+
+"A868"
+{
+	Type "E0"
+	RA 9.758
+	Dec -8.65
+	Distance 1.843e9
+	Radius 7.35e6
+}
+
+"A2009"
+{
+	Type "E0"
+	RA 15.004
+	Dec 21.37
+	Distance 1.843e9
+	Radius 5.21e6
+}
+
+"A2100"
+{
+	Type "E0"
+	RA 15.606
+	Dec 37.64
+	Distance 1.847e9
+	Radius 6.66e6
+}
+
+"A1360"
+{
+	Type "E0"
+	RA 11.718
+	Dec 11.02
+	Distance 1.849e9
+	Radius 5.21e6
+}
+
+"A545"
+{
+	Type "E0"
+	RA 5.539
+	Dec -11.53
+	Distance 1.854e9
+	Radius 7.94e6
+}
+
+"Abell 2550"
+{
+	Type "E0"
+	RA 23.193
+	Dec -21.78
+	Distance 1.858e9
+	Radius 5.64e6
+}
+
+"A204"
+{
+	Type "E0"
+	RA 1.477
+	Dec -6.79
+	Distance 1.873e9
+	Radius 4.9e6
+}
+
+"A506"
+{
+	Type "E0"
+	RA 4.721
+	Dec -9.71
+	Distance 1.878e9
+	Radius 5.73e6
+}
+
+"A136"
+{
+	Type "E0"
+	RA 1.069
+	Dec 25.07
+	Distance 1.887e9
+	Radius 5.96e6
+}
+
+"A1081"
+{
+	Type "E0"
+	RA 10.747
+	Dec 35.57
+	Distance 1.907e9
+	Radius 5.62e6
+}
+
+"A31"
+{
+	Type "E0"
+	RA 0.452
+	Dec 22.63
+	Distance 1.916e9
+	Radius 5.77e6
+}
+
+"A2213"
+{
+	Type "E0"
+	RA 16.609
+	Dec 41.28
+	Distance 1.917e9
+	Radius 5.43e6
+}
+
+"A588"
+{
+	Type "E0"
+	RA 7.649
+	Dec 69.95
+	Distance 1.921e9
+	Radius 5.5e6
+}
+
+"Abell 2542"
+{
+	Type "E0"
+	RA 23.168
+	Dec -24.5
+	Distance 1.924e9
+	Radius 4.55e6
+}
+
+"A1548"
+{
+	Type "E0"
+	RA 12.483
+	Dec 19.42
+	Distance 1.933e9
+	Radius 6.92e6
+}
+
+"AS996"
+{
+	Type "E0"
+	RA 22.155
+	Dec -59.67
+	Distance 1.933e9
+	Radius 5.81e6
+}
+
+"A1101"
+{
+	Type "E0"
+	RA 10.828
+	Dec 44.35
+	Distance 1.936e9
+	Radius 5.75e6
+}
+
+"A224"
+{
+	Type "E0"
+	RA 1.639
+	Dec -6.95
+	Distance 1.939e9
+	Radius 5.43e6
+}
+
+"A750"
+{
+	Type "E0"
+	RA 9.152
+	Dec 11.03
+	Distance 1.943e9
+	Radius 6.72e6
+}
+
+"A1170"
+{
+	Type "E0"
+	RA 11.12
+	Dec 8.01
+	Distance 1.943e9
+	Radius 6.06e6
+}
+
+"A293"
+{
+	Type "E0"
+	RA 2.033
+	Dec 3.77
+	Distance 1.955e9
+	Radius 5.71e6
+}
+
+"A1401"
+{
+	Type "E0"
+	RA 11.868
+	Dec 37.27
+	Distance 1.973e9
+	Radius 6.89e6
+}
+
+"A1667"
+{
+	Type "E0"
+	RA 13.055
+	Dec 31.82
+	Distance 1.973e9
+	Radius 5.94e6
+}
+
+"A1553"
+{
+	Type "E0"
+	RA 12.514
+	Dec 10.57
+	Distance 1.978e9
+	Radius 5.98e6
+}
+
+"A1234"
+{
+	Type "E0"
+	RA 11.374
+	Dec 21.39
+	Distance 1.99e9
+	Radius 5.73e6
+}
+
+"A1497"
+{
+	Type "E0"
+	RA 12.235
+	Dec 26.66
+	Distance 1.996e9
+	Radius 6.0e6
+}
+
+"A1661"
+{
+	Type "E0"
+	RA 13.03
+	Dec 29.08
+	Distance 1.998e9
+	Radius 5.92e6
+}
+
+"A2266"
+{
+	Type "E0"
+	RA 17.411
+	Dec 32.11
+	Distance 1.998e9
+	Radius 5.62e6
+}
+
+"A913"
+{
+	Type "E0"
+	RA 10.043
+	Dec 20.47
+	Distance 2.003e9
+	Radius 5.18e6
+}
+
+"A1232"
+{
+	Type "E0"
+	RA 11.369
+	Dec 17.89
+	Distance 2.004e9
+	Radius 5.31e6
+}
+
+"A1759"
+{
+	Type "E0"
+	RA 13.567
+	Dec 20.24
+	Distance 2.008e9
+	Radius 6.56e6
+}
+
+"A3888"
+{
+	Type "E0"
+	RA 22.573
+	Dec -37.72
+	Distance 2.008e9
+	Radius 6.11e6
+}
+
+"A1979"
+{
+	Type "E0"
+	RA 14.85
+	Dec 31.28
+	Distance 2.016e9
+	Radius 6.13e6
+}
+
+"A1201"
+{
+	Type "E0"
+	RA 11.217
+	Dec 13.43
+	Distance 2.017e9
+	Radius 6.04e6
+}
+
+"A1774"
+{
+	Type "E0"
+	RA 13.686
+	Dec 40.01
+	Distance 2.02e9
+	Radius 5.57e6
+}
+
+"A2163"
+{
+	Type "E0"
+	RA 16.259
+	Dec -6.12
+	Distance 2.028e9
+	Radius 6.34e6
+}
+
+"A1679"
+{
+	Type "E0"
+	RA 13.109
+	Dec 31.8
+	Distance 2.029e9
+	Radius 6.26e6
+}
+
+"A586"
+{
+	Type "E0"
+	RA 7.538
+	Dec 31.63
+	Distance 2.041e9
+	Radius 7.4e6
+}
+
+# Abell 2218, second-richest cluster in the survey.
+"A2218"
+{
+	Type "E0"
+	RA 16.598
+	Dec 66.22
+	Distance 2.041e9
+	Radius 7.7e6
+}
+
+"A2320"
+{
+	Type "E0"
+	RA 19.275
+	Dec 70.99
+	Distance 2.041e9
+	Radius 5.66e6
+}
+
+"A1760"
+{
+	Type "E0"
+	RA 13.568
+	Dec 20.21
+	Distance 2.042e9
+	Radius 7.11e6
+}
+
+"A1914"
+{
+	Type "E0"
+	RA 14.434
+	Dec 37.83
+	Distance 2.043e9
+	Radius 6.08e6
+}
+
+"AS222"
+{
+	Type "E0"
+	RA 2.097
+	Dec -50.8
+	Distance 2.047e9
+	Radius 3.66e6
+}
+
+"A234"
+{
+	Type "E0"
+	RA 1.684
+	Dec 18.92
+	Distance 2.064e9
+	Radius 5.46e6
+}
+
+"Abell 2539"
+{
+	Type "E0"
+	RA 23.146
+	Dec -21.53
+	Distance 2.068e9
+	Radius 4.81e6
+}
+
+"Abell 2531"
+{
+	Type "E0"
+	RA 23.115
+	Dec -21.68
+	Distance 2.074e9
+	Radius 5.04e6
+}
+
+"A1773"
+{
+	Type "E0"
+	RA 13.703
+	Dec 2.25
+	Distance 2.109e9
+	Radius 5.21e6
+}
+
+"A1359"
+{
+	Type "E0"
+	RA 11.725
+	Dec 61.66
+	Distance 2.12e9
+	Radius 4.0e6
+}
+
+"A2623"
+{
+	Type "E0"
+	RA 23.584
+	Dec 5.61
+	Distance 2.121e9
+	Radius 6.72e6
+}
+
+"A518"
+{
+	Type "E0"
+	RA 4.856
+	Dec -10.72
+	Distance 2.142e9
+	Radius 5.69e6
+}
+
+"A1689"
+{
+	Type "E0"
+	RA 13.193
+	Dec -1.37
+	Distance 2.149e9
+	Radius 7.87e6
+}
+
+"A1954"
+{
+	Type "E0"
+	RA 14.701
+	Dec 28.52
+	Distance 2.149e9
+	Radius 6.35e6
+}
+
+"A2008"
+{
+	Type "E0"
+	RA 15.001
+	Dec 23.14
+	Distance 2.149e9
+	Radius 5.84e6
+}
+
+# Abell 665, richest cluster in the survey.
+"A665"
+{
+	Type "E0"
+	RA 8.513
+	Dec 65.88
+	Distance 2.155e9
+	Radius 8.82e6
+}
+
+"A873"
+{
+	Type "E0"
+	RA 9.879
+	Dec 71.3
+	Distance 2.16e9
+	Radius 6.57e6
+}
+
+"A2187"
+{
+	Type "E0"
+	RA 16.405
+	Dec 41.25
+	Distance 2.165e9
+	Radius 4.71e6
+}
+
+"A1697"
+{
+	Type "E0"
+	RA 13.215
+	Dec 46.25
+	Distance 2.169e9
+	Radius 5.64e6
+}
+
+"A2283"
+{
+	Type "E0"
+	RA 17.741
+	Dec 69.65
+	Distance 2.17e9
+	Radius 5.18e6
+}
+
+"A1677"
+{
+	Type "E0"
+	RA 13.098
+	Dec 30.9
+	Distance 2.172e9
+	Radius 6.21e6
+}
+
+"A2616"
+{
+	Type "E0"
+	RA 23.554
+	Dec 5.61
+	Distance 2.172e9
+	Radius 5.86e6
+}
+
+"A1504"
+{
+	Type "E0"
+	RA 12.255
+	Dec 27.52
+	Distance 2.177e9
+	Radius 5.94e6
+}
+
+"A1675"
+{
+	Type "E0"
+	RA 13.087
+	Dec 34.55
+	Distance 2.181e9
+	Radius 4.75e6
+}
+
+"A2658"
+{
+	Type "E0"
+	RA 23.75
+	Dec -12.31
+	Distance 2.192e9
+	Radius 6.73e6
+}
+
+"A1889"
+{
+	Type "E0"
+	RA 14.278
+	Dec 30.72
+	Distance 2.202e9
+	Radius 6.21e6
+}
+
+"A2632"
+{
+	Type "E0"
+	RA 23.63
+	Dec -9.22
+	Distance 2.202e9
+	Radius 6.75e6
+}
+
+"A2192"
+{
+	Type "E0"
+	RA 16.444
+	Dec 42.67
+	Distance 2.211e9
+	Radius 5.1e6
+}
+
+"A1763"
+{
+	Type "E0"
+	RA 13.588
+	Dec 40.96
+	Distance 2.213e9
+	Radius 6.87e6
+}
+
+"A232"
+{
+	Type "E0"
+	RA 1.668
+	Dec -10.36
+	Distance 2.217e9
+	Radius 5.33e6
+}
+
+"A236"
+{
+	Type "E0"
+	RA 1.675
+	Dec -11.85
+	Distance 2.217e9
+	Radius 4.99e6
+}
+
+"A1960"
+{
+	Type "E0"
+	RA 14.742
+	Dec 19.34
+	Distance 2.219e9
+	Radius 4.84e6
+}
+
+"A125"
+{
+	Type "E0"
+	RA 1.002
+	Dec 14.27
+	Distance 2.224e9
+	Radius 5.21e6
+}
+
+"A1562"
+{
+	Type "E0"
+	RA 12.571
+	Dec 41.17
+	Distance 2.245e9
+	Radius 5.48e6
+}
+
+"A1911"
+{
+	Type "E0"
+	RA 14.407
+	Dec 38.96
+	Distance 2.259e9
+	Radius 5.55e6
+}
+
+"A801"
+{
+	Type "E0"
+	RA 9.467
+	Dec 20.57
+	Distance 2.264e9
+	Radius 5.57e6
+}
+
+"A2646"
+{
+	Type "E0"
+	RA 23.69
+	Dec -10.01
+	Distance 2.277e9
+	Radius 6.61e6
+}
+
+"A652"
+{
+	Type "E0"
+	RA 8.429
+	Dec 56.04
+	Distance 2.285e9
+	Radius 4.37e6
+}
+
+"A3783"
+{
+	Type "E0"
+	RA 21.567
+	Dec -42.64
+	Distance 2.303e9
+	Radius 6.32e6
+}
+
+"A1632"
+{
+	Type "E0"
+	RA 12.884
+	Dec 28.81
+	Distance 2.311e9
+	Radius 5.55e6
+}
+
+"A1685"
+{
+	Type "E0"
+	RA 13.147
+	Dec 34.75
+	Distance 2.319e9
+	Radius 4.55e6
+}
+
+"A115"
+{
+	Type "E0"
+	RA 0.933
+	Dec 26.32
+	Distance 2.32e9
+	Radius 7.19e6
+}
+
+"Abell 2536"
+{
+	Type "E0"
+	RA 23.129
+	Dec -22.46
+	Distance 2.32e9
+	Radius 4.99e6
+}
+
+"Abell 2534"
+{
+	Type "E0"
+	RA 23.128
+	Dec -22.71
+	Distance 2.325e9
+	Radius 6.46e6
+}
+
+"A1643"
+{
+	Type "E0"
+	RA 12.932
+	Dec 44.08
+	Distance 2.331e9
+	Radius 4.75e6
+}
+
+"A1514"
+{
+	Type "E0"
+	RA 12.299
+	Dec 20.66
+	Distance 2.345e9
+	Radius 6.56e6
+}
+
+"A1094"
+{
+	Type "E0"
+	RA 10.793
+	Dec 27.52
+	Distance 2.355e9
+	Radius 5.62e6
+}
+
+"A520"
+{
+	Type "E0"
+	RA 4.905
+	Dec 2.95
+	Distance 2.382e9
+	Radius 7.35e6
+}
+
+"A732"
+{
+	Type "E0"
+	RA 8.965
+	Dec 3.17
+	Distance 2.382e9
+	Radius 5.18e6
+}
+
+"A910"
+{
+	Type "E0"
+	RA 10.05
+	Dec 67.16
+	Distance 2.408e9
+	Radius 7.8e6
+}
+
+"A209"
+{
+	Type "E0"
+	RA 1.533
+	Dec -13.58
+	Distance 2.414e9
+	Radius 6.96e6
+}
+
+"A963"
+{
+	Type "E0"
+	RA 10.286
+	Dec 39.02
+	Distance 2.414e9
+	Radius 6.59e6
+}
+
+"A854"
+{
+	Type "E0"
+	RA 9.701
+	Dec 8.94
+	Distance 2.423e9
+	Radius 5.02e6
+}
+
+"A223"
+{
+	Type "E0"
+	RA 1.633
+	Dec -12.78
+	Distance 2.424e9
+	Radius 6.87e6
+}
+
+"A1571"
+{
+	Type "E0"
+	RA 12.545
+	Dec 83.34
+	Distance 2.445e9
+	Radius 7.4e6
+}
+
+"A3157"
+{
+	Type "E0"
+	RA 3.725
+	Dec -29.94
+	Distance 2.445e9
+	Radius 6.1e6
+}
+
+"A1430"
+{
+	Type "E0"
+	RA 11.991
+	Dec 49.79
+	Distance 2.2460e9
+	Radius 5.9e6
+}
+
+"A222"
+{
+	Type "E0"
+	RA 1.624
+	Dec -12.98
+	Distance 2.466e9
+	Radius 6.92e6
+}
+
+"A2317"
+{
+	Type "E0"
+	RA 19.138
+	Dec 69.07
+	Distance 2.466e9
+	Radius 7.35e6
+}
+
+"A3207"
+{
+	Type "E0"
+	RA 4.048
+	Dec -27.2
+	Distance 2.476e9
+	Radius 5.48e6
+}
+
+"A1304"
+{
+	Type "E0"
+	RA 11.546
+	Dec 35.46
+	Distance 2.487e9
+	Radius 5.55e6
+}
+
+"A1785"
+{
+	Type "E0"
+	RA 13.745
+	Dec 38.15
+	Distance 2.493e9
+	Radius 5.77e6
+}
+
+"A1246"
+{
+	Type "E0"
+	RA 11.397
+	Dec 21.43
+	Distance 2.517e9
+	Radius 6.62e6
+}
+
+"A2003"
+{
+	Type "E0"
+	RA 14.978
+	Dec 19.45
+	Distance 2.53e9
+	Radius 4.75e6
+}
+
+"A1929"
+{
+	Type "E0"
+	RA 14.531
+	Dec 29.53
+	Distance 2.549e9
+	Radius 5.88e6
+}
+
+"A1934"
+{
+	Type "E0"
+	RA 14.556
+	Dec 29.45
+	Distance 2.553e9
+	Radius 6.72e6
+}
+
+"AS230"
+{
+	Type "E0"
+	RA 2.198
+	Dec -47.85
+	Distance 2.555e9
+	Radius 2.78e6
+}
+
+"A777"
+{
+	Type "E0"
+	RA 9.472
+	Dec 78.23
+	Distance 2.599e9
+	Radius 7.65e6
+}
+
+"A1942"
+{
+	Type "E0"
+	RA 14.643
+	Dec 3.67
+	Distance 2.599e9
+	Radius 6.66e6
+}
+
+"A2397"
+{
+	Type "E0"
+	RA 21.936
+	Dec 1.34
+	Distance 2.599e9
+	Radius 6.78e6
+}
+
+"A3934"
+{
+	Type "E0"
+	RA 22.893
+	Dec -33.72
+	Distance 2.599e9
+	Radius 6.23e6
+}
+
+"A517"
+{
+	Type "E0"
+	RA 4.841
+	Dec -9.23
+	Distance 2.604e9
+	Radius 5.77e6
+}
+
+"A1299"
+{
+	Type "E0"
+	RA 11.539
+	Dec 33.97
+	Distance 2.607e9
+	Radius 6.06e6
+}
+
+"A2246"
+{
+	Type "E0"
+	RA 17.012
+	Dec 64.21
+	Distance 2.61e9
+	Radius 6.78e6
+}
+
+"A593"
+{
+	Type "E0"
+	RA 7.866
+	Dec 72.82
+	Distance 2.62e9
+	Radius 6.9e6
+}
+
+"A1093"
+{
+	Type "E0"
+	RA 10.782
+	Dec 9.07
+	Distance 2.62e9
+	Radius 4.78e6
+}
+
+"AS1151"
+{
+	Type "E0"
+	RA 23.805
+	Dec -28.91
+	Distance 2.62e9
+	Radius 7.75e6
+}
+
+"A1958"
+{
+	Type "E0"
+	RA 14.721
+	Dec 30.97
+	Distance 2.644e9
+	Radius 5.73e6
+}
+
+"A2111"
+{
+	Type "E0"
+	RA 15.661
+	Dec 34.41
+	Distance 2.65e9
+	Radius 6.81e6
+}
+
+"Abell 141"
+{
+	Type "E0"
+	RA 1.092
+	Dec -24.65
+	Distance 2.661e9
+	Radius 4.71e6
+}
+
+"Abell 2509"
+{
+	Type "E0"
+	RA 22.965
+	Dec -21.75
+	Distance 2.667e9
+	Radius 5.07e6
+}
+
+"A1292"
+{
+	Type "E0"
+	RA 11.529
+	Dec 35.82
+	Distance 2.68e9
+	Radius 6.06e6
+}
+
+"A1533"
+{
+	Type "E0"
+	RA 12.409
+	Dec 0.91
+	Distance 2.68e9
+	Radius 6.34e6
+}
+
+"A1961"
+{
+	Type "E0"
+	RA 14.742
+	Dec 31.19
+	Distance 2.681e9
+	Radius 6.64e6
+}
+
+"A3665"
+{
+	Type "E0"
+	RA 20.164
+	Dec -53.17
+	Distance 2.731e9
+	Radius 6.35e6
+}
+
+"A2270"
+{
+	Type "E0"
+	RA 17.455
+	Dec 55.18
+	Distance 2.738e9
+	Radius 4.71e6
+}
+
+"A2384"
+{
+	Type "E0"
+	RA 21.871
+	Dec -19.55
+	Distance 2.746e9
+	Radius 5.07e6
+}
+
+"A1957"
+{
+	Type "E0"
+	RA 14.719
+	Dec 31.21
+	Distance 2.772e9
+	Radius 7.08e6
+}
+
+"A2645"
+{
+	Type "E0"
+	RA 23.689
+	Dec -9.04
+	Distance 2.822e9
+	Radius 7.59e6
+}
+
+"A2125"
+{
+	Type "E0"
+	RA 15.683
+	Dec 66.31
+	Distance 2.827e9
+	Radius 7.89e6
+}
+
+"A1952"
+{
+	Type "E0"
+	RA 14.685
+	Dec 28.64
+	Distance 2.842e9
+	Radius 6.11e6
+}
+
+"A1997"
+{
+	Type "E0"
+	RA 14.931
+	Dec 20.07
+	Distance 2.86e9
+	Radius 4.25e6
+}
+
+"A1550"
+{
+	Type "E0"
+	RA 12.487
+	Dec 47.71
+	Distance 2.901e9
+	Radius 7.09e6
+}
+
+"A1878"
+{
+	Type "E0"
+	RA 14.214
+	Dec 29.22
+	Distance 2.901e9
+	Radius 4.93e6
+}
+
+"A1525"
+{
+	Type "E0"
+	RA 12.368
+	Dec -1.14
+	Distance 2.95e9
+	Radius 7.35e6
+}
+
+"A1178"
+{
+	Type "E0"
+	RA 11.164
+	Dec 34.6
+	Distance 2.956e9
+	Radius 6.04e6
+}
+
+"A348"
+{
+	Type "E0"
+	RA 2.399
+	Dec -8.59
+	Distance 3.096e9
+	Radius 4.84e6
+}
+
+"A41"
+{
+	Type "E0"
+	RA 0.48
+	Dec 7.84
+	Distance 3.106e9
+	Radius 6.89e6
+}
+
+"A1758"
+{
+	Type "E0"
+	RA 13.542
+	Dec 50.51
+	Distance 3.154e9
+	Radius 7.51e6
+}
+
+"A1622"
+{
+	Type "E0"
+	RA 12.827
+	Dec 49.83
+	Distance 3.207e9
+	Radius 5.9e6
+}
+
+"A528"
+{
+	Type "E0"
+	RA 4.988
+	Dec -9.01
+	Distance 3.246e9
+	Radius 4.41e6
+}
+
+"A1224"
+{
+	Type "E0"
+	RA 11.349
+	Dec 36.43
+	Distance 3.247e9
+	Radius 5.1e6
+}
+
+"A639"
+{
+	Type "E0"
+	RA 8.332
+	Dec 67.91
+	Distance 3.259e9
+	Radius 6.61e6
+}
+
+"A1018"
+{
+	Type "E0"
+	RA 10.465
+	Dec 17.56
+	Distance 3.316e9
+	Radius 4.75e6
+}
+
+"A2744"
+{
+	Type "E0"
+	RA 0.239
+	Dec -30.39
+	Distance 3.418e9
+	Radius 6.64e6
+}
+
+"AS910"
+{
+	Type "E0"
+	RA 20.956
+	Dec -64.66
+	Distance 3.446e9
+	Radius 6.56e6
+}
+
+"AS1077"
+{
+	Type "E0"
+	RA 22.981
+	Dec -34.78
+	Distance 3.455e9
+	Radius 5.81e6
+}
+
+"Abell 2444"
+{
+	Type "E0"
+	RA 22.463
+	Dec -23.83
+	Distance 3.565e9
+	Radius 4.84e6
+}
+
+"A2084"
+{
+	Type "E0"
+	RA 15.502
+	Dec 35.3
+	Distance 3.728e9
+	Radius 4.96e6
+}
+
+"A895"
+{
+	Type "E0"
+	RA 9.946
+	Dec 49.5
+	Distance 3.887e9
+	Radius 4.84e6
+}
+
+"A370"
+{
+	Type "E0"
+	RA 2.664
+	Dec -1.59
+	Distance 3.999e9
+	Radius 4.41e6
+}
