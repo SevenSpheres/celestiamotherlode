@@ -1,0 +1,660 @@
+{
+#------------------------------------------------------------------------
+# JupiterTour.cel V2.01: Touring Jupiter and its Moons.
+#
+# Original script by Bob Hegwood on 21 December 2003.
+# 
+# 27 Dec 03: Modified to use Grant Hutchison's new jupmoons.ssc locations
+#            file, and to orient the planet so that the first view of
+#            Jupiter is consistent no matter where (in the solar system)
+#            you come from.
+# 28 Dec 03: Modified to correct the problems found due to a bug in
+#            Celestia's location-handling ability with 3ds models, and to
+#            display Jupiter in the daylight.
+# 30 Jan 04: Modified to use Mr. Hutchison's new jupmoons2.ssc locations
+#            file. This file, along with the new 3D models now allows 
+#            Celestia 1.3.2 Pre1 and later to properly display locations
+#            on 3d objects like Amalthea. Thanks very much Mr. Hutchison!
+#            Also revised to use the orbit command to get from one side of
+#            a moon to the other, and revised visits to Amalthea, Io and
+#            Ganymede.
+#  9 May 04: Modified to correct a bug found with cloudmaps.
+#  5 Dec 04: Revised wording, timing and displays to make for a more
+#            pleasing (at least to me) tour.
+#------------------------------------------------------------------------
+#
+renderflags {clear "orbits|constellations|comettails|boundaries"}
+renderflags {clear "pointstars|galaxies|markers"}
+renderflags {set "cloudmaps|eclipseshadows|atmospheres|nightmaps"}
+labels {clear "planets|moons|spacecraft|asteroids|constellations|stars|galaxies"}
+set {name "AmbientLightLevel" value 0.60}
+#
+#---------------------------------------------------------------------
+# Set Tour Date to 21 December 2003 at roughly 5am EST. Then, set the
+# Field of View for a 1024 x 768 display. 
+#---------------------------------------------------------------------
+#
+print {text "Un momento, por favor..." row -4 column 1 duration 8.0}
+time {jd 2452995.63104}
+set {name "FOV" value 35.0}
+select {object "Sol/Jupiter"}
+center {time 4.0}
+wait {duration 4.0}
+preloadtex {object "Sol/Jupiter"}
+preloadtex {object "Sol/Jupiter/Io"}
+preloadtex {object "Sol/Jupiter/Callisto"}
+preloadtex {object "Sol/Jupiter/Ganymede"}
+preloadtex {object "Sol/Jupiter/Europa"}
+preloadtex {object "Sol/Jupiter/Amalthea"}
+wait {duration 4.0}
+goto {time 6.0 distance 5.0}
+wait {duration 6.0}
+follow {}
+timerate {rate 500.0}
+print {text "Bienvenido a Jupiter!" row -4 column 1 duration 6.0}
+gotolonglat {time 8.0 distance 5.0 longitude 0.0 latitude 0.0}
+wait {duration 8.0}
+#
+#---------------------------------------------------------------------
+# Display Jupiter and then have a look at its Rings.
+#---------------------------------------------------------------------
+#
+print {text "Jupiter es el MAYOR planeta del Sistema Solar." row -4 column 1 duration 6.0}
+wait {duration 8.0}
+print {text "Nos ha hecho un buen servicio. Atrae muchos de los escombros del espacio\nque de otra forma podrian haber impactado en nuestro planeta!" row -4 column 1 duration 8.0}
+wait {duration 10.0}
+print {text "Ves los hermosos anillos fantasmales de Jupiter?" row -4 column 1 duration 6.0}
+wait {duration 8.0}
+print {text "Quiza un cambio de perspectiva podria ayudar." row -4 column 1 duration 12.0}
+wait {duration 6.0}
+gotolonglat {time 6.0 distance 6.0 longitude 135.0 latitude -35.0}
+wait {duration 8.0}
+print {text "Se cree que estos anillos estan formados por polvo y particulas\nrecogidas por algunas de las lunas menores interiores." row -4 column 1 duration 10.0}
+wait {duration 12.0} 
+#
+#------------------------------------------------------------------
+# Investigate the main planet a little more closely.
+#------------------------------------------------------------------
+#
+gotolonglat {time 6.0 distance 4.0 longitude 135 latitude 0} 
+print {text "Veamos rotar a Jupiter un rato..." row -4 column 1 duration 6.0}
+wait {duration 10.0}
+print {text "Observa la Gran Mancha Roja, las manchas\nrojas menores y todos esos ovalos blancos." row -4 column 1 duration 8.0}
+wait {duration 10.0}
+print {text "La Gran Mancha Roja es una tormenta que lleva\nactiva mas de tres siglos!" row -4 column 1 duration 8.0}
+wait {duration 10.0}
+print {text "Los ovalos blancos y las manchas rojas menores tambien son tormentas. Algunas\nde ellas duran mas de medio siglo." row -4 column 1 duration 8.0}
+wait {duration 10.0}
+print {text "Observa tambien las bandas atmosfericas claras. Se\nllaman ZONAS. Las bandas oscuras se llaman CINTURONES." row -4 column 1 duration 10.0}
+wait {duration 12.0}
+print {text "Se cree que Jupiter contiene un nucleo rocoso\nde material bajo la superficie del planeta." row -4 column 1 duration 8.0}
+wait {duration 10.0}
+print {text "El resto de su masa se cree que esta compuesto de un material bastante\nraro. Este material se llama hidrogeno metalico liquido!" row -4 column 1 duration 10.0}
+wait {duration 12.0}
+#
+#------------------------------------------------------------------
+# Let's visit the Moons, starting with Amalthea.
+#------------------------------------------------------------------
+#
+print {text "Traslademonos a algunas de las lunas de Jupiter..." row -4 column 1 duration 6.0}
+gotolonglat {time 6.0 distance 7.0 longitude -180 latitude 25}
+wait {duration 6.0} 
+select {object "Sol/Jupiter/Amalthea"}
+center {time 4.0}
+wait {duration 4.0}
+follow {}
+goto {time 6.0 distance 4.5}
+wait {duration 6.0}
+timerate {rate 250.0}
+print {text "Esta es Amalthea" row -4 column 1 duration 6.0}
+wait {duration 8.0}
+print {text "Es una luna bastante menor e insignificante, pero sus\ncolores y amplia variedad de rasgos son interesantes." row -4 column 1 duration 6.0}
+wait {duration 8.0}
+print {text "Amalthea solo mide 262 kilometros\nen su parte mas ancha." row -4 column 1 duration 6.0}
+wait {duration 8.0}
+print {text "Sin embargo, presenta muchos crateres\npara un cuerpo tan minusculo!" row -4 column 1 duration 6.0}
+wait {duration 6.0}
+synchronous {}
+gotolonglat {time 5.0 distance 3.0 longitude -35 latitude 55.0}
+wait {duration 5.0}
+unmark {object "Sol/Jupiter/Amalthea"}
+unmark {object "Sol/Jupiter/Amalthea/Pan"}
+renderflags {set "markers"}
+mark {object "Sol/Jupiter/Amalthea/Pan" size 20 color [255 255 255] symbol "x"}
+print {text "Uno de sus mayores rasgos es una enorme\nindentacion o crater, llamado Pan." row -4 column 1 duration 6.0}
+wait {duration 6.0}
+unmark {object "Sol/Jupiter/Amalthea/Pan"}
+wait {duration 2.0}
+gotolonglat {time 3.0 distance 3.0 longitude -90 latitude -80.0}
+wait {duration 3.0}
+mark {object "Sol/Jupiter/Amalthea/Gaea" size 20 color [255 255 255] symbol "x"}
+print {text "Otro de los rasgos mas prominentes de Amalthea es Gaea!" row -4 column 1 duration 6.0}
+wait {duration 6.0}
+unmark {object "Sol/Jupiter/Amalthea/Gaea"}
+wait {duration 2.0}
+print {text "Observa el color oliva grisaceo unico que presenta el area." row -4 column 1 duration 6.0}
+wait {duration 8.0}
+gotolonglat {time 3.0 distance 3.0 longitude -175 latitude 20.0}
+wait {duration 3.0}
+mark {object "Sol/Jupiter/Amalthea/Ida Facula" size 15 color [255 255 255] symbol "x"}
+print {text "Amalthea es tambien el hogar de la Ida Facula." row -4 column 1 duration 6.0}
+wait {duration 6.0}
+unmark {object "Sol/Jupiter/Amalthea/Ida Facula"}
+wait {duration 2.0}
+print {text "Una Facula no es mas que una mancha brillante\nreconocible en la superficie de un cuerpo planetario." row -4 column 1 duration 6.0}
+wait {duration 8.0}
+renderflags {clear "markers"}
+print {text "Hora de marcharse..." row -4 column 1 duration 6.0}
+gotolonglat {time 6.0 distance 15.0 longitude -180 latitude 15.0}
+wait {duration 6.0}
+gotolonglat {time 6.0 distance 15.0 longitude 180 latitude 30.0}
+wait {duration 6.0}
+#
+#------------------------------------------------------------------
+# Let's visit Io.
+#------------------------------------------------------------------
+#
+print {text "Vamos a visitar Io!" row -4 column 1 duration 10.0}
+wait {duration 2.0}
+select {object "Sol/Jupiter/Io"}
+center {time 4.0}
+wait {duration 4.0}
+gotolonglat {time 6.0 distance 4.5 longitude 0 latitude 0}
+wait {duration 6.0}
+follow {}
+timerate {rate 3500.0}
+wait {duration 3.0}
+print {text "Esta luna es otro de los cuerpos exoticos\nque se encuentran en el sistema joviano." row -4 column 1 duration 8.0}
+wait {duration 10.0}
+print {text "Aparte de la Tierra, este es el unico lugar del\nSistema Solar en el que quedan volcanes ACTIVOS!" row -4 column 1 duration 8.0}
+wait {duration 10.0}
+print {text "La tenue atmosfera de Io permite que los penachos de humo volcanicos se extiendan hasta\n100 kilometros sobre su superficie." row -4 column 1 duration 8.0}
+wait {duration 10.0}
+print {text "Se cree que la tremenda gravedad de Jupiter continua\ncreando fuerzas de marea, que hacen nacer muchos volcanes en IO." row -4 column 1 duration 8.0}
+wait {duration 10.0}
+print {text "En la ultima cuenta, habia mas de 100\nvolcanes visibles en la superficie de la luna!" row -4 column 1 duration 8.0}
+wait {duration 10.0}
+#
+#------------------------------------------------------------------
+# Display Io's Prometheus.
+#------------------------------------------------------------------
+#
+timerate {rate 500.0}
+synchronous {}
+gotolonglat {time 4.0 distance 3.5 longitude -153 latitude -1.6}
+wait {duration 4.0}
+unmark {object "Sol/Jupiter/Io"}
+unmark {object "Sol/Jupiter/Io/Prometheus"}
+renderflags {set "markers"}
+mark {object "Sol/Jupiter/Io/Prometheus" size 20 color [0 0 0] symbol "x"}
+print {text "Este es uno de ellos." row -4 column 1 duration 4.0}
+wait {duration 6.0}
+unmark {object "Sol/Jupiter/Io/Prometheus"}
+wait {duration 2.0}
+print {text "Este es Prometheus..." row -4 column 1 duration 6.0}
+wait {duration 8.0}
+print {text "Como puedes ver, Prometheus es un volcan\nmuy GRANDE y muy ACTIVO!" row -4 column 1 duration 6.0}
+wait {duration 8.0}
+gotolonglat {time 4.0 distance 2.0 longitude -153 latitude -1.6}
+wait {duration 4.0}
+print {text "Observa la columna de humo que se eleva sobre la superficie." row -4 column 1 duration 6.0}
+wait {duration 8.0}
+gotolonglat {time 4.0 distance 3.5 longitude -153 latitude -1.6}
+wait {duration 4.0}
+#
+#------------------------------------------------------------------
+# Display Io's Caucasus Mons.
+#------------------------------------------------------------------
+#
+gotolonglat {time 4.0 distance 3.5 longitude -239 latitude -33}
+wait {duration 4.0}
+mark {object "Sol/Jupiter/Io/Caucasus Mons" size 20 color [255 255 255] symbol "x"}
+print {text "Este es Caucasus Mons. Es\nuna cadena de montes (blancos?)." row -4 column 1 duration 6.0}
+wait {duration 6.0}
+unmark {object "Sol/Jupiter/Io/Caucasus Mons"}
+wait {duration 4.0}
+#
+#------------------------------------------------------------------
+# Display Io's Egypt Mons.
+#------------------------------------------------------------------
+#
+gotolonglat {time 4.0 distance 3.5 longitude -257 latitude -41}
+wait {duration 4.0}
+print {text "Estos son los Egypt Mons..." row -4 column 1 duration 6.0}
+mark {object "Sol/Jupiter/Io/Egypt Mons" size 20 color [255 255 255] symbol "x"}
+wait {duration 6.0}
+unmark {object "Sol/Jupiter/Io/Egypt Mons"}
+gotolonglat {time 4.0 distance 2.0 longitude -257 latitude -41}
+wait {duration 4.0}
+print {text "Asi llamados por su forma piramidal?" row -4 column 1 duration 6.0}
+wait {duration 8.0}
+gotolonglat {time 4.0 distance 3.5 longitude -257 latitude -41}
+wait {duration 4.0}
+#
+#------------------------------------------------------------------
+# Display the Pele Region.
+#------------------------------------------------------------------
+#
+gotolonglat {time 4.0 distance 3.5 longitude -257.8 latitude -18.6}
+wait {duration 4.0}
+print {text "El volcan Pele es otro de los rasgos\nmas activos y prominentes de Io!" row -4 column 1 duration 8.0}
+mark {object "Sol/Jupiter/Io/Pele" size 20 color [255 255 255] symbol "x"}
+wait {duration 8.0}
+unmark {object "Sol/Jupiter/Io/Pele"}
+wait {duration 2.0}
+print {text "Pele esta sufriendo una\nerupcion volcanica de gran violencia." row -4 column 1 duration 6.0}
+wait {duration 8.0}
+print {text "Los materiales sulfurosos de la fumarola del Pele son expulsados\na mas de 600 km de la abertura." row -4 column 1 duration 6.0}
+wait {duration 8.0}
+print {text "La gran zona rojiza que le rodea fue creada\npor las enormes erupciones de este volcan." row -4 column 1 duration 6.0}
+wait {duration 8.0}
+#
+#------------------------------------------------------------------
+# Display Io's Loki and the Loki Patera.
+#------------------------------------------------------------------
+#
+gotolonglat {time 4.0 distance 3.5 longitude -302 latitude 17.9}
+wait {duration 4.0}
+print {text "Loki es otra ENORME zona de actividad volcanica. Presenta\nun crater (o algo parecido) dentro de sus limites." row -4 column 1 duration 6.0}
+mark {object "Sol/Jupiter/Io/Loki" size 25 color [255 255 255] symbol "x"}
+wait {duration 6.0}
+unmark {object "Sol/Jupiter/Io/Loki"}
+wait {duration 2.0}
+gotolonglat {time 4.0 distance 3.5 longitude -308.8 latitude 12.6}
+wait {duration 4.0}
+print {text "Esto es Loki Patera." row -4 column 1 duration 6.0}
+mark {object "Sol/Jupiter/Io/Loki Patera" size 25 color [255 255 255] symbol "x"}
+wait {duration 6.0}
+unmark {object "Sol/Jupiter/Io/Loki Patera"}
+wait {duration 2.0}
+gotolonglat {time 4.0 distance 2.5 longitude -308.8 latitude 12.6}
+wait {duration 4.0}
+print {text "Los Patera se definen habitualmente como crateres complejos\no irregulares con los bordes escalonados." row -4 column 1 duration 6.0}
+wait {duration 8.0}
+print {text "Aunque este rasgo ha sido denominado Patera\npor grupos de cientificos, se sabe que son calderas volcanicas muy grandes." row -4 column 1 duration 8.0}
+wait {duration 10.0}
+gotolonglat {time 4.0 distance 6.0 longitude -308.8 latitude 12.6}
+wait {duration 4.0}
+#
+#------------------------------------------------------------------
+# Display Callisto.
+#------------------------------------------------------------------
+#
+renderflags {clear "markers"}
+print {text "Preparado para Callisto?" row -4 column 1 duration 8.0}
+wait {duration 4.0}
+select {object "Sol/Jupiter/Callisto"}
+center {time 5.0}
+wait {duration 5.0}
+follow {}
+timerate {rate 5000.0}
+goto {time 4.0 distance 4.5}
+wait {duration 8.0}
+print {text "Esta luna es antigua y predecible..." row -4 column 1 duration 6.0}
+wait {duration 8.0}
+print {text "Callisto posee una superficie mas antigua y llena de crateres\nque cualquier otro objeto del Sistema Solar." row -4 column 1 duration 8.0}
+wait {duration 10.0}
+print {text "Esta es la segunda mayor luna de Jupiter. Tiene\nmas o menos el mismo diametro que el planeta Mercurio." row -4 column 1 duration 8.0}
+wait {duration 10.0}
+print {text "Callisto no tiene atmosfera, pero se cree que es OTRA\nde las lunas de Jupiter que contiene un oceano bajo su superficie helada." row -4 column 1 duration 8.0}
+wait {duration 10.0}
+print {text "Esta creencia procede del hecho de que la sonda Galileo encontro\ncambios en el campo magnetico de Callisto en respuesta al campo de Jupiter." row -4 column 1 duration 8.0}
+wait {duration 10.0}
+print {text "Las lecturas del campo magnetico se comportaban como si hubiera un\ngran oceano de agua salada bajo la superficie de Callisto!" row -4 column 1 duration 8.0}
+wait {duration 10.0}
+#
+#------------------------------------------------------------------
+# Display Callisto's most prominent feature, Valhalla.
+#------------------------------------------------------------------
+#
+print {text "Veamos primero sus rasgos mas importantes." row -4 column 1 duration 4.0}
+wait {duration 6.0}
+renderflags {set "markers"}
+unmark {object "Sol/Jupiter/Callisto"}
+unmark {object "Sol/Jupiter/Callisto/Valhalla"}
+synchronous {}
+gotolonglat {time 4.0 distance 3.5 longitude -56.6 latitude 15.9}
+wait {duration 4.0}
+timerate {rate 1000.0}
+print {text "Este es el enorme crater de impacto llamado Valhalla." row -4 column 1 duration 6.0}
+mark {object "Sol/Jupiter/Callisto/Valhalla" size 20 color [0 0 0] symbol "x"}
+wait {duration 6.0}
+unmark {object "Sol/Jupiter/Callisto/Valhalla"}
+wait {duration 2.0}
+print {text "Esta estructura tiene unos 3000 kilometros de diametro,\ny lleva aqui cuatro mil millones de anos." row -4 column 1 duration 8.0}
+wait {duration 10.0}
+print {text "El crater tiene unos 300 Km de diametro, pero\nsus anillos brillantes y concentricos abarcan mas de 3000 kilometros." row -4 column 1 duration 8.0}
+wait {duration 10.0}
+gotolonglat {time 4.0 distance 3.5 longitude -56.6 latitude 15.9}
+wait {duration 4.0}
+#
+#------------------------------------------------------------------
+# Display the Gipul Catena.
+#------------------------------------------------------------------
+#
+gotolonglat {time 4.0 distance 3.5 longitude -48.2 latitude 70.2}
+wait {duration 4.0}
+print {text "Esta es Gipul Catena." row -4 column 1 duration 4.0}
+mark {object "Sol/Jupiter/Callisto/Gipul Catena" size 20 color [255 255 255] symbol "x"}
+wait {duration 4.0}
+unmark {object "Sol/Jupiter/Callisto/Gipul Catena"}
+wait {duration 2.0}
+gotolonglat {time 4.0 distance 2.5 longitude -48.2 latitude 70.2}
+wait {duration 4.0}
+print {text "Una Catena es simplemente una cadena de crateres, pero observaras que\nESTA catena esta dispuesta en una linea casi perfectamente recta." row -4 column 1 duration 8.0}
+wait {duration 10.0}
+print {text "Esta cadena de crateres mide 620 kilometros de largo!" row -4 column 1 duration 6.0}
+wait {duration 8.0}
+print {text "Empieza AQUI..." row -4 column 1 duration 4.0}
+mark {object "Sol/Jupiter/Callisto/Gipul Catena Start" size 20 color [255 255 255] symbol "plus"}
+wait {duration 6.0}
+print {text "Y termina AQUI..." row -4 column 1 duration 4.0}
+mark {object "Sol/Jupiter/Callisto/Gipul Catena End" size 20 color [255 255 255] symbol "plus"}
+wait {duration 6.0}
+unmark {object "Sol/Jupiter/Callisto/Gipul Catena Start"}
+unmark {object "Sol/Jupiter/Callisto/Gipul Catena End"}
+wait {duration 2.0}
+print {text "Interesante, verdad?" row -4 column 1 duration 6.0}
+wait {duration 8.0}
+print {text "Se cree que esta catena la creo\nun cometa fragmentado for las fuerzas de marea." row -4 column 1 duration 8.0}
+wait {duration 10.0}
+gotolonglat {time 4.0 distance 3.5 longitude -48.2 latitude 70.2}
+wait {duration 4.0}
+#
+#------------------------------------------------------------------
+# Let's visit Asgard.
+#------------------------------------------------------------------
+#
+print {text "Hay tambien algunas manchas BRILLANTES\ninteresantes en esta oscura luna." row -4 column 1 duration 6.0}
+wait {duration 8.0}
+gotolonglat {time 4.0 distance 3.5 longitude -139.8 latitude 32.0}
+wait {duration 4.0}
+print {text "Esto es Asgard!" row -4 column 1 duration 4.0}
+mark {object "Sol/Jupiter/Callisto/Asgard" size 20 color [0 0 0] symbol "x"}
+wait {duration 4.0}
+unmark {object "Sol/Jupiter/Callisto/Asgard"}
+wait {duration 2.0}
+print {text "El crater, y los anillos concentricos de Asgard, tienen\naproximadamente 1700 Km de diametro." row -4 column 1 duration 6.0}
+wait {duration 8.0}
+print {text "Utgard esta por aqui cerca..." row -4 column 1 duration 8.0}
+gotolonglat {time 4.0 distance 3.5 longitude -134.0 latitude 45.0}
+wait {duration 4.0}
+mark {object "Sol/Jupiter/Callisto/Utgard" size 20 color [0 0 0] symbol "x"}
+wait {duration 4.0}
+unmark {object "Sol/Jupiter/Callisto/Utgard"}
+wait {duration 2.0}
+print {text "Y tambien Tornarsuk!" row -4 column 1 duration 8.0}
+gotolonglat {time 4.0 distance 3.5 longitude -128.6 latitude 28.7}
+wait {duration 4.0}
+mark {object "Sol/Jupiter/Callisto/Tornarsuk" size 20 color [0 0 0] symbol "x"}
+wait {duration 4.0}
+unmark {object "Sol/Jupiter/Callisto/Tornarsuk"}
+gotolonglat {time 4.0 distance 6.0 longitude -139.8 latitude 32.0}
+wait {duration 4.0}
+print {text "Se cree que estas areas son crateres mas jovenes\nexcavados en hielo reciente." row -4 column 1 duration 6.0}
+wait {duration 8.0}
+#
+#------------------------------------------------------------------
+# On to Ganymede.
+#------------------------------------------------------------------
+#
+renderflags {clear "markers"}
+wait {duration 2.0}
+print {text "Marchemonos a Ganymede..." row -4 column 1 duration 8.0}
+wait {duration 4.0}
+select {object "Sol/Jupiter/Ganymede"}
+center {time 6.0}
+wait {duration 6.0}
+goto {time 5.0 distance 4.5}
+wait {duration 5.0}
+follow {}
+gotolonglat {time 4.0 distance 4.5 longitude 180 latitude 0}
+wait {duration 4.0}
+timerate {rate 6000.0}
+wait {duration 2.0}
+print {text "Esta es la MAYOR luna de nuestro Sistema Solar.\nGanymede es mayor que Pluton y Mercurio!" row -4 column 1 duration 8.0}
+wait {duration 10.0}
+print {text "Como las otras lunas de Jupiter, Ganymede\norbita al gran planeta a una velocidad fantastica." row -4 column 1 duration 8.0}
+wait {duration 10.0}
+print {text "Ganymede solo tarda alrededor de una semana\nen circundar COMPLETAMENTE el ecuador de Jupiter!" row -4 column 1 duration 8.0}
+wait {duration 10.0}
+print {text "Aunque mayor que el planeta Mercurio,\nGanymede solo posee la MITAD de su masa." row -4 column 1 duration 8.0}
+wait {duration 10.0}
+print {text "Esto se debe a que la mitad de la composicion\nde la luna es agua helada de baja densidad." row -4 column 1 duration 8.0}
+wait {duration 10.0}
+print {text "Se cree que la corteza solida helada de Ganymede mide\nunos 75 km de espesor!" row -4 column 1 duration 8.0}
+wait {duration 10.0}
+print {text "Los crateres de esta luna poseen fondos planos y paredes inclinadas,\npues el lento fluir del hielo suaviza su superficie." row -4 column 1 duration 8.0}
+wait {duration 10.0}
+#
+#------------------------------------------------------------------
+# Display Ganymede's Nineveh Sulcus.
+#------------------------------------------------------------------
+#
+print {text "Echemos una ojeada..." row -4 column 1 duration 6.0}
+wait {duration 8.0}
+synchronous {}
+unmark {object "Sol/Jupiter/Ganymede"}
+unmark {object "Sol/Jupiter/Ganymede/Nineveh Sulcus"}
+renderflags {set "markers"}
+timerate {rate 100.0}
+gotolonglat {time 4.0 distance 3.5 longitude -60 latitude 26}
+wait {duration 4.0}
+print {text "Esto es Nineveh Sulcus." row -4 column 1 duration 6.0}
+mark {object "Sol/Jupiter/Ganymede/Nineveh Sulcus" size 20 color [255 255 255] symbol "x"}
+wait {duration 6.0}
+unmark {object "Sol/Jupiter/Ganymede/Nineveh Sulcus"}
+wait {duration 2.0}
+print {text "Un Sulcus es un area de\nsurcos y fallas paralelos." row -4 column 1 duration 6.0}
+wait {duration 8.0}
+print {text "Se cree que se han formado por\nlos efectos gravitatorios de Callisto y Jupiter." row -4 column 1 duration 8.0}
+wait {duration 10.0}
+#
+#------------------------------------------------------------------
+# Display Ganymede's Memphis Facula.
+#------------------------------------------------------------------
+#
+gotolonglat {time 4.0 distance 3.5 longitude -132.5 latitude 15.4}
+wait {duration 4.0}
+print {text "Este es otro rasgo distintivo de Ganymede." row -4 column 1 duration 4.0}
+wait {duration 6.0}
+mark {object "Sol/Jupiter/Ganymede/Memphis Facula" size 20 color [255 255 255] symbol "x"}
+print {text "A falta de conocimientos mas detallados, la Memphis\nFacula es solo otra de las manchas brillantes de Ganymede." row -4 column 1 duration 6.0}
+wait {duration 8.0}
+unmark {object "Sol/Jupiter/Ganymede/Memphis Facula"}
+wait {duration 2.0}
+#
+#------------------------------------------------------------------
+# Display Ganymede's Gilgamesh.
+#------------------------------------------------------------------
+#
+timerate {rate 10000.0}
+wait {duration 4.0}
+timerate {rate 6000.0}
+print {text "Vamos al area conocida como Gilgamesh..." row -4 column 1 duration 4.0}
+gotolonglat {time 6.0 distance 3.5 longitude -123.9 latitude -61.7}
+wait {duration 6.0}
+mark {object "Sol/Jupiter/Ganymede/Gilgamesh" size 20 color [255 255 255] symbol "x"}
+print {text "Esta area es una enorme estructura de impactos." row -4 column 1 duration 6.0}
+wait {duration 6.0}
+unmark {object "Sol/Jupiter/Ganymede/Gilgamesh"}
+wait {duration 2.0}
+gotolonglat {time 4.0 distance 2.5 longitude -123.9 latitude -61.7}
+wait {duration 4.0}
+print {text "Como puedes ver, ha sufrido una gran destruccion\nen algun momento del pasado lejano." row -4 column 1 duration 5.0}
+wait {duration 7.0}
+gotolonglat {time 4.0 distance 3.5 longitude -123.9 latitude -61.7}
+wait {duration 4.0}
+#
+#------------------------------------------------------------------
+# Display the Hershef Crater, taking a roundabout way there. 
+#------------------------------------------------------------------
+#
+orbit { axis [ 0 1 0 ] rate 25 duration 5.0}
+synchronous {}
+gotolonglat {time 4.0 distance 3.5 longitude -268.8 latitude 47.1}
+wait {duration 4.0}
+print {text "Esta es otra zona de impactos.\nEste es el crater Hershef." row -4 column 1 duration 6.0}
+mark {object "Sol/Jupiter/Ganymede/Hershef" size 20 color [255 255 255] symbol "x"}
+wait {duration 6.0}
+unmark {object "Sol/Jupiter/Ganymede/Hershef"}
+gotolonglat {time 4.0 distance 2.5 longitude -268.8 latitude 47.1}
+wait {duration 4.0}
+print {text "Mas destruccion..." row -4 column 1}
+wait {duration 4.0}
+print {text "Mas destruccion... a escala MASIVA." row -4 column 1 duration 4.0}
+wait {duration 6.0}
+gotolonglat {time 4.0 distance 5.0 longitude -268.8 latitude 47.1}
+wait {duration 4.0}
+#
+#------------------------------------------------------------------
+# On to the world of Ice and Mystery!
+#------------------------------------------------------------------
+#
+timerate {rate 2000.0}
+renderflags {clear "markers"}
+print {text "Vamos al Mundo del Hielo y el Misterio!" row -4 column 1 duration 9.0}
+wait {duration 4.0}
+select {object "Sol/Jupiter/Europa"}
+center {time 5.0}
+wait {duration 5.0}
+follow {}
+goto {time 4.0 distance 5.0}
+wait {duration 4.0}
+timerate {rate 100.0}
+print {text "Aqui esta Europa..." row -4 column 1 duration 6.0}
+gotolonglat {time 4.0 distance 5.0 longitude -184.7 latitude 0}
+wait {duration 8.0}
+#
+#------------------------------------------------------------------
+# Display the Minos Linea.
+#------------------------------------------------------------------
+#
+print {text "Echemos un vistazo a algo del misterio." row -4 column 1 duration 4.5}
+wait {duration 6.0}
+unmark {object "Sol/Jupiter/Europa"}
+unmark {object "Sol/Jupiter/Europa/Minos Linea"}
+renderflags {set "markers"}
+synchronous {}
+gotolonglat {time 4.0 distance 4.0 longitude -195.7 latitude 45.3}
+wait {duration 4.0}
+print {text "Este es un rasgo exclusivo de Europa." row -4 column 1 duration 4.0}
+wait {duration 6.0}
+print {text "Esto se llama Minos Linea!" row -4 column 1 duration 4.0}
+mark {object "Sol/Jupiter/Europa/Minos Linea" size 20 color [0 0 0] symbol "x"}
+wait {duration 6.0}
+unmark {object "Sol/Jupiter/Europa/Minos Linea"}
+print {text "Una Linea es una marca alargada clara u orcura.\nPuede ser recta o curva." row -4 column 1 duration 5.0}
+wait {duration 6.0}
+print {text "Esta Linea concreta tiene mas de 2100 km de longitud!" row -4 column 1 duration 6.0}
+wait {duration 8.0}
+print {text "Observa que hay muchisimas\nde estas Linea en la superficie de Europa!" row -4 column 1 duration 6.0}
+wait {duration 8.0}
+gotolonglat {time 4.0 distance 4.0 longitude -184.7 latitude 14.5}
+wait {duration 7.0}
+gotolonglat {time 4.0 distance 4.0 longitude -195.7 latitude 45.3}
+wait {duration 4.0}
+#
+#------------------------------------------------------------------
+# Display the Tyre Macula/Crater/Ringed Area.
+#------------------------------------------------------------------
+#
+unmark {object "Sol/Jupiter/Europa/Tyre"}
+print {text "Vamos a otro rasgo interesante..." row -4 column 1 duration 4.0}
+gotolonglat {time 4.0 distance 3.0 longitude -147.0 latitude 31.7}
+wait {duration 6.0}
+print {text "Esta es Tyre Macula." row -4 column 1 duration 4.0}
+mark {object "Sol/Jupiter/Europa/Tyre" size 20 color [255 255 255] symbol "x"}
+wait {duration 4.0}
+unmark {object "Sol/Jupiter/Europa/Tyre"}
+wait {duration 2.0}
+print {text "Una Macula una mancha OSCURA reconocible, pero ESTA\nMacula marca el crater Tyre y el area que lo circunda." row -4 column 1 duration 6.0}
+wait {duration 8.0}
+print {text "En la comunidad cientifica, existe cierta confusion sobre\nesta zona. Es una Macula, una zona circundante o un crater?." row -4 column 1 duration 6.0}
+wait {duration 8.0}
+print {text "Europa tiene sorprendentemente muy pocos crateres. Esto quiza\nse deba a que su superficie esta casi enteramente cubierta de hielo!" row -4 column 1 duration 8.0}
+wait {duration 10.0}
+#
+#------------------------------------------------------------------
+# Display the Pwyll Crater.
+#------------------------------------------------------------------
+#
+unmark {object "Sol/Jupiter/Europa/Pwyll"}
+print {text "Y hablando de crateres..." row -4 column 1}
+gotolonglat {time 4.0 distance 4.0 longitude -271.0 latitude -26.0}
+wait {duration 4.0}
+print {text "Y hablando de crateres... aqui esta Pwyll." row -4 column 1 duration 4.0}
+mark {object "Sol/Jupiter/Europa/Pwyll" size 20 color [0 0 0] symbol "x"}
+wait {duration 4.0}
+unmark {object "Sol/Jupiter/Europa/Pwyll"}
+gotolonglat {time 2.0 distance 3.0 longitude -271.0 latitude -26.0}
+print {text "Este es un cratercillo (unos 38km de diametro), pero una\nmanta de hielo a su alrededor lo hace parecer MUCHO mayor." row -4 column 1 duration 8.0}
+wait {duration 10.0}
+#
+#------------------------------------------------------------------
+# Display the Callanish Crater.
+#------------------------------------------------------------------
+#
+unmark {object "Sol/Jupiter/Europa/Callanish"}
+print {text "Uno de los mayores crateres de Europa es..." row -4 column 1}
+gotolonglat {time 4.0 distance 4.0 longitude -333.4 latitude -16.0}
+wait {duration 4.0}
+mark {object "Sol/Jupiter/Europa/Callanish" size 20 color [0 0 0] symbol "x"}
+print {text "Uno de los mayores crateres de Europa es... Callanish." row -4 column 1 duration 6.0}
+wait {duration 6.0}
+unmark {object "Sol/Jupiter/Europa/Callanish"}
+gotolonglat {time 4.0 distance 3.0 longitude -333.4 latitude -16.0}
+wait {duration 4.0}
+print {text "De unos 100 km, no es muy grande comparado\ncon algunos de otros crateres que hemos visto en este tour!" row -4 column 1 duration 8.0}
+wait {duration 8.0}
+#
+#------------------------------------------------------------------
+# Back off for discussion.
+#------------------------------------------------------------------
+#
+renderflags {clear "markers"}
+select {object "Sol/Jupiter/Europa"}
+center {time 5.0}
+wait {duration 5.0}
+follow {}
+goto {time 4.0 distance 4.0}
+timerate {rate 1500.0}
+gotolonglat {time 4.0 distance 4.5 longitude -260.5 latitude -30.2}
+wait {duration 4.0}
+print {text "Entonces, por que se llama a Europa el Mundo del Hielo y el Misterio?" row -4 column 1 duration 4.0}
+wait {duration 6.0}
+print {text "Porque los cientificos creen que el hielo de Europa\noculta una gran cantidad de agua." row -4 column 1 duration 6.0}
+wait {duration 8.0}
+print {text "Si este es el caso, entonces es posible que\npudiera haber VIDA en los oceanos de esta luna!" row -4 column 1 duration 6.0}
+wait {duration 8.0}
+#
+#------------------------------------------------------------------
+# Return to Jupiter for final display.
+#------------------------------------------------------------------
+#
+select {object "Sol/Jupiter"}
+center {time 5.0}
+wait {duration 5.0}
+follow {}
+timerate {rate 500.0}
+goto {time 4.0 distance 8.0}
+wait {duration 4.0}
+gotolonglat {time 5.0 distance 6.0 longitude 135.0 latitude -35.0}
+wait {duration 5.0}
+print {text "Aqui tienes una vista general..." row -4 column 1 duration 4.0}
+wait {duration 6.0}
+print {text "Jupiter esta en el centro de su propio sistema solar." row -4 column 1 duration 6.0}
+wait {duration 8.0}
+print {text "Aunque no las hemos visitado, hay otras 60 \nlunitas planeando sobre este GIGANTE!" row -4 column 1 duration 8.0}
+wait {duration 10.0}
+#
+#------------------------------------------------------------------
+# End the tour.
+#------------------------------------------------------------------
+#
+print {text "Esperamos que hayas disfrutado de este tour..." row -4 column 1}
+wait {duration 5.0}
+timerate {rate 1.0}
+print {text "El guion ha terminado.\nPulsa '!' para volver a la fecha y hora actuales..." row -4 column 1 duration 4.0}
+wait {duration 5.0}
+}
