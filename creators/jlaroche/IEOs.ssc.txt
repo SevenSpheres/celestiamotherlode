@@ -1,0 +1,100 @@
+#
+# IEOs.ssc
+# file created 19 Oct 2004 by J. LaRoche
+#
+
+# Installation: rename file IEOs.ssc.txt to IEOs.ssc and place the file in Celestia's "extras" directory.
+
+#Interior Earth Orbit (IEO) is a new asteroid orbital class. 
+#The first (of three to-date) was discovered 10 Feb 2003. 
+#Their entire orbits are within 1 AU. 
+#Ref. "Discovery of the First Asteroid with an Interior Earth Orbit: 2003 CP20"
+#http://spaceguard.esa.int/tumblingstone/issues/num21/eng/2003CP20.htm
+
+#1998 DK36 and 2004 JG6 are PHAs.
+#From http://neo.jpl.nasa.gov/neo/pha.html
+#Potentially Hazardous Asteroids (PHAs) are currently defined based on 
+#parameters that measure the asteroid's potential to make threatening close 
+#approaches to the Earth. Specifically, all asteroids with an Earth Minimum 
+#Orbit Intersection Distance (MOID) of 0.05 AU or less and an absolute magnitude 
+#(H) of 22.0 or less are considered PHAs. In other words, asteroids that can't 
+#get any closer to the Earth (i.e. MOID) than 0.05 AU (roughly 7,480,000 km or 
+#4,650,000 mi) or are smaller than about 150 m (500 ft) in diameter (i.e. 
+#H = 22.0 with assumed albedo of 13%) are not considered PHAs. 
+#There are currently 640 known PHAs.(as of 19 Oct 2004) 
+
+"1998 DK36" "Sol"
+#data source http://neo.jpl.nasa.gov/cgi-bin/neo_elem
+  
+{
+	Class "asteroid"  
+	Mesh "asteroid.cms"
+    Texture "asteroid.jpg"
+	Radius  0.0250 #H=25.01 = 50m dia. = 25m rad. = 0.0250km
+    Albedo  0.05
+
+	EllipticalOrbit
+	{
+		Period             0.58
+		SemiMajorAxis      0.693 
+		Eccentricity       0.416
+		Inclination        2.0
+		AscendingNode      151.5
+		ArgOfPericenter    180.0
+        MeanAnomaly        183.3
+		Epoch        2452724.5  #proxy
+	}
+}
+    
+"2003 CP20" "Sol"
+# CP20 is the first asteroid confirmed to have an orbit entirely
+# within that of the Earth.
+#http://neo.jpl.nasa.gov/cgi-bin/neo_elem
+#           a    e     i    w     Node  M     q     Q    P     H
+#2003 CP20) 0.74 0.322 25.6 252.9 104.0 276.8 0.502 0.98 0.64 16.43 
+{
+	Class "asteroid"  
+	Mesh "asteroid.cms"
+    Texture "asteroid.jpg"
+	Radius  1.710        #H=16.43 @.05 albedo = 3420m dia /2=1710m 
+    Albedo  0.05                     
+	InfoURL "http://www.hohmanntransfer.com/news/0302.htm#03cp20"
+    
+	EllipticalOrbit
+	{
+		Period             0.638004766148849
+		SemiMajorAxis      0.7411   
+		Eccentricity       0.3221   
+		Inclination        25.5617   
+		AscendingNode      103.95790 
+		ArgOfPericenter    252.8983 
+        MeanAnomaly        210.466   
+		Epoch              2452724.5
+	}
+}
+
+"2004 JG6" "Sol"   
+# data sources:
+#http://neo.jpl.nasa.gov/cgi-bin/neo_elem
+#http://cfa-www.harvard.edu/iau/Ephemerides/Unusual/K04S56B.html
+{ 
+	Class   "asteroid" 
+	Texture "asteroid.jpg" 
+    Mesh    "asteroid.cms"
+	Radius  0.50            #H = 18.8 = 1000 (useing 0.05 albedo)/2 = 0.5km
+                            
+	EllipticalOrbit 
+	{ 
+	Epoch            2453120.5  
+	MeanAnomaly      173.81234  
+	ArgOfPericenter  352.96971   
+	AscendingNode    36.98333  
+	Inclination      19.21592      
+ 	Eccentricity     0.5353349   
+	SemiMajorAxis    0.6332884  
+	Period           0.51       
+	} 
+
+    Albedo 0.05                
+} 
+
