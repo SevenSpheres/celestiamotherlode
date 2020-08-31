@@ -1,0 +1,335 @@
+{
+#****************************************************************************
+#*                                                                          *
+#*    Introduction to the Celestia Educational Tour of our Solar System     *
+#*                                                                          *
+#****************************************************************************
+#* Designed by Frank Gregorio                                               *
+#* Written by Don Goyette and Frank Gregorio                                *
+#* Velocity vector calculations by Harald Schmidt                           *
+#*                                                                          *
+#* This is a script for use with Celestia version 1.4.0 and newer.          *
+#*                                                                          *
+#* Version: 4.0                                                             *
+#*    Date: October, 2005
+#*                                                                          *
+#****************************************************************************
+
+
+#----------------------------------------------------------------------------
+#                     Set Celestia to a "known state"
+#----------------------------------------------------------------------------
+
+# Cancel follow and goto commands, and set Coordinate System to Universal...
+  cancel { }
+
+# Do not render the following objects...
+  renderflags { clear "boundaries|comettails|constellations|eclipseshadows" }
+  renderflags { clear "markers|orbits|pointstars|ringshadowscloudmaps|nightmaps" }
+  renderflags { clear ""atmospheres"|automag|grid" }
+
+# Render the following objects...
+  renderflags { set "galaxies|planets|stars" }
+
+# Do not label the following objects...
+  labels { clear "planets|moons|spacecraft|asteroids|constellations" }
+  labels { clear "stars|galaxies" }
+
+# Unmark any objects that are currently Marked and disable Marker display...
+  unmarkall { }
+
+# Set Minimum Orbit Size...
+  set { name "MinOrbitSize" value 1.0 }
+
+# Set FOV
+  set {name "FOV" value 42.0}
+
+
+# Set Ambient Light Level...
+  set { name "AmbientLightLevel" value 0.00 }
+
+# Set Star Distance Limit...
+  set { name "StarDistanceLimit" value 1000000 }
+
+# Set visible star Magnitude...
+  setvisibilitylimit { magnitude 9.90 }
+
+# Set Faintest Auto-Magnitude Brightness...
+  setfaintestautomag45deg { magnitude 9.90 }
+
+
+#----------------------------------------------------------------------------
+#                            Begin the script
+#----------------------------------------------------------------------------
+
+# Go to a position 200 ly from Sol ...
+
+  seturl { url "cel://Follow/Sol/2003-12-27T13:36:11.94781?x=AAAAAEDpwsWUhfT7/////w&y=CkxgAKBCOkQFIBIC&z=VcpQAACchFReAAD1/////w&ow=0.174547&ox=0.014574&oy=0.980768&oz=0.086108&select=Sol&fov=44.999994&ts=1.000000&ltd=0&rf=40887&lm=49152" }
+
+
+#----------------------------------------------------------------------------
+# Display some introduction text ...
+#----------------------------------------------------------------------------
+  print  { text "Ruimteschip Celestia 1 is aan het opstarten ..."
+           row -7  column 1  duration 12 }
+  wait   { duration 6 }
+  
+  print  { text "Welkom ...\nbij de Celestia educatieve reis\nnaar ons zonnestelsel."
+           row -7  column 1  duration 9 }
+  wait   { duration 10 }
+
+  print  { text "Druk enkele malen op de 'v'-toets om de teksten die in beeld staan\nte laten verdwijnen ..."
+           row -7  column 1  duration 8 }
+  wait   { duration 8 }
+
+  print  { text "Maak Celestia beeldvullend door rechtsboven op het kleine vierkantje te klikken"
+           row -7  column 1  duration 8 }
+  wait   { duration 10 }
+
+  print  { text "Het universum is een enorme, eindeloze ruimte."
+           row -7  column 1  duration 7 }
+  wait   { duration 10 }
+  
+  print  { text "Onze zon, aarde en ons hele zonnestelsel\nzijn maar een klein onderdeel in die enorme ruimte."
+           row -7  column 1  duration 10 }
+  wait   { duration 10 }
+  
+  print  { text "Onze zon is daar ...\nergens ...\nverborgen tussen alle anderen sterren."
+           row -7  column 1  duration 5 }
+  wait   { duration 5 }
+
+#----------------------------------------------------------------------------
+# Rotate 360 degrees from right to left ...
+#----------------------------------------------------------------------------
+  rotate { duration 10  rate -12  axis [0 1 0] }
+
+  print  { text "Kan jij hem vinden?"
+           row -7  column 1  duration 8 }
+  rotate { duration 10  rate -12  axis [0 1 0] }
+
+  print  { text "Er zijn zoveel sterren ..."
+           row -7  column 1 duration 9 }
+  rotate { duration 10  rate -12  axis [0 1 0] }
+
+
+#----------------------------------------------------------------------------
+# Place a marker on Sol ...
+#----------------------------------------------------------------------------
+  print  { text "We zullen je helpen ons zonnestelsel te vinden\ndoor er een rood rechthoekje omheen te tekenen."
+           row -7  column 1  duration 10 }
+  wait   { duration 07 }
+
+  unmark { object "Sol" }
+  mark   { object "Sol"
+           size 10
+           color [1 0 0]
+           symbol "square" }
+
+  renderflags { set "markers" }
+  wait   { duration 0.5 }
+  renderflags { clear "markers" }
+  wait   { duration 0.5 }
+  renderflags { set "markers" }
+  wait   { duration 0.5 }
+  renderflags { clear "markers" }
+  wait   { duration 0.5 }
+  renderflags { set "markers" }
+  
+  wait   { duration 4 }
+
+  print  { text "We bevinden ons in de ruimte, 200 lichtjaar verwijderd van ons zonnestelsel\nHet is een klein puntje in die rode rechthoek.\nEen lichtstraal van onze zon zou er 200 JAAR over doen om ons hier te bereiken!"
+           row -7  column 1  duration 14 }
+  wait   { duration 12 }
+
+    print  { text "Als je vanaf hier naar de aarde zou vliegen met de hoogste snelheid die een mens ooit heeft gehaald...\neen snelheid van 39.600 km/uur (25,000 mph)...\ndan zou je er 5,5 MILJOEN jaar over doen om thuis te komen!"
+           row -7  column 1  duration 16 }
+  wait   { duration 16 }
+
+  wait   { duration 6 }
+
+print  { text "Zullen we naar huis vliegen met hyper-lichtsnelheid?\n(dus sneller dan het licht?)"
+           row -7  column 1  duration 9 }
+  wait   { duration 9 }
+
+  print  { text "Laten we gaan!\n\nBen je er klaar voor?"
+           row -7  column 1  duration 7 }
+  wait   { duration 4 }
+
+
+#----------------------------------------------------------------------------
+# Remove the marker from Sol and begin traveling ...
+#----------------------------------------------------------------------------
+  renderflags { clear "markers" }
+
+  move { duration 3
+         velocity [ 9636479844747.75  -4933270574006.7  26205292581481.5 ] }
+
+  print { text "Onze kruissnelheid:\n3 lichtjaar per SECONDE.\nDat is 95 MILJOEN keer de snelheid van het licht!\n(of 102.173.000.000.000.000 km/uur)"
+          row -7  column 1  duration 13 }
+
+  move { duration 13
+         velocity [ 9636479844747.75  -4933270574006.7  26205292581481.5 ] }
+
+
+#----------------------------------------------------------------------------
+# Turn Star labels ON
+#----------------------------------------------------------------------------
+  labels { set "stars" }
+
+  move { duration 4
+         velocity [ 9636479844747.75  -4933270574006.7  26205292581481.5 ] }
+
+  print { text "Zelfs met deze enorme snelheid lijkt het\nalsof we stil staan, vind je ook niet?"
+          row -7  column 1  duration 6 }
+  move { duration 8
+         velocity [ 9636479844747.75  -4933270574006.7  26205292581481.5 ] }
+
+  print { text "Dat komt omdat de ruimte (het universum)\nzo E-N-O-R-M  G-R-O-O-T is"
+          row -7  column 1  duration 7.5 }
+  move { duration 8
+         velocity [ 9636479844747.75  -4933270574006.7  26205292581481.5 ] }
+
+  print { text "We leggen slechts een afstand van 200 lichtjaar af\nHet 'zichtbare' universum is\neen hersen-tintellende 160 MILJARD lichtjaar breed!"
+          row -7  column 1  duration 8 }
+  move { duration 12
+         velocity [ 9636479844747.75  -4933270574006.7  26205292581481.5 ] }
+
+  print { text "Ah, we komen in de buurt van een ster ...\nNee ... dat is niet onze zon.\nDat is Castor, een dubbelster.\nWe zijn nog 56 lichtjaar verwijderd van onze zon."
+          row -7  column 1  duration 10 }
+  wait { duration 08 }
+
+
+#----------------------------------------------------------------------------
+# Castor fly-by
+#----------------------------------------------------------------------------
+  move {  duration 3.8
+          velocity [ 4818239922373.875  -2466635287003.35  13102646290740.75 ] }
+
+
+#----------------------------------------------------------------------------
+# Continue our travels ... Display a marker on Sol
+#----------------------------------------------------------------------------
+  unmark { object "Sol" }
+  mark   { object "Sol"
+           size 10
+           color [1 0 0]
+           symbol "square" }
+
+  print { text "De zon is onze bestemming ..."  row -7  column 1  duration 5 }
+
+  renderflags { set "markers" }
+  move { duration 2.2
+         velocity [ 9636479844747.75  -4933270574006.7  26205292581481.5 ] }
+  renderflags { clear "markers" }
+
+  move { duration 1
+         velocity [ 9636479844747.75  -4933270574006.7  26205292581481.5 ] }
+
+  renderflags { set "markers" }
+  move { duration 1
+         velocity [ 9636479844747.75  -4933270574006.7  26205292581481.5 ] }
+  renderflags { clear "markers" }
+
+  move { duration 1
+         velocity [ 9636479844747.75  -4933270574006.7  26205292581481.5 ] }
+
+  renderflags { set "markers" }
+  move { duration 1
+         velocity [ 9636479844747.75  -4933270574006.7  26205292581481.5 ] }
+  renderflags { clear "markers" }
+
+  move { duration 6.3
+         velocity [ 9636479844747.75  -4933270574006.7  26205292581481.5 ] }
+
+
+#----------------------------------------------------------------------------
+# Turn Star labels OFF
+#----------------------------------------------------------------------------
+  labels { clear "stars" }
+
+  print { text "We zijn er bijna!"
+          row -7  column 1  duration 3 }
+  move { duration 4
+         velocity [ 9636479844747.75  -4933270574006.7  26205292581481.5 ] }
+
+  changedistance { duration 15 rate -0.3 }
+
+
+#----------------------------------------------------------------------------
+# Turn ON planet labels
+#----------------------------------------------------------------------------
+  labels { set "planets" }
+  changedistance { duration 5 rate -0.3 }
+
+
+#----------------------------------------------------------------------------
+# Solar System is in view with planet orbits displayed
+#----------------------------------------------------------------------------
+  print { text "Ons zonnestelsel ... eindelijk!\nWe hebben de banen van de planeten met blauwe lijntjes\nzichtbaar gemaakt."
+          row -6  column 1  duration 10 }
+  wait   { duration 10 }
+
+
+#----------------------------------------------------------------------------
+# Speed up time
+#----------------------------------------------------------------------------
+  print { text "Als we de tijd versnellen kun je de planeten\nrond de zon zien draaien ..."
+          row -6  column 1  duration 12 }
+  timerate { rate 10000000 }
+  wait   { duration 10 }
+
+  print { text "Zie je dat de baan van Pluto, de buitenste planeet van\nons zonnestelsel een hoek maakt met de banen van de\nandere planeten."
+          row -6  column 1  duration 7 }
+  wait   { duration 6 }
+
+  changedistance { duration 9 rate -0.13 }
+
+
+#----------------------------------------------------------------------------
+# Slow down time
+#----------------------------------------------------------------------------
+  timerate { rate 1000000 }
+  changedistance { duration 14 rate -0.09 }
+
+
+#----------------------------------------------------------------------------
+# Slow down time some more
+#----------------------------------------------------------------------------
+  timerate { rate 10000 }
+
+  print { text "We kunnen eindelijke onze zon zien!"
+          row -6  column 1  duration 7 }
+
+
+#----------------------------------------------------------------------------
+# Turn OFF orbits and planet labels
+#----------------------------------------------------------------------------
+  changedistance { duration 22 rate -0.16 }
+  renderflags { clear "orbits" }
+  labels { clear "planets" }
+  timerate { rate 10 }
+
+  changedistance { duration 16 rate -0.16 }
+  timerate { rate 10 }
+
+  print { text "We zijn gearriveerd bij onze zon, eindbestemming van deze reis." row -6  column 1  duration 10 }
+  wait   { duration 08 }
+
+
+#----------------------------------------------------------------------------
+# Set time to beginning of Activity
+#----------------------------------------------------------------------------
+  timerate { rate 10 }
+
+
+#----------------------------------------------------------------------------
+# End of Script - Let the user know the script is done running ...
+#----------------------------------------------------------------------------
+  wait   { duration 3 }
+
+  print  { text "Druk eventueel weer enkele keren op de 'v' toets\nom alle informatie in beeld te brengen ..."
+           row -7  column 1  duration 10 }
+  wait   { duration 10 }
+  timerate { rate 1 }
+
+}
