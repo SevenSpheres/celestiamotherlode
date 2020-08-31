@@ -1,0 +1,3 @@
+The following files were removed as they are too big to upload to GitHub:
+- Solanos_System.zip
+- tangiersystem_All_System_Update.zip
