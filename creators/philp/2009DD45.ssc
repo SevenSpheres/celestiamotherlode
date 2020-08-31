@@ -1,0 +1,32 @@
+# Author by Tom Philp III 20090304
+# Updated Observation http://ssd.jpl.nasa.gov/sbdb.cgi?sstr=2009%20DD45;orb=1
+# Read News Article here: http://news.yahoo.com/s/space/20090302/sc_space/asteroidfliespastearth
+# Epoch revised (2454800.69522) to set object to specified distance per article
+# Distance is at 72,000km above S. Pacific on 20090302 @ 14:50:20 UTC
+
+"2009 DD45" "Sol"
+	{
+	Class "asteroid"
+	Mesh "asteroid.cms"
+	Texture "asteroid.jpg"
+	Radius 0.035
+
+	CustomOrbit "2008 TC3"
+	EllipticalOrbit 
+		{
+		Eccentricity 	  0.2642327839542394
+		SemiMajorAxis 	  1.346965292511975
+		PeriDistance 	  0.9910529033817995
+		Inclination 	 13.17143230058466
+		AscendingNode 	162.0802712875753
+		ArgOfPericenter   4.051679279873548
+		MeanAnomaly 	299.3170577666165
+		Epoch 	    2454800.69522 # Exactly @ 72,000km above S. Pacific
+		Period  	  1.56
+		MeanMotion 	  0.6304773163460431
+		AphelionDistance  1.70287768164215
+		}
+
+#	RotationPeriod  00.0
+#	Albedo  0.00
+	}
