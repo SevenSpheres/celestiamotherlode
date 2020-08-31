@@ -1,0 +1,3 @@
+The following files were removed as they are too big to upload to GitHub:
+- StarWarSaga-ep1.zip
+- StarWarSaga-ep2.zip
