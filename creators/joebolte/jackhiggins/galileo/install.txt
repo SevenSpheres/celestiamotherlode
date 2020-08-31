@@ -1,0 +1,1 @@
+To install this update/addon, just copy the 3ds file into the models folder of Celestia. To actually view it, you'll also need the Galileo ssc patch, which is available from #19 on the spacecraft page of my website.

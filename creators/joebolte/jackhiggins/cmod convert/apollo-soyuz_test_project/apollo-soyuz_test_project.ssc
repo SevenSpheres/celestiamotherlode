@@ -1,0 +1,27 @@
+"Apollo-Soyuz Test Project" "Sol/Earth"
+{ 
+Class "spacecraft"  
+Mesh "astp.3ds" 
+
+Beginning 2442608.97222222 # Soyuz-19 launch
+Ending 2442618.34611111 # Apollo-18 splashdown
+
+Radius 0.0106 # combined soyuz + apollo radius 
+
+EllipticalOrbit { 
+   Epoch        2442615.1872048
+
+   Period          0.0616657396250476
+   SemiMajorAxis   6593.21729270777
+   Inclination     51.7675 
+   AscendingNode   99.9053 
+   ArgOfPericenter 230.4908
+   Eccentricity    0.0007974
+   MeanAnomaly     129.536
+} 
+   Orientation     [ 90 0 0 1 ] # your guess is as good as mine...
+   Obliquity               51.7675 
+   EquatorAscendingNode    99.9053 
+
+   RotationOffset          252.746988274980
+}

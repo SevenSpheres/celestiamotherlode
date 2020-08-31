@@ -1,0 +1,21 @@
+"Braille" "Sol" # 9969 Braille (1992 KD)
+{
+	Texture	"asteroid.jpg"
+	Mesh 	"braille.3ds"
+	Radius 	10
+
+	EllipticalOrbit
+	{
+		Period 		3.58352
+		SemiMajorAxis 	2.34171751
+		Eccentricity 	0.433535853
+		Inclination 	28.9489422
+		AscendingNode 	242.1584176
+		ArgOfPericenter	355.358449
+		MeanAnomaly 	4.977039
+		Epoch 		2451400.5
+	}
+
+	RotationPeriod 	6.9
+	Albedo 		0.7
+}

@@ -1,0 +1,1 @@
+To install this craft, simply extract the xyz file(s) into the "data" folder of Celestia, and put the ssc file into the "extras" folder

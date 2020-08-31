@@ -1,0 +1,9 @@
+INSTALL: Unzip this folder anywhere into the the "extras" direcotry within the Celestia Content folder. 
+
+**********
+
+This object is only present between certain dates. If you try to observe it at another time, you will be taken to a section of empty space. To find out what times you can view this object, open the SSC file in the same folder as this readme. 
+
+**********
+
+This add-on was created by Jack Higgins <http://homepage.eircom.net/~jackcelestia/>for the space simulator Celestia <http://shatters.net/celestia/> . It was updated and repackaged on 19 Dec 2004 by Joe Bolte for the Celestia Motherlode <http://celestiamotherlode.net/>

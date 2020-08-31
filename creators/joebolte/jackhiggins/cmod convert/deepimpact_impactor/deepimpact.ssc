@@ -1,0 +1,12 @@
+"Deep Impact Impactor" "Sol"
+{
+Class "spacecraft"
+Mesh "deepimpact_impactor.3ds"
+Radius 0.000325
+Beginning 2453370.303472222
+Ending 2453585.817635764
+Albedo 0.7
+SampledOrbit "deepimpact_impactor.xyz" 
+Orientation [90 1 0 0]
+RotationPeriod 0.0166667
+}

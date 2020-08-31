@@ -1,0 +1,28 @@
+"Galileo" "Sol"
+{
+	Class "spacecraft"
+	Mesh "galileo.3ds"
+	Radius   0.01
+
+	InfoURL "http://galileo.jpl.nasa.gov"
+
+	Beginning "1989 10 19 02:47"   # Launch
+	Ending    "2003  9 21 10:44"   # Crash into Jupiter
+
+	SampledOrbit "galileo.xyz"
+	EllipticalOrbit
+	{
+	Period        64.4068
+	SemiMajorAxis  4632880
+	Eccentricity   0.831774
+	Inclination    4.213
+	AscendingNode  59.562
+	ArgOfPericenter 97.224
+	TrueAnomaly    -66.619
+	}
+
+	RotationPeriod    1.0e9  # Essentially no rotation . . .
+	Orientation     [ 90 0 1 0 ]
+
+	Albedo         0.50
+}

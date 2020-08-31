@@ -1,0 +1,20 @@
+Instructions to install the Galileo ssc Patch:
+
+(These are for the windows version- if you've got a different system you'll know what to do yourself!
+
+STEP 1A:
+1. If you have any previous modified ssc's for the Galileo spacecraft in your extras folder or solarsys.ssc, remove and back them up first. This ssc set replaces all previous ones I have distributed, and the same goes for ssc's anyone else may have made available.
+
+STEP 1B:
+1. Open the folder where Celestia is installed (usually C:\Program Files\Celestia\ )
+2. Go into the "data" folder, and open up "solarsys.ssc". This can be viewed with any plain text editor (Notepad etc)
+3. Go down past all the major Planets & Moons, until you find the segment titled "Galileo". There are a few blank lines above & below it.
+4. Cut out all the Galileo section, and save it in another file (not ssc) for backup purposes. (Just in case!)
+
+STEP 2:
+5. Copy the other file from this zip (the one called "JACKgalileo_full_mission-xyz.ssc") and paste it into Celestia's "extras" folder.
+6. This will allow you to view the Galileo trajectory with changing models, from launch to destruction.
+
+
+
+If you have any problems or queries feel free to contact me - I appreciate all feedback!

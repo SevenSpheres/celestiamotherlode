@@ -1,0 +1,5 @@
+
+This model is a replacement for the bacchus model already included in the deafult Celestia installation.  Just delete the bacchus.3ds model in the extras/model folder and replace it with this one. 
+
+**********
+This add-on was created by Jack Higgins <http://homepage.eircom.net/~jackcelestia/>for the space simulator Celestia <http://shatters.net/celestia/> . It was updated and repackaged on 19 Dec 2004 by Joe Bolte for the Celestia Motherlode <http://celestiamotherlode.net/> 

@@ -1,0 +1,11 @@
+"Galileo Probe" "Sol"
+{
+Class "spacecraft"
+Mesh "galileoprobe.3ds"
+Radius 0.000545
+Beginning 2449925.911550000
+Ending 2450059.42361111
+Albedo 0.7
+RotationPeriod 0.003333333 # 5RPM - guess
+SampledOrbit "galileoprobe.xyz" 
+}

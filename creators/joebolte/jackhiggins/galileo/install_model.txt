@@ -1,0 +1,3 @@
+To install this model, copy the 3ds file into the "models" folder of Celestia, and put the image(s) into the "textures" > "medres" folder of Celestia. 
+
+Don't forget to change the ssc file in the extras folder to point to your new model!
