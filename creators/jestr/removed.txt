@@ -1,0 +1,11 @@
+The following files were removed as they are too big to upload to GitHub:
+- 40 Eridani-VulcanhiresPNG.zip
+- Bajorhires.zip
+- CardassianhiresPNG.zip
+- JestrEarth DDS levels6-10.zip
+- JestrEarth DDS.zip
+- JestrEarth JPG.zip
+- JMII_DDS_Level0-4_32K.zip
+- JMII_DDS_Level5_Full.zip
+- Stargate_Bane_DDS_hires.zip
+- Stargate_Bane_JPG_hires.zip
