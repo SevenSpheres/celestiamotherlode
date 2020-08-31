@@ -1,0 +1,25 @@
+# This .SSC contains the nearby object 2004 XP14 in 2006
+# Data taken from JPL's HORIZONS @ http://neo.jpl.nasa.gov/cgi-bin/db?name=2004%20XP14 (July 2, 2006)
+# Author Matthias Will on July 2, 2006.
+# Web: www.will256.de
+
+"2004 XP14" "Sol"
+{ 
+   Class "asteroid" 
+   Mesh "asteroid.cms" 
+   Texture "asteroid.jpg" 
+   Radius 0.7  #guess 
+
+   EllipticalOrbit 
+   { 
+      Period                1.0872
+      PericenterDistance    0.890895887189849 
+      Eccentricity          0.157407828849259
+      Inclination          32.9294139900471 
+      AscendingNode        281.080336978488 
+      ArgOfPericenter     275.879953170963
+      MeanAnomaly         318.5139038071
+      Epoch           		2453800.5
+   } 
+   InfoURL "http://neo.jpl.nasa.gov/cgi-bin/db?name=2004%20XP14" 
+} 
