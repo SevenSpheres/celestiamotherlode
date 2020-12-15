@@ -1,6 +1,6 @@
 ## Celestia Motherlode
 
-This repository is an archive of files from the [Celestia Motherlode](http://celestiamotherlode.net/).
+This repository is an archive of files from the [Celestia Motherlode](http://celestiamotherlode.net/), which went offline on 2020 August 27, and as of December 15 is still offline.
 
 The following files are not included because they are too big to upload to GitHub:
 - adirondack\th_titan.zip
@@ -132,6 +132,7 @@ The following files are not included because they are too big to upload to GitHu
 - rthorvald\jtps\th_journey_tps.zip
 - rthorvald\ran3\ran_iii_install_1.zip
 - rthorvald\ran3\ran_iii_install_2.zip
+  - The above two files can be downloaded from [here](https://archive.org/details/ran-motw).
 - rthorvald\rthorvalds_sun.zip
 - sbowers\oacompletev2.zip
 - theshadow1138\SWAtlasFull.zip
