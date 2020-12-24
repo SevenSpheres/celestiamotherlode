@@ -1,6 +1,7 @@
 ## Celestia Motherlode
 
-This repository is an archive of files from the [Celestia Motherlode](http://celestiamotherlode.net/), which went offline on 2020 August 27, and as of December 15 is still offline.
+This repository is an archive of files from the [Celestia Motherlode](http://celestiamotherlode.net/).
+The Motherlode was offline from 2020 August 27 to December 22, which is why this archive was created.
 
 The following files are not included because they are too big to upload to GitHub:
 - adirondack\th_titan.zip
